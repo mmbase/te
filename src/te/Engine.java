@@ -11,6 +11,7 @@ package te;
 
 import java.io.IOException;
 
+import javax.servlet.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
@@ -22,7 +23,7 @@ import org.mmbase.util.logging.*;
  * to choose the right template .
   * @author Kees Jongenburger
  */
-public class Engine extends BridgeServlet {
+public class Engine extends BridgeServlet implements Filter {
 
     private static String engineName = "programma";
     //every time a new EngineFacade is created a the counter is increased 
@@ -61,6 +62,10 @@ public class Engine extends BridgeServlet {
         }
     }
 
+	 public void init(FilterConfig filterConfig) throws ServletException {
+	 	init();
+	 }
+	 
     public static Facade getFacade() {
         return facade;
     }
@@ -71,12 +76,11 @@ public class Engine extends BridgeServlet {
     /* (non-Javadoc)
      * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
-    public void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServletException, IOException {
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
 
             requestCounter++;
-            HttpServletRequest req = (HttpServletRequest) servletRequest;
-            HttpServletResponse resp = (HttpServletResponse) servletResponse;
+
 
             resp.setContentType("text/html;charset=" + Facade.encoding);
             //resp.setContentType("text/html");
@@ -150,7 +154,7 @@ public class Engine extends BridgeServlet {
                 }
             } else {
                 try {
-                    req.getRequestDispatcher("/" + path).forward(servletRequest, servletResponse);
+                    req.getRequestDispatcher("/" + path).forward(req, resp);
                 } catch (IOException e) {
                     log.warn(Logging.stackTrace(e));
                 } catch (Exception e) {
@@ -165,6 +169,13 @@ public class Engine extends BridgeServlet {
 
     public void doPost(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
         doGet(arg0, arg1);
+    }
+
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		HttpServletRequest req = (HttpServletRequest)request;
+		HttpServletResponse resp = (HttpServletResponse) response;
+	 	doGet(req,resp);
+        
     }
 
 }
