@@ -9,11 +9,13 @@ See http://www.MMBase.org/license
 */
 package te;
 
-import te.jsp.*;
 import java.io.*;
-import java.util.*;
-import minixml.*;
+
+import minixml.XMLElement;
+
 import org.mmbase.util.logging.*;
+
+import te.jsp.*;
 /**
  * @author keesj
  * @version $Id$
@@ -34,7 +36,7 @@ public class ComponentRegistry {
         containers = new Containers();
         layoutManagers = new LayoutManagers();
 
-	updateRegistry();
+        updateRegistry();
         //add the default layout managers
         //LayoutManager defaultLayoutManager = new JSPLayoutManager("/te/layout/default.jsp", "default", "default list layout");
         //layoutManagers.add(defaultLayoutManager);
