@@ -9,7 +9,7 @@ See http://www.MMBase.org/license
 */
 package te;
 
-import java.util.Hashtable;
+import java.util.*;
 
 import org.mmbase.util.logging.*;
 
@@ -86,8 +86,15 @@ public class MMBaseNavigation extends AbstractNavigation implements Configurable
                 return null;
             }
         }
-        Navigation st = new StaticNavigation(path.current(), path.current());
+        Navigation st = new NavigationParam(path.current(), path.current(),field,guifield,type);
         Navigation g = NavigationLoader.parseXML(config);
+        Enumeration enum  = g.getProperties().keys();
+        while(enum.hasMoreElements()){
+        	String key = (String)enum.nextElement();
+        	st.setProperty(key,g.getProperty(key));
+        }
+        
+        
         Navigations n = g.getChildNavigations();
         for (int x = 0; x < n.size(); x++) {
             st.addChild(n.getNavigation(x));
