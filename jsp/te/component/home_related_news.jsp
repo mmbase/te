@@ -4,7 +4,7 @@
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
-	<mm:related path="magazines,news" fields="news.number" orderby="news.number" max="2"> 
+	<mm:related path="kaft,news" fields="news.number" orderby="news.number" max="2"> 
 		<mm:node element="news">
 			<div class="news">
 				<a href="<te:url/>">

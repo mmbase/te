@@ -4,7 +4,9 @@
 <mm:cloud>
 	<%-- episode title --%>
 	<mm:node number="<%= findParentParam(navigation,"episodes").getID() %>">
-		<h2><mm:field name="title"/></h2>
-                <a href="../../">terug naar de aflevering</a>
+		<div class="episodes">
+		<te:field name="title"/>
+		</div>
+                <a href="../../">terug naar de aflevering</a><br>
 	</mm:node>
 </mm:cloud>
