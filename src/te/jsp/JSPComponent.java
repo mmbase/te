@@ -52,18 +52,18 @@ public class JSPComponent extends AbstractContainer implements Component {
      * @see te.Template#renderRelative(java.lang.String, te.WhiteBoard, java.io.PrintWriter)
      */
     public void renderRelative(String path, WhiteBoard wb) throws ServletException, IOException {
-        if (path.endsWith(".jsp") || path.endsWith(".jpg") || path.endsWith(".css") || path.endsWith(".png") ){
-			mapRenderRelativeToRender = false;
+        if (path.endsWith(".jsp") || path.endsWith(".jpg") || path.endsWith(".css") || path.endsWith(".png")) {
+            mapRenderRelativeToRender = false;
         } else {
-        	mapRenderRelativeToRender = true;
+            mapRenderRelativeToRender = true;
         }
-         
+
         if (mapRenderRelativeToRender) {
-			log.debug("rendering " + path + " via " + getName());
+            log.debug("rendering " + path + " via " + getName());
             render(wb, wb.getHttpServletResponse().getWriter());
         } else {
-			log.debug("dispatching " + path );
-			
+            log.debug("dispatching " + path);
+
             int index = this.path.lastIndexOf(NavigationControl.PATH_SEPARATOR);
             if (index != -1) {
                 String realPath = this.path.substring(0, index);
@@ -92,7 +92,6 @@ public class JSPComponent extends AbstractContainer implements Component {
         c.setName(getName());
         c.setDescription(getDescription());
         c.setProperties(getProperties());
-        //copy properties?
         return c;
     }
     public String getName() {

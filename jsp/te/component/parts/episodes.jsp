@@ -6,7 +6,6 @@
 	<mm:field name="title"/>
 	<mm:field name="subtitle"/>
 	<mm:field name="html(intro)"/>
-	<mm:field name="html(description)"/>
 	<mm:field name="number" write="false" jspvar="field">
 	<a href="<%= facade.getEngineURL() + navigation.getFullURLString() + "/afleveringen/" + field%>/">&gt;</a>
 	</mm:field>

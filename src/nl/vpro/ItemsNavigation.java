@@ -18,6 +18,7 @@ import java.util.*;
  * @version $Id$
  */
 public class ItemsNavigation extends AbstractNavigation {
+	//TODO:EpisodeNavigation and ItemsNavigation need to be made generic
 	private static Logger log = Logging.getLoggerInstance(ItemsNavigation.class);
 	 String name = "items";
 	 String id = "items";

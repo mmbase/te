@@ -47,8 +47,9 @@ public class ComponentRegistry {
     }
 
 	public Components getComponents(){
-		//TODO:clone the list
-		return components;
+		Components c = new Components();
+		c.addAll(components);
+		return c;
 	}
 	
 	
