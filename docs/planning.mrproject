@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<project name="programma sites 2.0" company="" manager="" phase="" project-start="20030717T000000Z" mrproject-version="2" calendar="1">
+  <properties>
+    <property name="cost" type="cost" owner="resource" label="Cost" description="standard cost for a resource"/>
+  </properties>
+  <phases/>
+  <calendars>
+    <day-types>
+      <day-type id="0" name="Working" description="A default working day"/>
+      <day-type id="1" name="Nonworking" description="A default non working day"/>
+      <day-type id="2" name="Use base" description="Use day from base calendar"/>
+    </day-types>
+    <calendar id="1" name="Default">
+      <default-week mon="0" tue="0" wed="0" thu="0" fri="0" sat="1" sun="1"/>
+      <overridden-day-types>
+        <overridden-day-type id="0">
+          <interval start="0800" end="1200"/>
+          <interval start="1300" end="1700"/>
+        </overridden-day-type>
+      </overridden-day-types>
+      <days/>
+    </calendar>
+  </calendars>
+  <tasks>
+    <task id="1" name="onwerp templating systeem" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+      <task id="2" name="navigatie" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <task id="3" name="Filter schrijven" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="4" name="Navigatie object maken" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="5" name="navigatie opslaan in mmbase" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      </task>
+      <task id="6" name="template mechanisme" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <task id="7" name="template" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+          <task id="8" name="meta data" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+          <task id="9" name="headers" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        </task>
+        <task id="10" name="component" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+          <task id="11" name="data selectie" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+          <task id="12" name="editor" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+          <task id="13" name="configuratie interface maken" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        </task>
+        <task id="14" name="container" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+          <task id="15" name="content selectie" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+          <task id="16" name="editor" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        </task>
+        <task id="17" name="LayoutManager" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+          <task id="18" name="implementatie" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+          <task id="19" name="editor" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        </task>
+      </task>
+      <task id="20" name="page builder" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <task id="21" name="opslaan van templates in mmbase" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="22" name="generiek maken van de engine" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="23" name="optimalisatie" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="24" name="editor maken" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      </task>
+      <task id="25" name="look and feel" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <task id="26" name="Style editor maken" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      </task>
+    </task>
+    <task id="27" name="implementatie" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+      <task id="28" name="navigatie" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <task id="29" name="navigatie fallbacks maken voor VPRO" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+          <task id="30" name="beschijven wat er moet gebeuren" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+            <task id="31" name="wat zijn de regels voor het vinden van een programma site" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+            <task id="32" name="hoe moet bekend worden of het een nieuws of een oude site is" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+          </task>
+        </task>
+        <task id="33" name="kiezen wat te doen met hostnames en redirects" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="34" name="Navigatie objecten maken voor VPRO cloud" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      </task>
+      <task id="35" name="template machanisme" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      <task id="36" name="orion informix vpro cloud &quot;features&quot; oplossen/om heen werken" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      <task id="37" name="page builder" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <task id="38" name="een aantal standard definieren voor &quot;gewone&quot; sites" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="39" name="page builders maken voor VPRO cloud" note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="40" name="relevante voorbeeld &quot;home&quot; pages maken." note="" work="28800" start="20030717T000000Z" end="20030717T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      </task>
+    </task>
+  </tasks>
+  <resource-groups/>
+  <resources>
+    <resource id="1" name="VPRO" type="1" units="0" email="" note="" std-rate="0">
+      <properties>
+        <property name="cost" value=""/>
+      </properties>
+    </resource>
+    <resource id="2" name="DTA" type="1" units="0" email="" note="" std-rate="0">
+      <properties>
+        <property name="cost" value=""/>
+      </properties>
+    </resource>
+  </resources>
+  <allocations>
+    <allocation task-id="40" resource-id="1" units="100"/>
+    <allocation task-id="30" resource-id="1" units="100"/>
+  </allocations>
+</project>
