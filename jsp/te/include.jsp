@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html;charset=utf-8" %><%@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" %><%@
 taglib uri="http://www.mmbase.org/mmbase-taglib-1.0" prefix="mm" %><%@
 page import="te.*"%><%@
 page import="te.jsp.*"%><%@

@@ -1,7 +1,7 @@
 <%@include file="../include.jsp"%>
 <%@page import="te.edit.*"%><% 
 	 ContainerDecorator decorator = (ContainerDecorator)request.getAttribute("container");
-	 Container container = decorator.getContainer();
+	 Container container = decorator.getDecoratedContainer();
 	 Components components = container.getComponents();
 	 Navigation nav = wb.getCurrentNavigation();
 %>
