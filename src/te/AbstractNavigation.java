@@ -20,6 +20,7 @@ import org.mmbase.util.logging.*;
 
 public abstract class AbstractNavigation implements Navigation {
     private static Logger log = Logging.getLoggerInstance(AbstractNavigation.class);
+    
     Navigation parent = null;
     Properties properties = new Properties();
     boolean visible = true;
@@ -128,21 +129,21 @@ public abstract class AbstractNavigation implements Navigation {
     public Navigation resolveNavigation(Path path) {
         //if the current navigation is not visible call the child navigations and try to resolve
         if (!isVisible()) {
-            log.debug("nav " + getName() + " not visible trying child navigations");
+            //log.debug("nav " + getName() + " not visible trying child navigations");
             Navigations navs = getChildNavigations();
             for (int x = 0; x < navs.size(); x++) {
                 Navigation resolved = navs.getNavigation(x).resolveNavigation(path);
                 if (resolved != null) {
-                    log.debug("nav " + getName() + " child navigation returned true " + resolved.getName());
+                    //log.debug("nav " + getName() + " child navigation returned true " + resolved.getName());
                     return resolved;
                 }
             }
-            log.debug("nav " + getName() + " not visible trying param navigations");
+            //log.debug("nav " + getName() + " not visible trying param navigations");
             navs = paramNavigations;
             for (int x = 0; x < navs.size(); x++) {
                 Navigation resolved = navs.getNavigation(x).resolveNavigation(path);
                 if (resolved != null) {
-                    log.debug("nav " + getName() + " child navigation returned true " + resolved.getName());
+                    //log.debug("nav " + getName() + " child navigation returned true " + resolved.getName());
                     return resolved;
                 }
             }
@@ -168,7 +169,7 @@ public abstract class AbstractNavigation implements Navigation {
                             return resolved;
                         }
                     }
-                    log.debug(getName() + " resolve via params " + path.current());
+                    //log.debug(getName() + " resolve via params " + path.current());
                     Navigations params = getParamChilds();
                     for (int x = 0; x < params.size(); x++) {
                         Navigation theChild = params.getNavigation(x);
@@ -185,7 +186,7 @@ public abstract class AbstractNavigation implements Navigation {
         return null;
     }
     public Navigation addChild(Navigation nav) {
-        log.debug(getName() + " adding child " + nav.getName());
+        //log.debug(getName() + " adding child " + nav.getName());
         nav.setParentNavigation(this);
         childNavigation.add(nav);
         return nav;

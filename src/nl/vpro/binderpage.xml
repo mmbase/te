@@ -9,10 +9,7 @@
       	    <component name="breadcrum"/>
    	        <component name="binder"/>
      </container>
-     <container name="vertical">
-         <component name="related_audio_video"/>
-  	     <component name="related_other"/>
-     </container>
-    
+     <component name="binder_content"/>
+     <component name="binder_related"/>
   </container>
 </template>

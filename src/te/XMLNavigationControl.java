@@ -149,8 +149,8 @@ public class XMLNavigationControl extends NavigationControl {
 
         Paths p = new Paths();
         p.addAll(getPaths());
-
-        log.debug("resolve URL " + currentNavigation.getFullURLString() + " " + params);
+	
+        //log.debug("resolve URL " + currentNavigation.getFullURLString() + " " + params);
 
         //descriminate by removing the impossible paths
         for (int x = 0; x < params.size(); x++) {
@@ -183,7 +183,7 @@ public class XMLNavigationControl extends NavigationControl {
             }
         }
 
-        log.debug("after handling params " + p);
+        //log.debug("after handling params " + p);
 
         //create a list of information avaiable in the curren path
 
@@ -198,7 +198,7 @@ public class XMLNavigationControl extends NavigationControl {
             }
         } while ((e = e.getParentNavigation()) != null);
 
-        log.debug("hash:" + hash);
+        //log.debug("hash:" + hash);
         Paths retval = new Paths();
         //goto every path and start filling vars if it fails... it's not what we want
         for (int z = 0; z < p.size(); z++) {
@@ -217,29 +217,29 @@ public class XMLNavigationControl extends NavigationControl {
                     if (o != null) {
                         if (o instanceof NavigationParam) {
                             NavigationParam param = (NavigationParam) o;
-                            log.debug("adding param " + param.getURLString());
+                            //log.debug("adding param " + param.getURLString());
                             sb.append(param.getURLString());
                             sb.append("/");
                         } else if (o instanceof Node) {
                             Node node = (Node) o;
-                            log.debug("adding node " + node.getStringValue(field));
+                            //log.debug("adding node " + node.getStringValue(field));
                             sb.append(URLConverter.toURL(node.getStringValue(field)));
                             sb.append("/");
                         } else {
-                            log.debug("I don't know what to do with objects of type " + o.getClass().getName() + " " + o);
+                            //log.debug("I don't know what to do with objects of type " + o.getClass().getName() + " " + o);
                             //p.remove(z);
                             //z--;
                             //done = true;
 
                         }
                     } else {
-                        log.debug("failed to get type " + type);
+                        //log.debug("failed to get type " + type);
                         p.remove(z);
                         z--;
                         done = true;
                     }
                 } else {
-                    log.debug("append string " + var);
+                    //log.debug("append string " + var);
                     sb.append(var);
                     sb.append("/");
                 }
@@ -248,7 +248,7 @@ public class XMLNavigationControl extends NavigationControl {
                     if (current.hasNext()) {
                         current.next();
                     } else {
-                        log.debug("FOUND VALID NAVIGATION " + sb.toString());
+                        //log.debug("FOUND VALID NAVIGATION " + sb.toString());
                         retval.add(new Path(sb.toString()));
                         done = true;
                     }
