@@ -30,14 +30,19 @@ function mouseDown(e) {
 
 function getObjectPosX2(obj) { 
         var curleft = 0;
-        if (obj.offsetParent)
-        {
-                while (obj.offsetParent)
-                {
-                        curleft += obj.offsetLeft
-                        obj = obj.offsetParent;
-                }
-        }
+		 if (obj.offsetParent)
+		 {
+        if (obj.style.position == 'absolute'){
+								return obj.offsetLeft;
+	     } else {
+								while (obj.offsetParent)
+								{
+										  curleft += obj.offsetLeft;
+										  obj = obj.offsetParent;
+								}
+		  }
+		 }
+
         else if (obj.x)
                 curleft += obj.x;
         return curleft;
