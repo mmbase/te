@@ -8,7 +8,6 @@ See http://www.MMBase.org/license
 
 */
 package te;
-
 /**
  * @author keesj
  * @version $Id$
@@ -20,7 +19,7 @@ public class ParametredNavigation extends AbstractNavigation {
 
 	private String name;
 	private String id;
-	Navigations childs = new Navigations();
+	
     public String getID() {
     	return id;
     }
@@ -28,9 +27,4 @@ public class ParametredNavigation extends AbstractNavigation {
     public String getName() {
         return name;
     }
-
-    public Navigations getChildNavigations() {
- 			return childs;
-    }
-
 }

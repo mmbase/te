@@ -21,10 +21,12 @@ import te.*;
 public class MapsNavigation extends AbstractNavigation {
     private static Logger log = Logging.getLoggerInstance(MapsNavigation.class);
     private Node node;
-    Navigations childs = new Navigations();
+
     public MapsNavigation(Node node) {
         this.node = node;
-        if (node.getStringValue("title").startsWith("Madi")) {
+        if (node.getStringValue("title").startsWith("Mag")) {
+			setProperty("type", "magshomepage");
+        } else if (node.getStringValue("title").startsWith("Madi")) {
             setProperty("type", "weekhomepage");
         } else {
             setProperty("type", "episodeshomepage");
@@ -32,22 +34,9 @@ public class MapsNavigation extends AbstractNavigation {
         setProperty("nodemanager", "maps");
         setProperty("number", "" + node.getNumber());
 
-        Navigation archive = new EpisodesNavigation();
-        archive.setNavigationControl(getNavigationControl());
-        archive.setParentNavigation(this);
-        childs.add(archive);
-
-        Navigation binders = new BindersNavigation();
-        binders.setProperty("type", "binderpage");
-        binders.setNavigationControl(getNavigationControl());
-        binders.setParentNavigation(this);
-        childs.add(binders);
-
-        Navigation search = new StaticNavigation("search", "zoeken");
-        search.setProperty("type", "searchpage");
-        search.setNavigationControl(getNavigationControl());
-        search.setParentNavigation(this);
-        childs.add(search);
+        addChild(new EpisodesNavigation());
+        addChild(new BindersNavigation());
+        addChild(new StaticNavigation("search", "zoeken")).setProperty("type", "searchpage");
 
     }
 
@@ -58,9 +47,5 @@ public class MapsNavigation extends AbstractNavigation {
     public String getName() {
         return node.getStringValue("title");
     }
-    
 
-    public Navigations getChildNavigations() {
-    	return childs;
-    }
 }

@@ -12,25 +12,35 @@ package te.jsp.taglib;
 import javax.servlet.jsp.*;
 
 import org.mmbase.bridge.jsp.taglib.*;
-
+//import javax.servlet.jsp.PageContext;
+import te.*;
 /**
  * @author keesj
  * @version $Id$
  */
 public class TeFieldTag extends FieldTag {
-
+    //PageContext pageContext;
     /* (non-Javadoc)
      * @see org.mmbase.bridge.jsp.taglib.FieldTag#convert(java.lang.String)
      */
     protected String convert(String s) throws JspTagException {
+		WhiteBoard wb =(WhiteBoard) pageContext.getAttribute("wb");
+		if (wb.get)
         StringBuffer sb = new StringBuffer();
         sb.append("<div class=\"");
-        //sb.append(getFieldVar().getNodeManager().getName());
-        //sb.append("_");
+        sb.append(getFieldVar().getNodeManager().getName());
+        sb.append("_");
         sb.append(getFieldVar().getName());
         sb.append("\">");
         sb.append(s);
         sb.append("</div>");
         return sb.toString();
     }
+/*
+    public void setPageContext(PageContext pc) {
+        this.pageContext = pc;
+        super.setPageContext(pc);
+    }
+    */
+
 }

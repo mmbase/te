@@ -24,6 +24,7 @@ public abstract class AbstractNavigation implements Navigation {
     Properties properties = new Properties();
     boolean visible = true;
     NavigationControl navigationControl;
+    Navigations childNavigation = new Navigations();
 
     public AbstractNavigation() {
 
@@ -40,7 +41,7 @@ public abstract class AbstractNavigation implements Navigation {
     public void setProperty(String key, String value) {
         properties.setProperty(key, value);
     }
-    
+
     /** 
      * @return unique id of this navigation typicaly a number
      */
@@ -77,7 +78,9 @@ public abstract class AbstractNavigation implements Navigation {
     /**
      * @return the child navigations of this component
      */
-    public abstract Navigations getChildNavigations();
+    public Navigations getChildNavigations() {
+        return childNavigation;
+    }
 
     /**
      * @return the parent navigation of the component
@@ -151,7 +154,7 @@ public abstract class AbstractNavigation implements Navigation {
                     for (int x = 0; x < navs.size(); x++) {
                         Navigation theChild = navs.getNavigation(x);
                         Navigation resolved = theChild.resolveNavigation(path);
-                        if (resolved != null) {                        	
+                        if (resolved != null) {
                             return resolved;
                         }
                     }
@@ -162,4 +165,18 @@ public abstract class AbstractNavigation implements Navigation {
         }
         return null;
     }
+    public Navigation addChild(Navigation nav) {
+        log.debug(getName() + " adding child " + nav.getName());
+        nav.setParentNavigation(this);
+        childNavigation.add(nav);
+        return nav;
+    }
+
+    public void addChilds(Navigations navs) {
+        for (Iterator iter = navs.iterator(); iter.hasNext();) {
+            Navigation nav = (Navigation) iter.next();
+            addChild(nav);
+        }
+    }
+
 }

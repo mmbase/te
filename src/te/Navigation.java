@@ -16,40 +16,42 @@ import java.util.Properties;
  * @version $Id$
  */
 public interface Navigation extends NavigationResolver {
-    public abstract boolean isRootNavigation();
-    public abstract void setParentNavigation(Navigation navigation);
-    public abstract void setProperty(String key, String value);
+    public boolean isRootNavigation();
+    public void setParentNavigation(Navigation navigation);
+    public void setProperty(String key, String value);
     /** 
      * @return unique id of this navigation typicaly a number
      */
-    public abstract String getID();
+    public String getID();
     /** 
      * @return the name of the navigation nieuws
      */
-    public abstract String getName();
-    public abstract Navigation getChildByName(String name);
+    public String getName();
+    public Navigation getChildByName(String name);
     /**
      * 
      * @return the escaped name of the navigation
      */
-    public abstract String getURLString();
-    public abstract String getFullURLString();
+    public String getURLString();
+    public String getFullURLString();
     /**
      * @return the child navigations of this component
      */
-    public abstract Navigations getChildNavigations();
+    public Navigations getChildNavigations();
+
+    public Navigation addChild(Navigation navigation);
     /**
      * @return the parent navigation of the component
      */
-    public abstract Navigation getParentNavigation();
+    public Navigation getParentNavigation();
     /** 
      * @return the properties of the navigation
      */
-    public abstract Properties getProperties();
-    public abstract String getProperty(String key);
-    public abstract void setNavigationControl(NavigationControl navigationControl);
-    public abstract NavigationControl getNavigationControl();
-    public abstract Template getTemplate();
+    public Properties getProperties();
+    public String getProperty(String key);
+    public void setNavigationControl(NavigationControl navigationControl);
+    public NavigationControl getNavigationControl();
+    public Template getTemplate();
     public boolean isVisible();
     public void setVisible(boolean visible);
 }

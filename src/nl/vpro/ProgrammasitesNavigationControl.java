@@ -28,7 +28,8 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
     public ProgrammasitesNavigationControl() {
         Cloud cloud = ContextProvider.getDefaultCloudContext().getCloud("mmbase");
         NodeManager nodeManager = cloud.getNodeManager("maps");
-        NodeList list = nodeManager.getList("number =3302425 or number = 8884132 or number= 3517269 or number = 14055733", null, null);
+        NodeList list = nodeManager.getList("number = 14194448 or number =3302425 or number = 8884132 or number= 3517269 or number = 14055733", null, null);
+        //14194448
         navigation = new StaticNavigation("1", "root");
         navigation.setVisible(false);
         for (int x = 0; x < list.size(); x++) {

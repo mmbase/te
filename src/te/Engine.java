@@ -129,7 +129,7 @@ public class Engine extends BridgeServlet {
                 //if the navigation was found put it in the whiteboard
                 wb.setCurrentNavigation(nav);
                 String navpath = navigationComponent.getURLString(nav);
-                log.debug("request[" + requestCounter + "] found " + path);
+                log.debug("request[" + requestCounter + "] found " + navpath);
 
                 try {
                     Template t = navigationComponent.getTemplate(nav);

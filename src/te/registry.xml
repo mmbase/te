@@ -46,5 +46,7 @@
 
   <!-- search -->
   <component class="te.jsp.JSPComponent" path="/te/component/search.jsp" name="search" description="The programs of this week"/>
+  <!-- archief /episode list -->
+  <component class="te.jsp.JSPComponent" path="/te/component/episode_list.jsp" name="episode_list" description="list of episodes of a program"/>
   
 </registry>

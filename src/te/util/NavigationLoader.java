@@ -34,50 +34,46 @@ public abstract class NavigationLoader {
     }
 
     private static Navigation createNavigation(Navigation parent, XMLElement xmle) {
+    	Navigation retval  = null;
         if (xmle.getTagName().equals("entrypoint")) {
             String className = xmle.getProperty("class");
             Class entryClass;
             try {
                 entryClass = Class.forName(className);
                 NavigationControl control = (NavigationControl) entryClass.newInstance();
-                return control.getNavigation();
+                retval= control.getNavigation();
             } catch (ClassNotFoundException e) {
                 log.warn("the xml entry " + xmle + " does not contain a valid class\n" + Logging.stackTrace(e));
+                return null;
             } catch (InstantiationException e) {
                 log.warn(Logging.stackTrace(e));
+				return null;
             } catch (IllegalAccessException e) {
                 log.warn(Logging.stackTrace(e));
+				return null;
             } catch (RuntimeException e) {
-                log.warn(
-                    "error while loading entrypoint {"
-                        + className
-                        + "} the error was "
-                        + e.getMessage()
-                        + " : stacktrace "
-                        + Logging.stackTrace(e));
+                log.warn("error while loading entrypoint {" + className + "} the error was " + e.getMessage() + " : stacktrace " + Logging.stackTrace(e));
+				return null;
             }
-            log.warn("trying to load the rest of the navigation");
-            return null;
         } else {
-            StaticNavigation nav = new StaticNavigation(xmle.getProperty("id"), xmle.getProperty("name"));
+            retval = new StaticNavigation(xmle.getProperty("id"), xmle.getProperty("name"));
             if (xmle.getProperty("visible") != null && xmle.getProperty("visible").equals("false")) {
-                nav.setVisible(false);
+                retval.setVisible(false);
             }
-
-            for (int x = 0; x < xmle.countChildren(); x++) {
-                XMLElement child = xmle.getChildAt(x);
-                if (child.getTagName().equals("navigation")) {
-                    nav.addChild(createNavigation(nav, xmle.getChildAt(x)));
-                } else if (child.getTagName().equals("entrypoint")) {
-                    Navigation newChild = createNavigation(nav, xmle.getChildAt(x));
-                    if (newChild != null) {
-                        nav.addChild(newChild);
-                    }
-                } else if (child.getTagName().equals("property")) {
-                    nav.setProperty(child.getProperty("name"), child.getContents());
-                }
-            }
-            return nav;
         }
+        for (int x = 0; x < xmle.countChildren(); x++) {
+            XMLElement child = xmle.getChildAt(x);
+            if (child.getTagName().equals("navigation")) {
+                retval.addChild(createNavigation(retval, xmle.getChildAt(x)));
+            } else if (child.getTagName().equals("entrypoint")) {
+                Navigation newChild = createNavigation(retval, xmle.getChildAt(x));
+                if (newChild != null) {
+                    retval.addChild(newChild);
+                }
+            } else if (child.getTagName().equals("property")) {
+                retval.setProperty(child.getProperty("name"), child.getContents());
+            }
+        }
+        return retval;
     }
 }

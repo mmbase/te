@@ -22,10 +22,10 @@ public class BindersNavigation extends AbstractNavigation {
     private static Logger log = Logging.getLoggerInstance(BindersNavigation.class);
     String name = "Dossiers";
     String id = "binders";
-    Navigations childNavigation = new Navigations();
 
     public BindersNavigation() {
         super();
+        setProperty("type", "binderpage");
     }
 
     public String getID() {
@@ -34,10 +34,6 @@ public class BindersNavigation extends AbstractNavigation {
 
     public String getName() {
         return name;
-    }
-
-    public Navigations getChildNavigations() {
-        return childNavigation;
     }
 
     public Navigation resolveNavigation(Path path) {
@@ -54,18 +50,16 @@ public class BindersNavigation extends AbstractNavigation {
             String number = path.next();
             try {
                 Integer.parseInt(number);
-                if (childNavigation.getNavigationByName(number) == null) {
+                if (getChildByName(number) == null) {
                     StaticNavigation nav = new StaticNavigation(number, number);
-                    nav.setParentNavigation(this);
                     nav.setProperty("type", "binderpage");
-					nav.setProperty("nodemanager", "binders");
-					nav.setProperty("number",number);
-                    nav.setParentNavigation(this);
-                    childNavigation.add(nav);
+                    nav.setProperty("nodemanager", "binders");
+                    nav.setProperty("number", number);
+                    addChild(nav);
                 }
-                log.debug("current binder = " + number);                
+                log.debug("current binder = " + number);
             } catch (NumberFormatException e) {
-            	
+
             }
             path.previous();
         }

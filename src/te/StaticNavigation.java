@@ -16,25 +16,11 @@ package te;
 public class StaticNavigation extends AbstractNavigation {
     String id;
     String name;
-    Navigations childs;
-    Navigation parent = null;
-
-    NavigationControl navigationControl;
 
     public StaticNavigation(String id, String name) {
+        super();
         this.id = id;
         this.name = name;
-        childs = new Navigations();
-    }
-
-    public Navigation addChild(Navigation nav) {
-        nav.setParentNavigation(this);
-        childs.add(nav);
-        return nav;
-    }
-
-    public void addChilds(Navigations navs) {
-        childs.addAll(navs);
     }
 
     public String getID() {
@@ -42,14 +28,6 @@ public class StaticNavigation extends AbstractNavigation {
     }
 
     public String getName() {
-
         return name;
-    }
-
-    /* (non-Javadoc)
-     * @see te.AbstractNavigation#getChildNavigations()
-     */
-    public Navigations getChildNavigations() {
-        return childs;
     }
 }
