@@ -22,11 +22,12 @@
   <component class="te.jsp.JSPComponent" path="/te/component/episodes_next.jsp" name="episodes_next" description="Display the next episode"/>
   <component class="te.jsp.JSPComponent" path="/te/component/episodes_previous.jsp" name="episodes_previous" description="Display the pervious episode"/>
 
-  <component class="te.jsp.JSPComponent" path="/te/component/episode_name.jsp" name="episode_name" description="Display the title and number of the episode(small)"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episode_related_images.jsp" name="episode_related_images" description="Display the images related to an episode"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episode_title.jsp" name="episode_title" description="Display the Title of the episode(large)"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episode_previousnext.jsp" name="episode_previousnext" description="Display the pervious and next episode links"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episode_body.jsp" name="episode_body" description="Display the content of the episode"/>
+  <!-- episode page -->
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_name.jsp" name="episode_name" description="Display the title and number of the episode(small)"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_related_images.jsp" name="episode_related_images" description="Display the images related to an episode"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_title.jsp" name="episode_title" description="Display the Title of the episode(large)"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_previousnext.jsp" name="episode_previousnext" description="Display the pervious and next episode links"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_body.jsp" name="episode_body" description="Display the content of the episode"/>
   
-  <component class="te.jsp.JSPComponent" path="/te/component/episode_related_audio_video.jsp" name="episode_related_audio_video" description="Display the related audio and video's related to the episode"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_related_audio_video.jsp" name="episode_related_audio_video" description="Display the related audio and video's related to the episode"/>
 </registry>

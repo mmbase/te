@@ -19,7 +19,6 @@ public class StaticNavigation extends AbstractNavigation {
     String name;
     Navigations childs;
     Navigation parent = null;
-    Properties properties;
 
     NavigationControl navigationControl;
 
@@ -27,7 +26,6 @@ public class StaticNavigation extends AbstractNavigation {
         this.id = id;
         this.name = name;
         childs = new Navigations();
-        properties = new Properties();
     }
 
     public Navigation addChild(Navigation nav) {

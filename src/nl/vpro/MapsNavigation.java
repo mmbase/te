@@ -38,24 +38,24 @@ public class MapsNavigation extends AbstractNavigation {
 
     public Navigations getChildNavigations() {
         Navigations retval = new Navigations();
+
+        Navigation navigation2 = new StaticNavigation("keesj", "keesj");
+        navigation2.setProperty("template", "/te/edit/index.jsp");
+        navigation2.setNavigationControl(getNavigationControl());
+        navigation2.setParentNavigation(this);
+        retval.add(navigation2);
+
+        Navigation archive = new EpisodesNavigation(); //new StaticNavigation("episodes", "afleveringen");
+        archive.setProperty("type", "episodepage");
+        archive.setNavigationControl(getNavigationControl());
+        archive.setParentNavigation(this);
+        retval.add(archive);
+
         Navigation navigation = new StaticNavigation("edit", "edit");
         navigation.setProperty("template", "/te/edit/index.jsp");
         navigation.setNavigationControl(getNavigationControl());
         navigation.setParentNavigation(this);
         retval.add(navigation);
-
-        Navigation archive = new StaticNavigation("episodes", "afleveringen");
-        archive.setProperty("type", "episodepage");
-        archive.setNavigationControl(getNavigationControl());
-        archive.setParentNavigation(this);
-
-        Navigation x = new StaticNavigation("edit", "edit");
-        x.setProperty("template", "/te/edit/index.jsp");
-        x.setNavigationControl(getNavigationControl());
-        x.setParentNavigation(archive);
-        ((StaticNavigation) archive).addChild(x);
-
-        retval.add(archive);
 
         return retval;
     }
@@ -68,7 +68,7 @@ public class MapsNavigation extends AbstractNavigation {
         Navigation nav = super.resolveNavigation(path, wb);
         if (nav != null) {
             log.debug("setting current maps (program){" + node.getStringValue("title") + "} in whiteboard.");
-            wb.getHttpServletRequest().setAttribute("maps", node);
+            wb.getHttpServletRequest().setAttribute("maps","" + node.getNumber());
         }
         return nav;
     }

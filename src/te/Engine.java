@@ -156,7 +156,7 @@ public class Engine extends BridgeServlet {
                 }
             }
             wb = null;
-            log.debug(resp.getCharacterEncoding());
+            //log.debug(resp.getCharacterEncoding());
         } catch (Throwable t) {
             log.fatal(t.getMessage() + " " + Logging.stackTrace(t));
         }

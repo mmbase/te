@@ -39,7 +39,7 @@ public class XMLNavigationControl extends NavigationControl {
             throw new RuntimeException("can not load xml");
         }
         navigation = NavigationLoader.parseXML(sw.toString());
-        //navigation.setNavigationControl(this);
+        navigation.setNavigationControl(this);
     }
 
     public Navigation getNavigation() {

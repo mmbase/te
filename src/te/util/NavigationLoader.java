@@ -56,7 +56,7 @@ public abstract class NavigationLoader {
             }
 
             for (int x = 0; x < xmle.countChildren(); x++) {
-                XMLElement child = xmle.getChildAt(x);
+                XMLElement child = xmle.getChildAt(x);    			
                 if (child.getTagName().equals("navigation")) {
                     nav.addChild(createNavigation(nav, xmle.getChildAt(x)));
                 } else if (child.getTagName().equals("entrypoint")) {

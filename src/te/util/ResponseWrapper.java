@@ -86,7 +86,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
             characterEncoding = DEFAULT_CHARSET;
         }
         if (log.isDebugEnabled()) {
-            log.debug("set content type of include page to: '" + contentType + "' (and character encoding to '" + characterEncoding + "')");
+            //log.debug("set content type of include page to: '" + contentType + "' (and character encoding to '" + characterEncoding + "')");
         }
     }
     

@@ -7,23 +7,26 @@ The license (Mozilla version 1.0) can be read at the MMBase site.
 See http://www.MMBase.org/license
 
 */
+
 package te;
 
 import java.util.*;
 import te.util.*;
 import org.mmbase.util.logging.*;
+
 /**
  * @author Kees Jongenburger
  */
+
 public abstract class AbstractNavigation implements Navigation {
     private static Logger log = Logging.getLoggerInstance(AbstractNavigation.class);
     Navigation parent = null;
-    Properties properties;
+    Properties properties = new Properties();
     boolean visible = true;
     NavigationControl navigationControl;
 
     public AbstractNavigation() {
-        properties = new Properties();
+
     }
 
     public boolean isRootNavigation() {
@@ -66,8 +69,10 @@ public abstract class AbstractNavigation implements Navigation {
     }
 
     public String getFullURLString() {
-        return getNavigationControl().getURLString(this);
+        NavigationControl nc = getNavigationControl();
+        return nc.getURLString(this);
     }
+
     /**
      * @return the child navigations of this component
      */
@@ -115,8 +120,9 @@ public abstract class AbstractNavigation implements Navigation {
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
+	                           
     public Navigation resolveNavigation(String path, WhiteBoard wb) {
-        log.debug(getName() + " resolving " + path);
+        log.debug(getFullURLString() + " resolving " + path);
         //if the current navigation is not visible call the child navigations and try to resolve
         if (!isVisible()) {
             Navigations navs = getChildNavigations();
@@ -137,7 +143,6 @@ public abstract class AbstractNavigation implements Navigation {
         if (st.hasMoreTokens()) {
             String currentPath = st.nextToken();
             if (currentPath.equals(getURLString())) {
-                log.debug("currentPant == getURLString()");
                 if (st.hasMoreTokens()) {
                     StringTokenizer newTokenizer = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR, true);
                     if (newTokenizer.countTokens() > 2) {
@@ -148,8 +153,12 @@ public abstract class AbstractNavigation implements Navigation {
                             newPath.append(newTokenizer.nextToken());
                         }
                         Navigations navs = getChildNavigations();
+                        log.debug(getFullURLString() +  " Has "+ navs.size() +"childs");
                         for (int x = 0; x < navs.size(); x++) {
-                            Navigation resolved = navs.getNavigation(x).resolveNavigation(newPath.toString(), wb);
+                        	Navigation theChild = navs.getNavigation(x);
+							
+                            Navigation resolved = theChild.resolveNavigation(newPath.toString(), wb);
+							log.debug(getFullURLString() +  " child " + x + " " + theChild.getName() + " retval " + resolved);
                             if (resolved != null) {
                                 return resolved;
                             }
