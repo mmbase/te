@@ -12,7 +12,9 @@ package te;
  * @author Kees Jongenburger
  */
 public abstract class Facade {
-    public final static String DEFAULT_ENCODING = "UTF-8";
+    
+	public final static String DEFAULT_ENCODING = "ISO-8859-1";
+	
     public static String encoding = DEFAULT_ENCODING;
     public String engineURL = null;
 

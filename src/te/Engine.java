@@ -60,11 +60,11 @@ public class Engine extends BridgeServlet {
             log.fatal(t.getMessage() + " " + Logging.stackTrace(t));
         }
     }
-    
-	public static Facade getFacade(){
-		return facade;
-	}
-	
+
+    public static Facade getFacade() {
+        return facade;
+    }
+
     public void destroy() {
         destroyCounter++;
     }
@@ -78,8 +78,9 @@ public class Engine extends BridgeServlet {
             HttpServletRequest req = (HttpServletRequest) servletRequest;
             HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
-            resp.setContentType("text/html;charset=utf-8");
-              
+            resp.setContentType("text/html;charset=" + Facade.encoding );
+            //resp.setContentType("text/html");
+
             //code to determin the "engine url"             
             if (facade.getEngineURL() == null) {
                 String servletPath = req.getRequestURI();
@@ -139,7 +140,6 @@ public class Engine extends BridgeServlet {
                         t.renderRelative(remainingPath, wb);
                     } else {
                         t.render(wb, resp.getWriter());
-
                     }
                 } catch (IOException e) {
                     log.warn(Logging.stackTrace(e));
@@ -155,17 +155,10 @@ public class Engine extends BridgeServlet {
                     log.warn(Logging.stackTrace(e));
                 }
             }
-
-            //LayoutManager layout = new JSPLayoutManager("/layout/list.jsp");
-            //TemplateContainer c = new JSPTemplateContainer("/container/default.jsp", layout);
-            //c.addTemplate(new JSPTemplate("/test.jsp"));
-            //c.addTemplate(new JSPTemplate("/index.jsp"));
-            //c.addTemplate(new JSPTemplate("/debug.jsp"));/*
-
             wb = null;
+            log.debug(resp.getCharacterEncoding());
         } catch (Throwable t) {
             log.fatal(t.getMessage() + " " + Logging.stackTrace(t));
         }
     }
-
 }

@@ -22,8 +22,8 @@ import org.mmbase.util.logging.*;
  */
 public class ResponseWrapper extends HttpServletResponseWrapper {
 
-    private static String DEFAULT_CHARSET = "utf-8";
-    private static String DEFAULT_CONTENTTYPE = "text/html;charset=" + DEFAULT_CHARSET;
+    private static String DEFAULT_CHARSET = te.Facade.encoding;
+    private static String DEFAULT_CONTENTTYPE = "text/html";
     private static Logger log = Logging.getLoggerInstance(ResponseWrapper.class);
 
     private PrintWriter writer;
@@ -34,11 +34,11 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
     /**
      * Public constructor
      */
-    public ResponseWrapper(HttpServletResponse resp,PrintWriter writer) {
+    public ResponseWrapper(HttpServletResponse resp, PrintWriter writer) {
         super(resp);
         //caw = new CharArrayWriter();
         //writer = new PrintWriter(caw);
-        this.writer = writer; 
+        this.writer = writer;
         msos = new PrintWriterServletOutputStream(writer);
     }
 
@@ -63,7 +63,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
     public String toString() {
         writer.flush();
         return writer.toString();
-        
+
     }
 
     /**
@@ -81,14 +81,15 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
         int i = contentType.indexOf("charset=");
         if (i >= 0) {
             characterEncoding = contentType.substring(i + 8);
+            characterEncoding.trim();
         } else {
             characterEncoding = DEFAULT_CHARSET;
         }
         if (log.isDebugEnabled()) {
-            //log.debug("set contenttype of include page to: '" + contentType + "' (and character encoding to '" + characterEncoding + "')");
+            log.debug("set content type of include page to: '" + contentType + "' (and character encoding to '" + characterEncoding + "')");
         }
     }
-
+    
     /**
      * Returns the name of the charset used for the MIME body sent in this response.
      * If no charset has been assigned, it is implicitly set to ISO-8859-1 (Latin-1).

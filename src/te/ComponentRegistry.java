@@ -46,6 +46,12 @@ public class ComponentRegistry {
         return componentRegistry;
     }
 
+	public Components getComponents(){
+		//TODO:clone the list
+		return components;
+	}
+	//TODO:add the other get* functions
+	
     public Component getComponent(String name) {
         try {
              Component g =  components.getComponentByName(name);
@@ -120,7 +126,7 @@ public class ComponentRegistry {
                 //	<property name="jspPage">/te/layout/default.jsp</property>
                 //</layoutManager>
                 if (child.getProperty("class") != null || !child.getProperty("class").equals("te.jsp.JSPLayoutManager")) {
-                    log.error("layoutManager class not te.jsp.LayoutManager");
+                    log.error("layoutManager class not te.jsp.JSPLayoutManager" + child.getProperty("class"));
                 }
                 String name = child.getProperty("name");
                 String description = child.getProperty("description");

@@ -21,7 +21,7 @@ public class ContainerDecorator extends JSPContainer{
 		this.container = container;
 	}
 	
-	public Container getContainer(){
+	public Container getDecoratedContainer(){
 		return container;
 	}
 }

@@ -13,7 +13,7 @@ public class ComponentDecorator extends JSPComponent {
     	this.component = component;
     }
     
-    public Component getDecoratedCompoment(){
+    public Component getDecoratedComponent(){
     	return component;
     }
 }
