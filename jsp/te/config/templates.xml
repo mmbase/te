@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <templates>
-  <template name="default" layout="default" rootType="maps">
+  <template desc="afleverings pagina" name="default" layout="default" rootType="maps">
     <component name="page_head"/>
     <component name="navigation">
       <property name="showLogs" value="false"/>

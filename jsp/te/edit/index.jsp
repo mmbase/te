@@ -1,10 +1,14 @@
 <%@include file="../include.jsp"%>
 <%@page import="te.edit.*"%>
+<%@page import="te.util.*"%>
+<%@page import="minixml.*"%>
 <% 
 	 Template template = (Template)request.getAttribute("template");
 	 Navigation editNav = navigation.getParentNavigation();
          String map = editNav.getID();
-         //String map = "3302425";
+	 Template t = editNav.getTemplate();
+	 XMLStorage xmlStorage = new XMLStorage();
+	 String test = xmlStorage.componentToString(t);
 %>
 <mm:cloud jspvar="cloud">
 <html>
@@ -34,6 +38,9 @@
         </td>
 </tr>
 </TABLE>
+<pre>
+<%= test %>
+</pre>
 
 <body >
 </body>
