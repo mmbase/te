@@ -15,7 +15,7 @@
 			
 			<mm:relatednodes type="programs">
 				<mm:first><br>Afleveringen selecteren:<br>
-					<mm:isempty referid="programs">Geen selectie</mm:isempty>
+					<mm:isempty referid="programs">Alle programmas[huidige selectie]</mm:isempty>
 					<mm:isnotempty referid="programs">
 				                <a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>">Alle afleveringen zien</a>
 </mm:isnotempty>
@@ -23,7 +23,7 @@
 				<div class="programs">
 				<mm:field name="number">
 					<mm:compare value="$programs">
-						<div class="title">--<mm:field name="title"/></div>
+						<div class="title"><mm:field name="title"/>[huidige selectie]</div>
 					</mm:compare>
 					<mm:compare value="$programs" inverse="true">
 				                <a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>?programs=<mm:field name="number"/>"><te:field name="title"/></a>

@@ -25,7 +25,7 @@
 				  <% if (nav == navigation) { %>
 				     <td class="selectednavigation">[<%= nav.getName() %>]</td>
 				 <% } else { %>
-				     <td class="selectednavigation">[<%= nav.getName() %> ... ]</td>
+				    <td class="navigation"><a href="<%= facade.getEngineURL() + nav.getFullURLString() %>/">[<%= nav.getName() %> ..]</a></td>
 				 <% } %>
 				<% } else { %>
 				<td class="navigation"><a href="<%= facade.getEngineURL() + nav.getFullURLString() %>/"><%= nav.getName() %></a></td>
