@@ -4,7 +4,6 @@
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
-<div class="<%= component.getName() %>">
 	<mm:related path="magazines,news" fields="news.number" orderby="news.number" max="2"> 
 		<mm:node element="news">
 			<div class="news">
@@ -18,7 +17,6 @@
 				</div>
 			</mm:node>
 	</mm:related>
-</div>
 </mm:node>
 </mm:cloud>
 

@@ -4,13 +4,11 @@
 <mm:import externid="mapsid"><%= ((NavigationParam)findParentParam(navigation,"maps")).getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
-<div class="<%= component.getName() %>">
 	<mm:related path="images,categories" fields="images.number,categories.name" constraints="categories.name='logo'">
 		<mm:node element="images">
 		   <img src="<mm:image template="s(200x200)"/>">
 		</mm:node>
 	</mm:related>
-</div>
 </mm:node>
 </mm:cloud>
 

@@ -2,7 +2,6 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<div class="<%= component.getName() %>">
 	<mm:node number="<%= navigation.getID() %>">
 		<mm:related path="posrel,images" fields="posrel.pos" orderby="posrel.pos">
 			<mm:node element="images">
@@ -12,5 +11,4 @@
 			</mm:node>
 		</mm:related>
 	</mm:node>
-</div>
 </mm:cloud>

@@ -11,7 +11,6 @@
        bcNav = bcNav.getParentNavigation();
    } ;
 %>
-<div class="<%= component.getName() %>">
 <mm:cloud>
 <% Navigation n = null;
    while( ! stack.isEmpty() &&  (n = (Navigation)stack.pop()) != null) { %>
@@ -19,5 +18,3 @@
 	    <% if (! stack.isEmpty() ) {%> &gt; <% } %>
 <% } %>
 </mm:cloud>
-
-</div>

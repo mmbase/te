@@ -2,7 +2,6 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<div class="<%= component.getName() %>">
 	<mm:node number="<%= navigation.getID() %>">
 		<mm:relatednodes type="images">
 				<img src="<mm:image template="s(100x100)"/>"><br>
@@ -10,5 +9,4 @@
 			<br>
 		</mm:relatednodes>
 	</mm:node>
-</div>
 </mm:cloud>

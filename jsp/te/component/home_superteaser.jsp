@@ -3,7 +3,6 @@
 %>
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
 <mm:cloud>
-<div class="<%= component.getName() %>">
 <mm:node referid="mapsid">
 	<mm:related path="kaft,posrel,teasers" fields="posrel.pos" constraints="posrel.pos =0 ">
 		<mm:node element="teasers">
@@ -15,5 +14,4 @@
 		</mm:node>
 	</mm:related>
 </mm:node>
-</div>
 </mm:cloud>

@@ -3,7 +3,6 @@
 %>
 <mm:cloud>
 <mm:node number="<%= findParentParam(navigation,"binders").getID() %>">
-<div class="<%= component.getName() %>">
 
 	<te:field  name="title"/>
 	<mm:related path="images,categories" fields="images.number,categories.name" constraints="categories.name <>'logo'" max="1">
@@ -17,6 +16,5 @@
 	<te:field  name="subtitle"/>
 	<te:field  name="intro"/>
 	<te:field  name="html(body)"/>
-</div>
 </mm:node>
 </mm:cloud>

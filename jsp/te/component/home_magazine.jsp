@@ -1,7 +1,6 @@
 <%@include file="../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
 %>
-<div class="<%= component.getName() %>">
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
@@ -27,4 +26,3 @@
 </div>
 </mm:node>
 </mm:cloud>
-</div>

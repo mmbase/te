@@ -4,7 +4,6 @@
 <mm:import externid="mapsid"><%= ((NavigationParam)findParentParam(navigation,"maps")).getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
-<div class="<%= component.getName() %>">
 	<mm:relatednodes type="serviceinfo">
 		<a href="<te:url/>"><te:field name="title"/></a>
 		<mm:relatednodes type="images" max="1">
@@ -13,6 +12,5 @@
 		<te:field name="subtitle"/>
 	        <br>
 	</mm:relatednodes>
-</div>
 </mm:node>
 </mm:cloud>

@@ -2,7 +2,6 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<div class="content" width="200">
    <mm:list nodes="<%= findParentParam(navigation,"episodes").getID() %>" path="episodes,items" fields="episodes.number,items.number">
          <mm:node element="items" jspvar="thisItem">
             <% if (thisItem.getStringValue("number").equals(findParentParam(navigation,"items").getID())){ %>
@@ -12,6 +11,5 @@
             <% } %>
          </mm:node>
    </mm:list>
-</div>
 </mm:cloud>
 

@@ -16,7 +16,6 @@
 
 %>
 <mm:node referid="mapsid">
-<div class="<%= component.getName() %>">
 <table>
 <mm:related 
 	path="programs,episodes,bcastrel,mmevents" 
@@ -43,5 +42,4 @@
 </mm:related>
 </table>
 </mm:node>
-</div>
 </mm:cloud>

@@ -5,7 +5,6 @@
 <mm:cloud>
 <mm:import externid="programs"/>
 <mm:node referid="mapsid">
-<div class="<%= component.getName() %>">
 	<mm:relatednodes type="archives">
 		<div class="archives">
 			<te:field name="title"/>
@@ -33,6 +32,5 @@
 			</mm:relatednodes>
 		</div>
 	</mm:relatednodes>
-</div>
 </mm:node>
 </mm:cloud>

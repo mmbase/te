@@ -5,11 +5,9 @@
 <table cellpadding="0" cellspacing="0" border="0">
 <tr>
 <% for (int x = 0 ; x < components.size(); x++) {%>
-  <td valign="top">
-	 <%
-	 	Component component = components.getComponent(x);
-		component.render(wb,new PrintWriter(out));
-	 %>
+  <%Component component = components.getComponent(x); %>
+  <td valign="top" class="<%= component.getName() %>">
+	 <% component.render(wb,new PrintWriter(out)); %>
   </td>
 <% } %>
 </tr>

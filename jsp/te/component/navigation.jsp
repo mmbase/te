@@ -7,7 +7,6 @@
 	hash.put(tempNav,"true");
   } while( (tempNav = tempNav.getParentNavigation()) != null);
 %>
-        <div class="<%= component.getName() %>">
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<% if (navigation == mapsNavigation) {%>
 		<td class="selectednavigation">Voorpagina</td>
@@ -49,4 +48,3 @@
 </td>
 <td>&nbsp;</td>
 	</table>
-	</div>

@@ -3,7 +3,6 @@
 %>
 <mm:cloud>
 <mm:node number="<%= findParentParam(navigation,"binders").getID() %>">
-<div class="<%= component.getName() %>">
 <table border="0">
 <% int width = 2; %>
 <% int counter =1; %>
@@ -72,6 +71,5 @@
    } 
 %>
 </table>
-</div>
 </mm:node>
 </mm:cloud>

@@ -2,7 +2,6 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<div class="<%= component.getName() %>">
 	<mm:node number="<%= navigation.getID() %>">
 		<mm:relatednodes type="persons">
 			<mm:first>Persoon<br></mm:first>
@@ -28,5 +27,4 @@
 			<mm:last><hr></mm:last>
 		</mm:relatednodes>
 	</mm:node>
-</div>
 </mm:cloud>

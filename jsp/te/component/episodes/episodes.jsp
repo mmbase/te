@@ -4,7 +4,6 @@
 <mm:import externid="mapsid"><%= ((NavigationParam)findParentParam(navigation,"maps")).getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
-<div class="<%= component.getName() %>">
 <%-- list related episodes to a maps (program) order them by episode number
  skip episodes that are in the future (maybe we first need to make a query for only the next episode)
 --%>
@@ -69,6 +68,5 @@
 		</mm:size>
 	</mm:last>
 </mm:related>
-</div>
 </mm:node>
 </mm:cloud>

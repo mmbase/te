@@ -2,7 +2,6 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<div class="<%= component.getName() %>">
 <mm:node number="<%= navigation.getID() %>">
 <te:field name="title"/>
 <te:field name="subtitle"/>
@@ -26,5 +25,4 @@
 </tr>
 </table>
 </mm:node>
-</div>
 </mm:cloud>

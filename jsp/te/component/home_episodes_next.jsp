@@ -2,7 +2,6 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
-<div class="<%= component.getName() %>">
 <mm:cloud>
 <%-- get the current map --%>
 <mm:node referid="mapsid">
@@ -23,4 +22,3 @@
 	</mm:compare>
 </mm:node>
 </mm:cloud>
-</div>

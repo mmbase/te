@@ -2,7 +2,6 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<div class="<%= component.getName() %>">
 <mm:node number="<%= findParentParam(navigation,"maps").getID() %>">
 <table border="0">
 <% int counter =1; %>
@@ -33,7 +32,6 @@
    } 
 %>
 </table>
-</div>
 </mm:node>
 </mm:cloud>
 

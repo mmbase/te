@@ -10,9 +10,9 @@
 <% } %>
 <% for (int x = 0 ; x < components.size(); x++) {%>
 <tr>
-  <td>
+<%Component component = components.getComponent(x); %>
+  <td class="<%= component.getName()%>">
 	 <%
-	 	Component component = components.getComponent(x);
 		component.render(wb,new PrintWriter(out));
 	 %>
 	</td>

@@ -3,7 +3,6 @@
 %>
 <mm:import externid="curnav"><%= navigation.getID() %></mm:import>
 <mm:cloud>
-<div class="<%= component.getName() %>">
 <mm:node referid="curnav">
 	<%-- list of theasers pos 1 till 9 --%>
 	<div class="teasers1to9">
@@ -42,5 +41,4 @@
 	</mm:related>
 	</div>
 </mm:node>
-</div>
 </mm:cloud>

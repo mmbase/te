@@ -9,7 +9,6 @@
 <mm:cloud>
 <mm:import externid="episodeNumber"><%= episodeNumber %></mm:import>
 <mm:import externid="itemNumber"><%= itemNumber %></mm:import>
-<div class="<%= component.getName() %>">
   <mm:list nodes="$episodeNumber" path="episodes,insrel,items" fields="episodes.number,items.number" jspvar="list">
      <%-- selecte the item --%>
     <mm:node element="items">
@@ -36,5 +35,4 @@
   </mm:list>
 </td>
 </table>
-</div>
 </mm:cloud>
