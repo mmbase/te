@@ -49,8 +49,6 @@ public class StaticNavigation extends AbstractNavigation {
      * @see te.AbstractNavigation#getChildNavigations()
      */
     public Navigations getChildNavigations() {
-
         return childs;
     }
-
 }

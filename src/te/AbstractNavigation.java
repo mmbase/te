@@ -11,19 +11,21 @@ package te;
 
 import java.util.*;
 import te.util.*;
+import org.mmbase.util.logging.*;
 /**
  * @author Kees Jongenburger
  */
 public abstract class AbstractNavigation implements Navigation {
+    private static Logger log = Logging.getLoggerInstance(AbstractNavigation.class);
     Navigation parent = null;
     Properties properties;
-
+    boolean visible = true;
     NavigationControl navigationControl;
 
     public AbstractNavigation() {
         properties = new Properties();
     }
-	
+
     public boolean isRootNavigation() {
         return parent == null;
     }
@@ -39,12 +41,11 @@ public abstract class AbstractNavigation implements Navigation {
      * @return unique id of this navigation typicaly a number
      */
     public abstract String getID();
-        
+
     /** 
      * @return the name of the navigation nieuws
      */
-    public abstract String getName(); 
-        
+    public abstract String getName();
 
     public Navigation getChildByName(String name) {
         Navigations navs = getChildNavigations();
@@ -70,8 +71,7 @@ public abstract class AbstractNavigation implements Navigation {
     /**
      * @return the child navigations of this component
      */
-    public abstract Navigations getChildNavigations() ;
-        
+    public abstract Navigations getChildNavigations();
 
     /**
      * @return the parent navigation of the component
@@ -107,5 +107,59 @@ public abstract class AbstractNavigation implements Navigation {
     public Template getTemplate() {
         return getNavigationControl().getTemplate(this);
     }
-    
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+    public Navigation resolveNavigation(String path, WhiteBoard wb) {
+        log.debug(getName() + " resolving " + path);
+        //if the current navigation is not visible call the child navigations and try to resolve
+        if (!isVisible()) {
+            Navigations navs = getChildNavigations();
+            for (int x = 0; x < navs.size(); x++) {
+                Navigation resolved = navs.getNavigation(x).resolveNavigation(path, wb);
+                if (resolved != null) {
+                    return resolved;
+                }
+            }
+            //the current navigaiton was not visible and the child navigations did not return a valid navigation
+            //so te retrun null
+            return null;
+        }
+        //the current navigation is visible
+        //take the first element in the path
+        StringTokenizer st = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR);
+
+        if (st.hasMoreTokens()) {
+            String currentPath = st.nextToken();
+            if (currentPath.equals(getURLString())) {
+                log.debug("currentPant == getURLString()");
+                if (st.hasMoreTokens()) {
+                    StringTokenizer newTokenizer = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR, true);
+                    if (newTokenizer.countTokens() > 2) {
+                        newTokenizer.nextToken(); // the current nav
+                        newTokenizer.nextToken(); // the delimiter
+                        StringBuffer newPath = new StringBuffer();
+                        while (newTokenizer.hasMoreTokens()) {
+                            newPath.append(newTokenizer.nextToken());
+                        }
+                        Navigations navs = getChildNavigations();
+                        for (int x = 0; x < navs.size(); x++) {
+                            Navigation resolved = navs.getNavigation(x).resolveNavigation(newPath.toString(), wb);
+                            if (resolved != null) {
+                                return resolved;
+                            }
+                        }
+                    }
+
+                }
+                return this;
+            }
+        }
+        return null;
+    }
 }

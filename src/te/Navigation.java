@@ -15,7 +15,7 @@ import java.util.Properties;
  * @author keesj
  * @version $Id$
  */
-public interface Navigation {
+public interface Navigation extends NavigationResolver {
     public abstract boolean isRootNavigation();
     public abstract void setParentNavigation(Navigation navigation);
     public abstract void setProperty(String key, String value);
@@ -50,4 +50,6 @@ public interface Navigation {
     public abstract void setNavigationControl(NavigationControl navigationControl);
     public abstract NavigationControl getNavigationControl();
     public abstract Template getTemplate();
+    public boolean isVisible();
+    public void setVisible(boolean visible);
 }

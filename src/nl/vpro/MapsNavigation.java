@@ -18,7 +18,7 @@ import te.*;
  * @author keesj
  * @version $Id$
  */
-public class MapsNavigation extends AbstractResolvingNavigation  {
+public class MapsNavigation extends AbstractNavigation {
     private static Logger log = Logging.getLoggerInstance(MapsNavigation.class);
     public Node node;
     public MapsNavigation(Node node) {
@@ -64,10 +64,12 @@ public class MapsNavigation extends AbstractResolvingNavigation  {
      * @see te.NavigationResolver#resolveNavigation(java.lang.String, te.WhiteBoard)
      */
     public Navigation resolveNavigation(String path, WhiteBoard wb) {
-        log.debug(getFullURLString() + " resolving " + path);
-        
-        log.debug("setting current maps (program){" + node.getStringValue("title") + "} in whiteboard.");
-        wb.getHttpServletRequest().setAttribute("maps", node);
-        return super.resolveNavigation(path,wb);
+
+        Navigation nav = super.resolveNavigation(path, wb);
+        if (nav != null) {
+            log.debug("setting current maps (program){" + node.getStringValue("title") + "} in whiteboard.");
+            wb.getHttpServletRequest().setAttribute("maps", node);
+        }
+        return nav;
     }
 }

@@ -1,7 +1,8 @@
 <!ELEMENT navigation (navigation*|property*|entrypoint)>
 <!ATTLIST navigation 
 	id CDATA #REQUIRED 
-	name CDATA #REQUIRED>
+	name CDATA #REQUIRED
+	visible CDATA #IMPLIED>
 
 <!ELEMENT property (#PCDATA)>
 <!ATTLIST property name CDATA #REQUIRED>

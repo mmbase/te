@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
 <!DOCTYPE navigation SYSTEM "navigation.dtd">
-<navigation name="sites" id="1">
+<navigation name="sites" id="1" visible="false">
 	<entrypoint class="nl.vpro.ProgrammasitesNavigationControl"/>
-	
-	<!--<entrypoint class="te.edit.EditNavigationControl"/> -->
  </navigation> 
