@@ -3,7 +3,7 @@
 %>
 <mm:cloud>
 <div>
-	<mm:node number="<%= ((NavigationParam)findParentParam(navigation,"episodes")).getID() %>">
+	<mm:node number="<%= navigation.getID() %>">
 		<mm:relatednodes type="images">
 				<img src="<mm:image template="s(100x100)"/>"><br>
 				<te:field name="description"/>

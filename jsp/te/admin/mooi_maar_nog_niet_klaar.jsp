@@ -3,9 +3,7 @@
 <%@page import="te.util.*"%>
 <%@page import="minixml.*"%>
 <% 
-	 Template template = (Template)request.getAttribute("template");
-	//wb.getHttpServletResponse().addHeader("Cache-Control","no-cache");
-        //wb.getHttpServletResponse().addHeader("Pragma","no-cache");
+	Template template = (Template)request.getAttribute("template");
 	response.addHeader("Cache-Control","no-cache");
         response.addHeader("Pragma","no-cache");
 %>

@@ -14,19 +14,8 @@
 	<mm:compare referid="nextepisodenumber" value="0" inverse="true">
 		<mm:node referid="nextepisodenumber">
 			<table width="100%">
-				<tr><th colspan="2">Volgende aflevering</th><th></th></tr>
-				<tr>
-					<td>
-						<a href="<te:url/>"><te:field  name="title"/></a>
-						<te:field  name="subtitle"/>
-						<te:field  name="substring(html(intro),150,...)"/>
-					</td>
-					<td>
-					<mm:relatednodes type="images" max="1">
-						<img src="<mm:image template="s(100x100)"/>" valign="top" align="right"/>
-					</mm:relatednodes>
-					</td>
-				</tr>
+				<tr><th colspan="2">Vorige aflevering</th><th></th></tr>
+				<%@include file="parts/home_episodes.jsp"%>
 			</table>
 		</mm:node>
 	</mm:compare>

@@ -6,15 +6,27 @@ body {
 a {
 	color: #222222;
 	background-color: #d9f9d9;
+	text-decoration: underline;
 }
 
 a:hover {
 	color: #000000;
 	background-color: #bddadb;
 }
-table {
+td {
 	background-color: #d9f9d9;
+}
+table {
+	background-color: #5761A0;
 }
 th {
 	background-color: #dedad5;
+}
+
+.state_active {
+	background-color: green;
+}
+
+.state_inactive {
+	background-color: red;
 }

@@ -1,5 +1,6 @@
-<%@include file="../include.jsp"%><% 
-	 Template template = (Template)request.getAttribute("template");
+<%@include file="../include.jsp"%>
+<% 
+  	 Template template = (Template)request.getAttribute("template");
 	 LayoutManager layout = template.getLayoutManager();
 	 StringWriter sw = new StringWriter();
 	 PrintWriter pw = new PrintWriter(sw);

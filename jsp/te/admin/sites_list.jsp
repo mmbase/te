@@ -16,9 +16,15 @@
 <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
-<mm:listnodes type="sites">
+<table>
+	<tr><th>status</th><th>site naam</th><th>beschrijving</th></tr>
+<mm:listnodes type="programmasites" constraints="state <> 0">
+	<tr><td class="state_active">run</td><td><a href="view_site.jsp?number=<mm:field name="number"/>"><mm:field name="name"/></a></td><td><mm:field name="description"/></td></tr>
 </mm:listnodes>
-
+<mm:listnodes type="programmasites" constraints="state = 0">
+	<tr><td class="state_inactive">stoped</td><td><a href="view_site.jsp?number=<mm:field name="number"/>"><mm:field name="name"/></a></td><td><mm:field name="description"/></td></tr>
+</mm:listnodes>
+</table>
 <a href="new_site.jsp">nieuwe site maken</a>
 </body>
 </html>
