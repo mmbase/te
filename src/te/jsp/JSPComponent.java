@@ -55,7 +55,7 @@ public class JSPComponent extends AbstractContainer implements Component {
             wb.getHttpServletRequest().setAttribute("throwable", t);
             new JSPComponent("/te/component/error.jsp").render(wb, writer);
         }
-		log.debug("finised render {" + path + "} " + ((start - System.currentTimeMillis())/ 1000));
+		log.debug("finised render {" + path + "} " + ( System.currentTimeMillis()- start ) + " ms");
     }
 
     /* (non-Javadoc)

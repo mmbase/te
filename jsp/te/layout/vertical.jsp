@@ -2,7 +2,7 @@
 	 Container container = (Container)request.getAttribute("container");
 	 Components components= container.getComponents();
 %>
-<table>
+<table cellpadding="0" cellspacing="0" border="0">
 <% for (int x = 0 ; x < components.size(); x++) {%>
 <tr>
   <td valign="top">

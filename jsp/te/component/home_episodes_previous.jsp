@@ -8,17 +8,19 @@
 	<mm:field id="prevmmevent" name="prevmmevent" write="false"/>
 	<mm:node referid="prevmmevent">
 		<mm:relatednodes type="episodes">
+			<div class="episodes">
                         <span style="background-color:white">Vorige aflevering</span>
 <table width="100%">
 <tr>
 <td>
+			<te:url/>
 			<mm:field name="number" write="false" jspvar="field">
 			 <a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/afleveringen/" + field%>/">
 			</mm:field>
-		        <te:url/>
 			<te:field  name="title"/></a>
 			<te:field  name="subtitle"/>
 			<te:field  name="substring(html(intro),150,...)"/>
+			</div>
 </td>
 <td>
 

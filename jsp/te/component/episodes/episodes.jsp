@@ -33,10 +33,7 @@
 <table width="100%">
 <tr>
 <td>
-	<te:field name="number" write="false" jspvar="field">
-           <a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/afleveringen/" + field%>/">
-	</te:field>
-			<te:field  name="title"/></a>
+			<a href="<te:url/>"><te:field  name="title"/></a>
 			<te:field  name="subtitle"/>
 			<te:field  name="substring(html(intro),150,...)"/>
 </td>

@@ -16,7 +16,7 @@
 			<te:field  name="subtitle"/>
 			<te:field  name="substring(html(intro),150,...)"/>
 	<te:field name="number" write="false" jspvar="field">
-	<a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/afleveringen/" + field%>/">&gt;&gt;&gt;&gt;&gt;&gt;</a>
+	<a href="<te:url/>">lees meer</a>
 	</te:field>
 </td>
 <td>

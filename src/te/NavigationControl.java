@@ -9,6 +9,8 @@ See http://www.MMBase.org/license
 */
 package te;
 
+import java.util.*;
+
 /**
  * @author Kees Jongenburger
  */
@@ -56,4 +58,7 @@ public abstract class NavigationControl implements NavigationResolver {
     }
 
     public abstract Template getTemplate(Navigation navigation);
+    
+    public abstract String resoveURL(Navigation currentNavigation,List params);
+    
 }

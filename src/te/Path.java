@@ -28,6 +28,13 @@ public class Path {
             paths[x] = st.nextToken();
         }
     }
+    public void reset(){
+    	currentPointer =0; 
+    }
+    
+    public Path newInstance(){
+    	return new Path(fullPath);
+    }
 
     public String current() {
         return paths[currentPointer];
@@ -60,5 +67,9 @@ public class Path {
      */
     public int size() {
         return paths.length;
+    }
+    
+    public String toString(){
+    	return fullPath;
     }
 }

@@ -4,13 +4,6 @@
 body{
 	background-color: white;
 }
-.episodestitle{
-	background-color: green;
-}
-
-.episodepage .episodestitle{
-	background-color: red;
-}
 
 div {
 	background-color: #dedede;
@@ -19,6 +12,7 @@ div {
 .title {
  	font-size: 16pt;
 }
+
 .intro {
  	font-weight: bold;
 }
@@ -35,6 +29,7 @@ td {
 
 String[] nodeManagers =new String[]{"maps","programs", "news", "episodes", "items", "images" ,"magazines","binders","archives","audiofragments","videofragments","urls", "attachments","email","serviceinfo","people","public","groups" ,"mmevents","teasers"};
 
+Hashtable fieldNames = new Hashtable();
 for (int x =0 ; x < nodeManagers.length ; x ++){ 
 	NodeManager nm = cloud.getNodeManager(nodeManagers[x]);
 	FieldIterator iter = nm.getFields(NodeManager.ORDER_CREATE).fieldIterator();
@@ -46,8 +41,9 @@ for (int x =0 ; x < nodeManagers.length ; x ++){
 		&& !field.getName().equals("otype")
 		&& !field.getName().equals("owner")
 ){
+   fieldNames.put(field.getName(),"true");
 %>
-.<%= nm.getName() %><%= field.getName() %> {
+.<%= nm.getName() %> .<%= field.getName() %> {
 	<% if (field.getName().indexOf("title") != -1) { %>
 		font-size: 20px;
 	<%  }%>

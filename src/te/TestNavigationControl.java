@@ -9,6 +9,8 @@ See http://www.MMBase.org/license
 */
 package te;
 
+import java.util.*;
+
 import minixml.XMLElement;
 
 import org.mmbase.util.logging.*;
@@ -52,6 +54,14 @@ public class TestNavigationControl extends NavigationControl implements Configur
 		navigation.setNavigationControl(this);
 		navigation.setVisible(false);
 		log.debug("Test navigation = " + navigation);
+    }
+
+    /* (non-Javadoc)
+     * @see te.NavigationControl#resoveURL(te.Navigation, java.util.List)
+     */
+    public String resoveURL(Navigation currentNavigation, List params) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

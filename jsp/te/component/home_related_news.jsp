@@ -5,10 +5,11 @@
 <mm:cloud>
 <mm:node referid="mapsid">
 <div class="content">
-	<mm:related path="magazines,news"> 
+	<mm:related path="magazines,news" fields="news.number" orderby="news.number"> 
 		<mm:node element="news">
 			<div class="news">
-			<te:field  name="title"/>
+			<a href="<te:url/>">
+			<te:field  name="title"/></a>
 			<te:field  name="subtitle"/>
 			<te:field  name="substring(html_intro,150,..)"/>
 			   <mm:relatednodes type="images">

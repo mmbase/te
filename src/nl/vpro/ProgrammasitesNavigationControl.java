@@ -17,17 +17,18 @@ import te.util.*;
 
 import org.mmbase.util.logging.*;
 import java.util.*;
+
 import minixml.*;
 /**
  * @author Kees Jongenburger
  */
-public class ProgrammasitesNavigationControl extends NavigationControl implements Configurable{
+public class ProgrammasitesNavigationControl extends NavigationControl implements Configurable {
     private static Logger log = Logging.getLoggerInstance(ProgrammasitesNavigationControl.class);
 
     Navigation navigation;
-	String config = null;
+    String config = null;
     private Cloud _cloud;
-    
+
     public ProgrammasitesNavigationControl() {
     }
 
@@ -42,8 +43,8 @@ public class ProgrammasitesNavigationControl extends NavigationControl implement
             return t;
         }
         String templateName = navigation.getProperty("type");
-		//TODO : move code to storage          
-        Template t =  getTemplate(templateName);
+        //TODO : move code to storage          
+        Template t = getTemplate(templateName);
         t.setName(templateName);
         return t;
     }
@@ -74,20 +75,27 @@ public class ProgrammasitesNavigationControl extends NavigationControl implement
         }
         return _cloud;
     }
-    
-	/* (non-Javadoc)
-	 * @see te.Configurable#setConfig(java.lang.String)
-	 */
-	public void setConfig(String config) {
-		this.config = config;
-		XMLElement e = new XMLElement();
-		e.parseString(config);
-		e.setTagName("navigation");
-		e.addProperty("name","test controler");
-		e.addProperty("id","testcontroler");
-		navigation = NavigationLoader.parseXML(e.toString());
-		navigation.setNavigationControl(this);
-		navigation.setVisible(false);
-		log.debug("Test navigation = " + navigation);
-	}
+
+    /* (non-Javadoc)
+     * @see te.Configurable#setConfig(java.lang.String)
+     */
+    public void setConfig(String config) {
+        this.config = config;
+        XMLElement e = new XMLElement();
+        e.parseString(config);
+        e.setTagName("navigation");
+        e.addProperty("name", "test controler");
+        e.addProperty("id", "testcontroler");
+        navigation = NavigationLoader.parseXML(e.toString());
+        navigation.setNavigationControl(this);
+        navigation.setVisible(false);
+        log.debug("Test navigation = " + navigation);
+    }
+
+    /* (non-Javadoc)
+     * @see te.NavigationControl#resoveURL(te.Navigation, java.util.List)
+     */
+    public String resoveURL(Navigation currentNavigation, List params) {
+        return getNavigation().getParentNavigation().getNavigationControl().resoveURL(currentNavigation,params);
+    }
 }

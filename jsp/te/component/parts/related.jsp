@@ -18,11 +18,11 @@
 
 		<mm:relatednodes type="binders">
 			<mm:first>Dossiers:<br></mm:first>
-			<a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() %>/dossiers/<mm:field name="number"/>/"><mm:field name="title"/></a><br>
+			<a href="<te:url/>"><mm:field name="title"/></a><br>
 			<mm:last><hr></mm:last>
 		</mm:relatednodes>
 		<mm:relatednodes type="episodes">
 			<mm:first>Afleveringen:<br></mm:first>
-			<a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() %>/afleveringen/<mm:field name="number"/>/"><mm:field name="title"/></a><br>
+			<a href="<te:url/>"><mm:field name="title"/></a><br>
 			<mm:last><hr></mm:last>
 		</mm:relatednodes>

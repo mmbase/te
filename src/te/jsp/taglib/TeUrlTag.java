@@ -4,6 +4,7 @@ import javax.servlet.jsp.*;
 import javax.servlet.jsp.tagext.*;
 import org.mmbase.bridge.jsp.taglib.*;
 import te.*;
+import java.util.*;
 public class TeUrlTag extends TagSupport {
 
     private String name = "";
@@ -32,9 +33,12 @@ public class TeUrlTag extends TagSupport {
             String type = np.getNodeVar().getNodeManager().getName();
 
             Facade facade = wb.getFacade();
+            List list = new Vector();
+            list.add(np.getNodeVar());
+            String content  = facade.getNavigationControl().resoveURL(wb.getCurrentNavigation(),list);
             // FIXME: yup
             //String url = facade.getNavigationControl().findUrlString(wb.getCurrentNavigation(),type);
-            pageContext.getOut().write("http://www.test.com/");
+            pageContext.getOut().write(content);
 
         } catch (java.io.IOException e) {
             throw new JspTagException("IO Error: " + e.getMessage());

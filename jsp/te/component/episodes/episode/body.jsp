@@ -2,7 +2,7 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<div class="content">
+<div class="episodes">
 	<mm:node number="<%= ((NavigationParam)findParentParam(navigation,"episodes")).getID() %>">
 	<mm:related path="bcastrel,mmevents" fields="bcastrel.number,bcastrel.rerun" constraints="bcastrel.rerun != 0" >
 		<mm:node element="mmevents">
