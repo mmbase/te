@@ -4,7 +4,7 @@
 <mm:cloud>
 <div class="<%= component.getName() %>">
 <mm:node number="<%= findParentParam(navigation,"maps").getID() %>">
-<table border="5">
+<table border="0">
 <% int counter =1; %>
 <mm:relatednodes type="binders">
 

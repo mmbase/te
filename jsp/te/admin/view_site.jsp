@@ -1,6 +1,7 @@
 <%@include file="include.jsp"%>
 <%@page import="te.edit.*"%>
 <%@page import="te.util.*"%>
+<%@page import="te.*"%>
 <%@page import="minixml.*"%>
 <%@page import="nl.vpro.*"%>
 <%
@@ -40,7 +41,18 @@
 			<mm:compare value="0" inverse="true">
 				de site is geactiveerd en te 
 				<mm:cloud><%-- VPRO cloud --%>
-				<mm:node number="<%= node.getStringValue("maps") %>">
+				<mm:node number="<%= node.getStringValue("maps") %>" jspvar="navNode">
+<%
+            List list = new Vector();
+            list.add(navNode);
+            String content  = facade.getNavigationControl().resoveURL(wb.getCurrentNavigation(),list);
+	    Path path = new Path(content);
+	    path.next();
+	    Navigation nav = facade.getNavigationControl().resolveNavigation(path);
+	    if (nav != null && nav.getParentNavigation() != null){
+		nav.getParentNavigation().removeChild(nav);
+	    }
+%>
 				 <a href="<te:url/>">zien</a>
 				</mm:node>
 				</mm:cloud>
