@@ -1,5 +1,4 @@
-<%@include file="../include.jsp"%>
-<html>
+<%@include file="../include.jsp"%><html>
 <head>
 <title>Not implemented ...</title>
 <link rel="stylesheet" href="css/style.css" type="text/css">

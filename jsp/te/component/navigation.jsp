@@ -1,33 +1,35 @@
 <%@include file="../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
-  NavigationControl navcomp = facade.getNavigationControl();
-
-  String style = component.getProperty("style");
-	if (style == null) style = "default";
-
-	if (style.equals("breadcrum")){
-  Navigation nav = wb.getCurrentNavigation();
-
-	//generate a breadcrum
-  StringBuffer sb = new StringBuffer(); 
-  while(! nav.isRootNavigation()){ 
-		sb.insert(0,"<a href=\"" + facade.getEngineURL() + navcomp.getURLString(nav) + "/\">" + nav.getName() + "</a>");
-		nav = nav.getParentNavigation();
-		if (! nav.isRootNavigation()){
-		  sb.insert(0,">");
-		}
-  }
+  ProgrammaSiteNavigationComponent p = (ProgrammaSiteNavigationComponent)component;
 %>
-<div>
-<%= sb.toString() %>
-</div>
-<% } else if (style.equals("sitenavigation")){ 
-	Navigations navs = wb.getCurrentNavigation().getChildNavigations();
-	for (int x = 0 ; x < navs.size() ;x++){
-			Navigation child = navs.getNavigation(x);
-			%>
-			<A HREF="<%= facade.getEngineURL() %><%= navcomp.getURLString(child) %>/"><%= child.getName() %></a>
-			 <% if (x < navs.size() -1) { %>&nbsp;|&nbsp;<% } %>
-			<%
-	}
- } %>
+        <div id="navigation">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<td style="background-color: #E4B7A2"><b>VoorPagina</b></td>
+		<td><img src="pics/left.png" height="26" width="11" border="0"/></td>
+		<td>&nbsp;</td>
+
+		<% if (p.isShowArchives()) { %>
+		<td style="background-color: #E4B7A2">Archief</td>
+		<td><img src="pics/left.png" height="26" width="11" border="0"/></td>
+		<td>&nbsp;</td>
+		<% } %>
+
+		<% if (p.isShowBinders()) { %>
+		<td style="background-color: #E4B7A2">Dossiers</td>
+		<td><img src="pics/left.png" height="26" width="11" border="0"/></td>
+		<td>&nbsp;</td>
+		<% } %>
+
+		<% if (p.isShowLogs()) { %>
+		<td style="background-color: #E4B7A2">Log</td>
+		<td><img src="pics/left.png" height="26" width="11" border="0"/></td>
+		<td>&nbsp;</td>
+		<% } %>
+
+		<td width="150px" height="5">&nbsp;</td>
+
+		<td align="right"><img src="pics/right.png" height="26" width="11" border="0"/></td>
+		<td style="background-color: #E4B7A2"><form><input type="text" length="10"> [ZOEK] M</td>
+		<td>&nbsp;</td>
+	</table>
+	</div>
