@@ -63,7 +63,6 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
     public String toString() {
         writer.flush();
         return writer.toString();
-
     }
 
     /**
@@ -89,7 +88,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
             //log.debug("set content type of include page to: '" + contentType + "' (and character encoding to '" + characterEncoding + "')");
         }
     }
-    
+
     /**
      * Returns the name of the charset used for the MIME body sent in this response.
      * If no charset has been assigned, it is implicitly set to ISO-8859-1 (Latin-1).

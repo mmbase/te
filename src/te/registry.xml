@@ -13,7 +13,7 @@
   <container class="te.jsp.JSPContainer" path="/te/container/default.jsp" name="horizontal" description="a container with a horizontal layout" layout="horizontal"/>
   <container class="te.jsp.JSPContainer" path="/te/container/default.jsp" name="vertical" description="a container with a vertical layout" layout="vertical"/>
   <template class="te.jsp.JSPTemplate" path="/te/template/default.jsp" name="default" description="default tempate using the default layout" layout="default"/>
-  
+  <template class="te.jsp.JSPTemplate" path="/te/template/nocache.jsp" name="nocache" description="template with headers so it wil not get cached" layout="default"/>
   <component class="te.jsp.JSPComponent" name="navigation" path="/te/component/navigation.jsp" description="The VPRO programma sites navigation"/>
   
   <component class="te.jsp.JSPComponent" path="/te/component/page_head.jsp" name="page_head" description="The top of the VPRO page with meta navigation"/>

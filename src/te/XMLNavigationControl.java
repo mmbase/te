@@ -48,8 +48,15 @@ public class XMLNavigationControl extends NavigationControl {
 
     public Template getTemplate(Navigation navigation) {
         NavigationControl control = navigation.getNavigationControl();
+        
+        if (navigation.getProperty("template") != null) {
+            JSPTemplate t = new JSPTemplate(navigation.getProperty("template"), null);
+            t.setMapRenderRelativeToRender(true);
+            return t;
+        }
+
         if (control == this) {
-            return new JSPTemplate("/te/index.jsp?id=" + navigation.getID(),null);
+            return new JSPTemplate("/te/index.jsp?id=" + navigation.getID(), null);
         } else {
             return control.getTemplate(navigation);
         }

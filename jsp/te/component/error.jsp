@@ -1,7 +1,7 @@
 <%@include file="../include.jsp"%><% 
   Throwable t = (Throwable)request.getAttribute("throwable");
 %>
-<table>
+<table border="100">
 <tr><th align="left"><%= t.getMessage()  %></th></tr>
 <%
 	StringWriter wr = new StringWriter();

@@ -34,14 +34,22 @@ public class JSPComponent extends AbstractContainer implements Component {
     }
 
     public void render(WhiteBoard wb, PrintWriter writer) throws ServletException, IOException {
-        log.debug("{" + path + "}");
+        log.debug(" render {" + path + "} (writer avaiable " + (writer == null) + ")");
         try {
 
             wb.getHttpServletRequest().setAttribute("component", this);
+
             RequestWrapper req = new RequestWrapper(wb.getHttpServletRequest());
             ResponseWrapper resp = new ResponseWrapper(wb.getHttpServletResponse(), writer);
             RequestDispatcher requestDispatcher = wb.getHttpServletRequest().getRequestDispatcher(path);
             requestDispatcher.include(req, resp);
+
+            /**            
+            HttpServletRequestWrapper req = new HttpServletRequestWrapper(wb.getHttpServletRequest());
+            HttpServletResponseWrapper resp = new HttpServletResponseWrapper(wb.getHttpServletResponse());
+            RequestDispatcher requestDispatcher = wb.getHttpServletRequest().getRequestDispatcher(path);
+            requestDispatcher.include(wb.getHttpServletRequest(), wb.getHttpServletResponse());
+            **/
         } catch (Throwable t) {
             wb.getHttpServletRequest().setAttribute("throwable", t);
             new JSPComponent("/te/component/error.jsp").render(wb, writer);

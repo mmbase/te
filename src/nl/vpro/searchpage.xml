@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE template SYSTEM "template.dtd">
-<template name="default" layout="default">
+<template name="nocache" layout="default">
   <component name="page_head"/>
   <component name="navigation">
     <property name="showBinders">flase</property>

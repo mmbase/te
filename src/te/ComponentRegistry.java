@@ -64,6 +64,12 @@ public class ComponentRegistry {
         return null;
     }
 
+	public Containers getContainers(){
+		Containers c =  new Containers();
+		c.addAll(containers);
+		return c;
+	}
+	
     public Container getContainer(String name) {
         try {
             Container c =  containers.getContainerByName(name);
@@ -79,13 +85,20 @@ public class ComponentRegistry {
      * @return
      */
     public LayoutManagers getLayoutManagers() {
-        return layoutManagers;
+    	LayoutManagers l = new LayoutManagers();
+    	l.addAll(layoutManagers);
+        return l;
     }
     
     public LayoutManager getLayoutManager(String name){
     	return layoutManagers.getLayoutManagerByName(name);
     }
 
+	public Templates getTemplates(){
+		Templates t = new Templates();
+		t.addAll(templates);
+		return t;
+	}
     /**
      * @return
      */
@@ -101,7 +114,7 @@ public class ComponentRegistry {
 
     }
 
-    private void updateRegistry() {
+    public void updateRegistry() {
         BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("registry.xml")));
         StringWriter sw = new StringWriter();
         String data = null;

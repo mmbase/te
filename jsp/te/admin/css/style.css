@@ -1,0 +1,20 @@
+body {
+	background-color: #b6cfed;
+	color: #000000;
+	font-weight: bold;
+}
+a {
+	color: #222222;
+	background-color: #d9f9d9;
+}
+
+a:hover {
+	color: #000000;
+	background-color: #bddadb;
+}
+table {
+	background-color: #d9f9d9;
+}
+th {
+	background-color: #dedad5;
+}

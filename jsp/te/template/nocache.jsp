@@ -14,6 +14,13 @@
 	} ;
 	bc.insert(0,bcNav.getName());
 	String background = null;
+	//hmm does not work
+	//wb.getHttpServletResponse().addHeader("Cache-Control","no-cache");
+        //wb.getHttpServletResponse().addHeader("Pragma","no-cache");
+	response.addHeader("Cache-Control","no-cache");
+        response.addHeader("Pragma","no-cache");
+        response.addHeader("Test","123");
+
 %><html>
 <%-- find if there is a background image --%>
 <mm:cloud>
@@ -24,6 +31,7 @@
 <head>
 <title><%= bc %></title>
 <link rel="stylesheet" href="css/style.jsp" type="text/css">
+<!-- nocache page -->
 </head>
 <% if (background == null) { %>
  <body background="/img.db?<%= background  %>">

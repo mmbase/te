@@ -136,7 +136,7 @@ public class Engine extends BridgeServlet {
                     Template t = navigationComponent.getTemplate(nav);
                     if (!path.equals(navpath)) {
                         String remainingPath = path.substring(navpath.length() + NavigationControl.PATH_SEPARATOR.length());
-                        //call with the writer being null since the renderRelative may forwar and not include it's data
+                        //call with the writer being null since the renderRelative may forward and not include it's data
                         t.renderRelative(remainingPath, wb);
                     } else {
                         t.render(wb, resp.getWriter());

@@ -21,8 +21,8 @@ import java.util.*;
  * @author Kees Jongenburger
  */
 public class ProgrammasitesNavigationControl extends NavigationControl {
-	private static Logger log = Logging.getLoggerInstance(ProgrammasitesNavigationControl.class);
-	
+    private static Logger log = Logging.getLoggerInstance(ProgrammasitesNavigationControl.class);
+
     StaticNavigation navigation;
     private Cloud _cloud;
     public ProgrammasitesNavigationControl() {
@@ -34,7 +34,6 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
         for (int x = 0; x < list.size(); x++) {
             navigation.addChild(new MapsNavigation(list.getNode(x)));
         }
-
         navigation.setNavigationControl(this);
     }
 
@@ -62,7 +61,7 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
             Component c = store.stringToComponent(content);
             return (Template) c;
         } else {
-    		log.error("can not find template with name {"+ name+"} navigation");    	
+            log.error("can not find template with name {" + name + "} navigation");
             return null;
         }
     }

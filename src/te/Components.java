@@ -1,7 +1,7 @@
 package te;
 import java.util.*;
 
-public class Components extends Vector {
+public class Components extends Vector implements Comparator{
     public Component getComponent(int index) {
         return (Component)get(index);
     };
@@ -13,4 +13,12 @@ public class Components extends Vector {
     	}
     	return null;
     }
+
+    
+    public int compare(Object o1, Object o2) {
+    	return ((Component)o1).getName().compareTo(((Component)o2).getName());
+    }
+    
+    
+    
 }
