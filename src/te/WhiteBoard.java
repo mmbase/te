@@ -18,9 +18,9 @@ import javax.servlet.http.*;
 public class WhiteBoard {
     private HttpServletRequest httpServletRequest;
     private HttpServletResponse httpServletResponse;
-    private AbstractNavigation navigation;
-	private Facade facade;
-	 
+    private Navigation navigation;
+    private Facade facade;
+
     public WhiteBoard(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         this.httpServletRequest = httpServletRequest;
         this.httpServletResponse = httpServletResponse;
@@ -32,19 +32,24 @@ public class WhiteBoard {
     public HttpServletResponse getHttpServletResponse() {
         return httpServletResponse;
     }
-    
-    public void setCurrentNavigation(AbstractNavigation navigation){
-    	this.navigation = navigation;
-    }
-    public AbstractNavigation getCurrentNavigation(){
-    	return navigation;
+
+    public void setCurrentNavigation(Navigation navigation) {
+        this.navigation = navigation;
     }
     
-    public void setFacade(Facade facade){
-    	this.facade = facade;
+    public Navigation getCurrentNavigation() {
+        return navigation;
     }
-    
-    public Facade getFacade(){
-    	return facade;
+
+    public void setFacade(Facade facade) {
+        this.facade = facade;
+    }
+
+    public Facade getFacade() {
+        return facade;
+    }
+
+    public Navigation getRootNavigation() {
+        return getFacade().getNavigationControl().getNavigation();
     }
 }

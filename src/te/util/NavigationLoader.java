@@ -26,13 +26,13 @@ public abstract class NavigationLoader {
     * the xml must follow the navigation.dtd
     * provided
     **/
-    public static AbstractNavigation parseXML(String xml) {
+    public static Navigation parseXML(String xml) {
         XMLElement xmle = new XMLElement();
         xmle.parseString(xml);
         return createNavigation(null, xmle);
     }
 
-    private static AbstractNavigation createNavigation(AbstractNavigation parent, XMLElement xmle) {
+    private static Navigation createNavigation(Navigation parent, XMLElement xmle) {
         if (xmle.getTagName().equals("entrypoint")) {
             String className = xmle.getProperty("class");
             Class entryClass;

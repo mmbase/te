@@ -14,8 +14,8 @@ import te.util.*;
 /**
  * @author Kees Jongenburger
  */
-public abstract class AbstractNavigation {
-    AbstractNavigation parent = null;
+public abstract class AbstractNavigation implements Navigation {
+    Navigation parent = null;
     Properties properties;
 
     NavigationControl navigationControl;
@@ -28,7 +28,7 @@ public abstract class AbstractNavigation {
         return parent == null;
     }
 
-    public void setParentNavigation(AbstractNavigation navigation) {
+    public void setParentNavigation(Navigation navigation) {
         this.parent = navigation;
     }
 
@@ -46,10 +46,10 @@ public abstract class AbstractNavigation {
     public abstract String getName(); 
         
 
-    public AbstractNavigation getChildByName(String name) {
+    public Navigation getChildByName(String name) {
         Navigations navs = getChildNavigations();
         for (int x = 0; x < navs.size(); x++) {
-            AbstractNavigation nav = navs.getNavigation(x);
+            Navigation nav = navs.getNavigation(x);
             if (nav.getName().equals(name)) {
                 return nav;
             }
@@ -76,7 +76,7 @@ public abstract class AbstractNavigation {
     /**
      * @return the parent navigation of the component
      */
-    public AbstractNavigation getParentNavigation() {
+    public Navigation getParentNavigation() {
         return parent;
     }
 

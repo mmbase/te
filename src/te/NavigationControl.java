@@ -23,7 +23,7 @@ public abstract class NavigationControl {
     /** 
      * @return the root navigation
      */
-    public abstract AbstractNavigation getNavigation();
+    public abstract Navigation getNavigation();
 
     /** 
      * @param path navigation path separated by  PATH_SEPARATOR tokens
@@ -35,11 +35,11 @@ public abstract class NavigationControl {
      * </ul>
      * @return the navigation of null if not found
      */
-    public AbstractNavigation getNavigation(String path) {
+    public Navigation getNavigation(String path) {
 
         StringTokenizer st = new StringTokenizer(path, PATH_SEPARATOR);
 
-        AbstractNavigation currentNavigation = getNavigation();
+        Navigation currentNavigation = getNavigation();
 
         //the first token must of course be the "root" navigation
         //if that does no match we return null
@@ -65,7 +65,7 @@ public abstract class NavigationControl {
         return currentNavigation;
     }
 
-    public String getURLString(AbstractNavigation navigation) {
+    public String getURLString(Navigation navigation) {
         StringBuffer sb = new StringBuffer();
         sb.append(navigation.getURLString());
         while (!navigation.isRootNavigation()) {
@@ -76,5 +76,5 @@ public abstract class NavigationControl {
         return sb.toString();
     }
 
-    public abstract Template getTemplate(AbstractNavigation navigation);
+    public abstract Template getTemplate(Navigation navigation);
 }

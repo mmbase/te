@@ -116,7 +116,7 @@ public class Engine extends BridgeServlet {
 
             NavigationControl navigationComponent = facade.getNavigationControl();
             //resolve the current navigation
-            AbstractNavigation nav = navigationComponent.getNavigation(path);
+            Navigation nav = navigationComponent.getNavigation(path);
             if (nav != null) {
                 //if the navigation was found put it in the whiteboard
                 wb.setCurrentNavigation(nav);

@@ -26,15 +26,17 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
         for (int x = 0; x < list.size() ;x++) {
             navigation.addChild(new MapsNavigation(list.getNode(x)));
         }
+        
+        
         //navigation = new StaticNavigation("3302425", "De Wandelende Tak");
         navigation.setNavigationControl(this);
     }
 
-    public AbstractNavigation getNavigation() {
+    public Navigation getNavigation() {
         return navigation;
     }
 
-    public Template getTemplate(AbstractNavigation navigation) {
+    public Template getTemplate(Navigation navigation) {
         if (navigation.getProperty("template") != null) {
             JSPTemplate t = new JSPTemplate(navigation.getProperty("template"), null);
             t.setMapRenderRelativeToRender(true);
@@ -42,6 +44,17 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
         }
         //return new EditTemplate();
         //return new JSPTemplate("/te/template/notimplemented.jsp", null);
-        return new JSPTemplate("/te/template/maps.jsp", null);
+        //Template t =  new JSPTemplate("/te/template/default.jsp",new ProgrammaSiteLayoutManager());
+        
+		// create a default page (with a list layout
+		Template t =  new JSPTemplate("/te/template/default.jsp",new JSPLayoutManager("/te/layout/default.jsp"));
+		//add page head
+		t.addComponent(new JSPComponent("/te/component/page_head.jsp"),"page_head");
+		//add the navigation
+        t.addComponent(new ProgrammaSiteNavigationComponent(),"navigation");
+        Container container = new ProgrammaSiteContainer();
+        container.addComponent(new JSPComponent("/te/component/maps.jsp"),"maps intro");
+        t.addComponent(container);
+        return t;
     }
 }
