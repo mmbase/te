@@ -25,7 +25,7 @@ public class TeFieldTag extends FieldTag {
      */
     protected String convert(String s) throws JspTagException {
 		WhiteBoard wb =(WhiteBoard) pageContext.getAttribute("wb");
-		if (wb.get)
+		//if (wb.get)
         StringBuffer sb = new StringBuffer();
         sb.append("<div class=\"");
         sb.append(getFieldVar().getNodeManager().getName());

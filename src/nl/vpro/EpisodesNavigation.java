@@ -18,7 +18,7 @@ import te.*;
  */
 public class EpisodesNavigation extends AbstractNavigation {
     private static Logger log = Logging.getLoggerInstance(EpisodesNavigation.class);
-    String name = "afleveringen";
+    String name = "Afleveringen";
     String id = "episodes";
 
     public EpisodesNavigation() {

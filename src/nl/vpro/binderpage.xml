@@ -1,15 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE template SYSTEM "template.dtd">
-<template name="default" layout="default">
+<template name="default" layout="default" description="pagina om een dossier te laten zien">
   <component name="page_head"/>
-  <component name="navigation">
-    <property name="showBinders">true</property>
-    <property name="showArchives">flase</property>
-    <property name="showForums">flase</property>
-    <property name="showLogs">flase</property>
-  </component>
+  <component name="logo"/>
+  <component name="navigation"/>
   <container name="horizontal" layout="horizontal">
-    <component name="binders"/>
+    <component name="binder"/>
     <component name="binder_related"/>
   </container>
 </template>

@@ -17,15 +17,15 @@ import te.*;
  * @author keesj
  * @version $Id$
  */
-public class BindersNavigation extends AbstractNavigation {
+public class MagazinesNavigation extends AbstractNavigation {
     //TODO:EpisodeNavigation and ItemsNavigation need to be made generic
-    private static Logger log = Logging.getLoggerInstance(BindersNavigation.class);
-    String name = "Dossiers";
-    String id = "binders";
+    private static Logger log = Logging.getLoggerInstance(MagazinesNavigation.class);
+    String name = "Artikelen";
+    String id = "magazines";
 
-    public BindersNavigation() {
+    public MagazinesNavigation() {
         super();
-        setProperty("type", "binderspage");
+        setProperty("type", "magazinespage");
     }
 
     public String getID() {
@@ -52,12 +52,11 @@ public class BindersNavigation extends AbstractNavigation {
                 Integer.parseInt(number);
                 if (getChildByName(number) == null) {
                     StaticNavigation nav = new StaticNavigation(number, number);
-                    nav.setProperty("type", "binderpage");
-                    nav.setProperty("nodemanager", "binders");
+                    nav.setProperty("type", "newspage");
+                    nav.setProperty("nodemanager", "news");
                     nav.setProperty("number", number);
                     addChild(nav);
                 }
-                log.debug("current binder = " + number);
             } catch (NumberFormatException e) {
 
             }

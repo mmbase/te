@@ -25,7 +25,7 @@ public class MapsNavigation extends AbstractNavigation {
     public MapsNavigation(Node node) {
         this.node = node;
         if (node.getStringValue("title").startsWith("Mag")) {
-			setProperty("type", "magshomepage");
+			setProperty("type", "magazinehomepage");
         } else if (node.getStringValue("title").startsWith("Madi")) {
             setProperty("type", "weekhomepage");
         } else {
@@ -36,6 +36,7 @@ public class MapsNavigation extends AbstractNavigation {
 
         addChild(new EpisodesNavigation());
         addChild(new BindersNavigation());
+        addChild(new MagazinesNavigation());
         addChild(new StaticNavigation("search", "zoeken")).setProperty("type", "searchpage");
 
     }

@@ -41,12 +41,19 @@ public class TemplateImport {
                         NodeList list = nm.getList("name = '" + name + "' ", null, null);
                         if (list.size() == 0) {
                             System.err.println("importing a new template{" + name + "} ");
-                            Node newNode = nm.createNode();
-                            newNode.setStringValue("name", name);
-                            newNode.setStringValue("content", content);
-                            newNode.commit();
+                            try {
+                                XMLElement nodeXMLContent = new XMLElement();
+                                nodeXMLContent.parseString(content);
+                                Node newNode = nm.createNode();
+                                newNode.setStringValue("name", name);
+                                newNode.setStringValue("content", content);
+								newNode.setStringValue("description", nodeXMLContent.getProperty("description"));
+                                newNode.commit();
+                            } catch (Exception e) {
+                                System.err.println("template " + f.getPath() + " does not contain valid xml");
+                            }
                         } else if (list.size() == 1) {
-                            System.err.print("comparing templates: ");
+                            System.err.print("comparing " + name + ": ");
                             Node theNode = list.getNode(0);
                             String nodeContent = theNode.getStringValue("content");
                             XMLElement nodeXMLContent = new XMLElement();
@@ -56,6 +63,7 @@ public class TemplateImport {
                             if (nodeXMLContent.toString().hashCode() != fileXMLContent.toString().hashCode()) {
                                 System.err.println("differ updating");
                                 theNode.setStringValue("content", content);
+								theNode.setStringValue("description", fileXMLContent.getProperty("description"));
                                 theNode.commit();
                             } else {
                                 System.err.println("are the same ");

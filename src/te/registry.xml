@@ -10,43 +10,64 @@
     <property name="jspPage">/te/layout/vertical.jsp</property>
   </layoutManager>
   
+  <!-- containers -->
   <container class="te.jsp.JSPContainer" path="/te/container/default.jsp" name="horizontal" description="a container with a horizontal layout" layout="horizontal"/>
   <container class="te.jsp.JSPContainer" path="/te/container/default.jsp" name="vertical" description="a container with a vertical layout" layout="vertical"/>
+
+  <!-- tempates -->
   <template class="te.jsp.JSPTemplate" path="/te/template/default.jsp" name="default" description="default tempate using the default layout" layout="default"/>
   <template class="te.jsp.JSPTemplate" path="/te/template/nocache.jsp" name="nocache" description="template with headers so it wil not get cached" layout="default"/>
+
+  <!-- generic compoments -->
   <component class="te.jsp.JSPComponent" name="navigation" path="/te/component/navigation.jsp" description="The VPRO programma sites navigation"/>
   
   <component class="te.jsp.JSPComponent" path="/te/component/page_head.jsp" name="page_head" description="The top of the VPRO page with meta navigation"/>
   <component class="te.jsp.JSPComponent" path="/te/component/logo.jsp" name="logo" description="Display the logo of the program"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/maps.jsp" name="maps" description="Display information about maps"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/related_news.jsp" name="related_news" description="Display information about related news"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episodes_next.jsp" name="episodes_next" description="Display the next episode"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episodes_previous.jsp" name="episodes_previous" description="Display the pervious episode"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/home_maps.jsp" name="home_maps" description="Display information about a map (the root object of a programma site"/>
+
+  <!-- compoments for the front page -->
+  <component class="te.jsp.JSPComponent" path="/te/component/home_related_news.jsp" name="home_related_news" description="Display information about related news"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/home_episodes_next.jsp" name="home_episodes_next" description="Display the next episode"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/home_episodes_previous.jsp" name="home_episodes_previous" description="Display the pervious episode"/>
 
   <!-- episode page -->
-  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_name.jsp" name="episode_name" description="Display the title and number of the episode(small)"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_related_images.jsp" name="episode_related_images" description="Display the images related to an episode"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_title.jsp" name="episode_title" description="Display the Title of the episode(large)"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_previousnext.jsp" name="episode_previousnext" description="Display the pervious and next episode links"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_body.jsp" name="episode_body" description="Display the content of the episode"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode_related_audio_video.jsp" name="episode_related_audio_video" description="Display the related audio and video's related to the episode"/>
-  <!-- episode page -->
-  <component class="te.jsp.JSPComponent" path="/te/component/items/item_siblings.jsp" name="item_siblings" description="Display a list of sibling items (via the episode node)"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/items/item_title.jsp" name="item_title" description="Display the title of the item"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/items/item_nav.jsp" name="item_nav" description="Display a link to the parent episode"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/items/item_body.jsp" name="item_body" description="Display the body of the item"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/items/item_related_audio_video.jsp" name="item_related_audio_video" description="Display audio and video related to the item"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode/name.jsp" name="episode_name" description="Display the title and number of the episode(small)"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode/related_images.jsp" name="episode_related_images" description="Display the images related to an episode"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode/title.jsp" name="episode_title" description="Display the Title of the episode(large)"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode/previousnext.jsp" name="episode_previousnext" description="Display the pervious and next episode links"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode/body.jsp" name="episode_body" description="Display the content of the episode"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episode/related_audio_video.jsp" name="episode_related_audio_video" description="Display the related audio and video's related to the episode"/>
 
-  <!-- weehhomepage -->
-  <component class="te.jsp.JSPComponent" path="/te/component/weekoverview.jsp" name="weekoverview" description="The programs of this week"/>
+  <!-- items page -->
+  <component class="te.jsp.JSPComponent" path="/te/component/items/item/siblings.jsp" name="item_siblings" description="Display a list of sibling items (via the episode node)"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/items/item/title.jsp" name="item_title" description="Display the title of the item"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/items/item/nav.jsp" name="item_nav" description="Display a link to the parent episode"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/items/item/body.jsp" name="item_body" description="Display the body of the item"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/items/item/related_audio_video.jsp" name="item_related_audio_video" description="Display audio and video related to the item"/>
+
+  <!-- weekhomepage -->
+  <component class="te.jsp.JSPComponent" path="/te/component/home_weekoverview.jsp" name="home_weekoverview" description="The programs of this week"/>
   
-    <!--binders -->
-  <component class="te.jsp.JSPComponent" path="/te/component/binders/binders.jsp" name="binders" description="The information aboud a dossier"/>
-    <component class="te.jsp.JSPComponent" path="/te/component/binders/binder_related.jsp" name="binder_related" description="related information to a dossier"/>
-
+  <!--binder page -->
+  <component class="te.jsp.JSPComponent" path="/te/component/binders/binder/binder.jsp" name="binder" description="The information aboud a dossier"/>
+   <component class="te.jsp.JSPComponent" path="/te/component/binders/binder/related.jsp" name="binder_related" description="related information to a dossier"/>
+   
+   <!-- binders page -->
+   <component class="te.jsp.JSPComponent" path="/te/component/binders/binders.jsp" name="binders" description="The list of dossiers"/>
+     
   <!-- search -->
   <component class="te.jsp.JSPComponent" path="/te/component/search.jsp" name="search" description="The programs of this week"/>
-  <!-- archief /episode list -->
-  <component class="te.jsp.JSPComponent" path="/te/component/episode_list.jsp" name="episode_list" description="list of episodes of a program"/>
+
+  <!-- afleveringen  -->
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episodes.jsp" name="episode_list" description="list of episodes of a program"/>
+  <!-- magazines  -->
+  <component class="te.jsp.JSPComponent" path="/te/component/magazines/magazines.jsp" name="magazine_list" description="list of episodes of a program"/>
+
+  <!-- news  -->
+  <component class="te.jsp.JSPComponent" path="/te/component/magazines/news/news.jsp" name="news" description="display a news item"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/magazines/news/news_related.jsp" name="news_related" description="display a list of items related to news"/>
   
+  <!-- magazine home page -->
+  <component class="te.jsp.JSPComponent" path="/te/component/home_magazine.jsp" name="home_magazine" description="list of news items for the from page "/>
+  <component class="te.jsp.JSPComponent" path="/te/component/home_related_episodes.jsp" name="home_related_episodes" description="list of episodes of a program"/>
 </registry>

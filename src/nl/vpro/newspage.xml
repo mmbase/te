@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE template SYSTEM "template.dtd">
-<template name="default" layout="default" description="voorpagina inhoude de afleveringen van de week">
+<template name="default" layout="default" description="pagina om een news weer te geven">
   <component name="page_head"/>
   <component name="logo"/>
   <component name="navigation"/>
   <container name="horizontal" layout="horizontal">
-    <component name="home_maps"/>
-    <component name="home_weekoverview"/>
-    <component name="home_related_news"/>
+    <component name="news"/>
+    <component name="news_related"/>
   </container>
 </template>
