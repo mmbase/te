@@ -42,7 +42,7 @@ public class EngineServlet extends BridgeServlet {
     private Logger log = null;
 
     //we have only one facade
-    private static Facade facade;
+    //private static Facade facade;
     /**
      *
      */
@@ -54,8 +54,8 @@ public class EngineServlet extends BridgeServlet {
 
             log = Logging.getLoggerInstance(EngineServlet.class.getName() + "[" + creationCounter + "]");
             log.info("init of engine with name " + getServletConfig().getServletName());
-            if (facade == null) {
-                facade = new FacadeImpl();
+            if (Engine.facade == null) {
+                Engine.facade = new FacadeImpl();
             }
         } catch (Throwable t) {
             log.fatal(t.getMessage() + " " + Logging.stackTrace(t));
@@ -63,7 +63,7 @@ public class EngineServlet extends BridgeServlet {
     }
 
     public static Facade getFacade() {
-        return facade;
+        return Engine.facade;
     }
 
     public void destroy() {
@@ -83,12 +83,12 @@ public class EngineServlet extends BridgeServlet {
             //resp.setContentType("text/html");
 
             //code to determin the "engine url"             
-            if (facade.getEngineURL() == null) {
+            if (Engine.facade.getEngineURL() == null) {
                 String servletPath = req.getRequestURI();
                 int match = servletPath.indexOf(engineName);
                 if (match > 0) {
-                    facade.setEngineURL(servletPath.substring(0, match + engineName.length() + 1));
-                    log.debug("setting engine url to" + facade.getEngineURL());
+                    Engine.facade.setEngineURL(servletPath.substring(0, match + engineName.length() + 1));
+                    log.debug("setting engine url to" + Engine.facade.getEngineURL());
                 } else {
                     log.warn("it looks like the engine is not called \"engine\" unable to determin the engine url");
                 }
@@ -96,17 +96,17 @@ public class EngineServlet extends BridgeServlet {
 
             //create your shared object
             WhiteBoard wb = new WhiteBoard(req, resp);
-            wb.setFacade(facade);
+            wb.setFacade(Engine.facade);
             //and store the whiteboard on it
             req.setAttribute("wb", wb);
 
-            if (req.getRequestURI().length() == facade.getEngineURL().length()) {
+            if (req.getRequestURI().length() == Engine.facade.getEngineURL().length()) {
                 return;
             }
 
             //extract the servlet context name and the eninge name
             //this is the starting point
-            String path = req.getRequestURI().substring(facade.getEngineURL().length());
+            String path = req.getRequestURI().substring(Engine.facade.getEngineURL().length());
 
             //remove leading slashes
             while (path.charAt(path.length() - 1) == '/') {
@@ -123,7 +123,7 @@ public class EngineServlet extends BridgeServlet {
                 log.debug("request[" + requestCounter + "] requested " + path);
             }
 
-            NavigationControl navigationComponent = facade.getNavigationControl();
+            NavigationControl navigationComponent = Engine.facade.getNavigationControl();
             //resolve the current navigation
             Navigation nav = navigationComponent.resolveNavigation(new Path(path));
             if (nav != null) {
@@ -151,7 +151,7 @@ public class EngineServlet extends BridgeServlet {
                 }
             } else {
                 try {
-                    req.getRequestDispatcher("/programma" + path).forward(servletRequest, servletResponse);
+                    req.getRequestDispatcher("/programma/" + path).forward(servletRequest, servletResponse);
                 } catch (IOException e) {
                     log.warn(Logging.stackTrace(e));
                 } catch (Exception e) {

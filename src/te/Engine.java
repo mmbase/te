@@ -29,10 +29,10 @@ public class Engine implements Filter {
     protected static long creationCounter = 0;
 
     //	every time the EngineFacade is destroy is called a the counter is increased
-    private static long destroyCounter = 0;
+    protected static long destroyCounter = 0;
 
     //request counter shared over the different engines
-    private static int requestCounter = 0;
+    protected static int requestCounter = 0;
 
     //the configuration of the filter
     //private ServletConfig servletConfig = null;
@@ -41,7 +41,7 @@ public class Engine implements Filter {
     private Logger log = null;
 
     //we have only one facade
-    private static Facade facade;
+    public static Facade facade;
     
 	public Engine(){
 		
