@@ -14,7 +14,7 @@
   <container class="te.jsp.JSPContainer" path="/te/container/default.jsp" name="vertical" description="a container with a vertical layout" layout="vertical"/>
   <template class="te.jsp.JSPTemplate" path="/te/template/default.jsp" name="default" description="default tempate using the default layout" layout="default"/>
   
-  <component class="nl.vpro.ProgrammaSiteNavigationComponent" name="navigation" description="The VPRO programma sites navigation"/>
+  <component class="te.jsp.JSPComponent" name="navigation" path="/te/component/navigation.jsp" description="The VPRO programma sites navigation"/>
   
   <component class="te.jsp.JSPComponent" path="/te/component/page_head.jsp" name="page_head" description="The top of the VPRO page with meta navigation"/>
   <component class="te.jsp.JSPComponent" path="/te/component/maps.jsp" name="maps" description="Display information about maps"/>
@@ -42,5 +42,8 @@
     <!--binders -->
   <component class="te.jsp.JSPComponent" path="/te/component/binders/binders.jsp" name="binders" description="The information aboud a dossier"/>
     <component class="te.jsp.JSPComponent" path="/te/component/binders/binder_related.jsp" name="binder_related" description="related information to a dossier"/>
+
+  <!-- search -->
+  <component class="te.jsp.JSPComponent" path="/te/component/search.jsp" name="search" description="The programs of this week"/>
   
 </registry>

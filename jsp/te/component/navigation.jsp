@@ -1,6 +1,5 @@
 <%@include file="../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
-  ProgrammaSiteNavigationComponent p = (ProgrammaSiteNavigationComponent)component;
 %>
         <div id="navigation">
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">

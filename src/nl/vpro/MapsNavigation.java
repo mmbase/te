@@ -60,7 +60,14 @@ public class MapsNavigation extends AbstractNavigation {
         navigation.setProperty("template", "/te/edit/index.jsp");
         navigation.setNavigationControl(getNavigationControl());
         navigation.setParentNavigation(this);
-        retval.add(navigation);
+		retval.add(navigation);
+		
+		Navigation search = new StaticNavigation("search", "zoeken");
+		search.setProperty("type", "searchpage");
+		search.setNavigationControl(getNavigationControl());
+		search.setParentNavigation(this);
+		retval.add(search);
+        
 
         return retval;
     }

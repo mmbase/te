@@ -15,13 +15,16 @@ import te.*;
 import te.jsp.*;
 import te.util.*;
 
-import java.io.*;
+import org.mmbase.util.logging.*;
+import java.util.*;
 /**
  * @author Kees Jongenburger
  */
 public class ProgrammasitesNavigationControl extends NavigationControl {
+	private static Logger log = Logging.getLoggerInstance(ProgrammasitesNavigationControl.class);
+	
     StaticNavigation navigation;
-
+    private Cloud _cloud;
     public ProgrammasitesNavigationControl() {
         Cloud cloud = ContextProvider.getDefaultCloudContext().getCloud("mmbase");
         NodeManager nodeManager = cloud.getNodeManager("maps");
@@ -45,21 +48,33 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
             t.setMapRenderRelativeToRender(true);
             return t;
         }
-        String fileName = navigation.getProperty("type");
-        
-        XMLStorage store = new XMLStorage();
-        BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName + ".xml")));
-        StringWriter sw = new StringWriter();
-        String data = null;
-        try {
-            while ((data = br.readLine()) != null) {
-                sw.write(data);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("can not load xml");
+        String templateName = navigation.getProperty("type");
+        return getTemplate(templateName);
+    }
+
+    private Template getTemplate(String name) {
+        Cloud cloud = getCloud();
+        NodeManager nm = cloud.getNodeManager("templates");
+        NodeList list = nm.getList("name = '" + name + "' ", null, null);
+        if (list.size() == 1) {
+            String content = list.getNode(0).getStringValue("content");
+            XMLStorage store = new XMLStorage();
+            Component c = store.stringToComponent(content);
+            return (Template) c;
+        } else {
+    		log.error("can not find template with name {"+ name+"} navigation");    	
+            return null;
         }
-        String xmlData = sw.toString();
-        Component c = store.stringToComponent(xmlData);
-        return (Template) c;
+    }
+
+    private Cloud getCloud() {
+        if (_cloud == null || !_cloud.getUser().isValid()) {
+            CloudContext cloudContext = ContextProvider.getCloudContext("rmi://localhost:1111/templates");
+            HashMap user = new HashMap();
+            user.put("username", "admin");
+            user.put("password", "admin2k");
+            _cloud = cloudContext.getCloud("mmbase", "name/password", user);
+        }
+        return _cloud;
     }
 }
