@@ -8,15 +8,22 @@
 		  height: 100px;
 		  background-color: grey;
 }
-.header {
+.content_header {
 		  background-color: blue;
+			color: white;
+			font-weight: bold;
+			vertical-align : top;
+}
+.content_footer {
+		  background-color: grey;
+			vertical-align : bottom;
 }
 .content {
 		  border: 3px solid;
 		  position: absolute;
 		  width: 200px;
-		  height: 100px;
 		  float: left;
+			overflow: none;
 }
 
  </style>
@@ -116,6 +123,7 @@ function setObjectSize(element,x,y){
 
 function mouseUp(e) {
 		move = false;
+		resize = false;
       var element = document.getElementById("monitor");
 			if (currentDiv != null && dropTarget != null){
 					dropTarget.innerHTML = "Drop here";
@@ -176,6 +184,19 @@ function select(e){
 		element.innerHTML ="selected"  + e +  "(x,y)(" + currentDivStartX + "," + currentDivStartY + ")  (widht,height)(" + currentDivSizeX + "," + currentDivSizeY + ")";
     }
 }
+
+function selectResize(e){
+				resize = true;
+				if (document.body.style){
+					  document.body.style.cursor = "se-resize";
+        }
+}
+function unselectResize(e){
+				//resize = false;
+				if (document.body.style){
+					  document.body.style.cursor = "default";
+        }
+}
 function unselect(){
 		  /**
 		  if (move){
@@ -218,15 +239,14 @@ function unselectdrop(){
 					 <td>
 							
 								<div class="content" onMouseOver="select(this);" onMouseOut="unselect();">
-										  	<table>
-													  	<tr><th class="header">news</th></tr>
-														<tr><td>
+												<div class="content_header">news</div>
+												<div>
 																			 <b>Speciale R.A.M. uizendingen</b>
 																			 <p>
 																			 VPRO's wekelijks cultuurmagazine R.A.M keert terug in het tv seizoen 2003-2004 (haar tweede), met een nieuw uitzendtijdstip en een bijzondere openingsreeks.
 																			 </p>
-																			 <tr><td> <img src="pics/resize.png" onMouseOver="resize = true" onMouseOut="resize= false" align="right" width="16" height="16"></td></tr>
-											</table>
+												</div>
+												<div class="content_footer"><img src="pics/resize.png" onMouseOver="selectResize(this)" onMouseOut="unselectResize(this)" align="right" width="16" height="16" align="bottom"></div>
 								</div>
 					 </td>
 <div id="monitor">hoi</div>
