@@ -22,26 +22,21 @@ import org.mmbase.util.logging.*;
  * @version $Id$
  */
 public class ProgrammaSiteTemplate extends JSPTemplate {
-	private static Logger log = Logging.getLoggerInstance(ProgrammaSiteMMBaseNavigation.class);
-	
-	public ProgrammaSiteTemplate(String path,LayoutManager layoutManager){
-		super(path,layoutManager);
-		log.debug("new programma site");
-	}
-    /* (non-Javadoc)
-     * @see te.Component#render(te.WhiteBoard, java.io.PrintWriter)
-     */
+    private static Logger log = Logging.getLoggerInstance(ProgrammaSiteMMBaseNavigation.class);
+
+    public ProgrammaSiteTemplate(String path, LayoutManager layoutManager) {
+        super(path, layoutManager);
+        log.debug("new programma site");
+    }
+
     public void render(WhiteBoard wb, PrintWriter writer) throws ServletException, IOException {
-    	log.debug("render");
+        log.debug("render");
         super.render(wb, writer);
     }
 
-    /* (non-Javadoc)
-     * @see te.Component#renderRelative(java.lang.String, te.WhiteBoard)
-     */
     public void renderRelative(String path, WhiteBoard wb) throws ServletException, IOException {
-		log.debug("render relative");
-        // TODO Auto-generated method stub
+        log.debug("render relative");
+
         super.renderRelative(path, wb);
     }
 

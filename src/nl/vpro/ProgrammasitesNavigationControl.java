@@ -9,28 +9,27 @@ See http://www.MMBase.org/license
 */
 package nl.vpro;
 
-import java.util.*;
+import java.io.*;
+import java.util.List;
 
-import minixml.*;
+import minixml.XMLElement;
 
-import org.mmbase.bridge.*;
 import org.mmbase.util.logging.*;
 
 import te.*;
-import te.jsp.*;
+import te.jsp.JSPTemplate;
 import te.util.*;
 /**
  * @author Kees Jongenburger
  */
 public class ProgrammasitesNavigationControl extends NavigationControl implements Configurable {
+	
     private static Logger log = Logging.getLoggerInstance(ProgrammasitesNavigationControl.class);
 
     Navigation navigation;
     String config = null;
-    private Cloud _cloud;
 
-    public ProgrammasitesNavigationControl() {
-    }
+    public ProgrammasitesNavigationControl() {}
 
     public Navigation getNavigation() {
         return navigation;
@@ -52,30 +51,22 @@ public class ProgrammasitesNavigationControl extends NavigationControl implement
     }
 
     private Template getTemplate(String name) {
-        Cloud cloud = getCloud();
-        NodeManager nm = cloud.getNodeManager("tetemplates");
-        NodeList list = nm.getList("name = '" + name + "' ", null, null);
-        if (list.size() == 1) {
-            String content = list.getNode(0).getStringValue("content");
-            XMLStorage store = new XMLStorage();
-            Component c = store.stringToComponent(content);
-            return (Template) c;
-        } else {
-            log.error("can not find template with name {" + name + "} navigation");
-            return null;
+        BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(name + ".xml")));
+        StringWriter sw = new StringWriter();
+        String data = null;
+        try {
+            while ((data = br.readLine()) != null) {
+                sw.write(data);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("can not load xml");
         }
+        String xmlData = sw.toString();
+        XMLStorage store = new XMLStorage();
+        Component c = store.stringToComponent(xmlData);
+        return (Template)c;
     }
 
-    private Cloud getCloud() {
-        if (_cloud == null || !_cloud.getUser().isValid()) {
-            CloudContext cloudContext = ContextProvider.getCloudContext("rmi://localhost:1111/templates");
-            HashMap user = new HashMap();
-            user.put("username", "admin");
-            user.put("password", "admin2k");
-            _cloud = cloudContext.getCloud("mmbase", "name/password", user);
-        }
-        return _cloud;
-    }
 
     /* (non-Javadoc)
      * @see te.Configurable#setConfig(java.lang.String)
