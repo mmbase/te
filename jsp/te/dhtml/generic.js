@@ -13,6 +13,7 @@ function getObjectPosY(obj) {
 }
 
 function getEventPosX(event){
+
 	if (event == null) event = document.parentWindow.event;
 	if (event.clientX) return event.clientX  + document.body.scrollLeft;
 	if (event.pageX) return  event.pageX;

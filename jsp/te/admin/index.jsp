@@ -3,11 +3,9 @@
 <%@page import="te.util.*"%>
 <%@page import="minixml.*"%>
 <% 
-        Template template = (Template)request.getAttribute("template");
-	response.addHeader("Cache-Control","no-cache");
-        response.addHeader("Pragma","no-cache");
+   Template template = (Template)request.getAttribute("template");
 %>
-<mm:cloud name="mmbase" method="http" jspvar="cloud">
+<mm:cloud name="mmbase" method="http" jspvar="cloud"> 
 <html>
 <head>
 <title><%= navigation.getName() %></title>
@@ -24,4 +22,4 @@
 </p>
 </body>
 </html>
-</mm:cloud>
+</mm:cloud> 
