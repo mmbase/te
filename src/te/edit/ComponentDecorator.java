@@ -8,8 +8,8 @@ public class ComponentDecorator extends JSPComponent {
 	Component component;
 	
 	
-    public ComponentDecorator(String path , Component component){
-    	super(path);
+    public ComponentDecorator( Component component){
+    	super("/te/edit/componentdecorator.jsp");
     	this.component = component;
     }
     

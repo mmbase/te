@@ -17,27 +17,27 @@ public abstract class AbstractContainer extends AbstractComponent /*implements C
 
     Components components = new Components();
     Hashtable hints = new Hashtable();
-    LayoutManager layoutManager= null;
-    
+    LayoutManager layoutManager = null;
+
     public Components getComponents() {
         return components;
     }
 
-
     public void addComponent(Component component) {
-		components.add(component);
+        components.add(component);
+        component.setParentComponent(this);
     }
 
     public void addComponent(Component component, String hint) {
-        hints.put(component,hint);
-        component.setParentComponent(this);
-        components.add(component);
+        hints.put(component, hint);
+        addComponent(component);
     }
+    
     public LayoutManager getLayoutManager() {
-              return layoutManager;
+        return layoutManager;
     }
 
-	public void setLayoutManager(LayoutManager layoutManager){
-		this.layoutManager = layoutManager;
-	}
+    public void setLayoutManager(LayoutManager layoutManager) {
+        this.layoutManager = layoutManager;
+    }
 }

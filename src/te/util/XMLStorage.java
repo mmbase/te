@@ -62,7 +62,7 @@ public class XMLStorage {
         return xmle;
     }
 
-    public Component StringToComponent(String data) {
+    public Component stringToComponent(String data) {
         XMLElement xmle = new XMLElement();
         xmle.parseString(data);
         return XMLToComponent(xmle);

@@ -78,7 +78,8 @@ public class Engine extends BridgeServlet {
             HttpServletRequest req = (HttpServletRequest) servletRequest;
             HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
-            resp.setContentType("text/html");
+            resp.setContentType("text/html;charset=utf-8");
+              
             //code to determin the "engine url"             
             if (facade.getEngineURL() == null) {
                 String servletPath = req.getRequestURI();

@@ -48,7 +48,8 @@ public class ComponentRegistry {
 
     public Component getComponent(String name) {
         try {
-            return (Component) components.getComponentByName(name).clone();
+             Component g =  components.getComponentByName(name);
+             if (g != null ) return (Component)g.clone();
         } catch (CloneNotSupportedException e) {
             log.error("component " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
@@ -58,7 +59,8 @@ public class ComponentRegistry {
 
     public Container getContainer(String name) {
         try {
-            return (Container) containers.getContainerByName(name).clone();
+            Container c =  containers.getContainerByName(name);
+            if (c != null ) return (Container)c.clone();
         } catch (CloneNotSupportedException e) {
             log.error("container " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
@@ -82,7 +84,8 @@ public class ComponentRegistry {
      */
     public Template getTemplate(String name) {
         try {
-            return (Template) templates.getTemplateByName(name).clone();
+            Template  t =  templates.getTemplateByName(name);
+            if (t != null ) return (Template)t.clone();
         } catch (CloneNotSupportedException e) {
             log.error("template " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }

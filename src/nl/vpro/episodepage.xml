@@ -9,11 +9,15 @@
     <property name="showLogs">flase</property>
   </component>
   <container name="horizontal" layout="horizontal">
-    <component name="maps"/>
     <container name="vertical">
-            <component name="episodes_previous"/>
-    	    <component name="episodes_next"/>
+            <component name="episode_name"/>
+    	    <component name="episode_related_images"/>
     </container>
-    <component name="related_news"/>
+    <container name="vertical">
+            <component name="episode_title"/>
+            <component name="episode_previousnext"/>
+            <component name="episode_body"/>
+    </container>
+    <component name="episode_related_audio_video"/>
   </container>
 </template>

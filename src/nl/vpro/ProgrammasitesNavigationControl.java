@@ -25,13 +25,12 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
     public ProgrammasitesNavigationControl() {
         Cloud cloud = ContextProvider.getDefaultCloudContext().getCloud("mmbase");
         NodeManager nodeManager = cloud.getNodeManager("maps");
-        NodeList list = nodeManager.getList("number =3302425 or number = 8884132", null, null);
+        NodeList list = nodeManager.getList("number =3302425 or number = 8884132 or number= 3517269", null, null);
         navigation = new StaticNavigation("1", "root");
         for (int x = 0; x < list.size(); x++) {
             navigation.addChild(new MapsNavigation(list.getNode(x)));
         }
 
-        //navigation = new StaticNavigation("3302425", "De Wandelende Tak");
         navigation.setNavigationControl(this);
     }
 
@@ -45,10 +44,10 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
             t.setMapRenderRelativeToRender(true);
             return t;
         }
-
-		XMLStorage store = new XMLStorage();
-		
-        BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("episodeshomepage.xml")));
+        String fileName = navigation.getProperty("type");
+        
+        XMLStorage store = new XMLStorage();
+        BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(fileName + ".xml")));
         StringWriter sw = new StringWriter();
         String data = null;
         try {
@@ -59,25 +58,7 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
             throw new RuntimeException("can not load xml");
         }
         String xmlData = sw.toString();
-		
-		Component c = store.StringToComponent(xmlData);
-        return (Template)c;
-        /*
-        Facade facade = Engine.getFacade();
-        ComponentRegistry reg = facade.getComponentRegistry();
-
-        Template main = reg.getTemplate("default");
-        main.addComponent(reg.getComponent("page_head"));
-        main.addComponent(reg.getComponent("navigation"));
-
-        Container container = reg.getContainer("horizontal");
-
-        container.addComponent(reg.getComponent("maps"), "maps intro");
-        //container.addComponent(new JSPContainer("/te/container/episodes.jsp", new JSPLayoutManager("/te/layout/vertical.jsp", "test", "test")), "episodes");
-        container.addComponent(reg.getComponent("related_news"), "news");
-        main.addComponent(container);
-        return main;
-        */
+        Component c = store.stringToComponent(xmlData);
+        return (Template) c;
     }
-
 }
