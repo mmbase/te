@@ -30,6 +30,26 @@
 	}
 	String constraints = constraintsBuffer.toString();
 %>
+<%-- just do a list to determine the size :( not very impresive --%>
+<mm:related 
+	path="programs,episodes,bcastrel,mmevents"
+	fields="programs.number,episodes.episodenr,episodes.number,bcastrel.rerun,mmevents.start" 
+	constraints="<%= constraints  %>" orderby="episodes.episodenr" directions="DOWN" >
+<mm:first><mm:import id="listSize" vartype="Integer"><mm:size/></mm:import></mm:first>
+</mm:related>
+<mm:present referid="listSize">
+	<mm:write referid="listSize" jspvar="listSize">
+	<div class="pagelist">
+	<% for (int x = 0 ; x < ((Integer)listSize).intValue() ;  x += max) { %>
+	   <% if (x == offset) { %>
+	     &gt;<a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>?offset=<%= (x ) %>&programs=<%= programs%>"><%=  (x / max ) + 1 %></a>&lt;
+	   <% } else { %>
+	     <a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>?offset=<%= (x ) %>&programs=<%= programs%>"><%=  (x / max ) + 1 %></a>
+	   <% } %>
+	<% } %>
+	</div>
+	</mm:write>
+</mm:present>
 <mm:related 
 	path="programs,episodes,bcastrel,mmevents"
 	fields="programs.number,episodes.episodenr,episodes.number,bcastrel.rerun,mmevents.start" 

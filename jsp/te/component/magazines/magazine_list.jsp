@@ -13,6 +13,23 @@
 	} catch (Exception e){};
 %>
 <table width="400">
+<mm:related path="magazines,news,mmevents" fields="mmevents.start"  orderby="mmevents.start" directions="DOWN" >
+<%-- just do a list to determine the size :( not very impresive --%>
+<mm:first><mm:import id="listSize" vartype="Integer"><mm:size/></mm:import></mm:first>
+</mm:related>
+<mm:present referid="listSize">
+	<mm:write referid="listSize" jspvar="listSize">
+	<div class="pagelist">
+	<% for (int x = 0 ; x < ((Integer)listSize).intValue() ;  x += max) { %>
+	   <% if (x == offset) { %>
+		&gt;<a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>?offset=<%= (x) %>"><%=  (x / max ) + 1 %></a>&lt;
+	   <% } else { %>
+		<a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>?offset=<%= (x) %>"><%=  (x / max ) + 1 %></a>
+	   <% } %>
+	<% } %>
+	</div>
+	</mm:write>
+</mm:present>
 	<mm:related path="magazines,news,mmevents"  offset="<%= "" + offset %>" max="<%= "" + (max +1) %>" fields="mmevents.start"  orderby="mmevents.start" directions="DOWN" >
 	<mm:last inverse="true">
  <tr>
