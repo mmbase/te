@@ -12,5 +12,6 @@
 </head>
 <body >
 	<%= sw.toString() %>
+<% System.err.println("WOW");
 </body>
 </html>

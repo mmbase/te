@@ -14,33 +14,21 @@ import te.util.*;
 /**
  * @author Kees Jongenburger
  */
-public class Navigation {
-    String id;
-    String name;
-    Navigations childs;
-    Navigation parent = null;
+public abstract class AbstractNavigation {
+    AbstractNavigation parent = null;
     Properties properties;
 
     NavigationControl navigationControl;
-    
-    public Navigation(String id, String name) {
-        this.id = id;
-        this.name = name;
-        childs = new Navigations();
-        properties = new Properties();
-    }
 
-    public Navigation addChild(Navigation nav) {
-    	nav.setParentNavigation(this);
-        childs.add(nav);        
-        return nav;
+    public AbstractNavigation() {
+        properties = new Properties();
     }
 
     public boolean isRootNavigation() {
         return parent == null;
     }
 
-    public void setParentNavigation(Navigation navigation) {
+    public void setParentNavigation(AbstractNavigation navigation) {
         this.parent = navigation;
     }
 
@@ -50,27 +38,24 @@ public class Navigation {
     /** 
      * @return unique id of this navigation typicaly a number
      */
-    public String getID() {
-        return id;
-    }
-
+    public abstract String getID();
+        
     /** 
      * @return the name of the navigation nieuws
      */
-    public String getName() {
-        return name;
-    }
+    public abstract String getName(); 
+        
 
-	public Navigation getChildByName(String name){
-		Navigations navs = getChildNavigations();
-		for (int x =0 ; x < navs.size(); x++){
-			Navigation nav = navs.getNavigation(x);
-			if (nav.getName().equals(name)){
-				return nav;
-			}
-		}
-		return null;
-	}
+    public AbstractNavigation getChildByName(String name) {
+        Navigations navs = getChildNavigations();
+        for (int x = 0; x < navs.size(); x++) {
+            AbstractNavigation nav = navs.getNavigation(x);
+            if (nav.getName().equals(name)) {
+                return nav;
+            }
+        }
+        return null;
+    }
     /**
      * 
      * @return the escaped name of the navigation
@@ -79,17 +64,19 @@ public class Navigation {
         return URLConverter.toURL(getName());
     }
 
+    public String getFullURLString() {
+        return getNavigationControl().getURLString(this);
+    }
     /**
      * @return the child navigations of this component
      */
-    public Navigations getChildNavigations() {
-        return childs;
-    }
+    public abstract Navigations getChildNavigations() ;
+        
 
     /**
      * @return the parent navigation of the component
      */
-    public Navigation getParentNavigation() {
+    public AbstractNavigation getParentNavigation() {
         return parent;
     }
 
@@ -116,8 +103,8 @@ public class Navigation {
         }
         return null;
     }
-    
-    public Template getTemplate(){
-    	return getNavigationControl().getTemplate(this);    
+
+    public Template getTemplate() {
+        return getNavigationControl().getTemplate(this);
     }
 }

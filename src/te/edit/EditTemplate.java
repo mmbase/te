@@ -32,12 +32,12 @@ public class EditTemplate extends AbstractContainer implements Template {
         //remove the name of the "edit" navigation
         NavigationControl mainNavControl = wb.getFacade().getNavigationControl();
 
-        Navigation editNav = wb.getCurrentNavigation();
+        AbstractNavigation editNav = wb.getCurrentNavigation();
 
-        Navigation parentOfEditNav = editNav.getParentNavigation();
+        AbstractNavigation parentOfEditNav = editNav.getParentNavigation();
         //from the parent create a url and add the relative path
         String generatedURL = mainNavControl.getURLString(parentOfEditNav) + "/" + path;
-        Navigation navigationToEdit = mainNavControl.getNavigation(generatedURL);
+        AbstractNavigation navigationToEdit = mainNavControl.getNavigation(generatedURL);
 
         String editNavPath = mainNavControl.getURLString(editNav);
 
@@ -51,7 +51,7 @@ public class EditTemplate extends AbstractContainer implements Template {
 
             //the original template
             Template t = navigationToEdit.getTemplate();
-            Navigation cacheNav = wb.getCurrentNavigation();
+            AbstractNavigation cacheNav = wb.getCurrentNavigation();
             t.addComponent(new JSPComponent("/te/component/pagestructure.jsp"));
             wb.setCurrentNavigation(navigationToEdit);
             t.render(wb, wb.getHttpServletResponse().getWriter());

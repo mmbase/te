@@ -67,10 +67,12 @@ public class Engine extends BridgeServlet {
      */
     public void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServletException, IOException {
         try {
-
+			
             requestCounter++;
             HttpServletRequest req = (HttpServletRequest) servletRequest;
             HttpServletResponse resp = (HttpServletResponse) servletResponse;
+            
+			resp.setContentType("text/html");
             //code to determin the "engine url"             
             if (facade.getEngineURL() == null) {
                 String servletPath = req.getRequestURI();
@@ -114,7 +116,7 @@ public class Engine extends BridgeServlet {
 
             NavigationControl navigationComponent = facade.getNavigationControl();
             //resolve the current navigation
-            Navigation nav = navigationComponent.getNavigation(path);
+            AbstractNavigation nav = navigationComponent.getNavigation(path);
             if (nav != null) {
                 //if the navigation was found put it in the whiteboard
                 wb.setCurrentNavigation(nav);
@@ -130,6 +132,7 @@ public class Engine extends BridgeServlet {
                         t.renderRelative(remainingPath, wb);
                     } else {
                         t.render(wb, resp.getWriter());
+                        
                     }
                 } catch (IOException e) {
                     log.warn(Logging.stackTrace(e));
@@ -144,9 +147,8 @@ public class Engine extends BridgeServlet {
                 } catch (Exception e) {
                     log.warn(Logging.stackTrace(e));
                 }
-
             }
-
+            
             //LayoutManager layout = new JSPLayoutManager("/layout/list.jsp");
             //TemplateContainer c = new JSPTemplateContainer("/container/default.jsp", layout);
             //c.addTemplate(new JSPTemplate("/test.jsp"));

@@ -22,7 +22,7 @@ import org.mmbase.util.logging.*;
  */
 public class XMLNavigationControl extends NavigationControl {
     private static Logger log = Logging.getLoggerInstance(XMLNavigationControl.class);
-    Navigation navigation;
+    AbstractNavigation navigation;
 
     public XMLNavigationControl() {
         BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("navigation.xml")));
@@ -36,14 +36,14 @@ public class XMLNavigationControl extends NavigationControl {
             throw new RuntimeException("can not load xml");
         }
         navigation = NavigationLoader.parseXML(sw.toString());
-        navigation.setNavigationControl(this);
+        //navigation.setNavigationControl(this);
     }
 
-    public Navigation getNavigation() {
+    public AbstractNavigation getNavigation() {
         return navigation;
     }
 
-    public Template getTemplate(Navigation navigation) {
+    public Template getTemplate(AbstractNavigation navigation) {
         NavigationControl control = navigation.getNavigationControl();
         if (control == this) {
             //			return new JSPTemplate("/site/index.jsp?id=" + navigation.getID());

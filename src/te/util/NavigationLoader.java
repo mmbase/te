@@ -26,37 +26,39 @@ public abstract class NavigationLoader {
     * the xml must follow the navigation.dtd
     * provided
     **/
-    public static Navigation parseXML(String xml) {
+    public static AbstractNavigation parseXML(String xml) {
         XMLElement xmle = new XMLElement();
         xmle.parseString(xml);
         return createNavigation(null, xmle);
     }
 
-    private static Navigation createNavigation(Navigation parent, XMLElement xmle) {
-        Navigation nav = new Navigation( xmle.getProperty("id"), xmle.getProperty("name"));
-        for (int x = 0; x < xmle.countChildren(); x++) {
-            XMLElement child = xmle.getChildAt(x);
-            if (child.getTagName().equals("navigation")) {
-                nav.addChild(createNavigation(nav, xmle.getChildAt(x)));
-            } else if (child.getTagName().equals("property")) {
-                nav.setProperty(child.getProperty("name"), child.getContents());
-            } else if (child.getTagName().equals("entrypoint")) {
-                String className = child.getProperty("class");
-                Class entryClass;
-                try {
-                    entryClass = Class.forName(className);
-                    NavigationControl control = (NavigationControl)entryClass.newInstance();
-                    Navigation nn = control.getNavigation();
-                    nav.addChild(control.getNavigation());
-                } catch (ClassNotFoundException e) {
-                    log.warn("the xml entry " + child + " does not contain a valid class\n" + Logging.stackTrace(e));
-                } catch (InstantiationException e) {
-                    log.warn(Logging.stackTrace(e));
-                } catch (IllegalAccessException e) {
-                    log.warn(Logging.stackTrace(e));
+    private static AbstractNavigation createNavigation(AbstractNavigation parent, XMLElement xmle) {
+        if (xmle.getTagName().equals("entrypoint")) {
+            String className = xmle.getProperty("class");
+            Class entryClass;
+            try {
+                entryClass = Class.forName(className);
+                NavigationControl control = (NavigationControl) entryClass.newInstance();
+                return control.getNavigation();
+            } catch (ClassNotFoundException e) {
+                log.warn("the xml entry " + xmle + " does not contain a valid class\n" + Logging.stackTrace(e));
+            } catch (InstantiationException e) {
+                log.warn(Logging.stackTrace(e));
+            } catch (IllegalAccessException e) {
+                log.warn(Logging.stackTrace(e));
+            }
+            return null;
+        } else {
+            StaticNavigation nav = new StaticNavigation(xmle.getProperty("id"), xmle.getProperty("name"));
+            for (int x = 0; x < xmle.countChildren(); x++) {
+                XMLElement child = xmle.getChildAt(x);
+                if (child.getTagName().equals("navigation") || child.getTagName().equals("entrypoint")) {
+                    nav.addChild(createNavigation(nav, xmle.getChildAt(x)));
+                } else if (child.getTagName().equals("property")) {
+                    nav.setProperty(child.getProperty("name"), child.getContents());
                 }
             }
+            return nav;
         }
-        return nav;
     }
 }

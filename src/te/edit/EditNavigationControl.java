@@ -15,22 +15,22 @@ import te.jsp.*;
  * @author Kees Jongenburger
  */
 public class EditNavigationControl extends NavigationControl {
-    Navigation navigation;
+    StaticNavigation navigation;
 
     public EditNavigationControl() {
-        navigation = new Navigation("edit", "edit");
+        navigation = new StaticNavigation("edit", "edit");
         navigation.setNavigationControl(this);
-        Navigation configure = new Navigation("configure", "configure");
+        AbstractNavigation configure = new StaticNavigation("configure", "configure");
         configure.setProperty("template","/te/edit/configure.jsp");
         navigation.addChild(configure);
 
     }
 
-    public Navigation getNavigation() {
+    public AbstractNavigation getNavigation() {
         return navigation;
     }
 
-    public Template getTemplate(Navigation navigation) {
+    public Template getTemplate(AbstractNavigation navigation) {
     	if (navigation.getProperty("template") != null){
 			JSPTemplate t =  new JSPTemplate(navigation.getProperty("template"),null);
 			t.setMapRenderRelativeToRender(true);
