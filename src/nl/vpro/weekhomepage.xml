@@ -6,11 +6,10 @@
   <component name="navigation"/>
   <container name="horizontal" layout="horizontal">
     <component name="home_maps"/>
-        <container name="vertical">
+    <container name="vertical">
       <component name="home_superteaser"/>
-          <component name="home_weekoverview"/>
-     </container>
-
+      <component name="home_weekoverview"/>
+    </container>
     <component name="home_related_news"/>
   </container>
 </template>

@@ -5,12 +5,18 @@
   <component name="logo"/>
   <component name="navigation"/>
   <container name="horizontal" layout="horizontal">
-    <component name="item_siblings"/>
     <container name="vertical">
-            <component name="item_title"/>
-            <component name="item_nav"/>
-            <component name="item_body"/>
+      <component name="breadcrum"/>
+      <component name="item_siblings"/>
     </container>
-    <component name="item_related_audio_video"/>
+    <container name="vertical">
+      <component name="item_title"/>
+      <component name="item_nav"/>
+      <container name="horizontal">
+        <component name="related_images"/>
+        <component name="item_body"/>
+      </container>
+    </container>
+    <component name="related_audio_video"/>
   </container>
 </template>

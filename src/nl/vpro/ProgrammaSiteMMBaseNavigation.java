@@ -42,9 +42,9 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
         Cloud templateCloud = getTemplateCloud();
         NodeList sites = templateCloud.getNodeManager("programmasites").getList("state <> 0", null, null);
         for (int x = 0; x < sites.size(); x++) {
-        	Node theNode = sites.getNode(x);
+            Node theNode = sites.getNode(x);
             sb.append("number = " + theNode.getIntValue("maps"));
-            siteMapsHash.put(theNode.getStringValue("maps"), sites.getNode(0));
+            siteMapsHash.put(theNode.getStringValue("maps"), theNode);
             if (x + 1 < sites.size()) {
                 sb.append(" OR ");
             }
@@ -52,7 +52,7 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
 
         String constraints = sb.toString();
         if (sites.size() == 0) {
-        	log.debug("not programmasites nodes found");
+            log.debug("not programmasites nodes found");
             return null;
         }
 
@@ -65,27 +65,26 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
         for (int x = 0; x < nl.size(); x++) {
             Node nodeFromList = nl.getNode(x);
             String nodeField = nodeFromList.getStringValue("title");
-            log.debug("try to map "+ nodeField +"/" + current);
+            log.debug("try to map " + nodeField + "/" + current);
             String oldPath = nodeFromList.getStringValue("path");
+            StringTokenizer st = new StringTokenizer(oldPath, "/");
+            String lastPath = null;
+            while (st.hasMoreTokens()) {
+                lastPath = st.nextToken();
+            }
+            if (lastPath != null) {
+                if (current.equals(lastPath)) {
+                    log.debug("found node based on path field in navigation" + field);
+                    node = nodeFromList;
+                    navName = current;
+                    break;
+                }
+            }
             if (current.equals(URLConverter.toURL(nodeField))) {
                 log.debug("found node based on field" + field);
                 navName = nodeField;
                 node = nodeFromList;
                 break;
-            } else {
-                StringTokenizer st = new StringTokenizer(oldPath, "/");
-                String lastPath = null;
-                while (st.hasMoreTokens()) {
-                    lastPath = st.nextToken();
-                }
-                if (lastPath != null) {
-                    if (current.equals(lastPath)) {
-                        log.debug("found node based on path field in navigation" + field);
-                        node = nodeFromList;
-                        navName = current;
-                        break;
-                    }
-                }
             }
         }
 
@@ -113,13 +112,12 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
             st.addParamChild(n.getNavigation(x));
         }
 
-        log.debug("creating a new Navigation for " + path.current() + " result \n" + st.toString());
-
-		//find back the programmasite via the hash and select the right frontpage template
-		Node siteNode =(Node) siteMapsHash.get("" + node.getNumber());
-		Node templateNode = templateCloud.getNode(siteNode.getIntValue("frontpage"));
-		st.setProperty("type",templateNode.getStringValue("name"));
-
+        //find back the programmasite via the hash and select the right frontpage template
+        Node siteNode = (Node) siteMapsHash.get("" + node.getNumber());
+        Node templateNode = templateCloud.getNode(siteNode.getIntValue("frontpage"));
+        st.setProperty("type", templateNode.getStringValue("name"));
+        log.debug("creating a new Navigation for " + path.current() + " result style ={"+templateNode.getStringValue("name") +"} \n" + st.toString());
+        
         getParentNavigation().addChild(st);
         return st.resolveNavigation(path);
     }

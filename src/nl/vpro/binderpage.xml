@@ -5,7 +5,14 @@
   <component name="logo"/>
   <component name="navigation"/>
   <container name="horizontal" layout="horizontal">
-    <component name="binder"/>
-    <component name="binder_related"/>
+      <container name="vertical">
+      	    <component name="breadcrum"/>
+   	        <component name="binder"/>
+     </container>
+     <container name="vertical">
+         <component name="related_audio_video"/>
+  	     <component name="breadcrum"/>
+     </container>
+    
   </container>
 </template>

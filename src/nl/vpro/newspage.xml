@@ -5,8 +5,11 @@
   <component name="logo"/>
   <component name="navigation"/>
   <container name="horizontal" layout="horizontal">
-    <component name="news_related_images"/>
+    <container name="vertical">
+   	    <component name="breadcrum"/>
+	    <component name="related_images"/>
+    </container>
     <component name="news"/>
-    <component name="news_related"/>
+    <component name="related_audio_video"/>
   </container>
 </template>

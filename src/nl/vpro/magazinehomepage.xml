@@ -9,7 +9,7 @@
     <container name="vertical">
       <component name="home_superteaser"/>
       <component name="home_magazine"/>
-     </container>
+    </container>
     <component name="home_related_episodes"/>
   </container>
 </template>

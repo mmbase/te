@@ -6,14 +6,15 @@
   <component name="navigation"/>
   <container name="horizontal" layout="horizontal">
     <container name="vertical">
-            <component name="episode_name"/>
-    	    <component name="episode_related_images"/>
+      <component name="breadcrum"/>
+      <component name="episode_name"/>
+      <component name="related_images"/>
     </container>
     <container name="vertical">
-            <component name="episode_title"/>
-            <component name="episode_previousnext"/>
-            <component name="episode_body"/>
+      <component name="episode_title"/>
+      <component name="episode_previousnext"/>
+      <component name="episode_body"/>
     </container>
-    <component name="episode_related_audio_video"/>
+    <component name="related_audio_video"/>
   </container>
 </template>
