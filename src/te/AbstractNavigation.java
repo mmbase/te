@@ -27,9 +27,7 @@ public abstract class AbstractNavigation implements Navigation {
     Navigations childNavigation = new Navigations();
     Navigations paramNavigations = new Navigations();
     String guiName = null;
-    public AbstractNavigation() {
-
-    }
+    public AbstractNavigation() {}
 
     public boolean isRootNavigation() {
         return parent == null;
@@ -138,7 +136,7 @@ public abstract class AbstractNavigation implements Navigation {
                     return resolved;
                 }
             }
-			log.debug("nav " + getName() + " not visible trying param navigations");
+            log.debug("nav " + getName() + " not visible trying param navigations");
             navs = paramNavigations;
             for (int x = 0; x < navs.size(); x++) {
                 Navigation resolved = navs.getNavigation(x).resolveNavigation(path);
@@ -215,5 +213,19 @@ public abstract class AbstractNavigation implements Navigation {
         navigation.setParentNavigation(this);
         paramNavigations.add(navigation);
         return navigation;
+    }
+    public void toString(StringBuffer sb, int deep) {
+        for (int x = 0; x < deep; x++) {
+            sb.append(" ");
+        }
+        sb.append(getName() + "\n");
+        for (int x =0 ; x < childNavigation.size() ; x++){
+        	childNavigation.getNavigation(x).toString(sb, deep +1); 
+        }
+    }
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        toString(sb, 0);
+        return sb.toString();
     }
 }

@@ -70,13 +70,13 @@ public class MMBaseNavigation extends AbstractNavigation implements ParamNavigat
      */
     public Navigation resolveNavigation(Path path) {
         log.debug("params resolving" + path.current());
-        Navigation st = new StaticNavigation("hoi","hoi");
+        Navigation st = new StaticNavigation(path.current(),path.current());
         Navigations n = NavigationLoader.parseXML(config).getChildNavigations();
         for (int x = 0 ; x < n.size() ; x++){
                 st.addChild(n.getNavigation(x));
         }
         getParentNavigation().addChild(st);
-        return st;
+        return st.resolveNavigation(path);
     }
 
 }
