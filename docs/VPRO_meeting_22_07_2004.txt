@@ -1,0 +1,37 @@
+-Navigatie
+	navigatie zal de volgende vorm hebben /eningenaam/programma naam/navigatie*/nummers
+	programma naam is de naam van de programma
+	navigatie* is een onderdeel van de site bijvoorbeeld "archief"
+	nummers zijn bijvoorbeeld de nummers van een aflevering en een  item
+	er is gekozen voor nummers omdat deze het meest constant zijn waardoor en programma maker  de titel van zijn aflevering zal kunnen veranderen zonder dat de URL van de aflevering zal veranderen.
+
+-cache
+	De templates zullen zo goed mogelijk aangeven op welk moment ze voor het laatst zijn veranderd (aan de hand van MMBase age van de configuratie + het laatste item)
+	
+-configuratie
+	de configuratie van de een programma site zal vooral om 2 zaken draaien
+	-de stijl (kleurstelling achtergrond afbeelding)
+	-de home page template (wat voor content moet er op de template komen)
+
+-verschillende websites
+-hostnames
+	Over het gebruik van aparte hostnames voor sites moeten nog beslissingen worden genomen en moet het duidelijk worden waar de koppeling plaats zal moeten plaatsvinden en of de hostname behouden moet blijven bij een redirect.
+
+-nummers resolven
+	de navigatie component moet aan de hand van object nummers van bijvoorbeeld een item terug kunnen verwijzen naar een pagina
+-site structuur vast aan het object model
+	Omdat de object structuur bekend is zal aan de hand van de beschikbare informatie 
+	de site navigatie worden bepaald
+	voorbeeld: zijn er documenten vast aan het programma dan zal een dossiers hoofd navigatie moeten worden aangemaakt
+
+-zoek machine
+	VPRO maakt gebruik van een zoek machine . Deze maakt het mogelijk per programma te zoeken . De resultaten zullen in de stijl van de website moeten worden getoond. 
+
+aanpassingen aan het functioneel ontwerp
+er is geen spraken meer van verschillende soorten websites (programma / programma uitgebreid / radio)
+
+afspraken:
+-ik zal zo snel mogelijk code laten zien zodat daar feed-back op gegeven kan worden
+-VPRO zal er voor zorgen dat er voldoende voorbeeld home page voorbeelden zijn zodat daaruit het generieke deel kan worden afgeleid
+-VPRO zal een werkplek regelen voor mij zodat ik daar op de omgeving kan testen.
+
