@@ -40,7 +40,7 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
         Hashtable siteMapsHash = new Hashtable();
         StringBuffer sb = new StringBuffer();
         Cloud templateCloud = getTemplateCloud();
-        NodeList sites = templateCloud.getNodeManager("programmasites").getList("state <> 0", null, null);
+        NodeList sites = templateCloud.getNodeManager("tesites").getList("state <> 0", null, null);
         for (int x = 0; x < sites.size(); x++) {
             Node theNode = sites.getNode(x);
             sb.append("number = " + theNode.getIntValue("maps"));
@@ -52,7 +52,7 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
 
         String constraints = sb.toString();
         if (sites.size() == 0) {
-            log.debug("not programmasites nodes found");
+            log.debug("not tesites nodes found");
             return null;
         }
 
@@ -117,7 +117,7 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
         Node templateNode = templateCloud.getNode(siteNode.getIntValue("frontpage"));
         st.setProperty("type", templateNode.getStringValue("name"));
         log.debug("creating a new Navigation for " + path.current() + " result style ={"+templateNode.getStringValue("name") +"} \n" + st.toString());
-        st.setProperty("programmasites","" +siteNode.getNumber());
+        st.setProperty("tesites","" +siteNode.getNumber());
         getParentNavigation().addChild(st);
         return st.resolveNavigation(path);
     }

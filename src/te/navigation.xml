@@ -59,7 +59,17 @@
         <property name="type">searchpage</property>
         <property name="visible">flase</property>
       </navigation>
+          <navigation name="Service info" id="serviceinfo">
+         <property name="visible">flase</property>
+         <navigationparam class="te.MMBaseNavigation" type="serviceinfo" field="number" guifield="title">
+             <property name="type">serviceinfopage</property>
+             <navigation name="edit" id="edit"><property name="template">/te/edit/index.jsp</property></navigation>
+        </navigationparam>
+    </navigation>
+      
     </navigationparam>
+
+    
   </entrypoint>
   <navigation name="admin" id="admin">
     <property name="template">/te/admin/index.jsp</property>

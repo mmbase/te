@@ -11,7 +11,7 @@
 <mm:import externid="description" required="true" jspvar="description"/>
 <mm:cloud uri="<%= cloudUri %>" name="mmbase" method="http" jspvar="cloud">
 <%
-	NodeManager nm = cloud.getNodeManager("programmasites");
+	NodeManager nm = cloud.getNodeManager("tesites");
 	Encode sqle = new Encode("ESCAPE_SINGLE_QUOTE");
 	name = name.trim();
 	NodeList list = nm.getList("name = '"+ sqle.encode(name) +" '",null,null);

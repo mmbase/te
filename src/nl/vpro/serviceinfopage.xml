@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE template SYSTEM "template.dtd">
+<template name="default" layout="default" description="service info page">
+  <component name="page_head"/>
+  <component name="logo"/>
+  <component name="navigation"/>
+  <container name="horizontal" layout="horizontal">
+    <container name="vertical">
+      <component name="breadcrum"/>
+      <component name="serviceinfo_other"/>
+    </container>
+    <component name="serviceinfo"/>
+    <container name="vertical">
+      <component name="related_audio_video"/>
+      <component name="related_other"/>
+    </container>
+  </container>
+</template>

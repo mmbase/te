@@ -44,7 +44,7 @@ geen path geselecteerd
 	
 %>
 <mm:cloud uri="rmi://127.0.0.1:1111/templates" name="mmbase" method="http" jspvar="cloud"> 
-<mm:node number="<%= mapsNavigation.getProperty("programmasites") %>" jspvar="node">
+<mm:node number="<%= mapsNavigation.getProperty("tesites") %>" jspvar="node">
 	<mm:setfield name="style"><%= node.getStringValue("style")  + sb.toString()  %></mm:setfield>
 </mm:node>
 </mm:cloud> 

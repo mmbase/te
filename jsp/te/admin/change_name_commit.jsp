@@ -14,12 +14,12 @@
 <%
 	String message ="";
 	name = name.trim();
-	NodeList list = cloud.getNodeManager("programmasites").getList("name ='"+ sqlEscape.encode(name)  +"'",null,null);
+	NodeList list = cloud.getNodeManager("tesites").getList("name ='"+ sqlEscape.encode(name)  +"'",null,null);
 	if (list.size() ==1){
                 if (list.getNode(0).getStringValue("number").equals(number)){ 
                     message="naam niet veranderd omdat deze hetzelfde was als de originele";
                 } else {
-                    message="naam niet veranderd omdat er al een andere programmasite is metdezelfde naam";
+                    message="naam niet veranderd omdat er al een andere tesites is metdezelfde naam";
                 }
 	} else {
 	  Node node = cloud.getNode(number);

@@ -3,8 +3,7 @@
 <% Encode htmlEscape = new Encode("ESCAPE_HTML"); %>
 <html>
 <head>
-<SCRIPT LANGUAGE="Javascript">
-<jsp:include page="ColorPicker2.js" />
+<SCRIPT LANGUAGE="Javascript" src="ColorPicker2.js">
 </SCRIPT>
 <SCRIPT LANGUAGE="JavaScript">
 var cp = new ColorPicker('window'); // Popup window
@@ -102,7 +101,7 @@ bg:<INPUT TYPE="text" NAME="bgcolor" SIZE="6" VALUE=""> <A HREF="#" onClick="cp2
 </form>
 <% } %>
 <mm:cloud uri="rmi://127.0.0.1:1111/templates">
-<mm:node number="<%= mapsNavigation.getProperty("programmasites") %>">
+<mm:node number="<%= mapsNavigation.getProperty("tesites") %>">
 <form method="post" action="edit_commit.jsp" target="_top">
 	<textarea style="width: 100%" name="style" rows="10"><mm:field name="style"/></textarea>
 	<input type="submit"/>

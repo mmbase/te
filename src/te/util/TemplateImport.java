@@ -26,7 +26,7 @@ public class TemplateImport {
         user.put("password", "admin2k");
         Cloud cloud = cloudContext.getCloud("mmbase", "name/password", user);
         //Cloud cloud = cloudContext.getCloud("mmbase");
-        NodeManager nm = cloud.getNodeManager("templates");
+        NodeManager nm = cloud.getNodeManager("tetemplates");
         File dir = new File("/home/keesj/work/te/src/nl/vpro");
         if (dir.isDirectory()) {
             File[] fileList = dir.listFiles();
@@ -60,7 +60,7 @@ public class TemplateImport {
                             nodeXMLContent.parseString(nodeContent);
                             XMLElement fileXMLContent = new XMLElement();
                             fileXMLContent.parseString(content);
-                            if (nodeXMLContent.toString().hashCode() != fileXMLContent.toString().hashCode()) {
+                            if (nodeXMLContent.toString().hashCode() != fileXMLContent.toString().hashCode() ) {
                                 System.err.println("differ updating");
                                 theNode.setStringValue("content", content);
 								theNode.setStringValue("description", fileXMLContent.getProperty("description"));

@@ -53,7 +53,7 @@ public class ProgrammasitesNavigationControl extends NavigationControl implement
 
     private Template getTemplate(String name) {
         Cloud cloud = getCloud();
-        NodeManager nm = cloud.getNodeManager("templates");
+        NodeManager nm = cloud.getNodeManager("tetemplates");
         NodeList list = nm.getList("name = '" + name + "' ", null, null);
         if (list.size() == 1) {
             String content = list.getNode(0).getStringValue("content");

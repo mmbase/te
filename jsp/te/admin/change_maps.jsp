@@ -15,7 +15,7 @@
 <title><%= navigation.getName() %></title>
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <mm:node referid="number" jspvar="node">
-<div class="programmasites">
+<div class="tesites">
 <form action="change_maps_commit.jsp" method="POST">
 	<input type="hidden" name="number" value="<mm:field name="number"/>">
 <table>

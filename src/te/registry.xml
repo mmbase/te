@@ -56,10 +56,16 @@
   <component class="te.jsp.JSPComponent" path="/te/component/episodes/episodes.jsp" name="episode_list" description="list of episodes of a program"/>
   <component class="te.jsp.JSPComponent" path="/te/component/episodes/episodes_archive_info.jsp" name="episodes_archive_info" description="information about the archive linked to the maps object"/>
   <!-- magazines  -->
-  <component class="te.jsp.JSPComponent" path="/te/component/magazines/magazines.jsp" name="magazine_list" description="list of episodes of a program"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/magazines/magazine_list.jsp" name="magazine_list" description="list of news items related to a program"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/magazines/magazine.jsp" name="magazine" description="info about the magazine related to a map"/>
   <!-- news  -->
   <component class="te.jsp.JSPComponent" path="/te/component/magazines/news/news.jsp" name="news" description="display a news item"/>
   <!-- magazine home page -->
   <component class="te.jsp.JSPComponent" path="/te/component/home_magazine.jsp" name="home_magazine" description="list of news items for the from page "/>
   <component class="te.jsp.JSPComponent" path="/te/component/home_related_episodes.jsp" name="home_related_episodes" description="list of episodes of a program"/>
+  
+    <!-- service info -->
+  <component class="te.jsp.JSPComponent" path="/te/component/serviceinfo/serviceinfo.jsp" name="serviceinfo" description="display a service info node"/>
+   <component class="te.jsp.JSPComponent" path="/te/component/serviceinfo/serviceinfo_other.jsp" name="serviceinfo_other" description="display a list of service info node related to a map"/>
+  
 </registry>

@@ -4,8 +4,6 @@
 <%@page import="minixml.*"%>
 <% 
 	 Template template = (Template)request.getAttribute("template");
-	//wb.getHttpServletResponse().addHeader("Cache-Control","no-cache");
-        //wb.getHttpServletResponse().addHeader("Pragma","no-cache");
 	response.addHeader("Cache-Control","no-cache");
         response.addHeader("Pragma","no-cache");
 %>
@@ -18,10 +16,10 @@
 <body>
 <table>
 	<tr><th>status</th><th>site naam</th><th>beschrijving</th></tr>
-<mm:listnodes type="programmasites" constraints="state <> 0">
+<mm:listnodes type="tesites" constraints="state <> 0">
 	<tr><td class="state_active">run</td><td><a href="view_site.jsp?number=<mm:field name="number"/>"><mm:field name="name"/></a></td><td><mm:field name="description"/></td></tr>
 </mm:listnodes>
-<mm:listnodes type="programmasites" constraints="state = 0">
+<mm:listnodes type="tesites" constraints="state = 0">
 	<tr><td class="state_inactive">stoped</td><td><a href="view_site.jsp?number=<mm:field name="number"/>"><mm:field name="name"/></a></td><td><mm:field name="description"/></td></tr>
 </mm:listnodes>
 </table>

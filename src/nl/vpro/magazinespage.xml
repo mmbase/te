@@ -4,5 +4,8 @@
   <component name="page_head"/>
   <component name="logo"/>
   <component name="navigation"/>
-  <component name="magazine_list"/>
+  <container name="horizontal">
+     <component name="magazine"/>
+     <component name="magazine_list"/>
+  </container>
 </template>
