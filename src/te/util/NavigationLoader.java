@@ -29,7 +29,8 @@ public abstract class NavigationLoader {
     public static Navigation parseXML(String xml) {
         XMLElement xmle = new XMLElement();
         xmle.parseString(xml);
-        return createNavigation(null, xmle);
+        Navigation nav =  createNavigation(null, xmle);
+        return nav;
     }
 
     private static Navigation createNavigation(Navigation parent, XMLElement xmle) {
@@ -52,8 +53,21 @@ public abstract class NavigationLoader {
             StaticNavigation nav = new StaticNavigation(xmle.getProperty("id"), xmle.getProperty("name"));
             for (int x = 0; x < xmle.countChildren(); x++) {
                 XMLElement child = xmle.getChildAt(x);
-                if (child.getTagName().equals("navigation") || child.getTagName().equals("entrypoint")) {
-                    nav.addChild(createNavigation(nav, xmle.getChildAt(x)));
+                if (child.getTagName().equals("navigation")){
+					nav.addChild(createNavigation(nav, xmle.getChildAt(x)));
+                } else if ( child.getTagName().equals("entrypoint")) {
+                	
+                    Navigation extraNav = createNavigation(nav, xmle.getChildAt(x));
+                    Navigations extraNavChilds = extraNav.getChildNavigations();
+                    for (int z = 0; z < extraNavChilds.size(); z++) {
+                    	
+                        nav.addChild(extraNavChilds.getNavigation(z));
+                        
+                        if (nav instanceof AbstractNavigation){
+                        	((AbstractNavigation)extraNavChilds.getNavigation(z)).setParentNavigation(null);
+							((AbstractNavigation)extraNavChilds.getNavigation(z)).setNavigationControl(extraNav.getNavigationControl());							
+                        }
+                    }
                 } else if (child.getTagName().equals("property")) {
                     nav.setProperty(child.getProperty("name"), child.getContents());
                 }

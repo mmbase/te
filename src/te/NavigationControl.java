@@ -21,7 +21,8 @@ public abstract class NavigationControl implements NavigationResolver {
     public final static String PATH_SEPARATOR = "/";
 
     /** 
-     * @return the root navigation
+     * @return the root navigation with childs
+     * the root navigation is always skipped
      */
     public abstract Navigation getNavigation();
 
@@ -41,21 +42,11 @@ public abstract class NavigationControl implements NavigationResolver {
 
         Navigation currentNavigation = getNavigation();
 
-        //the first token must of course be the "root" navigation
-        //if that does no match we return null
-        if (st.hasMoreTokens()) {
-            String currentPath = st.nextToken();
-            if (!currentPath.equals(currentNavigation.getURLString())) {
-                return null;
-            }
-        }
-
         while (st.hasMoreTokens()) {
             String currentPath = st.nextToken();
             if (currentNavigation instanceof NavigationResolver) {
                 StringTokenizer newTokenizer = new StringTokenizer(path, PATH_SEPARATOR, true);
                 if (newTokenizer.countTokens() > 2) {
-
                     newTokenizer.nextToken(); // the current nav
                     newTokenizer.nextToken(); // the delimiter
                     StringBuffer newPath = new StringBuffer();

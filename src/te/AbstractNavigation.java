@@ -23,7 +23,7 @@ public abstract class AbstractNavigation implements Navigation {
     public AbstractNavigation() {
         properties = new Properties();
     }
-
+	
     public boolean isRootNavigation() {
         return parent == null;
     }
@@ -107,4 +107,5 @@ public abstract class AbstractNavigation implements Navigation {
     public Template getTemplate() {
         return getNavigationControl().getTemplate(this);
     }
+    
 }

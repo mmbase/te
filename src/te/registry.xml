@@ -9,10 +9,13 @@
   <layoutManager class="te.jsp.JSPLayoutManager" name="vertical" description="default list layout">
     <property name="jspPage">/te/layout/vertical.jsp</property>
   </layoutManager>
+  
   <container class="te.jsp.JSPContainer" path="/te/container/default.jsp" name="horizontal" description="a container with a horizontal layout" layout="horizontal"/>
   <container class="te.jsp.JSPContainer" path="/te/container/default.jsp" name="vertical" description="a container with a vertical layout" layout="vertical"/>
   <template class="te.jsp.JSPTemplate" path="/te/template/default.jsp" name="default" description="default tempate using the default layout" layout="default"/>
+  
   <component class="nl.vpro.ProgrammaSiteNavigationComponent" name="navigation" description="The VPRO programma sites navigation"/>
+  
   <component class="te.jsp.JSPComponent" path="/te/component/page_head.jsp" name="page_head" description="The top of the VPRO page with meta navigation"/>
   <component class="te.jsp.JSPComponent" path="/te/component/maps.jsp" name="maps" description="Display information about maps"/>
   <component class="te.jsp.JSPComponent" path="/te/component/related_news.jsp" name="related_news" description="Display information about related news"/>
@@ -24,5 +27,6 @@
   <component class="te.jsp.JSPComponent" path="/te/component/episode_title.jsp" name="episode_title" description="Display the Title of the episode(large)"/>
   <component class="te.jsp.JSPComponent" path="/te/component/episode_previousnext.jsp" name="episode_previousnext" description="Display the pervious and next episode links"/>
   <component class="te.jsp.JSPComponent" path="/te/component/episode_body.jsp" name="episode_body" description="Display the content of the episode"/>
+  
   <component class="te.jsp.JSPComponent" path="/te/component/episode_related_audio_video.jsp" name="episode_related_audio_video" description="Display the related audio and video's related to the episode"/>
 </registry>

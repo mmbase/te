@@ -9,18 +9,16 @@ See http://www.MMBase.org/license
 */
 package nl.vpro;
 
-import org.mmbase.bridge.Node;
+import org.mmbase.bridge.*;
+import org.mmbase.util.logging.*;
 
 import te.*;
-
-import org.mmbase.util.logging.*;
-import java.util.*;
 
 /**
  * @author keesj
  * @version $Id$
  */
-public class MapsNavigation extends AbstractNavigation implements NavigationResolver {
+public class MapsNavigation extends AbstractResolvingNavigation  {
     private static Logger log = Logging.getLoggerInstance(MapsNavigation.class);
     public Node node;
     public MapsNavigation(Node node) {
@@ -59,25 +57,6 @@ public class MapsNavigation extends AbstractNavigation implements NavigationReso
 
         retval.add(archive);
 
-        /*
-                    NodeList list = node.getCloud().getList(getID(), //startnodes     
-                "maps,posrel,programs", //nodepath
-                "maps.number,maps.number,posrel.number,posrel.pos,programs.number,programs.title", // fields
-                "", //constraints
-                "posrel.pos", //orderby
-                "down", //directions
-                "BOTH", //searchdir
-                false // distrinct
-            );
-            	Navigations navigations= new Navigations();
-            	for (int x =0 ; x < list.size() ; x++){
-            		Node node = list.getNode(x);
-            		StaticNavigation nav = new StaticNavigation(node.getStringValue("programs.number"),node.getStringValue("programs.title"));
-            		nav.setProperty("pos",node.getStringValue("posrel.pos"));
-            		navigations.add(nav);
-            	}
-            	return navigations;
-            	*/
         return retval;
     }
 
@@ -86,34 +65,9 @@ public class MapsNavigation extends AbstractNavigation implements NavigationReso
      */
     public Navigation resolveNavigation(String path, WhiteBoard wb) {
         log.debug(getFullURLString() + " resolving " + path);
-        StringTokenizer st = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR);
-
-        Navigation currentNavigation = this;
+        
         log.debug("setting current maps (program){" + node.getStringValue("title") + "} in whiteboard.");
         wb.getHttpServletRequest().setAttribute("maps", node);
-        while (st.hasMoreTokens()) {
-            String currentPath = st.nextToken();
-            Navigations navigations = currentNavigation.getChildNavigations();
-            for (int x = 0; x < navigations.size(); x++) {
-                AbstractNavigation navigation = navigations.getNavigation(x);
-                if (navigation.getURLString().equals(currentPath)) {
-                    if (navigation instanceof NavigationResolver) {
-                        StringTokenizer newTokenizer = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR, true);
-                        if (newTokenizer.countTokens() > 2) {
-                            newTokenizer.nextToken(); // the current nav
-                            newTokenizer.nextToken(); // the delimiter
-                            StringBuffer newPath = new StringBuffer();
-                            while (newTokenizer.hasMoreTokens()) {
-                                newPath.append(newTokenizer.nextToken());
-                            }
-                            return ((NavigationResolver) navigation).resolveNavigation(newPath.toString(), wb);
-                        }
-                    }
-                    currentNavigation = navigation;
-                    break;
-                }
-            }
-        }
-        return currentNavigation;
+        return super.resolveNavigation(path,wb);
     }
 }
