@@ -3,7 +3,7 @@
   String site = "programmas";
   String words= "vpro";
   String ppage= "1";
-  String restrict="";
+  String restrict=""; // facade.getEngineURL() + mapsNavigation.getFullURLString() +  "/";
 %>
 <mm:import externid="site">programmas</mm:import>
 <mm:import externid="words">vpro</mm:import>

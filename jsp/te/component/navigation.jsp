@@ -30,8 +30,17 @@
 		<% } %>
 
 		<td width="150px" height="5">&nbsp;</td>
+<td class="navigation" align="right">
 
-		<td class="navigation"><form><input type="text" length="10"> [ZOEK] M</td>
-		<td>&nbsp;</td>
+<mm:import externid="words"/>
+<mm:present referid="words">
+   <form action="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/zoeken/" %>" ><input name="words" type="text" value="<mm:write referid="words"/>" length="10"></form> 
+</mm:present>
+<mm:notpresent referid="words">
+   <form action="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/zoeken/" %>" ><input name="words" type="text" value="zoeken" length="10" onFocus="if (this.value == 'zoeken') this.value='';"></form> 
+</mm:notpresent>
+
+</td>
+<td>&nbsp;</td>
 	</table>
 	</div>
