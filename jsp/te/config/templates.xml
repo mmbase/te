@@ -1,11 +1,20 @@
+<?xml version="1.0"?>
 <templates>
-	<template name="afleveringssite" layout="listlayout">
-		<component name="page_head"/>
-		<component name="navigation"/>
-		<container name="content">
-		   <component name="maps"/>
-		   <component name="afleveringen"/>
-		   <component name="news"/>
-                </container>
-	</template>
+  <template name="default" layout="default" rootType="maps">
+    <component name="page_head"/>
+    <component name="navigation">
+      <property name="showLogs" value="false"/>
+      <property name="showForums" value="false"/>
+      <property name="showBinders" value="false"/>
+      <property name="showArchives" value="false"/>
+    </component>
+    <container name="default" layout="horizontal">
+      <component name="maps"/>
+      <container name="episodes">
+        <component name="nextepisode"/>
+        <component name="pervepisode"/>
+      </container>
+      <component name="news"/>
+    </container>
+  </template>
 </templates>
