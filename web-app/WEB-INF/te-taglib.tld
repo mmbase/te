@@ -68,4 +68,20 @@
 <rtexprvalue>true</rtexprvalue>
 </attribute>
 </tag>
+
+<tag>
+	<name>url</name>
+	<tagclass>te.jsp.taglib.TeUrlTag</tagclass>
+	<info>todo </info>
+	<attribute>
+		<name>name</name>
+		<required>false</required>
+		<rtexprvalue>false</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>referids</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+</tag>
 </taglib>
