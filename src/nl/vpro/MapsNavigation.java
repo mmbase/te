@@ -40,6 +40,7 @@ public class MapsNavigation extends AbstractNavigation {
         navigation.setNavigationControl(getNavigationControl());
         navigation.setParentNavigation(this);
         retval.add(navigation);
+        
         /*
                     NodeList list = node.getCloud().getList(getID(), //startnodes     
                 "maps,posrel,programs", //nodepath

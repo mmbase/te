@@ -40,7 +40,7 @@ public class Engine extends BridgeServlet {
     //we have a separate logger for the different instances
     private Logger log = null;
 
-    //we have only facade
+    //we have only one facade
     private static Facade facade;
     /**
      *
