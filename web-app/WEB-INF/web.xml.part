@@ -9,3 +9,7 @@
   <filter-name>TE</filter-name>
   <url-pattern>/engine/*</url-pattern>
 </filter-mapping>
+  <taglib>
+    <taglib-uri>http://www.mmbase.org/te-taglib-1.0</taglib-uri>
+	 <taglib-location>/WEB-INF/te-taglib.tld</taglib-location>
+  <taglib>
