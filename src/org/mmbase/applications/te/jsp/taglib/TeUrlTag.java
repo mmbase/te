@@ -3,7 +3,7 @@ package org.mmbase.applications.te.jsp.taglib;
 import javax.servlet.jsp.*;
 
 import org.mmbase.bridge.jsp.taglib.*;
-import org.mmbase.bridge.jsp.taglib.util.*;
+import org.mmbase.util.*;
 import org.mmbase.util.logging.*;
 import org.mmbase.applications.te.*;
 import java.util.*;
