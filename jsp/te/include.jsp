@@ -9,4 +9,11 @@ page import="java.io.*"%><%
   WhiteBoard wb = (WhiteBoard)request.getAttribute("wb") ;
   Facade facade = wb.getFacade();
   Navigation navigation = wb.getCurrentNavigation();
+  Navigation mapsNavigation = navigation;
+  while (mapsNavigation.getProperty("maps") == null){
+	mapsNavigation = mapsNavigation.getParentNavigation();
+        if (mapsNavigation == null){
+		throw new Exception("can not find the maps navigation");
+	}
+  }
 %>

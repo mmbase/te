@@ -1,7 +1,7 @@
 <%@include file="../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
 %>
-<mm:import externid="mapsid"><%= navigation.getID() %></mm:import>
+<mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
 <div class="content">
