@@ -3,24 +3,20 @@
   <xsl:output method="html" indent="yes"/>
 
 	<xsl:template match="/">
-		<HTML>
 			<xsl:call-template name="Header">
 			</xsl:call-template>
 			<xsl:call-template name="Body">
 			</xsl:call-template>
-		</HTML>
 	</xsl:template>
 
 	<xsl:template name="Header">
-		<head>
-			<title>Programmas Zoekresultaten </title>
-		</head>
+	    <div class="search_title">Zoekresultaten </div>
 	</xsl:template>
 
 	<xsl:template name="Body">
-		<body>
+		<div class="content">
 			<xsl:apply-templates />
-		</body>
+		</div>
 	</xsl:template>
 
 	<xsl:template match="searchresults">
@@ -37,7 +33,7 @@
 			<xsl:value-of select="//child::header/matches"/>
 	</td></tr>
 	<tr><td>
-		words </td><td> <xsl:value-of select="//child::header/words"/>
+		woorden </td><td> <xsl:value-of select="//child::header/words"/>
 	</td></tr>
 	<tr><td>
 		page </td><td> <xsl:value-of select="//child::header/page"/>
@@ -77,7 +73,7 @@
 
 	<br/>
 	<br/>
-		pages <xsl:value-of select="//child::footer/pages"/><br/>
+		<xsl:value-of select="//child::footer/pages"/> pagina's<br/>
 	<xsl:for-each select="//child::footer/prevpage/page">
 		<xsl:choose>
 		<xsl:when test="link">
