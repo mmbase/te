@@ -28,6 +28,7 @@ public class JSPTemplate extends JSPContainer implements Template {
         wb.getHttpServletRequest().setAttribute("template", this);
         super.render(wb, writer);
     }
+    
     public Object clone(){
     	JSPTemplate t =  new JSPTemplate(path,getLayoutManager());
     	t.setName(getName());

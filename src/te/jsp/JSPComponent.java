@@ -15,6 +15,7 @@ import javax.servlet.*;
 
 import org.mmbase.util.logging.*;
 
+import java.util.*;
 import te.*;
 import te.util.*;
 
@@ -34,7 +35,7 @@ public class JSPComponent extends AbstractContainer implements Component {
     }
 
     public void render(WhiteBoard wb, PrintWriter writer) throws ServletException, IOException {
-    	long start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         log.debug(" render {" + path + "} ");
         try {
 
@@ -55,7 +56,7 @@ public class JSPComponent extends AbstractContainer implements Component {
             wb.getHttpServletRequest().setAttribute("throwable", t);
             new JSPComponent("/te/component/error.jsp").render(wb, writer);
         }
-		log.debug("finised render {" + path + "} " + ( System.currentTimeMillis()- start ) + " ms");
+        log.debug("finised render {" + path + "} " + (System.currentTimeMillis() - start) + " ms");
     }
 
     /* (non-Javadoc)
@@ -67,6 +68,8 @@ public class JSPComponent extends AbstractContainer implements Component {
         } else {
             mapRenderRelativeToRender = true;
         }
+
+   
 
         if (mapRenderRelativeToRender) {
             log.debug("rendering " + path + " via " + getName());

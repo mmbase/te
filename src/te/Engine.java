@@ -10,10 +10,12 @@ See http://www.MMBase.org/license
 package te;
 
 import java.io.IOException;
+import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import org.mmbase.bridge.*;
 import org.mmbase.servlet.*;
 import org.mmbase.util.logging.*;
 
@@ -131,6 +133,40 @@ public class Engine extends BridgeServlet {
                 String navpath = navigationComponent.getURLString(nav);
                 log.debug("request[" + requestCounter + "] found " + navpath);
 
+				//TODO: move this code to the render relative of ProgrammaSites navigation control
+                //one exception for vpro for backwards compatibility
+                if (path.indexOf("index.shtml") != -1) {
+                    log.debug("detected old index.shtml trying automatic conversion");
+                    //get the objects from the params
+                    String querystring = wb.getHttpServletRequest().getQueryString();
+                    if (querystring != null) {
+                        StringTokenizer st = new StringTokenizer(querystring, "+");
+                        List list = new Vector();
+                        while (st.hasMoreElements()) {
+                            String token = st.nextToken();
+                            if (token.charAt(0) >= '0' && token.charAt(0) <= '9') {
+                                int number = Integer.parseInt(token);
+                                Cloud cloud = ContextProvider.getDefaultCloudContext().getCloud("mmbase");
+                                Node node = cloud.getNode(number);
+                                if (node.getNodeManager().getName().equals("programs") || node.getNodeManager().getName().equals("portals") || node.getNodeManager().getName().equals("maps")){
+                                	continue;
+                                }
+                                log.debug("SHTML PARAM {" + node.getNodeManager().getName()+"}{" + node.getNumber()  +"}{"+ node +"}");
+                                list.add(node);
+                            }
+                        }
+                        log.debug("calling resolveURL with " + nav + " " + list);
+                        String url = getFacade().getNavigationControl().resoveURL(nav, list);
+                        if (url != null) {
+                            resp.sendRedirect(url);
+                            
+                        } else {
+                        	resp.sendRedirect(facade.getEngineURL() +nav.getFullURLString() + "/");
+                        }
+                        return;
+                    }
+                }
+
                 try {
                     Template t = navigationComponent.getTemplate(nav);
                     log.debug("using template: " + t.getName() + " " + t.getDescription());
@@ -138,7 +174,6 @@ public class Engine extends BridgeServlet {
                         log.debug("navpath " + navpath);
                         log.debug("path " + path);
                         String remainingPath = path.substring(navpath.length() + NavigationControl.PATH_SEPARATOR.length());
-                        //call with the writer being null since the renderRelative may forward and not include it's data
                         t.renderRelative(remainingPath, wb);
                     } else {
                         t.render(wb, resp.getWriter());

@@ -257,9 +257,9 @@ public class XMLNavigationControl extends NavigationControl {
         }
         if (retval.size() > 1) {
             log.warn("remaining " + retval);
-        } else if (retval.size() != 1) {
-            log.error("there are multiple path" + retval);
-
+        } else if (retval.size() == 0 ) {
+			log.warn("did not resolve navigation params={" + currentNavigation +"," + params + "}");
+			return null;
         }
         //there are still multiple paths
         return Engine.getFacade().getEngineURL() + retval.getPath(0).fullPath;
