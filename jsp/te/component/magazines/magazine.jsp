@@ -6,7 +6,7 @@
 <mm:node referid="mapsid">
 <mm:relatednodes type="magazines" max="1">
 	<div class="magazines">
-	<te:field name="title"/>
+	<%-- <te:field name="title"/> --%>
 	<te:field name="subtitle"/>
 	<te:field name="intro"/>
 	<te:field name="body"/>

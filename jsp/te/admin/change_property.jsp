@@ -11,7 +11,7 @@
 <mm:import externid="number" required="true" jspvar="number"/>
 <mm:import externid="name" required="true" />
 <mm:import externid="value" required="true" />
-<mm:cloud uri="<%= cloudUri %>" name="mmbase" method="http" jspvar="cloud">
+<mm:cloud name="mmbase" method="http" jspvar="cloud">
 <mm:node referid="number" jspvar="node">
 <% Properties p = new Properties(); 
    p.load(new ByteArrayInputStream(node.getStringValue("properties").getBytes()));

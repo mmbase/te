@@ -9,7 +9,7 @@
 %>
 <mm:import externid="name" required="true" jspvar="name"/>
 <mm:import externid="description" required="true" jspvar="description"/>
-<mm:cloud uri="<%= cloudUri %>" name="mmbase" method="http" jspvar="cloud">
+<mm:cloud name="mmbase" method="http" jspvar="cloud">
 <%
 	NodeManager nm = cloud.getNodeManager("tesites");
 	Encode sqle = new Encode("ESCAPE_SINGLE_QUOTE");

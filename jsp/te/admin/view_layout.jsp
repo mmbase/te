@@ -10,7 +10,7 @@
   response.addHeader("Pragma","no-cache");
 %>
 <mm:import externid="number" required="true" jspvar="number"/>
-<mm:cloud  name="mmbase" method="http" jspvar="cloud">
+<mm:cloud name="mmbase" method="http" jspvar="cloud">
 <html>
 <head>
 <title><%= navigation.getName() %></title>
@@ -32,7 +32,7 @@
 	<tr><td align="right">maps object</td> <td> 
 	<a href="change_maps.jsp?number=<mm:field name="number"/>">
 		<mm:field name="maps">
-			<mm:compare value="-1" inverse="true"><mm:node number="$_"><mm:field name="title"/></mm:node></mm:compare>	
+			<mm:compare value="-1" inverse="true"><mm:cloud><mm:node number="$_"><mm:field name="title"/></mm:node></mm:cloud></mm:compare>	
 			<mm:compare value="-1">nog niet aangemaakt</mm:compare>	
 		</mm:field></a></td> </tr>
 	<%-- status --%>
@@ -40,6 +40,7 @@
 		<mm:field name="state">
 			<mm:compare value="0" inverse="true">
 				de site is geactiveerd en te 
+				<mm:cloud><%-- VPRO cloud --%>
 				<mm:node number="<%= node.getStringValue("maps") %>" jspvar="navNode">
 <%
             List list = new Vector();
@@ -54,6 +55,7 @@
 %>
 				 <a href="<te:url/>">zien</a>
 				</mm:node>
+				</mm:cloud>
 			</mm:compare>
 			<mm:compare value="0">niet actief <a href="activate_site.jsp?number=<mm:field name="number"/>">activeren</a></mm:compare>	
 		</mm:field></a></td> </tr>
@@ -61,6 +63,7 @@
 	<tr><td align="right">Navigatie</td> <td> 
 		<mm:field name="state">
 			<mm:compare value="0" inverse="true">
+				<mm:cloud><%-- VPRO cloud --%>
 				<mm:node number="<%= node.getStringValue("maps") %>" jspvar="navNode">
 <%
             List list = new Vector();
@@ -90,6 +93,7 @@
                 <% } %>
 	   <% } %>	
 				</mm:node>
+				</mm:cloud>
 			</mm:compare>
 		</mm:field></a></td> </tr>
 </table>

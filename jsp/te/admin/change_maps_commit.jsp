@@ -10,7 +10,7 @@
 %>
 <mm:import externid="number" required="true" jspvar="number"/>
 <mm:import externid="maps" required="true" jspvar="maps"/>
-<mm:cloud uri="<%= cloudUri %>" name="mmbase" method="http" jspvar="cloud">
+<mm:cloud name="mmbase" method="http" jspvar="cloud">
 <mm:node referid="number" jspvar="node">
    <mm:setfield name="maps" ><mm:write referid="maps"/></mm:setfield>
 </mm:node>

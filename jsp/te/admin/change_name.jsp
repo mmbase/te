@@ -9,7 +9,7 @@
   response.addHeader("Pragma","no-cache");
 %>
 <mm:import externid="number" required="true" jspvar="number"/>
-<mm:cloud uri="<%= cloudUri %>" name="mmbase" method="http" jspvar="cloud">
+<mm:cloud name="mmbase" method="http" jspvar="cloud">
 <html>
 <head>
 <title><%= navigation.getName() %></title>

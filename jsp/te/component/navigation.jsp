@@ -1,6 +1,6 @@
 <%@include file="../include.jsp"%>
 <% Properties p = new Properties() ;%>
-<mm:cloud uri="rmi://127.0.0.1:1111/templates">
+<mm:cloud >
 <mm:node number="<%= mapsNavigation.getProperty("tesites") %>" jspvar="myNode">
 	<% p.load(new ByteArrayInputStream(myNode.getStringValue("properties").getBytes())); %>
 </mm:node>

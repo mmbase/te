@@ -10,7 +10,7 @@
 %>
 <mm:import externid="number" required="true" jspvar="number"/>
 <mm:import externid="name" required="true" jspvar="name"/>
-<mm:cloud uri="<%= cloudUri %>" name="mmbase" method="http" jspvar="cloud">
+<mm:cloud name="mmbase" method="http" jspvar="cloud">
 <%
 	String message ="";
 	name = name.trim();

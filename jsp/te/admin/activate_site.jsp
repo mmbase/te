@@ -9,7 +9,7 @@
   response.addHeader("Pragma","no-cache");
 %>
 <mm:import externid="number" required="true" jspvar="number"/>
-<mm:cloud uri="<%= cloudUri %>" name="mmbase" method="http" jspvar="cloud">
+<mm:cloud name="mmbase" method="http" jspvar="cloud">
 <html>
 <head>
 <title><%= navigation.getName() %></title>
@@ -17,11 +17,9 @@
 <mm:node referid="number" jspvar="node">
 	<mm:setfield name="state">1</mm:setfield>
 de site is geactiveerd en te zien op
-<mm:cloud><%-- VPRO cloud --%>
 <mm:node number="<%= node.getStringValue("maps") %>">
 <a href="<te:url/>"><te:url/></a>
 </mm:node>
-</mm:cloud>
 </mm:node>
 </head>
 <body>

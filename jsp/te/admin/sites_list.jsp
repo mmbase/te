@@ -7,7 +7,7 @@
 	response.addHeader("Cache-Control","no-cache");
         response.addHeader("Pragma","no-cache");
 %>
-<mm:cloud uri="<%= cloudUri %>" method="http" jspvar="cloud">
+<mm:cloud method="http" jspvar="cloud">
 <html>
 <head>
 <title><%= navigation.getName() %></title>

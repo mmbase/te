@@ -13,26 +13,6 @@ var cp2 = new ColorPicker('window'); // Popup window
 <body>
 <mm:cloud jspvar="cloud">
 
-<%-- list of fields --%>
-<%
-String[] nodeManagers =new String[]{"maps","programs", "news", "episodes", "items", "images" ,"magazines","binders","archives","audiofragments","videofragments","urls", "attachments","email","serviceinfo","people","public","groups" ,"mmevents","teasers"};
-
-Set fields = new HashSet();
-for (int x =0 ; x < nodeManagers.length ; x ++){ 
-	NodeManager nm = cloud.getNodeManager(nodeManagers[x]);
-	FieldIterator iter = nm.getFields(NodeManager.ORDER_CREATE).fieldIterator();
-	while(iter.hasNext()){
-		Field field = iter.nextField();
-		if (
-		field.getState() != Field.STATE_SYSTEM &&  
-		!field.getName().equals("number")
-		&& !field.getName().equals("otype")
-		&& !field.getName().equals("owner")){ 
-			fields.add(field.getName());
-                } 
-        }
-} %>
-
 <% String path =request.getParameter("path"); %>
 <% if (path != null){ %>
 <form name=""styleform" id="styleform" action="edit_one_commit.jsp" target="_top" method="POST">
@@ -40,7 +20,7 @@ for (int x =0 ; x < nodeManagers.length ; x ++){
    toe te passen op
 <%   StringTokenizer st = new StringTokenizer(path,"|");
    while(st.hasMoreTokens()) { String name = st.nextToken() ;%>
-	<input type="radio" name="path_<%= name %>"><%= name %></input> 
+	<input type="radio" name="path_<%= name %>" selected="true"><%= name %></input> 
         <% if (st.hasMoreTokens()){ %>
 		in
 	<% } %>
@@ -131,13 +111,11 @@ bg:<INPUT TYPE="text" NAME="bgcolor" SIZE="6" VALUE=""> <A HREF="#" onClick="cp2
 <br>
 <br>
 <br>
-<mm:cloud uri="rmi://127.0.0.1:1111/templates">
 <mm:node number="<%= mapsNavigation.getProperty("tesites") %>">
 <form method="post" action="edit_commit.jsp" target="_top">
 	<textarea style="width: 100%" name="style" rows="10"><mm:field name="style"/></textarea>
 	<input type="submit"/>
 </form>
 </mm:node>
-</mm:cloud> 
 </mm:cloud>
 </body>
