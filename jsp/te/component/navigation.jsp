@@ -17,7 +17,11 @@
 		<% } %>
 
 		<% if (component.getProperty("showBinders").equals("true")) { %>
-		<td class=navigation">Dossiers</td>
+			<% if (binders != null) {%>
+			<td class="selectednavigation">Dossiers</td>
+			<% } else { %>
+			<td class="navigation">Dossiers</td>
+			<% } %>
 		<td>&nbsp;</td>
 		<% } %>
 
