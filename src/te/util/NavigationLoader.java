@@ -47,7 +47,16 @@ public abstract class NavigationLoader {
                 log.warn(Logging.stackTrace(e));
             } catch (IllegalAccessException e) {
                 log.warn(Logging.stackTrace(e));
+            } catch (RuntimeException e) {
+                log.warn(
+                    "error while loading entrypoint {"
+                        + className
+                        + "} the error was "
+                        + e.getMessage()
+                        + " : stacktrace "
+                        + Logging.stackTrace(e));
             }
+            log.warn("trying to load the rest of the navigation");
             return null;
         } else {
             StaticNavigation nav = new StaticNavigation(xmle.getProperty("id"), xmle.getProperty("name"));
@@ -56,11 +65,14 @@ public abstract class NavigationLoader {
             }
 
             for (int x = 0; x < xmle.countChildren(); x++) {
-                XMLElement child = xmle.getChildAt(x);    			
+                XMLElement child = xmle.getChildAt(x);
                 if (child.getTagName().equals("navigation")) {
                     nav.addChild(createNavigation(nav, xmle.getChildAt(x)));
                 } else if (child.getTagName().equals("entrypoint")) {
-                    nav.addChild(createNavigation(nav, xmle.getChildAt(x)));                    
+                    Navigation newChild = createNavigation(nav, xmle.getChildAt(x));
+                    if (newChild != null) {
+                        nav.addChild(newChild);
+                    }
                 } else if (child.getTagName().equals("property")) {
                     nav.setProperty(child.getProperty("name"), child.getContents());
                 }

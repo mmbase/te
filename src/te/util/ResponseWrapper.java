@@ -31,6 +31,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
     private String contentType = DEFAULT_CONTENTTYPE;
     private String characterEncoding = DEFAULT_CHARSET;
 
+
     /**
      * Public constructor
      */
@@ -99,4 +100,12 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
         log.debug(characterEncoding);
         return characterEncoding;
     }
+    /* (non-Javadoc)
+     * @see javax.servlet.http.HttpServletResponse#addHeader(java.lang.String, java.lang.String)
+     */
+    public void addHeader(String arg0, String arg1) {
+    	log.debug("adding header " + arg0  + " = " + arg1);
+        super.addHeader(arg0, arg1);
+    }
+
 }
