@@ -122,7 +122,6 @@ public abstract class AbstractNavigation implements Navigation {
     }
 
     public Navigation resolveNavigation(String path, WhiteBoard wb) {
-        log.debug(getFullURLString() + " resolving " + path);
         //if the current navigation is not visible call the child navigations and try to resolve
         if (!isVisible()) {
             Navigations navs = getChildNavigations();

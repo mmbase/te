@@ -78,7 +78,7 @@ public class Engine extends BridgeServlet {
             HttpServletRequest req = (HttpServletRequest) servletRequest;
             HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
-            resp.setContentType("text/html;charset=" + Facade.encoding );
+            resp.setContentType("text/html;charset=" + Facade.encoding);
             //resp.setContentType("text/html");
 
             //code to determin the "engine url"             
@@ -113,24 +113,23 @@ public class Engine extends BridgeServlet {
             }
 
             if (log.isDebugEnabled()) {
-                log.debug("request[" + requestCounter + "] servlet path info " + req.getPathInfo());
-                log.debug("request[" + requestCounter + "] servlet request uri " + req.getRequestURI());
+                //log.debug("request[" + requestCounter + "] servlet path info " + req.getPathInfo());
+                //log.debug("request[" + requestCounter + "] " + req.getRequestURI());
                 //log.debug("request[" + requestCounter + "] servlet request url " + req.getRequestURL());
-                log.debug("request[" + requestCounter + "] servlet context path " + req.getContextPath());
-                log.debug("request[" + requestCounter + "] servlet  path " + req.getServletPath());
-                log.debug("request[" + requestCounter + "] guesed filter path " + facade.getEngineURL());
-                log.debug("request[" + requestCounter + "] computed path " + path);
+                //log.debug("request[" + requestCounter + "] servlet context path " + req.getContextPath());
+                //log.debug("request[" + requestCounter + "] servlet  path " + req.getServletPath());
+                //log.debug("request[" + requestCounter + "] guesed filter path " + facade.getEngineURL());
+                log.debug("request[" + requestCounter + "] requested " + path);
             }
 
             NavigationControl navigationComponent = facade.getNavigationControl();
             //resolve the current navigation
-            Navigation nav = navigationComponent.resolveNavigation(path,wb);
+            Navigation nav = navigationComponent.resolveNavigation(path, wb);
             if (nav != null) {
                 //if the navigation was found put it in the whiteboard
                 wb.setCurrentNavigation(nav);
                 String navpath = navigationComponent.getURLString(nav);
-                log.debug("requested " + path);
-                log.debug("found " + navpath);
+                log.debug("request[" + requestCounter + "] found " + path);
 
                 try {
                     Template t = navigationComponent.getTemplate(nav);
@@ -156,7 +155,6 @@ public class Engine extends BridgeServlet {
                 }
             }
             wb = null;
-            //log.debug(resp.getCharacterEncoding());
         } catch (Throwable t) {
             log.fatal(t.getMessage() + " " + Logging.stackTrace(t));
         }
