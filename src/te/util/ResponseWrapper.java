@@ -97,7 +97,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
      * returns the encoding
      */
     public String getCharacterEncoding() {
-        log.debug(characterEncoding);
+        //log.debug(characterEncoding);
         return characterEncoding;
     }
     /* (non-Javadoc)

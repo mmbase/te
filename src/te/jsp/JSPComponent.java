@@ -34,7 +34,7 @@ public class JSPComponent extends AbstractContainer implements Component {
     }
 
     public void render(WhiteBoard wb, PrintWriter writer) throws ServletException, IOException {
-        log.debug(" render {" + path + "} (writer avaiable " + (writer == null) + ")");
+        log.debug(" render {" + path + "} ");
         try {
 
             wb.getHttpServletRequest().setAttribute("component", this);

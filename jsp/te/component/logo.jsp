@@ -4,11 +4,13 @@
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
-<div class="content">
-	<te:field  name="subtitle"/>
-	<te:field  name="intro"/>
-	<div class="body"><te:field  name="html(body)"/></div>
-	<div class="description"><te:field  name="html(description)"/></div>
+<div class="logo">
+	<mm:related path="images,categories" fields="images.number,categories.name" constraints="categories.name='logo'">
+		<mm:node element="images">
+		   <img src="<mm:image template="s(200x200)"/>">
+		</mm:node>
+	</mm:related>
 </div>
 </mm:node>
 </mm:cloud>
+

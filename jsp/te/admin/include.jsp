@@ -10,6 +10,6 @@ page import="java.io.*"%><%
   WhiteBoard wb = (WhiteBoard)request.getAttribute("wb") ;
   Facade facade = wb.getFacade();
   Navigation navigation = navigation = wb.getCurrentNavigation();
-	response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-  response.addHeader("WWW-Authenticate", "Basic realm=\"" + "test" + "\"");
+ // response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+ // response.addHeader("WWW-Authenticate", "Basic realm=\"" + "test" + "\"");
 %>
