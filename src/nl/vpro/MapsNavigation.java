@@ -23,7 +23,11 @@ public class MapsNavigation extends AbstractNavigation {
     public Node node;
     public MapsNavigation(Node node) {
         this.node = node;
-        setProperty("type", "episodeshomepage");
+        if (node.getStringValue("title").startsWith("Madi")) {
+			setProperty("type", "weekhomepage");
+        } else {
+            setProperty("type", "episodeshomepage");
+        }
         setProperty("maps", "" + node.getNumber());
 
     }
@@ -39,17 +43,18 @@ public class MapsNavigation extends AbstractNavigation {
     public Navigations getChildNavigations() {
         Navigations retval = new Navigations();
 
-        Navigation navigation2 = new StaticNavigation("keesj", "keesj");
-        navigation2.setProperty("template", "/te/edit/index.jsp");
-        navigation2.setNavigationControl(getNavigationControl());
-        navigation2.setParentNavigation(this);
-        retval.add(navigation2);
 
-        Navigation archive = new EpisodesNavigation(); //new StaticNavigation("episodes", "afleveringen");
+        Navigation archive = new EpisodesNavigation();
         archive.setProperty("type", "episodepage");
         archive.setNavigationControl(getNavigationControl());
         archive.setParentNavigation(this);
         retval.add(archive);
+
+		Navigation binders = new BindersNavigation();
+		binders.setProperty("type", "binderpage");
+		binders.setNavigationControl(getNavigationControl());
+		binders.setParentNavigation(this);
+		retval.add(binders);
 
         Navigation navigation = new StaticNavigation("edit", "edit");
         navigation.setProperty("template", "/te/edit/index.jsp");
@@ -68,7 +73,7 @@ public class MapsNavigation extends AbstractNavigation {
         Navigation nav = super.resolveNavigation(path, wb);
         if (nav != null) {
             log.debug("setting current maps (program){" + node.getStringValue("title") + "} in whiteboard.");
-            wb.getHttpServletRequest().setAttribute("maps","" + node.getNumber());
+            wb.getHttpServletRequest().setAttribute("maps", "" + node.getNumber());
         }
         return nav;
     }

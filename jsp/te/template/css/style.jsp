@@ -15,6 +15,11 @@ div {
 .intro {
  	font-weight: bold;
 }
+
+.selectednavigation{
+	background-color: black;
+	color: white;
+}
 <%
 
 String[] nodeManagers =new String[]{ "news", "episodes", "items", "images" };

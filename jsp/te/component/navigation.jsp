@@ -4,7 +4,11 @@
 %>
         <div id="navigation">
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<td class="navigation"><a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() %>/">VoorPagina</a></td>
+		<% if (navigation == mapsNavigation) {%>
+		<td class="selectednavigation">Voorpagina</td>
+		<% } else { %>
+		<td class="navigation"><a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() %>/">Voorpagina</a></td>
+		<% } %>
 		<td>&nbsp;</td>
 
 		<% if (component.getProperty("showArchives").equals("true")) { %>

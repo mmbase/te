@@ -35,4 +35,12 @@
   <component class="te.jsp.JSPComponent" path="/te/component/items/item_nav.jsp" name="item_nav" description="Display a link to the parent episode"/>
   <component class="te.jsp.JSPComponent" path="/te/component/items/item_body.jsp" name="item_body" description="Display the body of the item"/>
   <component class="te.jsp.JSPComponent" path="/te/component/items/item_related_audio_video.jsp" name="item_related_audio_video" description="Display audio and video related to the item"/>
+
+  <!-- weehhomepage -->
+  <component class="te.jsp.JSPComponent" path="/te/component/weekoverview.jsp" name="weekoverview" description="The programs of this week"/>
+  
+    <!--binders -->
+  <component class="te.jsp.JSPComponent" path="/te/component/binders/binders.jsp" name="binders" description="The information aboud a dossier"/>
+    <component class="te.jsp.JSPComponent" path="/te/component/binders/binder_related.jsp" name="binder_related" description="related information to a dossier"/>
+  
 </registry>

@@ -2,7 +2,7 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<div width="200">
+<div class="content" width="200">
 	<mm:list nodes="<%= episodes %>" path="episodes,insrel,items" fields="episodes.number,insrel.number,items.number">
 			<mm:node element="items" jspvar="thisItem">
 				<% if (thisItem.getStringValue("number").equals(items)){ %>
