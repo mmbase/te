@@ -6,7 +6,7 @@ body{
 }
 
 div {
-	background-color: #ffefef;
+	background-color: #dedede;
 }
 
 .title {
@@ -19,6 +19,9 @@ div {
 .selectednavigation{
 	background-color: black;
 	color: white;
+}
+td {
+	vertical-align: top;
 }
 <%
 

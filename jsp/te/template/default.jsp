@@ -23,7 +23,7 @@
 </mm:cloud>
 <head>
 <title><%= bc %></title>
-<link rel="stylesheet" href="css/style.jsp" type="text/css">
+<link rel="stylesheet" href="css/style.jsp" type="text/css"></link>
 </head>
 <% if (background == null) { %>
  <body background="/img.db?<%= background  %>">

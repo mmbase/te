@@ -1,11 +1,11 @@
-<table>
+<table width="100%">
 <tr>
 <td>
 			<te:field  name="title"/>
 			<te:field  name="subtitle"/>
 			<te:field  name="substring(html(intro),150,...)"/>
 	<te:field name="number" write="false" jspvar="field">
-	<a href="<%= facade.getEngineURL() + navigation.getFullURLString() + "/afleveringen/" + field%>/">ga naar de aflevering</a>
+	<a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/afleveringen/" + field%>/">&gt;&gt;&gt;&gt;&gt;&gt;</a>
 	</te:field>
 </td>
 <td>

@@ -12,4 +12,5 @@ page import="java.io.*"%><%
   Navigation navigation = navigation = wb.getCurrentNavigation();
  // response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
  // response.addHeader("WWW-Authenticate", "Basic realm=\"" + "test" + "\"");
+ String cloudUri="rmi://127.0.0.1:1111/templates";
 %>

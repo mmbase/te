@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" %><%@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" session="false"%><%@
 taglib uri="http://www.mmbase.org/mmbase-taglib-1.0" prefix="mm" %><%@
 taglib uri="http://www.mmbase.org/te-taglib-1.0" prefix="te" %><%@
 page import="te.*"%><%@
@@ -15,9 +15,10 @@ page import="java.io.*"%><%
   String episodes ="";
   String items ="";
   String binders ="";
+  String news ="";
   Navigation finder = navigation;
   while (finder != null){
-        System.err.println(finder.getName() + " "+ finder.getProperties());
+        //System.err.println(finder.getName() + " "+ finder.getProperties());
 	if (finder.getProperty("nodemanager") != null){
 		String nodemanager = finder.getProperty("nodemanager");
 		if (nodemanager.equals("maps")){
@@ -26,7 +27,11 @@ page import="java.io.*"%><%
 		}
 		if (nodemanager.equals("episodes")){
 			episodes = finder.getProperty("number");
-		        System.err.println("episodes  = " + episodes);
+		        //System.err.println("episodes  = " + episodes);
+		}
+		if (nodemanager.equals("news")){
+			news = finder.getProperty("number");
+		        System.err.println("news  = " + news);
 		}
 		if (nodemanager.equals("items")){
 			items = finder.getProperty("number");

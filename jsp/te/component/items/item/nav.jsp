@@ -1,4 +1,4 @@
-<%@include file="../../include.jsp"%><% 
+<%@include file="../../../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
 %>
 <div class="content">

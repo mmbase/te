@@ -4,7 +4,11 @@
 	 //StringWriter sw = new StringWriter();
 	 //PrintWriter pw = new PrintWriter(sw);
 %>
+<% if (container instanceof Template) { %>
+<table width="100%">
+<% } else { %>
 <table>
+<% } %>
 <% for (int x = 0 ; x < components.size(); x++) {%>
 <tr>
   <td>

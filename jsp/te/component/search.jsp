@@ -6,7 +6,11 @@
   String restrict=""; // facade.getEngineURL() + mapsNavigation.getFullURLString() +  "/";
 %>
 <mm:import externid="site">programmas</mm:import>
-<mm:import externid="words">vpro</mm:import>
+<mm:import externid="words"/>
 
+<mm:present referid="words">
 <mm:include page="/SearchServlet" referids="site,words" />
-
+</mm:present>
+<mm:notpresent referid="words">
+U kunt hier zoeken
+</mm:notpresent>

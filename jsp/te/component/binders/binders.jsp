@@ -2,19 +2,17 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<mm:node number="<%= binders %>">
+<mm:node number="<%= maps %>">
+<mm:relatednodes type="binders">
 <div class="content">
-	<mm:related path="images,categories" fields="images.number,categories.name" constraints="categories.name='logo'">
-		<mm:node element="images">
-		   <img src="<mm:image template="s(200x200)"/>">
-		</mm:node>
-	</mm:related>
-
-	<te:field  name="title"/>
+	<mm:field name="number" jspvar="field">
+	<a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/dossiers/" + field%>/">
+	</mm:field>
+	<te:field  name="title"/></a>
 	<te:field  name="subtitle"/>
-	<te:field  name="intro"/>
-	<te:field  name="html(body)"/>
 </div>
+<br>
+</mm:relatednodes>
 </mm:node>
 </mm:cloud>
 

@@ -1,9 +1,9 @@
-<%@include file="../../include.jsp"%><% 
+<%@include file="../../../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
 <div>
-	<mm:node number="<%= binders %>">
+	<mm:node number="<%= episodes %>">
 		<mm:relatednodes type="audiofragments">
 			<mm:first>audio:<br></mm:first>
 			<mm:field name="number"/> <BR>
@@ -25,11 +25,6 @@
 		<mm:relatednodes type="binders">
 			<mm:first>Dossiers:</mm:first>
 			<a href="../../dossiers/<mm:field name="number"/>/"><mm:field name="title"/></a>
-			<mm:last><hr></mm:last>
-		</mm:relatednodes>
-		<mm:relatednodes type="episodes">
-			<mm:first>Afleveringen:</mm:first>
-			<a href="../../afleveringen/<mm:field name="number"/>/"><mm:field name="title"/></a>
 			<mm:last><hr></mm:last>
 		</mm:relatednodes>
 	</mm:node>

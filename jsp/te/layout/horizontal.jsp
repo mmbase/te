@@ -1,8 +1,6 @@
 <%@include file="../include.jsp"%><% 
 	 Container container = (Container)request.getAttribute("container");
 	 Components components= container.getComponents();
-	 //StringWriter sw = new StringWriter();
-	 //PrintWriter pw = new PrintWriter(sw);
 %>
 <table>
 <tr>
@@ -12,7 +10,7 @@
 	 	Component component = components.getComponent(x);
 		component.render(wb,new PrintWriter(out));
 	 %>
-	</td>
+  </td>
 <% } %>
 </tr>
 </table>
