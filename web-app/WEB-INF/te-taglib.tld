@@ -17,7 +17,7 @@
 <info> </info>
 <tag>
 <name>field</name>
-<tagclass>te.jsp.taglib.TeFieldTag</tagclass>
+<tagclass>org.mmbase.applications.te.jsp.taglib.TeFieldTag</tagclass>
 <teiclass>org.mmbase.bridge.jsp.taglib.WriterTEI</teiclass>
 <info>
       Gets the field `name' from node `node' (can also be list).
@@ -71,7 +71,7 @@
 
 <tag>
 	<name>url</name>
-	<tagclass>te.jsp.taglib.TeUrlTag</tagclass>
+	<tagclass>org.mmbase.applications.te.jsp.taglib.TeUrlTag</tagclass>
 	<info>todo </info>
 	<attribute>
 		<name>name</name>
