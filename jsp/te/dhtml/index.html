@@ -4,7 +4,7 @@
 		  <body>
  <style>
 .entrypoint {
-		  width: 200;
+		  width: 200px;
 		  height: 100px;
 		  background-color: grey;
 }
@@ -14,20 +14,25 @@
 .content {
 		  border: 3px solid;
 		  position: absolute;
-		  float: left;
 		  width: 200px;
+		  height: 100px;
+		  float: left;
 }
 
  </style>
 <SCRIPT LANGUAGE="JavaScript">
 <!--
 var currentDiv = null;
-var move = false;;
+var move = false;
 
+var resize= false;
 var eventStartX =0;
 var eventStartY =0;
 var currentDivStartX =0;
 var currentDivStartY =0;
+
+var currentDivSizeX =0;
+var currentDivSizeY =0;
 
 var dropTarget = null;
 function mouseDown(e) {
@@ -51,6 +56,18 @@ function getObjectPosX(obj) {
 		  return obj.offsetLeft ;
 	}
 	return obj.x; 
+}
+
+function getObjectSizeX(obj) { 
+   return obj.offsetWidth;
+	//return obj.style.width; 
+	//	  if (obj.width) { 
+	//				 return obj.width ;
+	//}
+}
+
+function getObjectSizeY(obj) { 
+   return obj.offsetHeight;
 }
 
 function getObjectPosY(obj) { 
@@ -85,6 +102,16 @@ function setObjectPos(element,posx,posy){
 					  }
 }
 
+function setObjectSize(element,x,y){
+					  if (element.width){
+					     element.width =   x;
+						  element.height = y;
+					  } else {
+					  element.style.width =  x;
+					   element.style.height =  y;
+					  }
+}
+
 
 
 function mouseUp(e) {
@@ -112,7 +139,11 @@ function mouseMove(e) {
 					  var xxx = document.getElementById("monitor2");
 					  xxx.innerHTML ="div(x,y)(" + divx + "," + divy + ")";;
 
-					  setObjectPos(currentDiv,currentDivStartX + divx,currentDivStartY + divy);
+					  if (resize){
+					      setObjectSize(currentDiv,currentDivSizeX + divx,currentDivSizeY + divy);
+					  } else {
+					     setObjectPos(currentDiv,currentDivStartX + divx,currentDivStartY + divy);
+			        }
 					  /**
 					  if (currentDiv.pixelLeft){
 					     currentDiv.pixelLeft =   currentDivStartX + divx;
@@ -138,8 +169,11 @@ function select(e){
 		currentDiv = e;
 		currentDivStartX = getObjectPosX(currentDiv); 
 		currentDivStartY = getObjectPosY(currentDiv); 
+		currentDivSizeX = getObjectSizeX(currentDiv); 
+		currentDivSizeY = getObjectSizeY(currentDiv); 
+
 		var element = document.getElementById("monitor");
-		element.innerHTML ="selected"  + e +  " " + currentDivStartX + " " + currentDivStartY;
+		element.innerHTML ="selected"  + e +  "(x,y)(" + currentDivStartX + "," + currentDivStartY + ")  (widht,height)(" + currentDivSizeX + "," + currentDivSizeY + ")";
     }
 }
 function unselect(){
@@ -191,27 +225,7 @@ function unselectdrop(){
 																			 <p>
 																			 VPRO's wekelijks cultuurmagazine R.A.M keert terug in het tv seizoen 2003-2004 (haar tweede), met een nieuw uitzendtijdstip en een bijzondere openingsreeks.
 																			 </p>
-														</td></tr>
-											</table>
-								</div>
-								<br>
-								<div class="content" onMouseOver="select(this);" onMouseOut="unselect();">
-										  	<table>
-													  	<tr><th class="header">news</th></tr>
-														<tr><td>
-																			 <b>Duits ontwerp op Ground Zero</b>
-																			 <p>Woensdag 26 februari hebben de autoriteiten in New York besloten dat het ontwerp van de Duitse architect Libeskind het op 11 september ...</p>
-														</td></tr>
-											</table>
-								</div>
-								<br>
-								<div class="content" onMouseOver="select(this);" onMouseOut="unselect();">
-										  	<table>
-													  	<tr><th class="header">news</th></tr>
-														<tr><td>
-																			 <b>Raad de Aanvangs Melodie - kwis</b>
-																			 <p>R.A.M begint elke aflevering na de intro met een muziekje. Terwijl de camera over de entree-trap van het VPRO-gebouw zwe ... </p>
-														</td></tr>
+																			 <tr><td> <img src="pics/resize.png" onMouseOver="resize = true" onMouseOut="resize= false" align="right" width="16" height="16"></td></tr>
 											</table>
 								</div>
 					 </td>
