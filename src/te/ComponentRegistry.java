@@ -12,4 +12,5 @@ package te;
 /**
  * @author Kees Jongenburger
  */
-public class ComponentRegistry {}
+public class ComponentRegistry {
+}

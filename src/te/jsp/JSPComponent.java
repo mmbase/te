@@ -21,10 +21,11 @@ import te.util.*;
 /**
  * @author Kees Jongenburger
  */
-public class JSPComponent extends AbstractComponent implements Component {
+public class JSPComponent extends AbstractContainer implements Component {
     private static Logger log = Logging.getLoggerInstance(JSPComponent.class);
     String path = null;
-    
+
+    private boolean mapRenderRelativeToRender = false;
     /**
      * create a new jsp template for a certain path
      */
@@ -33,6 +34,7 @@ public class JSPComponent extends AbstractComponent implements Component {
     }
 
     public void render(WhiteBoard wb, PrintWriter writer) throws ServletException, IOException {
+		log.debug("{"+ path  +"}");
         try {
 
             wb.getHttpServletRequest().setAttribute("component", this);
@@ -50,18 +52,33 @@ public class JSPComponent extends AbstractComponent implements Component {
      * @see te.Template#renderRelative(java.lang.String, te.WhiteBoard, java.io.PrintWriter)
      */
     public void renderRelative(String path, WhiteBoard wb) throws ServletException, IOException {
-        int index = this.path.lastIndexOf(NavigationControl.PATH_SEPARATOR);
-        if (index != -1) {
-            String realPath = this.path.substring(0, index);
-            String theURL = realPath + NavigationControl.PATH_SEPARATOR + path;
-            log.debug("the url that will be renderd is : " + theURL);
+    	log.debug("{"+ path +" " + mapRenderRelativeToRender);
+        if (mapRenderRelativeToRender) {
+        	
+        	render(wb,wb.getHttpServletResponse().getWriter());
+        } else {
 
-            //RequestWrapper req = new RequestWrapper(wb.getHttpServletRequest());
-            //ResponseWrapper resp = new ResponseWrapper(wb.getHttpServletResponse(), writer);
-            //RequestDispatcher requestDispatcher = wb.getHttpServletRequest().getRequestDispatcher(path);
-            //requestDispatcher.forward(req, resp);
-            wb.getHttpServletRequest().getRequestDispatcher(theURL).forward(wb.getHttpServletRequest(), wb.getHttpServletResponse());
+            int index = this.path.lastIndexOf(NavigationControl.PATH_SEPARATOR);
+            if (index != -1) {
+                String realPath = this.path.substring(0, index);
+                String theURL = realPath + NavigationControl.PATH_SEPARATOR + path;
+                log.debug("the url that will be renderd is : " + theURL);
+                wb.getHttpServletRequest().getRequestDispatcher(theURL).forward(wb.getHttpServletRequest(), wb.getHttpServletResponse());
+            }
         }
-
     }
+    /**
+     * @return
+     */
+    public boolean isMapRenderRelativeToRender() {
+        return mapRenderRelativeToRender;
+    }
+
+    /**
+     * @param b
+     */
+    public void setMapRenderRelativeToRender(boolean b) {
+        mapRenderRelativeToRender = b;
+    }
+
 }

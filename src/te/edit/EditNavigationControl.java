@@ -32,7 +32,9 @@ public class EditNavigationControl extends NavigationControl {
 
     public Template getTemplate(Navigation navigation) {
     	if (navigation.getProperty("template") != null){
-			return new JSPTemplate(navigation.getProperty("template"),null);
+			JSPTemplate t =  new JSPTemplate(navigation.getProperty("template"),null);
+			t.setMapRenderRelativeToRender(true);
+			return t;
     	}
         return new EditTemplate();
         //return new JSPTemplate("/te/template/notimplemented.jsp",null);

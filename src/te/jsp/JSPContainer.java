@@ -19,20 +19,19 @@ import te.*;
 /**
  * @author Kees Jongenburger
  */
-public class JSPContainer extends AbstractContainer implements Container {
-    JSPComponent component;
-    
+public class JSPContainer extends JSPComponent implements Container {
+        
     public JSPContainer(String path, LayoutManager layoutManager) {
-        component = new JSPComponent(path);
+    	super(path);
         setLayoutManager(layoutManager);
     }
 
     public void render(WhiteBoard wb, PrintWriter writer) throws ServletException, IOException {
         wb.getHttpServletRequest().setAttribute("container", this);
-        component.render(wb, writer);
+        super.render(wb, writer);
     }
 
-    public void renderRelative(String path, WhiteBoard wb) throws Exception {
-        component.renderRelative(path, wb);
+    public void renderRelative(String path, WhiteBoard wb) throws ServletException, IOException {
+        super.renderRelative(path, wb);
     }
 }
