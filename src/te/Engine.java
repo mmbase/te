@@ -24,7 +24,7 @@ import org.mmbase.util.logging.*;
  */
 public class Engine extends BridgeServlet {
 
-    private static String engineName = "engine";
+    private static String engineName = "programma";
     //every time a new EngineFacade is created a the counter is increased 
     private static long creationCounter = 0;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE template SYSTEM "template.dtd">
-<template name="default" layout="default" description="voorpagina inhoude de afleveringen van de week">
+<template name="programmasites" layout="default" description="voorpagina inhoude de afleveringen van de week">
   <component name="page_head"/>
   <component name="logo"/>
   <component name="navigation"/>

@@ -114,9 +114,9 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
 
         //find back the programmasite via the hash and select the right frontpage template
         Node siteNode = (Node) siteMapsHash.get("" + node.getNumber());
-        Node templateNode = templateCloud.getNode(siteNode.getIntValue("frontpage"));
-        st.setProperty("type", templateNode.getStringValue("name"));
-        log.debug("creating a new Navigation for " + path.current() + " result style ={"+templateNode.getStringValue("name") +"} \n" + st.toString());
+        //Node templateNode = templateCloud.getNode(siteNode.getIntValue("frontpage"));
+        st.setProperty("type", siteNode.getStringValue("frontpage"));
+        log.debug("creating a new Navigation for " + path.current() + " result style ={"+siteNode.getStringValue("name") +"} \n" + st.toString());
         st.setProperty("tesites","" +siteNode.getNumber());
         getParentNavigation().addChild(st);
         return st.resolveNavigation(path);

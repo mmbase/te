@@ -22,12 +22,12 @@ import org.mmbase.bridge.*;
  * @author keesj
  * @version $Id$
  */
-public class ProgrammaSiteTemplate extends JSPTemplate {
-    private static Logger log = Logging.getLoggerInstance(ProgrammaSiteMMBaseNavigation.class);
+public class ProgrammaSiteTemplate extends JSPTemplate implements Template {
+    private static Logger log = Logging.getLoggerInstance(ProgrammaSiteTemplate.class);
 
     public ProgrammaSiteTemplate(String path, LayoutManager layoutManager) {
         super(path, layoutManager);
-        log.debug("new programma site");
+        log.debug("new programma site template");
     }
 
     public void render(WhiteBoard wb, PrintWriter writer) throws ServletException, IOException {
@@ -72,5 +72,11 @@ public class ProgrammaSiteTemplate extends JSPTemplate {
             }
         }
         super.renderRelative(path, wb);
+    }
+    /* (non-Javadoc)
+     * @see java.lang.Object#clone()
+     */
+    public Object clone() {
+    	return new ProgrammaSiteTemplate(path,getLayoutManager());
     }
 }

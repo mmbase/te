@@ -37,6 +37,7 @@ public class ProgrammasitesNavigationControl extends NavigationControl implement
 
     public Template getTemplate(Navigation navigation) {
         if (navigation.getProperty("template") != null) {
+        	
             JSPTemplate t = new JSPTemplate(navigation.getProperty("template"), null);
             t.setMapRenderRelativeToRender(true);
             return t;
