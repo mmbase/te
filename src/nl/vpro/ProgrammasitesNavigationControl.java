@@ -21,12 +21,12 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
     public ProgrammasitesNavigationControl() {
         Cloud cloud = ContextProvider.getDefaultCloudContext().getCloud("mmbase");
         NodeManager nodeManager = cloud.getNodeManager("maps");
-        NodeList list = nodeManager.getList("number =3302425 ", null, null);
+        NodeList list = nodeManager.getList("number =3302425 or number = 8884132", null, null);
         navigation = new StaticNavigation("1", "root");
         for (int x = 0; x < list.size(); x++) {
             navigation.addChild(new MapsNavigation(list.getNode(x)));
         }
-
+        
         //navigation = new StaticNavigation("3302425", "De Wandelende Tak");
         navigation.setNavigationControl(this);
     }
@@ -53,10 +53,14 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
         t.addComponent(new JSPComponent("/te/component/page_head.jsp"), "page_head");
         //add the navigation
         t.addComponent(new ProgrammaSiteNavigationComponent(), "navigation");
+
+        //create a container for the "content" part of the site
         Container container = new JSPContainer("/te/container/default.jsp", new JSPLayoutManager("/te/layout/horizontal.jsp"));
+        
         container.addComponent(new JSPComponent("/te/component/maps.jsp"), "maps intro");
-        container.addComponent(new JSPContainer("/te/container/episodes.jsp",new JSPLayoutManager("/te/layout/vertical.jsp")), "episodes");
+        container.addComponent(new JSPContainer("/te/container/episodes.jsp", new JSPLayoutManager("/te/layout/vertical.jsp")), "episodes");
         container.addComponent(new JSPComponent("/te/component/related_news.jsp"), "news");
+
         t.addComponent(container);
         return t;
     }
