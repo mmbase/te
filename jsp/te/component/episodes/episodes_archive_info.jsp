@@ -12,11 +12,18 @@
 			<te:field name="subtitle"/>
 			<te:field name="intro"/>
 			<te:field name="body"/>
+			
 			<mm:relatednodes type="programs">
+				<mm:first><br>Afleveringen selecteren:<br>
+					<mm:isempty referid="programs">Geen selectie</mm:isempty>
+					<mm:isnotempty referid="programs">
+				                <a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>">Alle afleveringen zien</a>
+</mm:isnotempty>
+                                </mm:first>
 				<div class="programs">
 				<mm:field name="number">
 					<mm:compare value="$programs">
-						--<te:field name="title"/>
+						<div class="title">--<mm:field name="title"/></div>
 					</mm:compare>
 					<mm:compare value="$programs" inverse="true">
 				                <a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>?programs=<mm:field name="number"/>"><te:field name="title"/></a>

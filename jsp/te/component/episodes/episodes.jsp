@@ -16,7 +16,6 @@
 	constraintsBuffer.append(" ");
 	constraintsBuffer.append("mmevents.start < ");
 	constraintsBuffer.append( (System.currentTimeMillis() / 1000));
-	String constraints = constraintsBuffer.toString();
 	int max =20;
 	String offsetString = request.getParameter("offset");
 	int offset =0;
@@ -27,9 +26,10 @@
 	if (programs != null){
 		try {   //parse.. for invalid data
 			Integer.parseInt(programs);
-			constraintsBuffer.append(" programs.number = " + Integer.parseInt(programs) + " ");
+			constraintsBuffer.append(" AND programs.number = " + Integer.parseInt(programs) + " ");
 		} catch (Exception e){};
 	}
+	String constraints = constraintsBuffer.toString();
 %>
 <mm:related 
 	path="programs,episodes,bcastrel,mmevents"

@@ -16,9 +16,9 @@
 		<%-- get the medium of the maps (program), bcastrel only contains a number (1,2,3 if 4) showing the channel --%>
 		<%-- the medium is stored in the maps object so first select the maps object , then display the channel --%>
 		<mm:node referid="mapsid">
-			<mm:field name="medium" id="medium" write="false">
-				<mm:compare referid="medium" value="1"><%-- TV? --%>Nederland</mm:compare>
-				<mm:compare referid="medium" value="2"><%-- RADIO --%>Radio</mm:compare>
+			<mm:field name="medium" write="false">
+				<mm:compare value="1"><%-- TV? --%>Nederland</mm:compare>
+				<mm:compare value="2"><%-- RADIO --%>Radio</mm:compare>
 			</mm:field>
 		</mm:node>
 		<mm:node element="bcastrel">
