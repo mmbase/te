@@ -30,6 +30,7 @@ public class ProgrammaSiteNavigationComponent extends JSPComponent {
      */
     public boolean isShowArchives() {
         return Boolean.getBoolean(getProperty("showArchives"));
+        
     }
 
     /**

@@ -9,15 +9,19 @@ See http://www.MMBase.org/license
 */
 package te.util;
 
-import te.*;
-import minixml.*;
 import java.util.*;
 
+import minixml.*;
+
+import org.mmbase.util.logging.*;
+
+import te.*;
 /**
  * @author keesj
  * @version $Id$
  */
 public class XMLStorage {
+    private static Logger log = Logging.getLoggerInstance(XMLStorage.class);
 
     public String componentToString(Component c) {
         return componentToXML(c).toString();
@@ -57,8 +61,48 @@ public class XMLStorage {
         }
         return xmle;
     }
-    
-    public String layoutManagerToString(LayoutManager lom){
-    	return "";
+
+    public Component StringToComponent(String data) {
+        XMLElement xmle = new XMLElement();
+        xmle.parseString(data);
+        return XMLToComponent(xmle);
+    }
+
+    public Component XMLToComponent(XMLElement xmle) {
+        ComponentRegistry reg = Engine.getFacade().getComponentRegistry();
+        Component retval = null;
+        if (xmle.getTagName().equals("template")) {
+            Template t = reg.getTemplate(xmle.getProperty("name"));
+            if (xmle.getProperty("layout") != null) {
+                String layout = xmle.getProperty("layout");
+                t.setLayoutManager(reg.getLayoutManager(layout));
+            }
+            retval = t;
+        } else if (xmle.getTagName().equals("container")) {
+           Container c = reg.getContainer(xmle.getProperty("name"));
+            if (xmle.getProperty("layout") != null) {
+                String layout = xmle.getProperty("layout");
+                c.setLayoutManager(reg.getLayoutManager(layout));
+            }
+            retval = c;
+        } else if (xmle.getTagName().equals("component")) {
+            retval = reg.getComponent(xmle.getProperty("name"));
+        } else {
+            log.error("unknown subtab " + xmle.getTagName());
+            return null;
+        }
+        for (int x =0 ; x < xmle.countChildren(); x++){
+        	XMLElement child = xmle.getChildAt(x);
+        	if (child.getTagName().equals("property")){
+        		retval.setProperty(child.getProperty("name"),child.getContents());
+        	} else if (retval instanceof Container) {
+        		Container cont = (Container)retval;
+        		Component comp = XMLToComponent(child);
+        		if (comp != null){
+        			cont.addComponent(comp); 
+        		}
+        	}
+        }
+        return retval;
     }
 }

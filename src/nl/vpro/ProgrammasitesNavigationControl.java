@@ -13,6 +13,9 @@ import org.mmbase.bridge.*;
 
 import te.*;
 import te.jsp.*;
+import te.util.*;
+
+import java.io.*;
 /**
  * @author Kees Jongenburger
  */
@@ -43,6 +46,23 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
             return t;
         }
 
+		XMLStorage store = new XMLStorage();
+		
+        BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("episodeshomepage.xml")));
+        StringWriter sw = new StringWriter();
+        String data = null;
+        try {
+            while ((data = br.readLine()) != null) {
+                sw.write(data);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("can not load xml");
+        }
+        String xmlData = sw.toString();
+		
+		Component c = store.StringToComponent(xmlData);
+        return (Template)c;
+        /*
         Facade facade = Engine.getFacade();
         ComponentRegistry reg = facade.getComponentRegistry();
 
@@ -57,6 +77,7 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
         container.addComponent(reg.getComponent("related_news"), "news");
         main.addComponent(container);
         return main;
+        */
     }
-    
+
 }

@@ -52,6 +52,7 @@ public class ComponentRegistry {
         } catch (CloneNotSupportedException e) {
             log.error("component " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
+        log.warn("component {"+ name +"} is not registerd");
         return null;
     }
 
@@ -61,6 +62,7 @@ public class ComponentRegistry {
         } catch (CloneNotSupportedException e) {
             log.error("container " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
+		log.warn("container {"+ name +"} is not registerd");
         return null;
     }
 
@@ -69,6 +71,10 @@ public class ComponentRegistry {
      */
     public LayoutManagers getLayoutManagers() {
         return layoutManagers;
+    }
+    
+    public LayoutManager getLayoutManager(String name){
+    	return layoutManagers.getLayoutManagerByName(name);
     }
 
     /**
@@ -80,6 +86,7 @@ public class ComponentRegistry {
         } catch (CloneNotSupportedException e) {
             log.error("template " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
+		log.warn("template {"+ name +"} is not registerd");
         return null;
 
     }
