@@ -15,7 +15,6 @@ import javax.servlet.*;
 
 import org.mmbase.util.logging.*;
 
-import java.util.*;
 import te.*;
 import te.util.*;
 
