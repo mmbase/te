@@ -7,7 +7,7 @@ The license (Mozilla version 1.0) can be read at the MMBase site.
 See http://www.MMBase.org/license
 
 */
-package nl.vpro;
+package nl.vpro.mmbase.applications.te;
 
 import java.io.*;
 import java.util.List;

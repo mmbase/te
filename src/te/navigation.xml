@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE navigation SYSTEM "navigation.dtd">
 <navigation name="sites" id="1" visible="false">
-  <entrypoint class="nl.vpro.ProgrammasitesNavigationControl">
-    <navigationparam class="nl.vpro.ProgrammaSiteMMBaseNavigation" type="maps" field="title">
+  <entrypoint class="nl.vpro.mmbase.applications.te.ProgrammasitesNavigationControl">
+    <navigationparam class="nl.vpro.mmbase.applications.te.ProgrammaSiteMMBaseNavigation" type="maps" field="title">
       <property name="type">episodeshomepage</property>
       <navigation name="edit" id="edit">
         <property name="template">/te/edit/index.jsp</property>
