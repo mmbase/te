@@ -50,6 +50,7 @@ public interface Navigation extends NavigationResolver {
     public Navigations getChildNavigations();
 
     public Navigation addChild(Navigation navigation);
+    public Navigation addParamChild(Navigation navigation);
     /**
      * @return the parent navigation of the component
      */

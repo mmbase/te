@@ -48,7 +48,7 @@ public class XMLNavigationControl extends NavigationControl {
 
     public Template getTemplate(Navigation navigation) {
         NavigationControl control = navigation.getNavigationControl();
-        
+
         if (navigation.getProperty("template") != null) {
             JSPTemplate t = new JSPTemplate(navigation.getProperty("template"), null);
             t.setMapRenderRelativeToRender(true);
@@ -59,6 +59,18 @@ public class XMLNavigationControl extends NavigationControl {
             return new JSPTemplate("/te/index.jsp?id=" + navigation.getID(), null);
         } else {
             return control.getTemplate(navigation);
+        }
+    }
+
+    public static void main(String[] argv) {
+        Logging.configure("/home/keesj/mmsite/WEB-INF/config/log/log.xml");
+        XMLNavigationControl c = new XMLNavigationControl();
+        c.getNavigation();
+        Navigation nav = c.resolveNavigation(new Path("de_wandelende_tak"));
+		//Navigation nav = c.resolveNavigation(new Path("admin"));
+        if (nav != null) {
+            System.err.println(nav.getFullURLString());
+        } else {
         }
     }
 }

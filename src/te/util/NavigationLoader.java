@@ -34,26 +34,50 @@ public abstract class NavigationLoader {
     }
 
     private static Navigation createNavigation(Navigation parent, XMLElement xmle) {
-    	Navigation retval  = null;
-        if (xmle.getTagName().equals("entrypoint")) {
+        Navigation retval = null;
+        if (xmle.getTagName().equals("navigationparam")) {
+			String className = xmle.getProperty("class");
+			Class paramClass;
+			try {
+				paramClass = Class.forName(className);
+				retval = (Navigation) paramClass.newInstance();
+				if (retval instanceof ParamNavigation){
+					((ParamNavigation)retval).setConfig(xmle.toString());
+				}
+			} catch (ClassNotFoundException e) {
+				log.warn("the xml entry " + xmle + " does not contain a valid class\n" + Logging.stackTrace(e));
+				return null;
+			} catch (InstantiationException e) {
+				log.warn(Logging.stackTrace(e));
+				return null;
+			} catch (IllegalAccessException e) {
+				log.warn(Logging.stackTrace(e));
+				return null;
+			} catch (RuntimeException e) {
+				log.warn("error while loading entrypoint {" + className + "} the error was " + e.getMessage() + " : stacktrace " + Logging.stackTrace(e));
+				return null;
+			}
+				 
+        } else if (xmle.getTagName().equals("entrypoint")) {
             String className = xmle.getProperty("class");
             Class entryClass;
             try {
                 entryClass = Class.forName(className);
                 NavigationControl control = (NavigationControl) entryClass.newInstance();
-                retval= control.getNavigation();
+                retval = control.getNavigation();
+                return retval; // we do not need to parse more content
             } catch (ClassNotFoundException e) {
                 log.warn("the xml entry " + xmle + " does not contain a valid class\n" + Logging.stackTrace(e));
                 return null;
             } catch (InstantiationException e) {
                 log.warn(Logging.stackTrace(e));
-				return null;
+                return null;
             } catch (IllegalAccessException e) {
                 log.warn(Logging.stackTrace(e));
-				return null;
+                return null;
             } catch (RuntimeException e) {
                 log.warn("error while loading entrypoint {" + className + "} the error was " + e.getMessage() + " : stacktrace " + Logging.stackTrace(e));
-				return null;
+                return null;
             }
         } else {
             retval = new StaticNavigation(xmle.getProperty("id"), xmle.getProperty("name"));
@@ -61,6 +85,7 @@ public abstract class NavigationLoader {
                 retval.setVisible(false);
             }
         }
+
         for (int x = 0; x < xmle.countChildren(); x++) {
             XMLElement child = xmle.getChildAt(x);
             if (child.getTagName().equals("navigation")) {
@@ -72,6 +97,10 @@ public abstract class NavigationLoader {
                 }
             } else if (child.getTagName().equals("property")) {
                 retval.setProperty(child.getProperty("name"), child.getContents());
+            } else if (child.getTagName().equals("navigationparam")) {
+                retval.addParamChild(createNavigation(retval, xmle.getChildAt(x)));
+            } else {
+                log.warn("unknown subtag" + child);
             }
         }
         return retval;

@@ -25,6 +25,7 @@ public abstract class AbstractNavigation implements Navigation {
     boolean visible = true;
     NavigationControl navigationControl;
     Navigations childNavigation = new Navigations();
+    Navigations paramNavigations = new Navigations();
     String guiName = null;
     public AbstractNavigation() {
 
@@ -133,10 +134,20 @@ public abstract class AbstractNavigation implements Navigation {
             for (int x = 0; x < navs.size(); x++) {
                 Navigation resolved = navs.getNavigation(x).resolveNavigation(path);
                 if (resolved != null) {
-                    log.debug("nav " + getName() + " child navigation returned true" + resolved.getName());
+                    log.debug("nav " + getName() + " child navigation returned true " + resolved.getName());
                     return resolved;
                 }
             }
+			log.debug("nav " + getName() + " not visible trying param navigations");
+            navs = paramNavigations;
+            for (int x = 0; x < navs.size(); x++) {
+                Navigation resolved = navs.getNavigation(x).resolveNavigation(path);
+                if (resolved != null) {
+                    log.debug("nav " + getName() + " child navigation returned true " + resolved.getName());
+                    return resolved;
+                }
+            }
+
             //the current navigaiton was not visible and the child navigations did not return a valid navigation
             //so te retrun null
             return null;
@@ -153,6 +164,15 @@ public abstract class AbstractNavigation implements Navigation {
                     Navigations navs = getChildNavigations();
                     for (int x = 0; x < navs.size(); x++) {
                         Navigation theChild = navs.getNavigation(x);
+                        Navigation resolved = theChild.resolveNavigation(path);
+                        if (resolved != null) {
+                            return resolved;
+                        }
+                    }
+                    log.debug("resolve via params" + path.current());
+                    Navigations params = getChildNavigations();
+                    for (int x = 0; x < params.size(); x++) {
+                        Navigation theChild = params.getNavigation(x);
                         Navigation resolved = theChild.resolveNavigation(path);
                         if (resolved != null) {
                             return resolved;
@@ -185,8 +205,15 @@ public abstract class AbstractNavigation implements Navigation {
         }
         return guiName;
     }
-    
-    public void setGUIName(String guiName){
-    	this.guiName = guiName;
+
+    public void setGUIName(String guiName) {
+        this.guiName = guiName;
+    }
+
+    public Navigation addParamChild(Navigation navigation) {
+
+        navigation.setParentNavigation(this);
+        paramNavigations.add(navigation);
+        return navigation;
     }
 }

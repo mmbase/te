@@ -25,7 +25,7 @@ public class MapsNavigation extends AbstractNavigation {
     public MapsNavigation(Node node) {
         this.node = node;
         if (node.getStringValue("title").startsWith("Mag")) {
-			setProperty("type", "magazinehomepage");
+            setProperty("type", "magazinehomepage");
         } else if (node.getStringValue("title").startsWith("Madi")) {
             setProperty("type", "weekhomepage");
         } else {
@@ -38,10 +38,9 @@ public class MapsNavigation extends AbstractNavigation {
         addChild(new BindersNavigation());
         addChild(new MagazinesNavigation());
         addChild(new StaticNavigation("search", "Zoeken")).setProperty("type", "searchpage");
-		Navigation edit = addChild(new StaticNavigation("edit", "edit"));
-		edit.setProperty("template", "/te/edit/index.jsp");
-		edit.setVisible(false);
-
+        Navigation edit = addChild(new StaticNavigation("edit", "edit"));
+        edit.setProperty("template", "/te/edit/index.jsp");
+        edit.setVisible(false);
     }
 
     public String getID() {
