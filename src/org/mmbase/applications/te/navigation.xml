@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE navigation SYSTEM "navigation.dtd">
+<navigation name="sites" id="1" visible="false">
+  <entrypoint class="nl.vpro.mmbase.applications.te.ProgrammasitesNavigationControl">
+    <navigationparam class="nl.vpro.mmbase.applications.te.ProgrammaSiteMMBaseNavigation" type="maps" field="title">
+      <property name="type">episodeshomepage</property>
+      <navigation name="edit" id="edit">
+        <property name="template">/te/edit/index.jsp</property>
+        <property name="visible">flase</property>
+      </navigation>
+      <navigation id="episodes" name="Afleveringen">
+        <property name="type">episodespage</property>
+        <navigation name="edit" id="edit">
+          <property name="template">/te/edit/index.jsp</property>
+          <property name="visible">flase</property>
+        </navigation>
+        <navigationparam class="org.mmbase.applications.te.MMBaseNavigation" type="episodes" field="number" guifield="title">
+          <property name="type">episodepage</property>
+            <navigation name="edit" id="edit">
+                <property name="template">/te/edit/index.jsp</property>
+                <property name="visible">flase</property>
+              </navigation>
+          
+          <navigation id="items" name="Items">
+            <navigationparam class="org.mmbase.applications.te.MMBaseNavigation" type="items" field="number" guifield="title">
+              <property name="type">itempage</property>
+              <navigation name="edit" id="edit">
+                <property name="template">/te/edit/index.jsp</property>
+                <property name="visible">flase</property>
+              </navigation>
+            </navigationparam>
+          </navigation>
+        </navigationparam>
+      </navigation>
+      <navigation id="binders" name="Dossiers">
+        <property name="type">binderspage</property>
+        <navigation name="edit" id="edit">
+          <property name="template">/te/edit/index.jsp</property>
+          <property name="visible">flase</property>
+        </navigation>
+        <navigationparam class="org.mmbase.applications.te.MMBaseNavigation" type="binders" field="number" guifield="title">
+          <property name="type">binderpage</property>
+          <navigation name="edit" id="edit">
+            <property name="template">/te/edit/index.jsp</property>
+            <property name="visible">flase</property>
+          </navigation>
+        </navigationparam>
+      </navigation>
+      <navigation id="magazines" name="Artikelen">
+        <property name="type">magazinespage</property>
+        <navigation name="edit" id="edit">
+          <property name="template">/te/edit/index.jsp</property>
+          <property name="visible">flase</property>
+        </navigation>
+        <navigationparam class="org.mmbase.applications.te.MMBaseNavigation" type="news" field="number" guifield="title">
+          <property name="type">newspage</property>
+          <navigation name="edit" id="edit">
+            <property name="template">/te/edit/index.jsp</property>
+            <property name="visible">flase</property>
+          </navigation>
+        </navigationparam>
+      </navigation>
+      <navigation name="Zoeken" id="search">
+        <property name="type">searchpage</property>
+        <property name="visible">flase</property>
+      </navigation>
+          <navigation name="Service info" id="serviceinfo">
+         <property name="visible">flase</property>
+         <navigationparam class="org.mmbase.applications.te.MMBaseNavigation" type="serviceinfo" field="number" guifield="title">
+             <property name="type">serviceinfopage</property>
+             <navigation name="edit" id="edit"><property name="template">/te/edit/index.jsp</property></navigation>
+        </navigationparam>
+    </navigation>
+      
+    </navigationparam>
+
+    
+  </entrypoint>
+  <navigation name="admin" id="admin">
+    <property name="template">/te/admin/index.jsp</property>
+  </navigation>
+</navigation>

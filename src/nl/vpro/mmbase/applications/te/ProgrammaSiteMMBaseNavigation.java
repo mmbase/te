@@ -14,8 +14,8 @@ import java.util.*;
 import org.mmbase.bridge.*;
 import org.mmbase.util.logging.*;
 
-import te.*;
-import te.util.*;
+import org.mmbase.applications.te.*;
+import org.mmbase.applications.te.util.*;
 /**
  * Programma site MMBase navigation
  * @author keesj

@@ -12,13 +12,13 @@ package nl.vpro.mmbase.applications.te;
 import java.io.*;
 import java.util.List;
 
-import minixml.XMLElement;
+import org.mmbase.applications.te.minixml.XMLElement;
 
 import org.mmbase.util.logging.*;
 
-import te.*;
-import te.jsp.JSPTemplate;
-import te.util.*;
+import org.mmbase.applications.te.*;
+import org.mmbase.applications.te.jsp.JSPTemplate;
+import org.mmbase.applications.te.util.*;
 /**
  * @author Kees Jongenburger
  */

@@ -13,8 +13,8 @@ import java.io.*;
 
 import javax.servlet.*;
 
-import te.*;
-import te.jsp.*;
+import org.mmbase.applications.te.*;
+import org.mmbase.applications.te.jsp.*;
 import java.util.*;
 import org.mmbase.util.logging.*;
 import org.mmbase.bridge.*;
