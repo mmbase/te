@@ -36,7 +36,10 @@ function mouseDown(e) {
 		          eventStartX = getEventPosX(e);
 		          eventStartY = getEventPosY(e);
 		          var element = document.getElementById("monitor");
-					 element.innerHTML ="start move window ";
+					    element.innerHTML ="start move window ";
+							if (document.body.style){
+							  document.body.style.cursor = "move";
+			        }
 					 return false;
 		  }
 		  return true;
@@ -91,6 +94,9 @@ function mouseUp(e) {
 					dropTarget.innerHTML = "Drop here";
 					//dropTarget.value = currentDiv.innerHTML;
 			}
+			if (document.body.style){
+				  document.body.style.cursor = "default";
+      }
 		currentDiv = null;
 	   element.innerHTML ="stop move window ";
 
