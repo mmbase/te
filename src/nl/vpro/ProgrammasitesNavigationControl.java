@@ -42,31 +42,21 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
             t.setMapRenderRelativeToRender(true);
             return t;
         }
-        
+
         Facade facade = Engine.getFacade();
         ComponentRegistry reg = facade.getComponentRegistry();
 
         Template main = reg.getTemplate("default");
-        main.addComponent(new JSPComponent("/te/component/page_head.jsp"));
-        main.addComponent(new ProgrammaSiteNavigationComponent(), "navigation");
+        main.addComponent(reg.getComponent("page_head"));
+        main.addComponent(reg.getComponent("navigation"));
 
-        //create a container for the "content" part of the site
         Container container = reg.getContainer("horizontal");
-        String type = navigation.getProperty("type");
-        if (type == null) {
-            type = "frontpage";
-        }
 
-        if (type.equals("frontpage")) {
-            container.addComponent(new JSPComponent("/te/component/maps.jsp"), "maps intro");
-            container.addComponent(new JSPContainer("/te/container/episodes.jsp", new JSPLayoutManager("/te/layout/vertical.jsp", "test", "test")), "episodes");
-            container.addComponent(new JSPComponent("/te/component/related_news.jsp"), "news");
-        } else if (type.equals("episodes")) {
-            container.addComponent(new JSPComponent("/te/component/maps.jsp"), "maps intro");
-            container.addComponent(new JSPComponent("/te/component/maps.jsp"), "maps intro");
-            container.addComponent(new JSPComponent("/te/component/maps.jsp"), "maps intro");
-        }
+        container.addComponent(reg.getComponent("maps"), "maps intro");
+        //container.addComponent(new JSPContainer("/te/container/episodes.jsp", new JSPLayoutManager("/te/layout/vertical.jsp", "test", "test")), "episodes");
+        container.addComponent(reg.getComponent("related_news"), "news");
         main.addComponent(container);
         return main;
     }
+    
 }

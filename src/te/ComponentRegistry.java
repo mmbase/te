@@ -35,39 +35,7 @@ public class ComponentRegistry {
         templates = new Templates();
         containers = new Containers();
         layoutManagers = new LayoutManagers();
-
         updateRegistry();
-        //add the default layout managers
-        //LayoutManager defaultLayoutManager = new JSPLayoutManager("/te/layout/default.jsp", "default", "default list layout");
-        //layoutManagers.add(defaultLayoutManager);
-
-        //LayoutManager horizontal = new JSPLayoutManager("/te/layout/horizontal.jsp", "horizontal", "horizontal layout");
-        //layoutManagers.add(horizontal);
-
-        //LayoutManager vertical = new JSPLayoutManager("/te/layout/vertical.jsp", "vertical", "vertical layout");
-        //layoutManagers.add(vertical);
-
-        Container defaultContainer = new JSPContainer("/te/container/default.jsp", layoutManagers.getLayoutManagerByName("horizontal"));
-        defaultContainer.setName("default");
-        defaultContainer.setDescription("default container with horizontal layout");
-        containers.add(defaultContainer);
-
-        Container verticalContainer = new JSPContainer("/te/container/default.jsp", layoutManagers.getLayoutManagerByName("vertical"));
-        verticalContainer.setName("vertical");
-        verticalContainer.setDescription("default container with vertical layout");
-        containers.add(verticalContainer);
-
-        Container horizontalContainer = new JSPContainer("/te/container/default.jsp", layoutManagers.getLayoutManagerByName("horizontal"));
-        horizontalContainer.setName("horizontal");
-        horizontalContainer.setDescription("default container with horizontal layout");
-        containers.add(horizontalContainer);
-
-        //add the default templates
-        Template defaultTemplate = new JSPTemplate("/te/template/default.jsp", layoutManagers.getLayoutManagerByName("default"));
-        defaultTemplate.setName("default");
-        defaultTemplate.setDescription("default tempate using the default layout");
-        templates.add(defaultTemplate);
-
     }
 
     public static ComponentRegistry getInstance() {
@@ -82,8 +50,7 @@ public class ComponentRegistry {
         try {
             return (Component) components.getComponentByName(name).clone();
         } catch (CloneNotSupportedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.error("component " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
         return null;
     }
@@ -92,8 +59,7 @@ public class ComponentRegistry {
         try {
             return (Container) containers.getContainerByName(name).clone();
         } catch (CloneNotSupportedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.error("container " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
         return null;
     }
@@ -112,8 +78,7 @@ public class ComponentRegistry {
         try {
             return (Template) templates.getTemplateByName(name).clone();
         } catch (CloneNotSupportedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.error("template " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
         return null;
 
@@ -138,7 +103,12 @@ public class ComponentRegistry {
 
         for (int x = 0; x < xmle.countChildren(); x++) {
             XMLElement child = xmle.getChildAt(x);
+
+            //layout manager
             if (child.getTagName().equals("layoutManager")) {
+                //<layoutManager class="te.jsp.JSPLayoutManager" name="default" description="default list layout">
+                //	<property name="jspPage">/te/layout/default.jsp</property>
+                //</layoutManager>
                 if (child.getProperty("class") != null || !child.getProperty("class").equals("te.jsp.JSPLayoutManager")) {
                     log.error("layoutManager class not te.jsp.LayoutManager");
                 }
@@ -167,8 +137,137 @@ public class ComponentRegistry {
                         log.error("unknown property of layout manager");
                     }
                 }
+            } else if (child.getTagName().equals("container")) {
+                //<container class="te.jsp.JSPContainer" path="/te/container/default.jsp" name="horizontal" description="a container with a horizontal layout" layout="horizontal"/>
+                String className = child.getProperty("class");
+                String name = child.getProperty("name");
+                String path = child.getProperty("path");
+                String description = child.getProperty("description");
+                String layout = child.getProperty("layout");
+                if (!className.equals("te.jsp.JSPContainer")) {
+                    log.error("currently impossible to load containers that are not te.jsp.JSPContainer :" + child);
+                    continue;
+                }
+                if (className == null || name == null || path == null || description == null || layout == null) {
+                    log.error("container can not be loaded because some parameters are missing(className,name,path,description,layout)(" + className + "," + name + "," + path + "," + description + "," + layout + ")");
+                    continue;
+                }
+                Container c = containers.getContainerByName(name);
+                if (c != null) {
+                    log.debug("updating container");
+                    containers.remove(c);
+                }
+                LayoutManager lom = layoutManagers.getLayoutManagerByName(layout);
+                if (lom == null) {
+                    log.error("while loading the layout manager for a container the layout manager(" + layout + ") was not registered :" + child);
+                    continue;
+                }
+                log.debug("adding container with name " + name);
+                c = new JSPContainer(path, lom);
+                c.setName(name);
+                c.setDescription(description);
+                containers.add(c);
+            } else if (child.getTagName().equals("template")) {
+                String className = child.getProperty("class");
+                String name = child.getProperty("name");
+                String path = child.getProperty("path");
+                String description = child.getProperty("description");
+                String layout = child.getProperty("layout");
+                if (!className.equals("te.jsp.JSPTemplate")) {
+                    log.error("currently impossible to load templates that are not te.jsp.JSPTemplate :" + child);
+                    continue;
+                }
+                if (className == null || name == null || path == null || description == null || layout == null) {
+                    log.error("template can not be loaded because some parameters are missing(className,name,path,description,layout)(" + className + "," + name + "," + path + "," + description + "," + layout + ")");
+                    continue;
+                }
+
+                Template t = templates.getTemplateByName(name);
+                if (t != null) {
+                    log.debug("updating template");
+                    templates.remove(t);
+                }
+
+                LayoutManager lom = layoutManagers.getLayoutManagerByName(layout);
+                if (lom == null) {
+                    log.error("while loading the layout manager for a template the layout manager(" + layout + ") was not registered :" + child);
+                    continue;
+                }
+
+                log.debug("adding template with name " + name);
+                t = new JSPTemplate(path, lom);
+                t.setName(name);
+                t.setDescription(description);
+                templates.add(t);
+            } else if (child.getTagName().equals("component")) {
+                String className = child.getProperty("class");
+                String name = child.getProperty("name");
+                String path = child.getProperty("path");
+                String description = child.getProperty("description");
+                if (className == null || name == null || description == null) {
+                    log.error("component can not be loaded because some parameters are missing(className,name,description)(" + className + "," + name + "," + path + "," + description + ")");
+                    continue;
+                }
+                Component c = components.getComponentByName(name);
+                if (c != null) {
+                    log.debug("replacing component " + name);
+                    components.remove(c);
+                }
+                if (className.equals("te.jsp.JSPComponent")) {
+                    if (path == null) {
+                        log.error("can not create a jsp component for " + child + " attribute path missing");
+                    }
+                    c = new JSPComponent(path);
+                    c.setName(name);
+                    c.setDescription(description);
+                } else {
+                    Class clazz = null;
+                    try {
+                        clazz = Class.forName(className);
+                    } catch (ClassNotFoundException e1) {
+                        log.error("class " + className + " not found, wil not initialize the component ()" + child + "");
+                        continue;
+                    }
+                    try {
+                        Object o = clazz.newInstance();
+                        if (o instanceof Component) {
+                            c = (Component) o;
+                            c.setName(name);
+                            c.setDescription(description);
+
+                            try {
+                                Object cloned = c.clone();
+                                if (!cloned.getClass().getName().equals(clazz.getName())) {
+                                    log.error(
+                                        "The component "
+                                            + name
+                                            + " (class "
+                                            + c.getClass().getName()
+                                            + ") doe supports cloning the the clone method does not return the same object type. reusable component should have a properly implemented clone method. ik will not be added ("
+                                            + child
+                                            + ")");
+                                    continue;
+                                }
+                            } catch (CloneNotSupportedException e3) {
+                                log.error("The component " + name + " (class " + c.getClass().getName() + ") doe not support the encoding and wil not be added");
+                                continue;
+                            }
+                        } else {
+                            log.error(clazz.getName() + "  is does not implement the Component interface. skipping");
+                        }
+                    } catch (InstantiationException e2) {
+                        log.error("class " + name + " can not be instantiated (no empty constructor . skipping?)()" + child + "");
+                        continue;
+                    } catch (IllegalAccessException e2) {
+                        log.error("class " + name + " can not be instantiated (IllegalAccessException)()" + child + "");
+                    }
+
+                }
+                log.debug("adding component with name " + name);
+                components.add(c);
+            } else {
+                log.error("found unknown component in the registry:" + child);
             }
         }
-
     }
 }

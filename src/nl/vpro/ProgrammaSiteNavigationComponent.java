@@ -52,4 +52,13 @@ public class ProgrammaSiteNavigationComponent extends JSPComponent {
     public boolean isShowLogs() {
         return Boolean.getBoolean(getProperty("showLogs"));
     }
+    
+    public Object clone() {
+		ProgrammaSiteNavigationComponent c =  new ProgrammaSiteNavigationComponent();
+		c.setName(getName());
+		c.setProperties(getProperties());
+		c.setDescription(getDescription());
+		return c;
+    	
+    }
 }

@@ -22,7 +22,7 @@ public class EditTemplate extends AbstractContainer implements Template {
     private static Logger log = Logging.getLoggerInstance(EditTemplate.class);
 
     public void render(WhiteBoard wb, PrintWriter writer) throws Exception {
-        // TODO Auto-generated method stub
+        
 
     }
 
@@ -58,8 +58,7 @@ public class EditTemplate extends AbstractContainer implements Template {
             wb.setCurrentNavigation(cacheNav);
         } else {
 
-            //TODO: fix this .. it's all to compilcated
-            log.debug("//TODO: fix this .. it's all to compilcated");
+            
             Template t = navigationToEdit.getTemplate();
             String url1 = mainNavControl.getURLString(navigationToEdit);
 
