@@ -1,4 +1,3 @@
-<config>
 	<!-- to use the engine as servlet use this -->
 	<!--
   <servlet>
@@ -29,4 +28,3 @@
     <taglib-uri>http://www.mmbase.org/te-taglib-1.0</taglib-uri>
     <taglib-location>/WEB-INF/te-taglib.tld</taglib-location>
   </taglib>
-</config>
