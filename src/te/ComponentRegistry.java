@@ -125,8 +125,8 @@ public class ComponentRegistry {
                 //<layoutManager class="te.jsp.JSPLayoutManager" name="default" description="default list layout">
                 //	<property name="jspPage">/te/layout/default.jsp</property>
                 //</layoutManager>
-                if (child.getProperty("class") != null || !child.getProperty("class").equals("te.jsp.JSPLayoutManager")) {
-                    log.error("layoutManager class not te.jsp.JSPLayoutManager" + child.getProperty("class"));
+                if (child.getProperty("class") != null && ! child.getProperty("class").equals("te.jsp.JSPLayoutManager")) {
+                    log.error("layoutManager class not of type  te.jsp.JSPLayoutManager {" + child.getProperty("class")+ "}");
                 }
                 String name = child.getProperty("name");
                 String description = child.getProperty("description");

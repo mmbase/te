@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
 /**
  * @author Kees Jongenburger
  */
-public abstract class NavigationControl {
+public abstract class NavigationControl implements NavigationResolver {
     /**
      * String PATH_SEPARATOR ="/";
      */
@@ -35,7 +35,7 @@ public abstract class NavigationControl {
      * </ul>
      * @return the navigation of null if not found
      */
-    public Navigation getNavigation(String path) {
+    public Navigation resolveNavigation(String path, WhiteBoard wb) {
 
         StringTokenizer st = new StringTokenizer(path, PATH_SEPARATOR);
 
@@ -52,12 +52,26 @@ public abstract class NavigationControl {
 
         while (st.hasMoreTokens()) {
             String currentPath = st.nextToken();
-            Navigations navigations = currentNavigation.getChildNavigations();
-            for (int x = 0; x < navigations.size(); x++) {
-                AbstractNavigation navigation = navigations.getNavigation(x);
-                if (navigation.getURLString().equals(currentPath)) {
-                    currentNavigation = navigation;
-                    break;
+            if (currentNavigation instanceof NavigationResolver) {
+                StringTokenizer newTokenizer = new StringTokenizer(path, PATH_SEPARATOR, true);
+                if (newTokenizer.countTokens() > 2) {
+
+                    newTokenizer.nextToken(); // the current nav
+                    newTokenizer.nextToken(); // the delimiter
+                    StringBuffer newPath = new StringBuffer();
+                    while (newTokenizer.hasMoreTokens()) {
+                        newPath.append(newTokenizer.nextToken());
+                    }
+                    currentNavigation = ((NavigationResolver) currentNavigation).resolveNavigation(newPath.toString(), wb);
+                }
+            } else {
+                Navigations navigations = currentNavigation.getChildNavigations();
+                for (int x = 0; x < navigations.size(); x++) {
+                    AbstractNavigation navigation = navigations.getNavigation(x);
+                    if (navigation.getURLString().equals(currentPath)) {
+                        currentNavigation = navigation;
+                        break;
+                    }
                 }
             }
 
