@@ -17,24 +17,18 @@ import te.util.*;
 
 import org.mmbase.util.logging.*;
 import java.util.*;
+import minixml.*;
 /**
  * @author Kees Jongenburger
  */
-public class ProgrammasitesNavigationControl extends NavigationControl {
+public class ProgrammasitesNavigationControl extends NavigationControl implements Configurable{
     private static Logger log = Logging.getLoggerInstance(ProgrammasitesNavigationControl.class);
 
-    StaticNavigation navigation;
+    Navigation navigation;
+	String config = null;
     private Cloud _cloud;
+    
     public ProgrammasitesNavigationControl() {
-        Cloud cloud = ContextProvider.getDefaultCloudContext().getCloud("mmbase");
-        NodeManager nodeManager = cloud.getNodeManager("maps");
-        NodeList list = nodeManager.getList("number = 14194448 or number =3302425 or number = 8884132 or number= 3517269 or number = 14055733", null, null);
-        navigation = new StaticNavigation("maps", "root");
-        navigation.setVisible(false);
-        for (int x = 0; x < list.size(); x++) {
-            navigation.addChild(new MapsNavigation(list.getNode(x)));
-        }
-        navigation.setNavigationControl(this);
     }
 
     public Navigation getNavigation() {
@@ -48,7 +42,10 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
             return t;
         }
         String templateName = navigation.getProperty("type");
-        return getTemplate(templateName);
+		//TODO : move code to storage          
+        Template t =  getTemplate(templateName);
+        t.setName(templateName);
+        return t;
     }
 
     private Template getTemplate(String name) {
@@ -59,6 +56,7 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
             String content = list.getNode(0).getStringValue("content");
             XMLStorage store = new XMLStorage();
             Component c = store.stringToComponent(content);
+            //TODO : better clonning support (name)            
             return (Template) c;
         } else {
             log.error("can not find template with name {" + name + "} navigation");
@@ -76,4 +74,20 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
         }
         return _cloud;
     }
+    
+	/* (non-Javadoc)
+	 * @see te.Configurable#setConfig(java.lang.String)
+	 */
+	public void setConfig(String config) {
+		this.config = config;
+		XMLElement e = new XMLElement();
+		e.parseString(config);
+		e.setTagName("navigation");
+		e.addProperty("name","test controler");
+		e.addProperty("id","testcontroler");
+		navigation = NavigationLoader.parseXML(e.toString());
+		navigation.setNavigationControl(this);
+		navigation.setVisible(false);
+		log.debug("Test navigation = " + navigation);
+	}
 }

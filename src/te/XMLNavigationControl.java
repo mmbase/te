@@ -66,7 +66,7 @@ public class XMLNavigationControl extends NavigationControl {
         Logging.configure("/home/keesj/mmsite/WEB-INF/config/log/log.xml");
         XMLNavigationControl c = new XMLNavigationControl();
         System.err.println(c.getNavigation());
-        Navigation nav = c.resolveNavigation(new Path("test1/afleveringen/123/"));
+        Navigation nav = c.resolveNavigation(new Path("de_wandelende_tak/"));
         //createpath maps[number]/episodes
         
 		//Navigation nav = c.resolveNavigation(new Path("admin"));
@@ -77,5 +77,6 @@ public class XMLNavigationControl extends NavigationControl {
         } else {
         }
 		System.err.println("\n" + c.getNavigation());
+		log.debug("finished");
     }
 }

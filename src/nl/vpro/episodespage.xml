@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE template SYSTEM "template.dtd">
-<template name="default" layout="default" description="pagia met een lijst van afleveringen">
+<template name="default" layout="default" description="pagina met een lijst van afleveringen">
   <component name="page_head"/>
   <component name="logo"/>
   <component name="navigation"/>

@@ -29,7 +29,7 @@ public class TeFieldTag extends FieldTag {
         StringBuffer sb = new StringBuffer();
         sb.append("<div class=\"");
         sb.append(getFieldVar().getNodeManager().getName());
-        sb.append("_");
+        //sb.append("_");
         sb.append(getFieldVar().getName());
         sb.append("\">");
         sb.append(s);

@@ -23,4 +23,25 @@ public class NavigationParam extends StaticNavigation {
 		this.type = type;
 	}
     
+    /**
+     * @return
+     */
+    public String getField() {
+        return field;
+    }
+
+    /**
+     * @return
+     */
+    public String getGuifield() {
+        return guifield;
+    }
+
+    /**
+     * @return
+     */
+    public String getType() {
+        return type;
+    }
+
 }

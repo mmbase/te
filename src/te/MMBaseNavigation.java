@@ -10,7 +10,7 @@ See http://www.MMBase.org/license
 package te;
 
 import java.util.*;
-
+import org.mmbase.bridge.*;
 import org.mmbase.util.logging.*;
 
 import te.util.*;
@@ -64,37 +64,57 @@ public class MMBaseNavigation extends AbstractNavigation implements Configurable
         this.field = xmle.getProperty("field");
         this.guifield = xmle.getProperty("guifield");
         log.warn("initialised " + type + " " + field);
+        try {
+            NodeManager nm = getCloud().getNodeManager(type);
+        } catch (BridgeException e) {
+            log.error("did not find the node manager " + type + " " + Logging.stackTrace(e));
+        }
     }
     /* (non-Javadoc)
      * @see te.NavigationResolver#resolveNavigation(te.Path)
      */
     public Navigation resolveNavigation(Path path) {
+        log.debug("resolve " + path.current());
         String current = path.current();
-        if (field.equals("number")) {
-
-            if (current.charAt(0) >= '0' && current.charAt(0) <= '9') {} else {
+        Cloud cloud = getCloud();
+        NodeManager nm = getCloud().getNodeManager(type);
+        Field nodeManagerField = nm.getField(field);
+        Node node = null;
+        if (nodeManagerField.getType() == Field.TYPE_INTEGER) {
+            if (current.charAt(0) >= '0' && current.charAt(0) <= '9') {
+                node = cloud.getNode(Integer.parseInt(current));
+            } else {
                 log.debug(current + " is not a number");
                 return null;
             }
-        } else if (field.equals("title")) {
-            Hashtable hash = new Hashtable();
-            hash.put("test1", "true");
-            hash.put("test2", "true");
-            hash.put("test3", "true");
-            if (hash.get(current) == null) {
-                log.debug(current + " is no valid");
-                return null;
+        } else {
+            //TODO need beter code for performance (for example a "best" reverse mapping for url)
+            NodeList nl = nm.getList(null, null, null);
+            for (int x = 0; x < nl.size(); x++) {
+                Node nodeFromList = nl.getNode(x);
+                String nodeField = nodeFromList.getStringValue(field);
+                if (current.equals(URLConverter.toURL(nodeField))) {
+                    log.debug("found node based on field" + field);
+                    node = nodeFromList;
+                }
             }
         }
-        Navigation st = new NavigationParam(path.current(), path.current(),field,guifield,type);
-        Navigation g = NavigationLoader.parseXML(config);
-        Enumeration enum  = g.getProperties().keys();
-        while(enum.hasMoreElements()){
-        	String key = (String)enum.nextElement();
-        	st.setProperty(key,g.getProperty(key));
+
+        if (node == null) {
+            return null;
         }
-        
-        
+
+        Navigation st = new NavigationParam("" + node.getNumber(), node.getStringValue(field), field, guifield, type);
+         if (guifield != null){
+         	st.setGUIName(node.getStringValue(guifield));
+         }
+        Navigation g = NavigationLoader.parseXML(config);
+        Enumeration enum = g.getProperties().keys();
+        while (enum.hasMoreElements()) {
+            String key = (String) enum.nextElement();
+            st.setProperty(key, g.getProperty(key));
+        }
+
         Navigations n = g.getChildNavigations();
         for (int x = 0; x < n.size(); x++) {
             st.addChild(n.getNavigation(x));
@@ -108,5 +128,10 @@ public class MMBaseNavigation extends AbstractNavigation implements Configurable
 
         getParentNavigation().addChild(st);
         return st.resolveNavigation(path);
+    }
+
+    private static Cloud getCloud() {
+        return ContextProvider.getDefaultCloudContext().getCloud("mmbase");
+        //return ContextProvider.getCloudContext("rmi://127.0.0.1:1111/remotecontext").getCloud("mmbase");
     }
 }
