@@ -14,5 +14,7 @@ import java.io.*;
  * @author Kees Jongenburger
  */
 public interface LayoutManager {
+	public String getName();
+	public String getDescription();
     public void render(WhiteBoard wb,Container container, PrintWriter pw) throws Exception;
 }

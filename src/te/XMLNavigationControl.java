@@ -9,13 +9,16 @@ See http://www.MMBase.org/license
 */
 package te;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
 
-import te.jsp.*;
+import org.mmbase.util.logging.Logger;
+import org.mmbase.util.logging.Logging;
+
 import te.jsp.JSPTemplate;
 import te.util.NavigationLoader;
-
-import org.mmbase.util.logging.*;
 
 /**
  * @author Kees Jongenburger
@@ -46,24 +49,7 @@ public class XMLNavigationControl extends NavigationControl {
     public Template getTemplate(Navigation navigation) {
         NavigationControl control = navigation.getNavigationControl();
         if (control == this) {
-            //			return new JSPTemplate("/site/index.jsp?id=" + navigation.getID());
-
-            LayoutManager layout = new JSPLayoutManager("/te/layout/default.jsp");
-            Template t = new JSPTemplate("/te/template/default.jsp", layout);
-			Component c = new JSPComponent("/te/component/mags_intro.jsp");
-			c.setProperty("number", navigation.getProperty("number"));
-			t.addComponent(c);
-						
-			/**
-            Component c = new JSPComponent("/te/component/navigation.jsp");
-            c.setProperty("style", "breadcrum");
-            t.addComponent(c, "breadcrum");
-
-            Component c2 = new JSPComponent("/te/component/navigation.jsp");
-            c2.setProperty("style", "sitenavigation");
-            t.addComponent(c2, "sitenavigation");
-            **/
-            return t;
+            return new JSPTemplate("/te/index.jsp?id=" + navigation.getID(),null);
         } else {
             return control.getTemplate(navigation);
         }

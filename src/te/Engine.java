@@ -53,12 +53,18 @@ public class Engine extends BridgeServlet {
 
             log = Logging.getLoggerInstance(Engine.class.getName() + "[" + creationCounter + "]");
             log.info("init of engine with name " + getServletConfig().getServletName());
-            facade = new FacadeImpl();
+            if (facade == null) {
+                facade = new FacadeImpl();
+            }
         } catch (Throwable t) {
             log.fatal(t.getMessage() + " " + Logging.stackTrace(t));
         }
     }
-
+    
+	public static Facade getFacade(){
+		return facade;
+	}
+	
     public void destroy() {
         destroyCounter++;
     }
@@ -67,12 +73,12 @@ public class Engine extends BridgeServlet {
      */
     public void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServletException, IOException {
         try {
-			
+
             requestCounter++;
             HttpServletRequest req = (HttpServletRequest) servletRequest;
             HttpServletResponse resp = (HttpServletResponse) servletResponse;
-            
-			resp.setContentType("text/html");
+
+            resp.setContentType("text/html");
             //code to determin the "engine url"             
             if (facade.getEngineURL() == null) {
                 String servletPath = req.getRequestURI();
@@ -132,7 +138,7 @@ public class Engine extends BridgeServlet {
                         t.renderRelative(remainingPath, wb);
                     } else {
                         t.render(wb, resp.getWriter());
-                        
+
                     }
                 } catch (IOException e) {
                     log.warn(Logging.stackTrace(e));
@@ -148,7 +154,7 @@ public class Engine extends BridgeServlet {
                     log.warn(Logging.stackTrace(e));
                 }
             }
-            
+
             //LayoutManager layout = new JSPLayoutManager("/layout/list.jsp");
             //TemplateContainer c = new JSPTemplateContainer("/container/default.jsp", layout);
             //c.addTemplate(new JSPTemplate("/test.jsp"));

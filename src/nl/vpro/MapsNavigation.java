@@ -21,7 +21,8 @@ public class MapsNavigation extends AbstractNavigation {
     public Node node;
     public MapsNavigation(Node node) {
         this.node = node;
-        setProperty("nodemanager", node.getNodeManager().getName());
+        setProperty("type", "frontpage");
+        setProperty("maps","" + node.getNumber());
 
     }
 
@@ -39,7 +40,16 @@ public class MapsNavigation extends AbstractNavigation {
         navigation.setProperty("template", "/te/edit/index.jsp");
         navigation.setNavigationControl(getNavigationControl());
         navigation.setParentNavigation(this);
-        retval.add(navigation);
+		retval.add(navigation);
+
+		Navigation archive = new StaticNavigation("episodes", "afleveringen");
+		archive.setProperty("type", "episodes");
+		archive.setNavigationControl(getNavigationControl());
+		archive.setParentNavigation(this);
+
+        
+        retval.add(archive);
+        
         
         /*
                     NodeList list = node.getCloud().getList(getID(), //startnodes     

@@ -21,13 +21,30 @@ import te.*;
  */
 public class JSPLayoutManager implements LayoutManager {
     JSPComponent jspTemplate;
-
-    public JSPLayoutManager(String path) {
+    
+    public JSPLayoutManager(String path, String name, String description) {
         jspTemplate = new JSPComponent(path);
+		jspTemplate.setName(name);
+		jspTemplate.setDescription(description);
+		
     }
 
     public void render(WhiteBoard wb, Container container, PrintWriter pw) throws ServletException, IOException {
         wb.getHttpServletRequest().setAttribute("container", container);
         jspTemplate.render(wb, pw);
+    }
+
+    /* (non-Javadoc)
+     * @see te.LayoutManager#getName()
+     */
+    public String getName() {
+    	return jspTemplate.getName();
+    }
+
+    /* (non-Javadoc)
+     * @see te.LayoutManager#getDescription()
+     */
+    public String getDescription() {
+        return jspTemplate.getDescription();
     }
 }

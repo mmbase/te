@@ -34,4 +34,12 @@ public class JSPContainer extends JSPComponent implements Container {
     public void renderRelative(String path, WhiteBoard wb) throws ServletException, IOException {
         super.renderRelative(path, wb);
     }
+    
+    public Object clone(){
+    	JSPContainer c =  new JSPContainer(path,getLayoutManager());
+    	c.setName(getName());
+    	c.setDescription(getDescription());
+    	c.setProperties(getProperties());
+    	return c;
+    }
 }

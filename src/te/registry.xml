@@ -1,0 +1,19 @@
+<registry>
+	<layoutManager class="te.jsp.JSPLayoutManager" name="default" description="default list layout">
+		<property name="jspPage">/te/layout/default.jsp</property>
+	</layoutManager>
+
+	<layoutManager class="te.jsp.JSPLayoutManager" name="horizontal" description="horizontal  layout">
+		<property name="jspPage">/te/layout/horizontal.jsp</property>
+	</layoutManager>
+
+	<layoutManager class="te.jsp.JSPLayoutManager" name="vertical" description="default list layout">
+		<property name="jspPage">/te/layout/vertical.jsp</property>
+	</layoutManager>
+
+	<container class="te.jsp.JSPContainer" name="horizontal" description="a container with a horizontal layout" layout="horizontal"/>
+	<container class="te.jsp.JSPContainer" name="vertical" description="a container with a vertical layout" layout="vertical"/>
+
+	<template class="te.jsp.JSPTemplate" name="default" description="default tempate using the default layout" layout="default"/>
+
+</registry>

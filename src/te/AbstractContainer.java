@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * @author Kees Jongenburger
  */
-public abstract class AbstractContainer extends AbstractComponent implements Container {
+public abstract class AbstractContainer extends AbstractComponent /*implements Container*/ {
 
     Components components = new Components();
     Hashtable hints = new Hashtable();

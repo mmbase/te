@@ -16,69 +16,40 @@ import te.jsp.JSPComponent;
  * @version $Id$
  */
 public class ProgrammaSiteNavigationComponent extends JSPComponent {
-    public boolean showLogs = false; //log
-    public boolean showForums = false; //Form
-    public boolean showBinders = false; //Dossiers
-    public boolean showArchives = false; //Dossiers
 
     public ProgrammaSiteNavigationComponent() {
         super("/te/component/navigation.jsp");
+        setProperty("showLogs", "flase");
+        setProperty("showForums", "flase");
+        setProperty("showBinders", "flase");
+        setProperty("showArchives", "flase");
     }
 
     /**
      * @return
      */
     public boolean isShowArchives() {
-        return showArchives;
+        return Boolean.getBoolean(getProperty("showArchives"));
     }
 
     /**
      * @return
      */
     public boolean isShowBinders() {
-        return showBinders;
+        return Boolean.getBoolean(getProperty("showBinders"));
     }
 
     /**
      * @return
      */
     public boolean isShowForums() {
-        return showForums;
+        return Boolean.getBoolean(getProperty("showForums"));
     }
 
     /**
      * @return
      */
     public boolean isShowLogs() {
-        return showLogs;
+        return Boolean.getBoolean(getProperty("showLogs"));
     }
-
-    /**
-     * @param b
-     */
-    public void setShowArchives(boolean b) {
-        showArchives = b;
-    }
-
-    /**
-     * @param b
-     */
-    public void setShowBinders(boolean b) {
-        showBinders = b;
-    }
-
-    /**
-     * @param b
-     */
-    public void setShowForums(boolean b) {
-        showForums = b;
-    }
-
-    /**
-     * @param b
-     */
-    public void setShowLogs(boolean b) {
-        showLogs = b;
-    }
-
 }

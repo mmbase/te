@@ -12,5 +12,5 @@ package te;
 /**
  * @author Kees Jongenburger
  */
-public interface Template extends Container {  
+public interface Template extends Container{  
 }

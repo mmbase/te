@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE template SYSTEM "template.dtd">
+<template name="default" layout="default">
+  <component name="te.jsp.JSPComponent//te/component/page_head.jsp"/>
+  <component name="nl.vpro.ProgrammaSiteNavigationComponent//te/component/navigation.jsp">
+    <property name="showBinders">flase</property>
+    <property name="showArchives">flase</property>
+    <property name="showForums">flase</property>
+    <property name="showLogs">flase</property>
+  </component>
+  <container name="horizontal">
+    <component name="te.jsp.JSPComponent//te/component/maps.jsp"/>
+    <container name="vertical"/>
+    <component name="te.jsp.JSPComponent//te/component/related_news.jsp"/>
+  </container>
+</template>

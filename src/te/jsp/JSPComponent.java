@@ -23,7 +23,7 @@ import te.util.*;
  */
 public class JSPComponent extends AbstractContainer implements Component {
     private static Logger log = Logging.getLoggerInstance(JSPComponent.class);
-    String path = null;
+    protected String path = null;
 
     private boolean mapRenderRelativeToRender = false;
     /**
@@ -34,7 +34,7 @@ public class JSPComponent extends AbstractContainer implements Component {
     }
 
     public void render(WhiteBoard wb, PrintWriter writer) throws ServletException, IOException {
-		log.debug("{"+ path  +"}");
+        log.debug("{" + path + "}");
         try {
 
             wb.getHttpServletRequest().setAttribute("component", this);
@@ -52,10 +52,10 @@ public class JSPComponent extends AbstractContainer implements Component {
      * @see te.Template#renderRelative(java.lang.String, te.WhiteBoard, java.io.PrintWriter)
      */
     public void renderRelative(String path, WhiteBoard wb) throws ServletException, IOException {
-    	log.debug("{"+ path +" " + mapRenderRelativeToRender);
+        log.debug("{" + path + " " + mapRenderRelativeToRender);
         if (mapRenderRelativeToRender) {
-        	
-        	render(wb,wb.getHttpServletResponse().getWriter());
+
+            render(wb, wb.getHttpServletResponse().getWriter());
         } else {
 
             int index = this.path.lastIndexOf(NavigationControl.PATH_SEPARATOR);
@@ -79,6 +79,21 @@ public class JSPComponent extends AbstractContainer implements Component {
      */
     public void setMapRenderRelativeToRender(boolean b) {
         mapRenderRelativeToRender = b;
+    }
+
+    public Object clone() {
+        JSPComponent c = new JSPComponent(path);
+        c.setName(getName());
+        c.setDescription(getDescription());
+        c.setProperties(getProperties());
+        //copy properties?
+        return c;
+    }
+    public String getName() {
+        if (super.getName() == null) {
+            return getClass().getName() + "/" + path;
+        }
+        return super.getName();
     }
 
 }

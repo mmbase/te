@@ -35,7 +35,9 @@ public abstract class AbstractComponent implements Component {
     public Properties getProperties() {
         return properties;
     }
-    
+    public void setProperties(Properties properties){
+    	this.properties = properties;
+    }
     public void setParentComponent(Component component){
     	this.parent = component;
     }
@@ -58,5 +60,9 @@ public abstract class AbstractComponent implements Component {
 	
 	public String getDescription(){
 		return desc;
+	}
+	
+	public Object clone() throws CloneNotSupportedException{
+		throw new CloneNotSupportedException();
 	}
 }

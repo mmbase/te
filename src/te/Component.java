@@ -17,7 +17,7 @@ import java.util.*;
  * on a page
  * @author Kees Jongenburger
  */
-public interface Component {
+public interface Component extends Cloneable{
 	
 	/** 
 	 * @param wb the whiteboard
@@ -32,10 +32,12 @@ public interface Component {
 	public String getProperty(String key);
 	public void setProperty(String key,String value);
 	public Properties getProperties(); 
+	public void setProperties(Properties properties);
 	public void setParentComponent(Component component);
 	public Component getParentComponent();
 	public void setName(String name);
 	public String getName();
 	public void setDescription(String  desc);
 	public String getDescription();
+	public Object clone() throws CloneNotSupportedException;
 }

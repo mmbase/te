@@ -9,9 +9,10 @@ See http://www.MMBase.org/license
 */
 package nl.vpro;
 
+import org.mmbase.bridge.*;
+
 import te.*;
 import te.jsp.*;
-import org.mmbase.bridge.*;
 /**
  * @author Kees Jongenburger
  */
@@ -26,7 +27,7 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
         for (int x = 0; x < list.size(); x++) {
             navigation.addChild(new MapsNavigation(list.getNode(x)));
         }
-        
+
         //navigation = new StaticNavigation("3302425", "De Wandelende Tak");
         navigation.setNavigationControl(this);
     }
@@ -41,27 +42,31 @@ public class ProgrammasitesNavigationControl extends NavigationControl {
             t.setMapRenderRelativeToRender(true);
             return t;
         }
-        //return new EditTemplate();
-        //return new JSPTemplate("/te/template/notimplemented.jsp", null);
-        //Template t =  new JSPTemplate("/te/template/default.jsp",new ProgrammaSiteLayoutManager());
+        
+        Facade facade = Engine.getFacade();
+        ComponentRegistry reg = facade.getComponentRegistry();
 
-        // create a default page (with a list layout
-
-        //this code needs to be in an xml
-        Template t = new JSPTemplate("/te/template/default.jsp", new JSPLayoutManager("/te/layout/default.jsp"));
-        //add page head
-        t.addComponent(new JSPComponent("/te/component/page_head.jsp"), "page_head");
-        //add the navigation
-        t.addComponent(new ProgrammaSiteNavigationComponent(), "navigation");
+        Template main = reg.getTemplate("default");
+        main.addComponent(new JSPComponent("/te/component/page_head.jsp"));
+        main.addComponent(new ProgrammaSiteNavigationComponent(), "navigation");
 
         //create a container for the "content" part of the site
-        Container container = new JSPContainer("/te/container/default.jsp", new JSPLayoutManager("/te/layout/horizontal.jsp"));
-        
-        container.addComponent(new JSPComponent("/te/component/maps.jsp"), "maps intro");
-        container.addComponent(new JSPContainer("/te/container/episodes.jsp", new JSPLayoutManager("/te/layout/vertical.jsp")), "episodes");
-        container.addComponent(new JSPComponent("/te/component/related_news.jsp"), "news");
+        Container container = reg.getContainer("horizontal");
+        String type = navigation.getProperty("type");
+        if (type == null) {
+            type = "frontpage";
+        }
 
-        t.addComponent(container);
-        return t;
+        if (type.equals("frontpage")) {
+            container.addComponent(new JSPComponent("/te/component/maps.jsp"), "maps intro");
+            container.addComponent(new JSPContainer("/te/container/episodes.jsp", new JSPLayoutManager("/te/layout/vertical.jsp", "test", "test")), "episodes");
+            container.addComponent(new JSPComponent("/te/component/related_news.jsp"), "news");
+        } else if (type.equals("episodes")) {
+            container.addComponent(new JSPComponent("/te/component/maps.jsp"), "maps intro");
+            container.addComponent(new JSPComponent("/te/component/maps.jsp"), "maps intro");
+            container.addComponent(new JSPComponent("/te/component/maps.jsp"), "maps intro");
+        }
+        main.addComponent(container);
+        return main;
     }
 }
