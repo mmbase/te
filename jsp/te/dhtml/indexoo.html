@@ -1,0 +1,194 @@
+<html>
+		  <head>
+		  </head>
+		  <body>
+ <style>
+.entrypoint {
+		  width: 200;
+		  height: 100px;
+		  background-color: grey;
+}
+.header {
+		  background-color: blue;
+}
+.content {
+		  border: 3px solid;
+		  position: absolute;
+		  float: left;
+		  width: 200px;
+}
+
+ </style>
+ <SCRIPT src="generic.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function DragAndDrop(){
+		  this.selectedItem = null;
+		  this.move = false;
+
+		  this.eventStartX =0;
+		  this.eventStartY =0;
+		  this.selectedItemStartX =0;
+		  this.selectedItemStartY =0;
+		  this.dropTarget = null;
+}
+
+DragAndDrop.prototype.mouseDown = DragAndDrop_mouseDown;
+DragAndDrop.prototype.mouseUp = DragAndDrop_mouseUp;
+DragAndDrop.prototype.mouseMove = DragAndDrop_mouseMove;
+DragAndDrop.prototype.selectDrag = DragAndDrop_selectDrag;
+DragAndDrop.prototype.unselectDrag = DragAndDrop_selectDrag;
+DragAndDrop.prototype.selectDrop = DragAndDrop_selectDrop;
+DragAndDrop.prototype.unselectDrop = DragAndDrop_unselectDrop;
+
+function DragAndDrop_mouseDown(e) {
+		  if (this.selectedItem != null){
+					 this.move = true;
+		          this.eventStartX = getEventPosX(e);
+		          this.eventStartY = getEventPosY(e);
+		          var element = document.getElementById("monitor");
+					 element.innerHTML ="start move window ";
+					 return false;
+		  }
+		  return true;
+}
+
+function DragAndDrop_mouseUp(e) {
+		this.move = false;
+      var element = document.getElementById("monitor");
+		if (this.selectedItem != null && this.dropTarget != null){
+					this.dropTarget.innerHTML = "Drop here";
+					//this.dropTarget.value = this.selectedItem.innerHTML;
+			}
+		this.selectedItem = null;
+	   element.innerHTML ="stop move window ";
+
+}
+function DragAndDrop_mouseMove(e) {
+		  if (this.selectedItem != null && this.move){
+				    var mouseX = getEventPosX(e);
+				    var mouseY = getEventPosY(e);
+
+					 var divx =  mouseX - this.eventStartX;
+					 var divy =  mouseY - this.eventStartY;
+
+					  var xxx = document.getElementById("monitor2");
+					  xxx.innerHTML ="div(x,y)(" + divx + "," + divy + ")";
+
+					  setObjectPos(this.selectedItem,this.selectedItemStartX + divx,this.selectedItemStartY + divy);
+					  /**
+					  if (this.selectedItem.pixelLeft){
+					     this.selectedItem.pixelLeft =   this.selectedItemStartX + divx;
+					     this.selectedItem.pixelTop = this.selectedItemStartY + divy;
+					  } else {
+					   this.selectedItem.style.left =   this.selectedItemStartX + divx;
+					   this.selectedItem.style.top =   this.selectedItemStartY + divy;
+					  }
+					  **/
+					  return true;
+		  }
+		  return false;
+}
+
+function DragAndDrop_selectDrag(e){
+	if (this.move == false){
+	    if (e == null) alert("e == null");
+		this.selectedItem = e;
+		this.selectedItemStartY = getObjectPosY(this.selectedItem); 
+		this.selectedItemStartX = getObjectPosX(this.selectedItem); 
+		var element = document.getElementById("monitor");
+		element.innerHTML ="selected"  + e +  " " + this.selectedItemStartX + " " + this.selectedItemStartY;
+		} else {
+		var element = document.getElementById("monitor");
+		element.innerHTML ="hmm";
+		}
+		return false;
+}
+
+function DragAndDrop_unselectDrag(){
+		  /**
+		  if (this.move){
+					 this.move= false;
+		          var element = document.getElementById("monitor");
+		          element.innerHTML ="unselected";
+		          this.selectedItem = null;
+		  }
+		  **/
+}
+function DragAndDrop_selectDrop(e){
+		this.unselectDrop();
+		this.dropTarget = e;
+		e.style.background ="green";
+}
+function DragAndDrop_unselectDrop(){
+		if (this.dropTarget != null){
+						this.dropTarget.style.background ="grey";
+						this.dropTarget = null;
+		}
+}
+var dnd = new DragAndDrop();
+if (document.captureEvents){
+	document.captureEvents(Event.MOUSEDOWN | Event.MOUSEMOVE | Event.MOUSEUP);
+}
+	document.onmousedown = dnd.mouseDown;
+	document.onmouseup = dnd.mouseUp;
+	document.onmousemove = dnd.mouseMove;
+
+// -->
+</SCRIPT>
+<table>
+		  <tr>
+					 <td>
+								<!-- entry entries -->
+								<table border="10">
+										  <tr>
+													 <td> 
+																<div class="entrypoint" onMouseOver="dnd.selectDrop(this);" onMouseOut="dnd.unselectDrop();" id="entry1">&nbsp;</div>
+																</td>
+																<td> 
+																		  <div class="entrypoint" onMouseOver="dnd.selectDrop(this);" onMouseOut="dnd.unselectDrop();" id="entry2">&nbsp;</div> 
+													 </td>
+										  </tr>
+								</table>
+								<!-- entry entries -->
+					 </td>
+					 <td>
+							
+								<div class="content" onMouseOver="alert("select drag" ) ;dnd.selectDrag(this);" onMouseOut="dnd.unselectDrag();">
+										  	<table>
+													  	<tr><th class="header">news</th></tr>
+														<tr><td>
+																			 <b>Speciale R.A.M. uizendingen</b>
+																			 <p>
+																			 VPRO's wekelijks cultuurmagazine R.A.M keert terug in het tv seizoen 2003-2004 (haar tweede), met een nieuw uitzendtijdstip en een bijzondere openingsreeks.
+																			 </p>
+														</td></tr>
+											</table>
+								</div>
+								<br>
+								<!--
+								<div class="content" onMouseOver="dnd.selectDrag(this);" onMouseOut="dnd.unselectDrag();">
+										  	<table>
+													  	<tr><th class="header">news</th></tr>
+														<tr><td>
+																			 <b>Duits ontwerp op Ground Zero</b>
+																			 <p>Woensdag 26 februari hebben de autoriteiten in New York besloten dat het ontwerp van de Duitse architect Libeskind het op 11 september ...</p>
+														</td></tr>
+											</table>
+								</div>
+								<br>
+								<div class="content" onMouseOver="dnd.selectDrag(this);" onMouseOut="dnd.unselectDrag();">
+										  	<table>
+													  	<tr><th class="header">news</th></tr>
+														<tr><td>
+																			 <b>Raad de Aanvangs Melodie - kwis</b>
+																			 <p>R.A.M begint elke aflevering na de intro met een muziekje. Terwijl de camera over de entree-trap van het VPRO-gebouw zwe ... </p>
+														</td></tr>
+											</table>
+								</div>
+								-->
+					 </td>
+<div id="monitor">hoi</div>
+<div id="monitor2">hoi2</div>
+		  </body>
+</html>

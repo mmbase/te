@@ -13,7 +13,7 @@
 }
 .content {
 		  border: 3px solid;
-			position: absolute;
+		  position: absolute;
 		  float: left;
 		  width: 200px;
 }
@@ -33,10 +33,10 @@ var dropTarget = null;
 function mouseDown(e) {
 		  if (currentDiv != null){
 					 move = true;
-		          var element = document.getElementById("monitor");
-					 element.innerHTML ="start move window ";
 		          eventStartX = getEventPosX(e);
 		          eventStartY = getEventPosY(e);
+		          var element = document.getElementById("monitor");
+					 element.innerHTML ="start move window ";
 					 return false;
 		  }
 		  return true;
@@ -72,6 +72,16 @@ function getEventPosY(event){
   return event.clientY  + document.body.scrollTop;
 }
 
+function setObjectPos(element,posx,posy){
+					  if (element.pixelLeft){
+					     element.pixelLeft =   posx;
+						  element.pixelTop = posy;
+					  } else {
+					  element.style.left =  posx;
+					   element.style.top =   posy;
+					  }
+}
+
 
 
 function mouseUp(e) {
@@ -96,6 +106,8 @@ function mouseMove(e) {
 					  var xxx = document.getElementById("monitor2");
 					  xxx.innerHTML ="div(x,y)(" + divx + "," + divy + ")";;
 
+					  setObjectPos(currentDiv,currentDivStartX + divx,currentDivStartY + divy);
+					  /**
 					  if (currentDiv.pixelLeft){
 					     currentDiv.pixelLeft =   currentDivStartX + divx;
 					     currentDiv.pixelTop = currentDivStartY + divy;
@@ -103,6 +115,7 @@ function mouseMove(e) {
 					   currentDiv.style.left =   currentDivStartX + divx;
 					   currentDiv.style.top =   currentDivStartY + divy;
 					  }
+					  **/
 					  return true;
 		  }
 		  return false;
@@ -151,15 +164,14 @@ function unselectdrop(){
 					 <td>
 								<!-- entry entries -->
 								<table border="10">
-												<tr><td>
-																				<div class="entrypoint" onMouseOver="selectdrop(this);" onMouseOut="unselectdrop();" id="entry1">&nbsp;</div>
-												</td><td>
-																				<div class="entrypoint" onMouseOver="selectdrop(this);" onMouseOut="unselectdrop();" id="entry2">&nbsp;</div>
-				                 </td></tr>
-										  <tr><td><div class="entrypoint" id="entry3">&nbsp;</div></td><td><div class="entrypoint" id="entry4">&nbsp;</div></td></tr>
-										  <tr><td><div class="entrypoint" id="entry5">&nbsp;</div></td><td><div class="entrypoint" id="entry6">&nbsp;</div></td></tr>
-										  <tr><td><div class="entrypoint" id="entry7">&nbsp;</div></td><td><div class="entrypoint" id="entry8">&nbsp;</div></td></tr>
-										  <tr><td><div class="entrypoint" id="entry9">&nbsp;</div></td><td><div class="entrypoint" id="entry10">&nbsp;</div></td></tr>
+										  <tr>
+													 <td> 
+																<div class="entrypoint" onMouseOver="selectdrop(this);" onMouseOut="unselectdrop();" id="entry1">&nbsp;</div>
+																</td>
+																<td> 
+																		  <div class="entrypoint" onMouseOver="selectdrop(this);" onMouseOut="unselectdrop();" id="entry2">&nbsp;</div> 
+													 </td>
+										  </tr>
 								</table>
 								<!-- entry entries -->
 					 </td>
