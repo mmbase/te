@@ -6,7 +6,7 @@
 <mm:node referid="mapsid">
 	<mm:field id="nextmmevent" name="nextmmevent" write="false"/>
 	<mm:node referid="nextmmevent">
-		<mm:relatednodes type="episodes" jspvar="episodes">
+		<mm:relatednodes type="episodes">
 			<%@include file="parts/episodes.jsp" %>
 		</mm:relatednodes>
 	</mm:node>
