@@ -6,8 +6,5 @@
 	<mm:field name="style"/>
 </mm:node>
 </mm:cloud>
-
-.breadcrum {
-	font-size: 6px;
-}
+<%@include file="jerry.css"%>
 </mm:cloud>

@@ -24,7 +24,7 @@ var prevColor = null;
 function select(div){
 	currentElement = div;
 	prevColor = currentElement.style.color;
-	currentElement.style.color="green";
+	//currentElement.style.color="green";
 	var content = currentElement.className;
 	var walker = div;
 	while(walker.parentNode != null){
@@ -39,7 +39,7 @@ function select(div){
 }
 
 function unselect(){
-	currentElement.style.color= prevColor;
+	//currentElement.style.color= prevColor;
 	//currentElement = null;
 }
 

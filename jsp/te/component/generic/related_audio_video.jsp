@@ -26,9 +26,10 @@
 			<a href="<te:url/>"><mm:field name="title"/></a><br>
 			<mm:last><hr></mm:last>
 		</mm:relatednodes>
-		<mm:relatednodes type="episodes">
-			<mm:first>Afleveringen:<br></mm:first>
-			<a href="<te:url/>"><mm:field name="title"/></a><br>
+
+		<mm:relatednodes type="attachments">
+			<mm:first>Bijlagen:<br></mm:first>
+			<a href="<mm:field name="gui()"/>"><mm:field name="title"/></a><br>
 			<mm:last><hr></mm:last>
 		</mm:relatednodes>
 	</mm:node>

@@ -1,0 +1,231 @@
+BODY {color:#996600; margin:0px; padding:0px; background-color:#000000; font-family:arial, helvetica, sans-serif;}
+TD {color:#996600; font-family:arial, helvetica, sans-serif;}
+a {text-decoration:none;}
+a:link {color:#996600;}
+a:visited {color:#996600;}
+a:hover {color:#ff3366;}
+a:active {color:#ff3366;}
+
+TABLE {padding:0px; border-width:0px; margin:0px;}
+TD {padding:0px; margin:0px;}
+
+INPUT {}
+TEXTAREA {}
+
+.containsall {margin:0px; padding:0px;}
+.backgroundlayer {
+	margin-top:135px;
+	height:200%;
+	width:100%;
+	position:absolute;
+	z-index:1;
+	filter:alpha(opacity=85);
+	//background-color:#ffff00;
+	}
+.backgroundlayer .col1 {width:30%; background-color:#ffcdb5;}
+.backgroundlayer .col2 { background-color:#eebca4;}
+.backgroundlayer .col3 {width:160; background-color:#ffcdb5;}
+
+.backgroundlayercenter {height:500; width:100%; position:absolute; z-index:-100; filter:alpha(opacity=85); background-color:#000000;}
+.episodeshomepage {position:absolute; left:0px; top:0px; z-index:400;}
+
+/*header*/
+
+.page_head {
+	position:relative;
+	height:37px;
+	}
+.logo {
+	position:relative;
+	height:68px;
+	}
+
+.navigationbar {
+	}
+.navigationbar .selectednavigation {
+	background-repeat:no-repeat;
+	vertical-align:bottom;
+	padding-bottom:3px;
+	padding-left:4px;
+	font-family:arial narrow, arial;
+	font-weight:bold; color:#996600;
+	font-size:15px;
+	width:115px;
+	height:26px;
+	}
+.navigationbar .selectednavigationbridge{
+	background-repeat:no-repeat;
+	height:2px;
+	}
+.navigationbar .navigation {
+	background-repeat:no-repeat;
+	vertical-align:bottom;
+	padding-left:4px;
+	padding-bottom:3px;
+	font-family:arial narrow, arial;
+	font-weight:bold;
+	font-size:15px;
+	width:115px;
+	}
+.navigationbar .navigationsearch {
+	text-align:left;
+	width:140px;
+	background-repeat:no-repeat;
+	vertical-align:middle;
+	padding-left:25px;
+	padding-right:8px;
+	padding-bottom:3px;
+	font-family:arial narrow, arial;
+	font-weight:bold;
+	}
+	
+.navigationbar .navigationsearch INPUT {
+	background-color:#ffff00;
+	color:#000000;
+	font-family:arial, helvetica;
+	font-size:11px;
+	width:100px;
+	}
+.navigationbar .navigationsearch .submit {
+	background-color:#996600;
+	color:#ffff00;
+	font-weight:bold;
+	border-style:none;
+	font-family:arial, helvetica;
+	font-size:11px;
+	display:inline;
+	width:30px;
+	margin-left:6px;
+	}
+
+.home_maps {
+	width:30%;
+	padding-top:10px;
+	padding-left:10px;
+	padding-right:10px;
+	background-color:#ffff00;
+	}
+
+.maps {}
+.maps .subtitle {font-size:13px; font-weight:bold; padding-bottom:8px;}
+.maps .intro {font-size:12px;}
+.maps .description {font-size:12px; padding-top:8px; padding-bottom:8px;}
+
+.home_superteaser {
+	padding-top:10px;
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:17px;
+	border-style:solid;
+	border-width:0px 0px 2px 0px;
+	border-color:#ffff00;
+	background-color:#D8FF00;
+	}
+.home_superteaser .title {font-size:26px; font-weight:bold;}
+.home_superteaser .subtitle {font-size:21px; font-weight:bold;}
+.home_superteaser .body {font-size:13px;}
+
+.home_episodes_previous {
+	padding-top:8px;
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:17px;
+	border-style:solid;
+	border-width:0px 0px 2px 0px;
+	border-color:#ffff00;
+	background-color:#D8FF00;
+	}
+.home_episodes_previous .episodes TH {border-color:#996600; border-width:0px 0px 1px 0px; border-style:solid; padding-bottom:3px; font-weight:normal; vertical-align:bottom;}
+.home_episodes_previous .episodes .vorigevolgende {text-align:left; font-family:arial narrow, arial, helvetica; font-size:15px; font-weight:bold; align:left; width:100%; white-space:nowrap;}
+.home_episodes_previous .episodes .mmevent {font-size:10px; align:right; width:100%; white-space:nowrap;}
+.home_episodes_previous .episodes .title {font-size:17px; font-weight:bold; padding-bottom:2px; padding-top:2px;}
+.home_episodes_previous .episodes .subtitle {font-size:15px; font-weight:bold; padding-bottom:3px;}
+.home_episodes_previous .episodes .intro {font-size:13px;}
+
+.home_episodes_next {
+	padding-top:8px;
+	padding-left:10px;
+	padding-right:10px;
+	padding-bottom:17px;
+	border-style:solid;
+	border-width:0px 0px 2px 0px;
+	border-color:#ffff00;
+	background-color:#D8FF00;
+	}
+.home_episodes_next .episodes TH {border-color:#996600; border-width:0px 0px 1px 0px; border-style:solid; padding-bottom:3px; font-weight:normal; vertical-align:bottom;}
+.home_episodes_next .episodes .vorigevolgende {text-align:left; font-family:arial narrow, arial, helvetica; font-size:15px; font-weight:bold; align:left; width:100%; white-space:nowrap;}
+.home_episodes_next .episodes .mmevent {font-size:10px; align:right; width:100%; white-space:nowrap;}
+.home_episodes_next .episodes .title {font-size:17px; font-weight:bold; padding-bottom:2px; padding-top:2px;}
+.home_episodes_next .episodes .subtitle {font-size:15px; font-weight:bold; padding-bottom:3px;}
+.home_episodes_next .episodes .intro {font-size:13px;}
+
+.home_related_news {
+	width:140px;
+	text-align:center;
+	padding-top:10px;
+	margin-right:10px;
+	padding-right:10px;
+	padding-left:10px;
+	border-style:solid;
+	border-width:0px;
+	background-color:#ffff00;
+	}
+.news .image {border:#996600 solid; border-width:1px 0px 0px 0px;}
+.news {text-align:left; padding-bottom:10px;}
+.news .title {font-size:12px; font-weight:bold;}
+.news .subtitle {font-size:11px;font-weight: bold;}
+.news .intro {font-size:11px;}
+
+/*episode*/
+.episodepage .col1 {width:124px; padding-left:10px; background-color:#ffff00; padding-top:10px;}
+.episodepage .col2 {padding-left:10px; padding-right:10px; background-color:#ffff00; padding-top:10px;}
+.episodepage .col3 {background-color:#eeee00; padding-top:0px; width:176px;}
+
+.episode_previousnext TD {font-size:11px; padding-top:3px; padding-bottom:3px;}
+.episodepage .episode_title .title {font-family:arial narrow; font-size:21px; font-weight:bold;}
+.episodepage .episode_title .subtitle {font-family:arial narrow; font-size:17px; font-weight:bold;}
+.episodepage .episode_body .mmevent {font-family:arial narrow; font-size:15px; font-weight:bold; padding-bottom:4px; border-width:0px 0px 1px 0px; border-style:solid;}
+.episodepage .episode_body .intro {font-size:13px; font-style:italic; padding-top:4px;}
+.episodepage .episode_body .description {font-size:13px; padding-top:8px;}
+
+/*episodes*/
+.episodespage .episodes_archive_info {width:155px; padding-left:10px; padding-right:10px; background-color:#ffff00; padding-top:10px;}
+.episodespage .episode_list {padding-left:10px; padding-right:10px; background-color:#eeee00; padding-top:10px;}
+.archives .intro {font-size:12px; padding-bottom:8px;}
+.archives .body {font-size:12px; padding-bottom:8px;}
+.programs {border:#996600 solid; border-width:1px 0px 0px 0px;}
+.programs .image {}
+.programs .title {font-family:arial narrow; font-size:13px; font-weight:bold; padding-top:4px;}
+.episode_list .episodes .title {font-family:arial narrow; font-size:13px; font-weight:bold;}
+.episode_list .episodes .subtitle {font-family:arial narrow; font-size:12px; font-weight:bold;}
+.episode_list .episodes .intro {font-size:12px;}
+.episode_list .episodes .image {margin-left:10px;}
+.episode_list .episodes {border:#ffff44 solid; border-width:2px 0px 0px 0px;}
+.episode_list .episodes TD {padding-top:4px; padding-bottom:5px; border:#996600 solid; border-width:0px 0px 1px 0px;}
+
+/*item*/
+.itempage .col1 {width:124px; padding-left:10px; background-color:#ffff00; padding-top:10px;}
+.itempage .col2 {padding-left:10px; padding-right:10px; background-color:#ffff00; padding-top:10px;}
+.itempage .col3 {background-color:#eeee00; padding-top:0px; width:176px;}
+
+/*binder*/
+.binderpage .binder {width:124px; padding-left:10px; padding-right:10px; padding-top:10px; background-color:#ffff00;}
+.binderpage .binder_content {padding-left:10px; padding-right:10px; padding-top:10px; background-color:#eeee00;}
+.binderpage .binder_content TD {border:#996600 solid; border-width:1px 0px 0px 0px;}
+.binderpage .binder .title {font-size:24px; font-family:arial narrow; font-weight:bold;}
+
+/*artikelen*/
+.magazine {padding-left:10px; padding-top:10px; width:155px; padding-right:10px; background-color:#ffff00; font-size:11px;}
+
+/*general*/
+.episode_nr {font-size:11px;}
+.relatedTable TD {padding-left:10px; padding-right:10px;}
+.relatedTable .related_head {background-color:#ffff00;}
+.relatedTable .related_body {border-width:0px 0px 2px 0px; border-style:solid; border-color:#ffff00; padding-top:7px; padding-bottom:3px;}
+.related_header {font-size:15px; font-weight:bold; font-family:arial narrow; margin-bottom:6px;}
+.related_description {font-size:11px; padding-bottom:7px;}
+.icon {margin-right:8px;}
+.line {margin:0px; height:1px; line-style:solid; border-width:6px 0px 0px 0px; border-color:#ffff00;}
+
+
+

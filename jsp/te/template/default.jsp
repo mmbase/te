@@ -32,8 +32,10 @@
 <% } else { %>
 <body>
 <% } %>
+<div class=containsall>
 <div class="<%= template.getName() %>">
 	<%= sw.toString() %>
+</div>
 </div>
 </mm:cloud>
 </body>

@@ -5,7 +5,7 @@
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
 <div class="episodes">
 	<mm:node number="<%= navigation.getID() %>">
-	<mm:related path="bcastrel,mmevents" fields="bcastrel.number,bcastrel.rerun" constraints="bcastrel.rerun != 0" >
+	<mm:related path="bcastrel,mmevents" fields="bcastrel.number,bcastrel.rerun" >
 		<mm:node element="mmevents">
 			<mm:field name="weekday_start"/>
 			<mm:field name="day_start"/>
@@ -23,7 +23,12 @@
 		</mm:node>
 		<mm:node element="bcastrel">
 			<mm:field name="channel"/>
+                        <%-- als rerun niet gelijk is aan 0 dan is het een herhaling --%>
+			<mm:field name="rerun">
+				<mm:compare value="0" inverse="true">(Herhaling)</mm:compare>
+			</mm:field>
 		</mm:node>
+                <br>
 	</mm:related>
 	<table>
 	<tr><td colspan="2">

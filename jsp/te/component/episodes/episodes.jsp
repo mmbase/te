@@ -22,7 +22,7 @@
 		offset=Integer.parseInt(offsetString);
 	} catch (Exception e){};
 	String programs =  request.getParameter("programs");
-	if (programs != null){
+	if (programs != null && programs.trim().length() > 0){
 		try {   //parse.. for invalid data
 			Integer.parseInt(programs);
 			constraintsBuffer.append(" AND programs.number = " + Integer.parseInt(programs) + " ");
@@ -34,7 +34,6 @@
 	path="programs,episodes,bcastrel,mmevents"
 	fields="programs.number,episodes.episodenr,episodes.number,bcastrel.rerun,mmevents.start" 
 	constraints="<%= constraints  %>" orderby="episodes.episodenr" directions="DOWN" offset="<%= "" + offset %>" max="<%= "" + (max +1) %>">
-	<mm:last inverse="true">
 		<mm:node element="episodes">
 		<div class="episodes">
 <table width="100%">
@@ -54,14 +53,13 @@
 </table>
 		</div>
 		</mm:node>
-	</mm:last>
 	<mm:last>
 		<mm:size jspvar="size">
 			<% if (size.intValue() == max +1){ %>
 				<% if (programs != null) { %>
-				<a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>?offset=<%= (offset + max) %>">verder terug in de tijd</a>
-				<% }  else { %>
-				<a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>?offset=<%= (offset + max) %>?programs=<%= programs %>">verder terug in de tijd</a>
+				    <a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>?offset=<%= (offset + max) %>">verder terug in de tijd</a>
+			<% }  else { %>
+				   <a href="<%= facade.getEngineURL() + navigation.getFullURLString() +"/" %>?offset=<%= (offset + max) %>?programs=<%= programs %>">verder terug in de tijd</a>
 				<% } %>
 			
 			<% } %>

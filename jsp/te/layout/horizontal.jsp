@@ -6,7 +6,7 @@
 <tr>
 <% for (int x = 0 ; x < components.size(); x++) {%>
   <%Component component = components.getComponent(x); %>
-  <td valign="top" class="<%= component.getName() %>">
+  <td valign="top" class="<%= component.getName()%><%= (component instanceof Container)?"" + x:""%>">
 	 <% component.render(wb,new PrintWriter(out)); %>
   </td>
 <% } %>

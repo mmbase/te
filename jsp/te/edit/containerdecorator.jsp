@@ -7,7 +7,7 @@
 %>
 <% if (container.getLayoutManager().getName().equals("horizontal")) { %>
 <table>
-	<tr><th class="header" colspan="<%= components.size() %>"><%= container.getName() %> -  <%= container.getLayoutManager().getName() %></th></tr>
+	<tr><th colspan="<%= components.size() %>"><%= container.getName() %> -  <%= container.getLayoutManager().getName() %></th></tr>
         <tr>
 <% for (int x = 0 ; x < components.size(); x++) {%>
 	<td valign="top">
@@ -16,9 +16,11 @@
 		<th bgcolor="white"><%= x %></th>
 		</tr>
 		<tr>
-		<td>
 	 <%
 	 	Component component = components.getComponent(x);
+         %>
+        <td class="<%= component.getName()  %><%= (components instanceof Container)? "" + x:""%>">
+         <%
 		component.render(wb,new PrintWriter(out));
 	 %>
 		</td>
@@ -35,10 +37,11 @@
         <tr>
 	<td valign="top"> </td>
 	<td valign="top"><%= x %> </td>
-        <td>
 	 <%
 	 	Component component = components.getComponent(x);
-		component.render(wb,new PrintWriter(out));
+         %>
+        <td class="<%= component.getName()  %><%= (components instanceof Container)? "" + x:""%>">
+	<%	component.render(wb,new PrintWriter(out));
 	 %>
 	</td>
 	</tr>

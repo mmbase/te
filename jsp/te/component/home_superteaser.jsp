@@ -5,6 +5,9 @@
 <mm:cloud>
 <mm:node referid="mapsid">
 	<mm:related path="kaft,posrel,teasers" fields="posrel.pos" constraints="posrel.pos =0 ">
+		<mm:relatednodes type="episodes" max="1">
+			<a href="<te:url/>">
+		</mm:relatednodes>
 		<mm:node element="teasers">
 			<te:field name="title"/>
 			<te:field name="html(body)"/>
@@ -12,6 +15,9 @@
 				 <img src="<mm:image template="s(140x140)+part(10,10,110,100)"/>" align="right"/>
 			</mm:relatednodes>
 		</mm:node>
+		<mm:relatednodes type="episodes" max="1">
+			</a>
+		</mm:relatednodes>
 	</mm:related>
 </mm:node>
 </mm:cloud>

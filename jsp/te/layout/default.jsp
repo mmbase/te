@@ -11,7 +11,7 @@
 <% for (int x = 0 ; x < components.size(); x++) {%>
 <tr>
 <%Component component = components.getComponent(x); %>
-  <td class="<%= component.getName()%>">
+  <td class="<%= component.getName()%><%= (component instanceof Container)?"" + x:""%>">
 	 <%
 		component.render(wb,new PrintWriter(out));
 	 %>

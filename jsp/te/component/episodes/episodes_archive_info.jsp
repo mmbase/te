@@ -30,7 +30,14 @@
 				</mm:field>
 				</div>
 			</mm:relatednodes>
+                
+                <br>
+                 urls:<br>
+                <mm:relatednodes type="urls">
+                     <a href="<mm:field name="url"/>"><mm:field name="description"/></a><br>
+                </mm:relatednodes>
 		</div>
+
 	</mm:relatednodes>
 </mm:node>
 </mm:cloud>
