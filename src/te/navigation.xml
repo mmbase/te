@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE navigation SYSTEM "navigation.dtd">
+<navigation name="sites" id="150">
+  <navigation name="tv" id="132">
+    <navigation name="ram" id="148"/>
+    <navigation name="dokwerk" id="148"/>
+     <navigation name="sportpaleis" id="148"/>
+  </navigation>
+  <navigation name="radio" id="130">
+    <navigation name="argos" id="92"/>
+    <navigation name="madiwodo" id="94"/>
+        <navigation name="ochtenden" id="94"/>
+  </navigation>
+  <entrypoint class="te.edit.EditNavigationControl"/>
+</navigation>

@@ -1,0 +1,35 @@
+/**
+ * @version $Id$
+ **/
+body {
+	color:#3A5060; 
+	font-weight:normal; 
+}
+
+a {
+	color: #146395;
+	font-weight: bold;
+}
+a:hover {
+	color: #146395;
+	font-weight: bold;
+	text-decoration : none;
+}
+
+table {
+	background-color: #EEEEEE;
+	border: 3px solid;
+}
+
+td {  
+	color: #333333;
+	border: 1px solid;
+}
+
+p { 
+	color: #333333;
+}
+
+br { 
+	color: 333333 
+}
