@@ -12,12 +12,13 @@
 <table width="100%">
 <tr>
 <td>
-			<te:field  name="title"/>
+			<mm:field name="number" write="false" jspvar="field">
+			 <a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/afleveringen/" + field%>/">
+			</mm:field>
+		        <te:url/>
+			<te:field  name="title"/></a>
 			<te:field  name="subtitle"/>
 			<te:field  name="substring(html(intro),150,...)"/>
-	<te:field name="number" write="false" jspvar="field">
-	<a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/afleveringen/" + field%>/">&gt;&gt;&gt;&gt;&gt;&gt;</a>
-	</te:field>
 </td>
 <td>
 

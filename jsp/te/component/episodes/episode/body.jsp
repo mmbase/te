@@ -3,7 +3,7 @@
 %>
 <mm:cloud>
 <div class="content">
-	<mm:node number="<%= episodes %>">
+	<mm:node number="<%= ((NavigationParam)findParentParam(navigation,"episodes")).getID() %>">
 	<mm:related path="bcastrel,mmevents" fields="bcastrel.number,bcastrel.rerun" constraints="bcastrel.rerun != 0" >
 		<mm:node element="mmevents">
 			<mm:field name="weekday_start"/>

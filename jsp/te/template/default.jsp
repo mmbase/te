@@ -9,7 +9,7 @@
 	StringBuffer bc = new StringBuffer();
 	Navigation bcNav = navigation;
 	while(bcNav != null && bcNav != mapsNavigation) {
-		bc.insert(0," -> " + bcNav.getName());
+		bc.insert(0," -> " + bcNav.getGUIName());
 		bcNav = bcNav.getParentNavigation();
 	} ;
 	bc.insert(0,bcNav.getName());
@@ -17,7 +17,7 @@
 %><html>
 <%-- find if there is a background image --%>
 <mm:cloud>
-	<mm:list nodes="<%= maps %>" path="maps,images,categories" fields="images.number,categories.name" constraints="categories.name ='background'"  jspvar="vnode">
+	<mm:list nodes="<%= mapsNavigation.getID() %>" path="maps,images,categories" fields="images.number,categories.name" constraints="categories.name ='background'"  jspvar="vnode">
 	 <% background = vnode.getStringValue("images.number") ;%>
         </mm:list>
 </mm:cloud>
@@ -30,6 +30,8 @@
 <% } else { %>
 <body>
 <% } %>
+<div class="<%= template.getName() %>">
 	<%= sw.toString() %>
+</div>
 </body>
 </html>

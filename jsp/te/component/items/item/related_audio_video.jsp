@@ -3,7 +3,7 @@
 %>
 <div class="content">
 <mm:cloud>
-	<mm:node number="<%= items %>">
+	<mm:node number="<%= findParentParam(navigation,"items").getID() %>">
 		<%@include file="../../parts/related.jsp"%>
 	</mm:node>
 </mm:cloud>

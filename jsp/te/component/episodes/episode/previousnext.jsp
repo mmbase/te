@@ -3,7 +3,7 @@
 %>
 <mm:cloud>
 
-	<mm:node number="<%= episodes %>">
+	<mm:node number="<%= ((NavigationParam)findParentParam(navigation,"episodes")).getID() %>">
 <div>
 <table width="100%">
 <tr>

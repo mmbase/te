@@ -1,11 +1,15 @@
 <%@include file="../../../include.jsp"%><%
   Component component = (Component)request.getAttribute("component");
 %>
-<div class="content">
 <mm:cloud>
         <mm:node number="<%= findParentParam(navigation,"news").getID() %>">
-                <%@include file="../../parts/related.jsp"%>
+		<mm:relatednodes type="images">
+<div class="content">
+			<img src="<mm:image template="s(200x200)"/>">
+			<mm:field name="description"/>
+</div>
+<br>
+		</mm:relatednodes>
         </mm:node>
 </mm:cloud>
-</div>
 

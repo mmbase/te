@@ -2,7 +2,7 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<mm:node number="<%= binders %>">
+<mm:node number="<%= findParentParam(navigation,"binders").getID() %>">
 <div class="content">
 	<mm:related path="images,categories" fields="images.number,categories.name" constraints="categories.name='logo'">
 		<mm:node element="images">

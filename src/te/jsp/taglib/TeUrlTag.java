@@ -19,16 +19,23 @@ public class TeUrlTag extends TagSupport {
     public int doEndTag() throws javax.servlet.jsp.JspTagException {
         try {
             NodeProvider np = (NodeProvider) findAncestorWithClass(this, NodeProvider.class);
-            if (np!= null){
-            	name = np.getNodeVar().getNodeManager().getName();
-            }
             WhiteBoard wb = (WhiteBoard) pageContext.getRequest().getAttribute("wb");
-            if (wb != null) {
-                Facade facade = wb.getFacade();
-                pageContext.getOut().write(wb.getCurrentNavigation().getFullURLString() + " " + name + "!");
-            } else {
-                pageContext.getOut().write(" " + name + "!");
+            if (np == null) {
+                pageContext.getOut().write(" url tag not in node provider" + name + "!");
+                return EVAL_PAGE;
             }
+            if (wb == null) {
+                pageContext.getOut().write("no whiteboard in context!");
+                return EVAL_PAGE;
+            }
+
+            String type = np.getNodeVar().getNodeManager().getName();
+
+            Facade facade = wb.getFacade();
+            // FIXME: yup
+            //String url = facade.getNavigationControl().findUrlString(wb.getCurrentNavigation(),type);
+            pageContext.getOut().write("http://www.test.com/");
+
         } catch (java.io.IOException e) {
             throw new JspTagException("IO Error: " + e.getMessage());
         }

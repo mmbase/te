@@ -21,7 +21,11 @@
 				Navigation nav = mavs.getNavigation(z);
 		%>
 			<% if (hash.get(nav) != null) { %>
-			<td class="selectednavigation"><%= nav.getName() %></td>
+			  <% if (nav == navigation) { %>
+			     <td class="selectednavigation">[<%= nav.getName() %>]</td>
+			 <% } else { %>
+			     <td class="selectednavigation">[<%= nav.getName() %> ... ]</td>
+                         <% } %>
 			<% } else { %>
 			<td class="navigation"><a href="<%= facade.getEngineURL() + nav.getFullURLString() %>/"><%= nav.getName() %></a></td>
 			<% } %>

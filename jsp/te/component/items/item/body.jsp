@@ -3,7 +3,7 @@
 %>
 <div class="content">
 <mm:cloud>
-	<mm:node number="<%= items %>">
+	<mm:node number="<%= findParentParam(navigation,"items").getID() %>">
 		<p>
 		<mm:field name="html(intro)"/>
 		</p>

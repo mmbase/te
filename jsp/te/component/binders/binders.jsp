@@ -2,7 +2,7 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
-<mm:node number="<%= maps %>">
+<mm:node number="<%= findParentParam(navigation,"maps").getID() %>">
 <mm:relatednodes type="binders">
 <div class="content">
 	<mm:field name="number" jspvar="field">

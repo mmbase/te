@@ -1,7 +1,7 @@
 <%@include file="../../../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
 %>
-<mm:import externid="newsid"><%= news %></mm:import>
+<mm:import externid="newsid"><%= findParentParam(navigation,"news").getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="newsid">
 <div class="news">
