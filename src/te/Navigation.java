@@ -48,7 +48,7 @@ public interface Navigation extends NavigationResolver {
      * @return the child navigations of this component
      */
     public Navigations getChildNavigations();
-
+	public Navigations getParamChilds();
     public Navigation addChild(Navigation navigation);
     public Navigation addParamChild(Navigation navigation);
     /**

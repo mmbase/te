@@ -167,8 +167,8 @@ public abstract class AbstractNavigation implements Navigation {
                             return resolved;
                         }
                     }
-                    log.debug("resolve via params" + path.current());
-                    Navigations params = getChildNavigations();
+                    log.debug(getName() + " resolve via params " + path.current());
+                    Navigations params = getParamChilds();
                     for (int x = 0; x < params.size(); x++) {
                         Navigation theChild = params.getNavigation(x);
                         Navigation resolved = theChild.resolveNavigation(path);
@@ -218,7 +218,11 @@ public abstract class AbstractNavigation implements Navigation {
         for (int x = 0; x < deep; x++) {
             sb.append(" ");
         }
-        sb.append(getName() + "\n");
+        sb.append(getName() + " " + getClass().getName() );
+		for (int x =0 ; x < paramNavigations.size() ; x++){
+			sb.append( " " + paramNavigations.getNavigation(x).getName());
+		}
+		sb.append("\n");
         for (int x =0 ; x < childNavigation.size() ; x++){
         	childNavigation.getNavigation(x).toString(sb, deep +1); 
         }
@@ -227,5 +231,9 @@ public abstract class AbstractNavigation implements Navigation {
         StringBuffer sb = new StringBuffer();
         toString(sb, 0);
         return sb.toString();
+    }
+    
+    public Navigations getParamChilds(){
+    	return paramNavigations;
     }
 }

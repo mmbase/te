@@ -13,6 +13,6 @@ package te;
  * @author keesj
  * @version $Id$
  */
-public interface ParamNavigation {
+public interface Configurable {
 	void setConfig(String config);
 }

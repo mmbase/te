@@ -41,8 +41,8 @@ public abstract class NavigationLoader {
 			try {
 				paramClass = Class.forName(className);
 				retval = (Navigation) paramClass.newInstance();
-				if (retval instanceof ParamNavigation){
-					((ParamNavigation)retval).setConfig(xmle.toString());
+				if (retval instanceof Configurable){
+					((Configurable)retval).setConfig(xmle.toString());
 				}
 			} catch (ClassNotFoundException e) {
 				log.warn("the xml entry " + xmle + " does not contain a valid class\n" + Logging.stackTrace(e));
@@ -64,6 +64,10 @@ public abstract class NavigationLoader {
             try {
                 entryClass = Class.forName(className);
                 NavigationControl control = (NavigationControl) entryClass.newInstance();
+				if (control instanceof Configurable){
+					((Configurable)control).setConfig(xmle.toString());
+				}
+
                 retval = control.getNavigation();
                 return retval; // we do not need to parse more content
             } catch (ClassNotFoundException e) {

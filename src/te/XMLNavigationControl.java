@@ -66,12 +66,13 @@ public class XMLNavigationControl extends NavigationControl {
         Logging.configure("/home/keesj/mmsite/WEB-INF/config/log/log.xml");
         XMLNavigationControl c = new XMLNavigationControl();
         System.err.println(c.getNavigation());
-        Navigation nav = c.resolveNavigation(new Path("de_wandelende_tak/afleveringen/"));
+        Navigation nav = c.resolveNavigation(new Path("test1/afleveringen/sadfasdf"));
         
 		//Navigation nav = c.resolveNavigation(new Path("admin"));
         if (nav != null) {
 			System.err.println(nav.toString());
             System.err.println(nav.getFullURLString());
+            System.err.println(nav.getProperties());
         } else {
         }
     }

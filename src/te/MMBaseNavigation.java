@@ -8,7 +8,9 @@ See http://www.MMBase.org/license
 
 */
 package te;
-import org.mmbase.bridge.*;
+
+import java.util.Hashtable;
+
 import org.mmbase.util.logging.*;
 
 import te.util.*;
@@ -20,10 +22,9 @@ import minixml.*;
  * the first is the real name of the navigation. the second is a parameter
  * example /episodes/345632
  */
-public class MMBaseNavigation extends AbstractNavigation implements ParamNavigation {
+public class MMBaseNavigation extends AbstractNavigation implements Configurable {
     private static Logger log = Logging.getLoggerInstance(MMBaseNavigation.class);
     private String config = null;
-    private Node node;
     private String type;
     private String field;
     private String guifield;
@@ -38,45 +39,67 @@ public class MMBaseNavigation extends AbstractNavigation implements ParamNavigat
     }
 
     public String getID() {
-        return "" + node.getNumber();
+        return "${" + type + ",number}";
     }
 
     public String getName() {
-        return null;//"MMBASE_PARAM_NAVIGATION";
+        return "${" + type + "," + field + "}";
     }
 
     public String getGUIName() {
         if (guifield == null) {
             return getName();
         }
-        return node.getStringValue(guifield);
+        return "${" + type + "," + guifield + "}";
     }
 
-	
     /* (non-Javadoc)
      * @see te.ParamNavigation#setConfig(java.lang.String)
      */
     public void setConfig(String config) {
-       this.config = config;
-       XMLElement xmle = new XMLElement();
-       xmle.parseString(config);
-       this.type = xmle.getProperty("type");
-       this.field  = xmle.getProperty("field");
-       this.guifield= xmle.getProperty("guifield"); 
-       log.warn("initialised " + type  + " " + field);
+        this.config = config;
+        XMLElement xmle = new XMLElement();
+        xmle.parseString(config);
+        this.type = xmle.getProperty("type");
+        this.field = xmle.getProperty("field");
+        this.guifield = xmle.getProperty("guifield");
+        log.warn("initialised " + type + " " + field);
     }
     /* (non-Javadoc)
      * @see te.NavigationResolver#resolveNavigation(te.Path)
      */
     public Navigation resolveNavigation(Path path) {
-        log.debug("params resolving" + path.current());
-        Navigation st = new StaticNavigation(path.current(),path.current());
-        Navigations n = NavigationLoader.parseXML(config).getChildNavigations();
-        for (int x = 0 ; x < n.size() ; x++){
-                st.addChild(n.getNavigation(x));
+        String current = path.current();
+        if (field.equals("number")) {
+
+            if (current.charAt(0) >= '0' && current.charAt(0) <= '9') {} else {
+                log.debug(current + " is not a number");
+                return null;
+            }
+        } else if (field.equals("title")) {
+            Hashtable hash = new Hashtable();
+            hash.put("test1", "true");
+            hash.put("test2", "true");
+            hash.put("test3", "true");
+            if (hash.get(current) == null) {
+                log.debug(current + " is no valid");
+                return null;
+            }
         }
+        Navigation st = new StaticNavigation(path.current(), path.current());
+        Navigation g = NavigationLoader.parseXML(config);
+        Navigations n = g.getChildNavigations();
+        for (int x = 0; x < n.size(); x++) {
+            st.addChild(n.getNavigation(x));
+        }
+        n = g.getParamChilds();
+        for (int x = 0; x < n.size(); x++) {
+            st.addParamChild(n.getNavigation(x));
+        }
+
+        log.debug("creating a new Navigation for " + path.current() + " result \n" + st.toString());
+
         getParentNavigation().addChild(st);
         return st.resolveNavigation(path);
     }
-
 }
