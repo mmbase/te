@@ -24,16 +24,26 @@ public interface Navigation extends NavigationResolver {
      */
     public String getID();
     /** 
-     * @return the name of the navigation nieuws
+     * @return the name of the navigation (as used in url)
      */
     public String getName();
+    
+    /**
+     * 
+     * @return the name of the navigation (as used in a breadcrum)
+     */
+    public String getGUIName();
+    
+	public void setGUIName(String name);
     public Navigation getChildByName(String name);
     /**
      * 
      * @return the escaped name of the navigation
      */
     public String getURLString();
+        
     public String getFullURLString();
+    
     /**
      * @return the child navigations of this component
      */

@@ -25,7 +25,7 @@ public abstract class AbstractNavigation implements Navigation {
     boolean visible = true;
     NavigationControl navigationControl;
     Navigations childNavigation = new Navigations();
-
+    String guiName = null;
     public AbstractNavigation() {
 
     }
@@ -179,4 +179,14 @@ public abstract class AbstractNavigation implements Navigation {
         }
     }
 
+    public String getGUIName() {
+        if (guiName == null) {
+            return getName();
+        }
+        return guiName;
+    }
+    
+    public void setGUIName(String guiName){
+    	this.guiName = guiName;
+    }
 }

@@ -65,7 +65,8 @@
 
   <!-- news  -->
   <component class="te.jsp.JSPComponent" path="/te/component/magazines/news/news.jsp" name="news" description="display a news item"/>
-  <component class="te.jsp.JSPComponent" path="/te/component/magazines/news/news_related.jsp" name="news_related" description="display a list of items related to news"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/magazines/news/news_related.jsp" name="news_related" description="display a list of audio video etc related to news"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/magazines/news/news_related_images.jsp" name="news_related_images" description="display a list of images related to news"/>
   
   <!-- magazine home page -->
   <component class="te.jsp.JSPComponent" path="/te/component/home_magazine.jsp" name="home_magazine" description="list of news items for the from page "/>

@@ -10,7 +10,7 @@ See http://www.MMBase.org/license
 package nl.vpro;
 
 import org.mmbase.util.logging.*;
-
+import org.mmbase.bridge.*;
 import te.*;
 
 /**
@@ -20,12 +20,12 @@ import te.*;
 public class ItemsNavigation extends AbstractNavigation {
     //TODO:EpisodeNavigation and ItemsNavigation need to be made generic
     private static Logger log = Logging.getLoggerInstance(ItemsNavigation.class);
-    String name = "items";
+    String name = "Items";
     String id = "items";
-    Navigations childNavigation = new Navigations();
 
     public ItemsNavigation() {
         super();
+        setProperty("type", "itempage");
     }
 
     public String getID() {
@@ -36,9 +36,6 @@ public class ItemsNavigation extends AbstractNavigation {
         return name;
     }
 
-    public Navigations getChildNavigations() {
-        return childNavigation;
-    }
 
     public Navigation resolveNavigation(Path path) {
         //the current nav
@@ -54,17 +51,23 @@ public class ItemsNavigation extends AbstractNavigation {
             String number = path.next();
             try {
                 Integer.parseInt(number);
-                if (childNavigation.getNavigationByName(number) == null) {
-                    StaticNavigation nav = new StaticNavigation(number, number);
-                    nav.setParentNavigation(this);
-                    nav.setProperty("type", "itempage");
-					nav.setProperty("nodemanager", "items");
-					nav.setProperty("number", number);
-                    nav.setParentNavigation(this);
-                    childNavigation.add(nav);
+                if (getChildByName(number) == null) {
+                    try {
+                        Cloud cloud = ContextProvider.getDefaultCloudContext().getCloud("mmbase");
+                        Node node = cloud.getNode(number);
+                        StaticNavigation nav = new StaticNavigation(number, number);
+                        nav.setGUIName(node.getStringValue("title"));
+                        nav.setProperty("type", "itempage");
+                        nav.setProperty("nodemanager", "items");
+                        nav.setProperty("number", number);
+                        addChild(nav);
+
+                    } catch (Throwable t) {
+                        log.warn("invalid node number" + number);
+                    }
                 }
                 log.debug("current item = " + number);
-                
+
             } catch (NumberFormatException e) {
             }
             path.previous();

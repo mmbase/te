@@ -15,5 +15,14 @@ public class Navigations extends Vector {
     	}
     	return null;
     }
-}   
- 
+    
+	public Navigation getNavigationById(String id){
+		 for (int x = 0 ; x < size() ; x++){
+				 Navigation nav = getNavigation(x);
+				 if (nav.getName().equals(id)){
+					 return nav;
+				 }
+		 }
+		 return null;
+	 }
+}  

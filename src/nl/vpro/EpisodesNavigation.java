@@ -12,6 +12,8 @@ package nl.vpro;
 import org.mmbase.util.logging.*;
 
 import te.*;
+import org.mmbase.bridge.*;
+
 /**
  * @author keesj
  * @version $Id$
@@ -50,15 +52,20 @@ public class EpisodesNavigation extends AbstractNavigation {
                 log.debug("current episode = " + number);
                 //create a navigation item
                 if (getChildByName(number) == null) {
-                    StaticNavigation nav = new StaticNavigation(number, number);
-                    nav.setProperty("type", "episodepage");
-                    nav.setProperty("nodemanager", "episodes");
-                    nav.setProperty("number", number);
+                    try {
+                        Cloud cloud = ContextProvider.getDefaultCloudContext().getCloud("mmbase");
+                        Node node = cloud.getNode(number);
 
-                    Navigation navigation = new ItemsNavigation(); //new StaticNavigation("items", "items");
-                    navigation.setProperty("type", "itempage");
-                    nav.addChild(navigation);
-                    addChild(nav);
+                        StaticNavigation nav = new StaticNavigation(number, number);
+                        nav.setGUIName(node.getStringValue("title"));
+                        nav.setProperty("type", "episodepage");
+                        nav.setProperty("nodemanager", "episodes");
+                        nav.setProperty("number", number);
+						nav.addChild(new ItemsNavigation());                                                
+                        addChild(nav);
+                    } catch (Throwable t) {
+                        log.warn("invalid node number" + number);
+                    }
                 }
             } catch (NumberFormatException e) {
             }

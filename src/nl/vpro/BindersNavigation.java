@@ -10,7 +10,7 @@ See http://www.MMBase.org/license
 package nl.vpro;
 
 import org.mmbase.util.logging.*;
-
+import org.mmbase.bridge.*;
 import te.*;
 
 /**
@@ -51,11 +51,18 @@ public class BindersNavigation extends AbstractNavigation {
             try {
                 Integer.parseInt(number);
                 if (getChildByName(number) == null) {
-                    StaticNavigation nav = new StaticNavigation(number, number);
-                    nav.setProperty("type", "binderpage");
-                    nav.setProperty("nodemanager", "binders");
-                    nav.setProperty("number", number);
-                    addChild(nav);
+                    try {
+                        Cloud cloud = ContextProvider.getDefaultCloudContext().getCloud("mmbase");
+                        Node node = cloud.getNode(number);
+						StaticNavigation nav = new StaticNavigation(number, number);
+						nav.setGUIName(node.getStringValue("title"));
+						nav.setProperty("type", "binderpage");
+						nav.setProperty("nodemanager", "binders");
+						nav.setProperty("number", number);
+						addChild(nav);
+                    } catch (Throwable t) {
+                        log.warn("invalid node number" + number);
+                    }
                 }
                 log.debug("current binder = " + number);
             } catch (NumberFormatException e) {

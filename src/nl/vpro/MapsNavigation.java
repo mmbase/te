@@ -37,7 +37,10 @@ public class MapsNavigation extends AbstractNavigation {
         addChild(new EpisodesNavigation());
         addChild(new BindersNavigation());
         addChild(new MagazinesNavigation());
-        addChild(new StaticNavigation("search", "zoeken")).setProperty("type", "searchpage");
+        addChild(new StaticNavigation("search", "Zoeken")).setProperty("type", "searchpage");
+		Navigation edit = addChild(new StaticNavigation("edit", "edit"));
+		edit.setProperty("template", "/te/edit/index.jsp");
+		edit.setVisible(false);
 
     }
 

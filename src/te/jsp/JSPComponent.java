@@ -34,6 +34,7 @@ public class JSPComponent extends AbstractContainer implements Component {
     }
 
     public void render(WhiteBoard wb, PrintWriter writer) throws ServletException, IOException {
+    	long start = System.currentTimeMillis();
         log.debug(" render {" + path + "} ");
         try {
 
@@ -54,6 +55,7 @@ public class JSPComponent extends AbstractContainer implements Component {
             wb.getHttpServletRequest().setAttribute("throwable", t);
             new JSPComponent("/te/component/error.jsp").render(wb, writer);
         }
+		log.debug("finised render {" + path + "} " + ((start - System.currentTimeMillis())/ 1000));
     }
 
     /* (non-Javadoc)
