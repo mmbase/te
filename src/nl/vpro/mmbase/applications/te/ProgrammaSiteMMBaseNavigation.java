@@ -22,7 +22,7 @@ import te.util.*;
  * @version $Id$
  */
 public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
-    private static Logger log = Logging.getLoggerInstance(MMBaseNavigation.class);
+    private static Logger log = Logging.getLoggerInstance(ProgrammaSiteMMBaseNavigation.class);
     private Cloud _cloud;
 
     public ProgrammaSiteMMBaseNavigation() {
@@ -124,16 +124,13 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
 
     private static Cloud getCloud() {
         return ContextProvider.getDefaultCloudContext().getCloud("mmbase");
-        //return ContextProvider.getCloudContext("rmi://127.0.0.1:1111/remotecontext").getCloud("mmbase");
+        
     }
 
     private Cloud getTemplateCloud() {
         if (_cloud == null || !_cloud.getUser().isValid()) {
-            CloudContext cloudContext = ContextProvider.getCloudContext("rmi://localhost:1111/templates");
-            HashMap user = new HashMap();
-            user.put("username", "admin");
-            user.put("password", "admin2k");
-            _cloud = cloudContext.getCloud("mmbase", "name/password", user);
+            CloudContext cloudContext = ContextProvider.getDefaultCloudContext();
+            _cloud = cloudContext.getCloud("mmbase");
         }
         return _cloud;
     }
