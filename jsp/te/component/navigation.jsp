@@ -1,4 +1,11 @@
-<%@include file="../include.jsp"%><% 
+<%@include file="../include.jsp"%>
+<% Properties p = new Properties() ;%>
+<mm:cloud uri="rmi://127.0.0.1:1111/templates">
+<mm:node number="<%= mapsNavigation.getProperty("tesites") %>" jspvar="myNode">
+	<% p.load(new ByteArrayInputStream(myNode.getStringValue("properties").getBytes())); %>
+</mm:node>
+</mm:cloud>
+<% 
   Component component = (Component)request.getAttribute("component");
   //create a hash of selected navigations
   Hashtable hash = new Hashtable();
@@ -20,7 +27,7 @@
 			for (int z =0 ;z < mavs.size() ; z++ ) {
 				Navigation nav = mavs.getNavigation(z);
 		%>
-			<% if ( nav.getProperty("visible") == null) { %>
+			<% if ( nav.getProperty("visible") == null && p.getProperty("navigation." + nav.getID() + ".visible","true").equals("true")  ) { %>
 				<% if (hash.get(nav) != null  ) { %>
 				  <% if (nav == navigation) { %>
 				     <td class="selectednavigation" background="http://images.vpro.nl/img.db?kaft_kader_wit_v_gif+f(gif)+flipx+part(292x0x400x50)+colorizehex(ffff00)"><%= nav.getName() %></td>
@@ -58,7 +65,7 @@
 		<% for (int z =0 ;z < mavs.size() ; z++ ) {
 			Navigation nav = mavs.getNavigation(z);
 		%>
-			<% if ( nav.getProperty("visible") == null) { %>
+			<% if ( nav.getProperty("visible") == null && p.getProperty("navigation." + nav.getID() + ".visible","true").equals("true")  ) { %>
 				<% if (hash.get(nav) != null  ) { %>
 				  <% if (nav == navigation) { %>
 		    <td class="selectednavigationbridge" background="http://images.vpro.nl/img.db?kaft_kader_wit_v_gif+f(gif)+flipx+part(292x26x400x50)+colorizehex(ffff00)">

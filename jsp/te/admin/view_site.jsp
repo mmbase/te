@@ -59,6 +59,43 @@
 			</mm:compare>
 			<mm:compare value="0">niet actief <a href="activate_site.jsp?number=<mm:field name="number"/>">activeren</a></mm:compare>	
 		</mm:field></a></td> </tr>
+    	<%-- navigation --%>
+	<tr><td align="right">Navigatie</td> <td> 
+		<mm:field name="state">
+			<mm:compare value="0" inverse="true">
+				<mm:cloud><%-- VPRO cloud --%>
+				<mm:node number="<%= node.getStringValue("maps") %>" jspvar="navNode">
+<%
+            List list = new Vector();
+            list.add(navNode);
+            String content  = facade.getNavigationControl().resoveURL(wb.getCurrentNavigation(),list);
+	    Path path = new Path(content);
+	    path.next();
+	    Navigation navi = facade.getNavigationControl().resolveNavigation(path);
+%>
+           <% if (navi != null) {
+                Navigations mavs = navi.getChildNavigations();
+                for (int z =0 ;z < mavs.size() ; z++ ) {
+                                Navigation nav = mavs.getNavigation(z);
+                %>
+		<% Properties p = new Properties(); 
+		   p.load(new ByteArrayInputStream(node.getStringValue("properties").getBytes()));
+                %>
+		 <% if (nav.getProperty("visible") == null) { %>
+			<% if ( p.getProperty("navigation." + nav.getID() + ".visible","true").equals("true")        ) { %>
+			   <a href="change_property.jsp?number=<%= node.getNumber() %>&name=navigation.<%=nav.getID() + ".visible&value=false" %>"><%= nav.getName() %></a>
+			<% } else { %>
+			   <strike>
+			   <a href="change_property.jsp?number=<%= node.getNumber() %>&name=navigation.<%=nav.getID() + ".visible&value=true" %>"><%= nav.getName() %></a>
+			   </strike>
+			<% } %>
+		<% } %>
+                <% } %>
+	   <% } %>	
+				</mm:node>
+				</mm:cloud>
+			</mm:compare>
+		</mm:field></a></td> </tr>
 </table>
 </div>
 </mm:node>
