@@ -62,6 +62,7 @@
   <component class="te.jsp.JSPComponent" path="/te/component/magazines/magazine.jsp" name="magazine" description="info about the magazine related to a map"/>
   <!-- news  -->
   <component class="te.jsp.JSPComponent" path="/te/component/magazines/news/news.jsp" name="news" description="display a news item"/>
+    <component class="te.jsp.JSPComponent" path="/te/component/magazines/news/news_prev_next.jsp" name="news_prev_next" description="display the previous and next  news item"/>
   <!-- magazine home page -->
   <component class="te.jsp.JSPComponent" path="/te/component/home_magazine.jsp" name="home_magazine" description="list of news items for the from page "/>
   <component class="te.jsp.JSPComponent" path="/te/component/home_related_episodes.jsp" name="home_related_episodes" description="list of episodes of a program"/>

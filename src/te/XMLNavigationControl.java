@@ -149,14 +149,14 @@ public class XMLNavigationControl extends NavigationControl {
 
         Paths p = new Paths();
         p.addAll(getPaths());
-	
+
         //log.debug("resolve URL " + currentNavigation.getFullURLString() + " " + params);
 
         //descriminate by removing the impossible paths
         for (int x = 0; x < params.size(); x++) {
             Object o = params.get(x);
             if (o instanceof Node) {
-                Node node = (Node) params.get(0);
+                Node node = (Node) params.get(x);
                 String type = node.getNodeManager().getName();
                 //find a navigation with this type
                 Iterator iter = p.iterator();
@@ -167,7 +167,10 @@ public class XMLNavigationControl extends NavigationControl {
                         iter.remove();
                     } else {
                         if (hash.get(type) == null) {
+                        	//log.debug("adding param of type " + type + " with node " + node);
                             hash.put(type, node);
+                        } else {
+							//log.debug("param of type " + type + " already existed" );
                         }
                     }
                 }
@@ -226,7 +229,7 @@ public class XMLNavigationControl extends NavigationControl {
                             sb.append(URLConverter.toURL(node.getStringValue(field)));
                             sb.append("/");
                         } else {
-                            //log.debug("I don't know what to do with objects of type " + o.getClass().getName() + " " + o);
+                            log.debug("I don't know what to do with objects of type " + o.getClass().getName() + " " + o);
                             //p.remove(z);
                             //z--;
                             //done = true;
@@ -257,9 +260,9 @@ public class XMLNavigationControl extends NavigationControl {
         }
         if (retval.size() > 1) {
             log.warn("remaining " + retval);
-        } else if (retval.size() == 0 ) {
-			log.warn("did not resolve navigation params={" + currentNavigation +"," + params + "}");
-			return null;
+        } else if (retval.size() == 0) {
+            log.warn("did not resolve navigation params={" + currentNavigation + "," + params + "}");
+            return null;
         }
         //there are still multiple paths
         return Engine.getFacade().getEngineURL() + retval.getPath(0).fullPath;

@@ -6,7 +6,6 @@
   <component name="navigation"/>
   <container name="horizontal" layout="horizontal">
       <container name="vertical">
-      	    <component name="breadcrum"/>
    	        <component name="binder"/>
      </container>
      <component name="binder_content"/>

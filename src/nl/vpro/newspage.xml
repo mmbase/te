@@ -6,10 +6,12 @@
   <component name="navigation"/>
   <container name="horizontal" layout="horizontal">
     <container name="vertical">
-   	    <component name="breadcrum"/>
 	    <component name="related_images"/>
     </container>
-    <component name="news"/>
+    <container name="vertical">
+        <component name="news_prev_next"/>
+       <component name="news"/>
+    </container>
     <component name="related_audio_video"/>
   </container>
 </template>
