@@ -24,4 +24,8 @@ public class ContainerDecorator extends JSPContainer{
 	public Container getDecoratedContainer(){
 		return container;
 	}
+	
+	public String getName(){
+		return container.getName();
+	}
 }

@@ -16,4 +16,8 @@ public class ComponentDecorator extends JSPComponent {
     public Component getDecoratedComponent(){
     	return component;
     }
+    
+    public String getName(){
+    	return component.getName();
+    }
 }
