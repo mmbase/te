@@ -35,9 +35,11 @@ function mouseDown(e) {
 					 move = true;
 		          var element = document.getElementById("monitor");
 					 element.innerHTML ="start move window ";
+		          eventStartX = getEventPosX(e);
+		          eventStartY = getEventPosY(e);
+					 return false;
 		  }
-		  eventStartX = getEventPosX(e);
-		  eventStartY = getEventPosY(e);
+		  return true;
 }
 
 
@@ -73,13 +75,14 @@ function getEventPosY(event){
 
 
 function mouseUp(e) {
-		  move = false;
+		move = false;
       var element = document.getElementById("monitor");
 			if (currentDiv != null && dropTarget != null){
 					dropTarget.innerHTML = "Drop here";
+					//dropTarget.value = currentDiv.innerHTML;
 			}
-			currentDiv = null;
-		  element.innerHTML ="stop move window ";
+		currentDiv = null;
+	   element.innerHTML ="stop move window ";
 
 }
 function mouseMove(e) {
@@ -100,7 +103,9 @@ function mouseMove(e) {
 					   currentDiv.style.left =   currentDivStartX + divx;
 					   currentDiv.style.top =   currentDivStartY + divy;
 					  }
+					  return true;
 		  }
+		  return false;
 }
 if (document.captureEvents){
 	document.captureEvents(Event.MOUSEDOWN | Event.MOUSEMOVE | Event.MOUSEUP);
