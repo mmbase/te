@@ -9,12 +9,9 @@ See http://www.MMBase.org/license
 */
 package te.util;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import org.mmbase.util.logging.*;
-
-import te.Facade;
 /**
  * @author Kees Jongenburger
  */
@@ -49,11 +46,14 @@ public abstract class URLConverter {
                     sb.append(current);
             }
         }
-        try {
-            return URLEncoder.encode(sb.toString(), Facade.encoding);
+        return URLEncoder.encode(sb.toString());
+        //		java 1.4
+        /* try {
+        	return URLEncoder.encode(sb.toString(), Facade.encoding);
         } catch (UnsupportedEncodingException e) {
             log.debug(Logging.stackTrace(e));
         }
-        return null;
+        */
+        
     }
 }

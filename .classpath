@@ -7,6 +7,6 @@
     <classpathentry kind="lib" path="lib/runtime/minixml.jar"/>
     <classpathentry kind="lib" path="lib/testtime/junit.jar"/>
     <classpathentry kind="lib"
-        path="/home/keesj/work/mmbase/build/mmbase.jar" sourcepath="/mmbase/src"/>
+        path="/home/keesj/server/webapp/WEB-INF/lib/mmbase.jar" sourcepath="/home/keesj/server/mmbase/src"/>
     <classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -14,29 +14,28 @@ import java.io.IOException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import org.mmbase.module.core.MMBaseContext;
+import org.mmbase.servlet.*;
 import org.mmbase.util.logging.*;
 
-
 /**
- * Engine is a Filter servlet that acts as a front servlet the main purpose of the filter is 
+ * Engine is a Servlet that acts as a front servlet the main purpose of the filter is 
  * to choose the right template .
   * @author Kees Jongenburger
  */
-public class Engine implements Filter {
+public class Engine extends BridgeServlet {
 
     private static String engineName = "engine";
     //every time a new EngineFacade is created a the counter is increased 
-    private static long filterCreationCounter = 0;
+    private static long creationCounter = 0;
 
     //	every time the EngineFacade is destroy is called a the counter is increased
-    private static long filterDestroyCounter = 0;
+    private static long destroyCounter = 0;
 
     //request counter shared over the different engines
     private static int requestCounter = 0;
 
     //the configuration of the filter
-    private FilterConfig filterConfig = null;
+    //private ServletConfig servletConfig = null;
 
     //we have a separate logger for the different instances
     private Logger log = null;
@@ -46,35 +45,38 @@ public class Engine implements Filter {
     /**
      *
      */
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init() throws ServletException {
+        super.init();
         try {
 
-            filterCreationCounter++;
-            this.filterConfig = filterConfig;
+            creationCounter++;
 
-            MMBaseContext.init(filterConfig.getServletContext());
-            MMBaseContext.initHtmlRoot();
-            filterConfig.getServletContext();
-            log = Logging.getLoggerInstance(Engine.class.getName() + "[" + filterCreationCounter + "]");
-            log.info("init of engine with name " + this.filterConfig.getFilterName());
+            log = Logging.getLoggerInstance(Engine.class.getName() + "[" + creationCounter + "]");
+            log.info("init of engine with name " + getServletConfig().getServletName());
             facade = new FacadeImpl();
         } catch (Throwable t) {
             log.fatal(t.getMessage() + " " + Logging.stackTrace(t));
         }
     }
 
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void destroy() {
+        destroyCounter++;
+    }
+    /* (non-Javadoc)
+     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+     */
+    public void doGet(HttpServletRequest servletRequest, HttpServletResponse servletResponse) throws ServletException, IOException {
         try {
 
             requestCounter++;
-            HttpServletRequest req = (HttpServletRequest)servletRequest;
-            HttpServletResponse resp = (HttpServletResponse)servletResponse;
-			//code to determin the "engine url"             
+            HttpServletRequest req = (HttpServletRequest) servletRequest;
+            HttpServletResponse resp = (HttpServletResponse) servletResponse;
+            //code to determin the "engine url"             
             if (facade.getEngineURL() == null) {
                 String servletPath = req.getRequestURI();
                 int match = servletPath.indexOf(engineName);
                 if (match > 0) {
-                    facade.setEngineURL(servletPath.substring(0,match + engineName.length() + 1));
+                    facade.setEngineURL(servletPath.substring(0, match + engineName.length() + 1));
                     log.debug("setting engine url to" + facade.getEngineURL());
                 } else {
                     log.warn("it looks like the engine is not called \"engine\" unable to determin the engine url");
@@ -95,7 +97,7 @@ public class Engine implements Filter {
             //this is the starting point
             String path = req.getRequestURI().substring(facade.getEngineURL().length());
 
-			//remove leading slashes
+            //remove leading slashes
             while (path.charAt(path.length() - 1) == '/') {
                 path = path.substring(0, path.length() - 1);
             }
@@ -103,7 +105,7 @@ public class Engine implements Filter {
             if (log.isDebugEnabled()) {
                 log.debug("request[" + requestCounter + "] servlet path info " + req.getPathInfo());
                 log.debug("request[" + requestCounter + "] servlet request uri " + req.getRequestURI());
-                log.debug("request[" + requestCounter + "] servlet request url " + req.getRequestURL());
+                //log.debug("request[" + requestCounter + "] servlet request url " + req.getRequestURL());
                 log.debug("request[" + requestCounter + "] servlet context path " + req.getContextPath());
                 log.debug("request[" + requestCounter + "] servlet  path " + req.getServletPath());
                 log.debug("request[" + requestCounter + "] guesed filter path " + facade.getEngineURL());
@@ -157,7 +159,4 @@ public class Engine implements Filter {
         }
     }
 
-    public void destroy() {
-        filterDestroyCounter++;
-    }
 }
