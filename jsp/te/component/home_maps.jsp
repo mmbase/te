@@ -21,7 +21,7 @@
 
 	<mm:relatednodes type="serviceinfo">
 		<mm:first><br>service info:<BR></mm:first>
-		<te:field name="title"/>
+		<a href="<te:url/>"><te:field name="title"/></a>
 		<te:field name="subtitle"/>
 	</mm:relatednodes>
 	<mm:relatednodes type="urls">

@@ -5,9 +5,9 @@
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
+<table width="400">
 	<mm:related path="magazines,news" max="3"> 
 <div class="news">
-<table width="400">
  <tr>
 		<mm:node element="news">
 		<td>
@@ -22,8 +22,8 @@
 		</td>
 			</mm:node>
  </tr>
-</table>
 	</mm:related>
+</table>
 </div>
 </mm:node>
 </mm:cloud>

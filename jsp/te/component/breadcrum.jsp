@@ -5,7 +5,9 @@
   Stack stack = new Stack();
   Navigation bcNav = navigation;
   while(bcNav != null && bcNav != mapsNavigation) {
-       stack.push(bcNav);
+       if (bcNav.getProperty("type") != null){
+          stack.push(bcNav);
+       }
        bcNav = bcNav.getParentNavigation();
    } ;
 %>
