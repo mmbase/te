@@ -37,7 +37,6 @@ public class ProgrammaSiteTemplate extends JSPTemplate implements Template {
 
     public void renderRelative(String path, WhiteBoard wb) throws ServletException, IOException {
         log.debug("render relative");
-        //TODO: TEST this code navigation control
         //one exception for vpro for backwards compatibility
         if (path.indexOf("index.shtml") != -1) {
             log.debug("detected old index.shtml trying automatic conversion");

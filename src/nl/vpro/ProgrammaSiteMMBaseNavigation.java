@@ -17,6 +17,7 @@ import org.mmbase.util.logging.*;
 import te.*;
 import te.util.*;
 /**
+ * Programma site MMBase navigation
  * @author keesj
  * @version $Id$
  */
@@ -31,7 +32,6 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
     }
 
     public Navigation resolveNavigation(Path path) {
-
         log.debug("resolve " + path.current());
         String current = path.current();
 
@@ -116,8 +116,8 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
         Node siteNode = (Node) siteMapsHash.get("" + node.getNumber());
         //Node templateNode = templateCloud.getNode(siteNode.getIntValue("frontpage"));
         st.setProperty("type", siteNode.getStringValue("frontpage"));
-        log.debug("creating a new Navigation for " + path.current() + " result style ={"+siteNode.getStringValue("name") +"} \n" + st.toString());
-        st.setProperty("tesites","" +siteNode.getNumber());
+        log.debug("creating a new Navigation for " + path.current() + " result style ={" + siteNode.getStringValue("name") + "} \n" + st.toString());
+        st.setProperty("tesites", "" + siteNode.getNumber());
         getParentNavigation().addChild(st);
         return st.resolveNavigation(path);
     }
