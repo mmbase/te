@@ -1,15 +1,32 @@
-<filter>
-  <filter-name>TE</filter-name>
-  <display-name>TE</display-name>
-  <description>TE</description>
-  <filter-class>te.Engine</filter-class>
-</filter>
+<config>
+	<!-- to use the engine as servlet use this -->
+	<!--
+  <servlet>
+    <servlet-name>TemplateEngine</servlet-name>
+    <display-name>TemplateEngine</display-name>
+    <servlet-class>te.Engine</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>servscan</servlet-name>
+    <url-pattern>/engine/*</url-pattern>
+  </servlet-mapping>
+	-->
 
-<filter-mapping>
-  <filter-name>TE</filter-name>
-  <url-pattern>/engine/*</url-pattern>
-</filter-mapping>
+	<!-- to use the engine as servlet use this -->
+	<!--
+  <filter>
+    <filter-name>TemplateEngine</filter-name>
+    <display-name>TemplateEngine</display-name>
+    <description>TemplateEngine</description>
+    <filter-class>te.Engine</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>TemplateEngine</filter-name>
+    <url-pattern>/engine/*</url-pattern>
+  </filter-mapping>
+	-->
   <taglib>
     <taglib-uri>http://www.mmbase.org/te-taglib-1.0</taglib-uri>
-	 <taglib-location>/WEB-INF/te-taglib.tld</taglib-location>
-  <taglib>
+    <taglib-location>/WEB-INF/te-taglib.tld</taglib-location>
+  </taglib>
+</config>
