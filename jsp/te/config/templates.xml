@@ -1,0 +1,11 @@
+<templates>
+	<template name="afleveringssite" layout="listlayout">
+		<component name="page_head"/>
+		<component name="navigation"/>
+		<container name="content">
+		   <component name="maps"/>
+		   <component name="afleveringen"/>
+		   <component name="news"/>
+                </container>
+	</template>
+</templates>
