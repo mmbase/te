@@ -18,5 +18,5 @@ package te;
  * some Navigations might be able to resolve the path futher . they then must implements the NavigationResolver  
  */
 public interface NavigationResolver {
-	public Navigation resolveNavigation(String path,WhiteBoard wb);
+	public Navigation resolveNavigation(Path path);
 }

@@ -20,15 +20,34 @@ import te.*;
  */
 public class MapsNavigation extends AbstractNavigation {
     private static Logger log = Logging.getLoggerInstance(MapsNavigation.class);
-    public Node node;
+    private Node node;
+    Navigations childs = new Navigations();
     public MapsNavigation(Node node) {
         this.node = node;
         if (node.getStringValue("title").startsWith("Madi")) {
-			setProperty("type", "weekhomepage");
+            setProperty("type", "weekhomepage");
         } else {
             setProperty("type", "episodeshomepage");
         }
-        setProperty("maps", "" + node.getNumber());
+        setProperty("nodemanager", "maps");
+        setProperty("number", "" + node.getNumber());
+
+        Navigation archive = new EpisodesNavigation();
+        archive.setNavigationControl(getNavigationControl());
+        archive.setParentNavigation(this);
+        childs.add(archive);
+
+        Navigation binders = new BindersNavigation();
+        binders.setProperty("type", "binderpage");
+        binders.setNavigationControl(getNavigationControl());
+        binders.setParentNavigation(this);
+        childs.add(binders);
+
+        Navigation search = new StaticNavigation("search", "zoeken");
+        search.setProperty("type", "searchpage");
+        search.setNavigationControl(getNavigationControl());
+        search.setParentNavigation(this);
+        childs.add(search);
 
     }
 
@@ -39,49 +58,9 @@ public class MapsNavigation extends AbstractNavigation {
     public String getName() {
         return node.getStringValue("title");
     }
+    
 
     public Navigations getChildNavigations() {
-        Navigations retval = new Navigations();
-
-
-        Navigation archive = new EpisodesNavigation();
-        archive.setProperty("type", "episodepage");
-        archive.setNavigationControl(getNavigationControl());
-        archive.setParentNavigation(this);
-        retval.add(archive);
-
-		Navigation binders = new BindersNavigation();
-		binders.setProperty("type", "binderpage");
-		binders.setNavigationControl(getNavigationControl());
-		binders.setParentNavigation(this);
-		retval.add(binders);
-
-        Navigation navigation = new StaticNavigation("edit", "edit");
-        navigation.setProperty("template", "/te/edit/index.jsp");
-        navigation.setNavigationControl(getNavigationControl());
-        navigation.setParentNavigation(this);
-		retval.add(navigation);
-		
-		Navigation search = new StaticNavigation("search", "zoeken");
-		search.setProperty("type", "searchpage");
-		search.setNavigationControl(getNavigationControl());
-		search.setParentNavigation(this);
-		retval.add(search);
-        
-
-        return retval;
-    }
-
-    /* (non-Javadoc)
-     * @see te.NavigationResolver#resolveNavigation(java.lang.String, te.WhiteBoard)
-     */
-    public Navigation resolveNavigation(String path, WhiteBoard wb) {
-
-        Navigation nav = super.resolveNavigation(path, wb);
-        if (nav != null) {
-            log.debug("setting current maps (program){" + node.getStringValue("title") + "} in whiteboard.");
-            wb.getHttpServletRequest().setAttribute("maps", "" + node.getNumber());
-        }
-        return nav;
+    	return childs;
     }
 }

@@ -124,7 +124,7 @@ public class Engine extends BridgeServlet {
 
             NavigationControl navigationComponent = facade.getNavigationControl();
             //resolve the current navigation
-            Navigation nav = navigationComponent.resolveNavigation(path, wb);
+            Navigation nav = navigationComponent.resolveNavigation(new Path(path));
             if (nav != null) {
                 //if the navigation was found put it in the whiteboard
                 wb.setCurrentNavigation(nav);
@@ -133,7 +133,10 @@ public class Engine extends BridgeServlet {
 
                 try {
                     Template t = navigationComponent.getTemplate(nav);
+                    log.debug("using template: " + t.getName() + " " + t.getDescription());
                     if (!path.equals(navpath)) {
+                    	log.debug("navpath " + navpath);
+						log.debug("path " + path);
                         String remainingPath = path.substring(navpath.length() + NavigationControl.PATH_SEPARATOR.length());
                         //call with the writer being null since the renderRelative may forward and not include it's data
                         t.renderRelative(remainingPath, wb);

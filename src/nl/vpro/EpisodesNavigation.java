@@ -9,10 +9,9 @@ See http://www.MMBase.org/license
 */
 package nl.vpro;
 
-import java.util.*;
+import org.mmbase.util.logging.*;
 
 import te.*;
-import org.mmbase.util.logging.*;
 /**
  * @author keesj
  * @version $Id$
@@ -42,25 +41,17 @@ public class EpisodesNavigation extends AbstractNavigation {
         return retval;
     }
 
-    public Navigation resolveNavigation(String path, WhiteBoard wb) {
-        StringTokenizer st = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR);
-
+    public Navigation resolveNavigation(Path path) {
         //the current nav
-        if (st.hasMoreTokens()) {
-            String name = st.nextToken();
+        if (path.hasCurrent()) {
+            String name = path.current();
             if (!name.equals(getURLString())) {
                 return null;
             }
         }
-        //the separator
-        if (! st.hasMoreTokens()) {
-            //if there was not spearator .. this navigation is the current navigation
-            return this;
-        }
-
-        //the episode number
-        if (st.hasMoreTokens()) {
-            String number = st.nextToken();
+		//the item number
+		if (path.hasNext()) {
+			String number = path.next();
             try {
                 Integer.parseInt(number);
                 log.debug("current episode = " + number);
@@ -69,7 +60,9 @@ public class EpisodesNavigation extends AbstractNavigation {
                     StaticNavigation nav = new StaticNavigation(number, number);
                     nav.setParentNavigation(this);
                     nav.setProperty("type", "episodepage");
-
+					nav.setProperty("nodemanager", "episodes");
+					nav.setProperty("number", number);
+                    
                     Navigation navigation = new ItemsNavigation(); //new StaticNavigation("items", "items");
                     navigation.setProperty("type", "itempage");
                     navigation.setNavigationControl(getNavigationControl());
@@ -79,11 +72,10 @@ public class EpisodesNavigation extends AbstractNavigation {
                     realChildNav.add(nav);
 
                 }
-                //nav.setNavigationControl(getNavigationControl());
-                wb.getHttpServletRequest().setAttribute("episodes", number);
             } catch (NumberFormatException e) {
             }
+            path.previous();
         }
-        return super.resolveNavigation(path, wb);
+        return super.resolveNavigation(path);
     }
 }

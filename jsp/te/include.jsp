@@ -11,14 +11,30 @@ page import="java.io.*"%><%
   Facade facade = wb.getFacade();
   Navigation navigation = wb.getCurrentNavigation();
   Navigation mapsNavigation = navigation;
-  while (mapsNavigation.getProperty("maps") == null){
-	mapsNavigation = mapsNavigation.getParentNavigation();
-        if (mapsNavigation == null){
-		throw new Exception("can not find the maps navigation");
+  String maps ="";
+  String episodes ="";
+  String items ="";
+  String binders ="";
+  Navigation finder = navigation;
+  while (finder != null){
+        System.err.println(finder.getName() + " "+ finder.getProperties());
+	if (finder.getProperty("nodemanager") != null){
+		String nodemanager = finder.getProperty("nodemanager");
+		if (nodemanager.equals("maps")){
+			maps = finder.getProperty("number");
+	                mapsNavigation = finder;	
+		}
+		if (nodemanager.equals("episodes")){
+			episodes = finder.getProperty("number");
+		        System.err.println("episodes  = " + episodes);
+		}
+		if (nodemanager.equals("items")){
+			items = finder.getProperty("number");
+		}
+		if (nodemanager.equals("binders")){
+			binders = finder.getProperty("number");
+		}
 	}
+	finder=finder.getParentNavigation();
   }
-  String maps= (String)request.getAttribute("maps");
-  String episodes= (String)request.getAttribute("episodes");
-  String items= (String)request.getAttribute("items");
-  String binders= (String)request.getAttribute("binders");
 %>

@@ -1,5 +1,6 @@
 <%@include file="../include.jsp"%><% 
   Template template = (Template)request.getAttribute("template");
+  //add header here otherwise this will not work
   response.addHeader("Cache-Control","no-cache");
   response.addHeader("Pragma","no-cache");
 

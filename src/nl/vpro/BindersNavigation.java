@@ -9,9 +9,9 @@ See http://www.MMBase.org/license
 */
 package nl.vpro;
 
-import te.*;
 import org.mmbase.util.logging.*;
-import java.util.*;
+
+import te.*;
 
 /**
  * @author keesj
@@ -40,39 +40,35 @@ public class BindersNavigation extends AbstractNavigation {
         return childNavigation;
     }
 
-    public Navigation resolveNavigation(String path, WhiteBoard wb) {
-        StringTokenizer st = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR);
-
+    public Navigation resolveNavigation(Path path) {
         //the current nav
-        if (st.hasMoreTokens()) {
-            String name = st.nextToken();
+        if (path.hasCurrent()) {
+            String name = path.current();
             if (!name.equals(getURLString())) {
                 return null;
             }
         }
 
-        //the separator
-        if (! st.hasMoreTokens()) {
-            return this;
-        }
-
         //the item number
-        if (st.hasMoreTokens()) {
-            String number = st.nextToken();
+        if (path.hasNext()) {
+            String number = path.next();
             try {
                 Integer.parseInt(number);
                 if (childNavigation.getNavigationByName(number) == null) {
                     StaticNavigation nav = new StaticNavigation(number, number);
                     nav.setParentNavigation(this);
                     nav.setProperty("type", "binderpage");
+					nav.setProperty("nodemanager", "binders");
+					nav.setProperty("number",number);
                     nav.setParentNavigation(this);
                     childNavigation.add(nav);
                 }
-                log.debug("current binder = " + number);
-                wb.getHttpServletRequest().setAttribute("binders", number);
+                log.debug("current binder = " + number);                
             } catch (NumberFormatException e) {
+            	
             }
+            path.previous();
         }
-        return super.resolveNavigation(path, wb);
+        return super.resolveNavigation(path);
     }
 }

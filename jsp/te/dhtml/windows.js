@@ -17,8 +17,8 @@ function mouseDown(e) {
 							if (document.body.style){
 							  document.body.style.cursor = "move";
 							  if (currentDiv.style.position != "absolute"){
-					          element.innerHTML ="start move window  and set pos abs";
-                         currentDiv.style.position = "absolute";
+					                    element.innerHTML ="start move window  and set pos abs";
+                                                            currentDiv.style.position = "absolute";
 							    setObjectPos(currentDiv,currentDivStartX,currentDivStartY);
 							  }
 			        }
@@ -29,7 +29,7 @@ function mouseDown(e) {
 
 
 function getObjectPosX2(obj) { 
- var curleft = 0;
+        var curleft = 0;
         if (obj.offsetParent)
         {
                 while (obj.offsetParent)
@@ -106,7 +106,7 @@ function mouseMove(e) {
 					 var divy =  mouseY - eventStartY;
 
 					  var xxx = document.getElementById("monitor2");
-					  xxx.innerHTML ="div(x,y)(" + divx + "," + divy + ")";;
+					  xxx.innerHTML ="abs("+currentDivStartX +","+ currentDivStartY +")div(x,y)(" + divx + "," + divy + ")";;
 
 					  setObjectPos(currentDiv,currentDivStartX + divx,currentDivStartY + divy);
 					  /**
@@ -130,7 +130,7 @@ if (document.captureEvents){
 	document.onmousemove = mouseMove;
 
 function select(e){
-	if (move == false){
+    if (move == false){
 		currentDiv = e;
 		currentDivStartX = getObjectPosX2(currentDiv); 
 		currentDivStartY = getObjectPosY(currentDiv); 
@@ -138,6 +138,7 @@ function select(e){
 		element.innerHTML ="selected"  + e +  " " + currentDivStartX + " " + currentDivStartY;
     }
 }
+
 function unselect(){
 		  /**
 		  if (move){
@@ -153,6 +154,7 @@ function selectdrop(e){
 		dropTarget = e;
 		e.style.background ="green";
 }
+
 function unselectdrop(){
 		if (dropTarget != null){
 						dropTarget.style.background ="grey";

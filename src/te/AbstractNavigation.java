@@ -40,6 +40,7 @@ public abstract class AbstractNavigation implements Navigation {
     public void setProperty(String key, String value) {
         properties.setProperty(key, value);
     }
+    
     /** 
      * @return unique id of this navigation typicaly a number
      */
@@ -121,13 +122,15 @@ public abstract class AbstractNavigation implements Navigation {
         this.visible = visible;
     }
 
-    public Navigation resolveNavigation(String path, WhiteBoard wb) {
+    public Navigation resolveNavigation(Path path) {
         //if the current navigation is not visible call the child navigations and try to resolve
         if (!isVisible()) {
+            log.debug("nav " + getName() + " not visible trying child navigations");
             Navigations navs = getChildNavigations();
             for (int x = 0; x < navs.size(); x++) {
-                Navigation resolved = navs.getNavigation(x).resolveNavigation(path, wb);
+                Navigation resolved = navs.getNavigation(x).resolveNavigation(path);
                 if (resolved != null) {
+                    log.debug("nav " + getName() + " child navigation returned true" + resolved.getName());
                     return resolved;
                 }
             }
@@ -135,32 +138,24 @@ public abstract class AbstractNavigation implements Navigation {
             //so te retrun null
             return null;
         }
-        //the current navigation is visible
-        //take the first element in the path
-        StringTokenizer st = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR);
 
-        if (st.hasMoreTokens()) {
-            String currentPath = st.nextToken();
+        //the current navigation is visible
+        //take the current element in the path
+        if (path.hasCurrent()) {
+            String currentPath = path.current(); // this is the current path
             if (currentPath.equals(getURLString())) {
-                if (st.hasMoreTokens()) {
-                    StringTokenizer newTokenizer = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR, true);
-                    if (newTokenizer.countTokens() > 2) {
-                        newTokenizer.nextToken(); // the current nav
-                        newTokenizer.nextToken(); // the delimiter
-                        StringBuffer newPath = new StringBuffer();
-                        while (newTokenizer.hasMoreTokens()) {
-                            newPath.append(newTokenizer.nextToken());
-                        }
-                        Navigations navs = getChildNavigations();
-                        for (int x = 0; x < navs.size(); x++) {
-                            Navigation theChild = navs.getNavigation(x);
-                            Navigation resolved = theChild.resolveNavigation(newPath.toString(), wb);
-                            if (resolved != null) {
-                                return resolved;
-                            }
+                //if there are more elements in the path try to resolve them
+                if (path.hasNext()) {
+                    path.next();
+                    Navigations navs = getChildNavigations();
+                    for (int x = 0; x < navs.size(); x++) {
+                        Navigation theChild = navs.getNavigation(x);
+                        Navigation resolved = theChild.resolveNavigation(path);
+                        if (resolved != null) {                        	
+                            return resolved;
                         }
                     }
-
+                    path.previous();
                 }
                 return this;
             }

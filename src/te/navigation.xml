@@ -1,7 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE navigation SYSTEM "navigation.dtd">
 <navigation name="sites" id="1" visible="false">
+    <!-- selector for the programma sites -->
 	<entrypoint class="nl.vpro.ProgrammasitesNavigationControl"/>
+		<navigation name="admin" id="admin">
+		<property name="template">/te/edit/index.jsp</property>
+		</navigation>
+	</navigation>
+	
+    </entrypoint>
 	<navigation name="admin" id="admin">
 		<property name="template">/te/admin/index.jsp</property>
 	</navigation>

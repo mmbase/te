@@ -34,10 +34,10 @@ public abstract class NavigationControl implements NavigationResolver {
      * </ul>
      * @return the navigation of null if not found
      */
-    public Navigation resolveNavigation(String path, WhiteBoard wb) {
+    public Navigation resolveNavigation(Path path) {
         //get the root navigation
         Navigation rootNavigation = getNavigation();
-        return rootNavigation.resolveNavigation(path, wb);
+        return rootNavigation.resolveNavigation(path);
     }
 
     public String getURLString(Navigation navigation) {

@@ -16,11 +16,11 @@
 		<% } %>
 
 		<% if (component.getProperty("showBinders").equals("true")) { %>
-			<% if (binders != null) {%>
+			<%-- if (binders != null) { 
 			<td class="selectednavigation">Dossiers</td>
-			<% } else { %>
+			<% } else { %> --%>
 			<td class="navigation">Dossiers</td>
-			<% } %>
+			<%-- <% } %> --%>
 		<td>&nbsp;</td>
 		<% } %>
 
