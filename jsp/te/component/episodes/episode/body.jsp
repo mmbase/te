@@ -12,6 +12,10 @@
 			<mm:field name="year_start"/>
 			<mm:field name="time_start"/>
 		</mm:node>
+		<mm:node element="bcastrel">
+			<div class="fixme">how to convert from channel to zender</div>
+			<mm:field name="channel"/>
+		</mm:node>
 	</mm:related>
 	<table>
 	<tr><td colspan="2">
@@ -24,7 +28,7 @@
 		<mm:related path="insrel,items">
 			<mm:node element="items">
 				<p>
-				<a href="items/<mm:field name="number"/>/"><mm:field name="title"/></a><br>
+				<a href="<te:url/>"><mm:field name="title"/></a><br>
 				<te:field name="subtitle"/>
 				</p>
 			</mm:node>

@@ -10,7 +10,9 @@
 	<td align="left">
 		<mm:field name="prev" jspvar="prev">
 			<% if (! prev.equals("0")){ %>
-		            <a href="../<mm:field name="prev"/>/">vorige aflevering</a>
+				<mm:node number="$_">
+					<a href="<te:url/>">vorige aflevering</a>
+				</mm:node>
 			<% }  else { %>
 				geen vorige aflevering
 			<% } %>
@@ -20,7 +22,9 @@
 	<td align="right">
 		<mm:field name="next" jspvar="next">
 			<% if (! next.equals("0")){ %>
-		            <a href="../<mm:field name="next"/>/">volgende aflevering</a>
+				<mm:node number="$_">
+					<a href="<te:url/>">volgende aflevering</a>
+				</mm:node>
 			<% }  else { %>
 				geen volgende aflevering
 			<% } %>

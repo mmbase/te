@@ -24,7 +24,7 @@
   <component class="te.jsp.JSPComponent" path="/te/component/page_head.jsp" name="page_head" description="The top of the VPRO page with meta navigation"/>
   <component class="te.jsp.JSPComponent" path="/te/component/logo.jsp" name="logo" description="Display the logo of the program"/>
   <component class="te.jsp.JSPComponent" path="/te/component/home_maps.jsp" name="home_maps" description="Display information about a map (the root object of a programma site"/>
-
+  <component class="te.jsp.JSPComponent" path="/te/component/home_superteaser.jsp" name="home_superteaser" description="Display teaser related to current object with pos =0"/>
   <!-- compoments for the front page -->
   <component class="te.jsp.JSPComponent" path="/te/component/home_related_news.jsp" name="home_related_news" description="Display information about related news"/>
   <component class="te.jsp.JSPComponent" path="/te/component/home_episodes_next.jsp" name="home_episodes_next" description="Display the next episode"/>

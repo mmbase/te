@@ -2,33 +2,34 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
+<div class="<%= component.getName() %>">
 <mm:cloud>
-<div class="content">
+<%-- get the current map --%>
 <mm:node referid="mapsid">
-	<mm:field id="nextmmevent" name="nextmmevent" write="false"/>
-	<mm:node referid="nextmmevent">
-		<mm:relatednodes type="episodes">
-                        <span style="background-color:white">Volgende aflevering</span>
-<table width="100%">
-<tr>
-<td>
-			<te:field  name="title"/>
-			<te:field  name="subtitle"/>
-			<te:field  name="substring(html(intro),150,...)"/>
-	<te:field name="number" write="false" jspvar="field">
-	<a href="<te:url/>">lees meer</a>
-	</te:field>
-</td>
-<td>
-
-	<mm:relatednodes type="images" max="1">
-		<img src="<mm:image template="s(100x100)"/>" valign="top" align="right"/>
-	</mm:relatednodes>
-</td>
-</tr>
-</table>
-		</mm:relatednodes>
-	</mm:node>
+	<%-- get the next episode from the maps builder --%>
+	<mm:field id="nextepisodenumber" name="nextepisodenumber" write="false"/>
+	
+	<%-- if there is no next episode  the maps builder returns 0 --%>
+	<%-- so compare the nextepisode with 0 , if they are not equal display the episode --%>
+	<mm:compare referid="nextepisodenumber" value="0" inverse="true">
+		<mm:node referid="nextepisodenumber">
+			<table width="100%">
+				<tr><th colspan="2">Volgende aflevering</th><th></th></tr>
+				<tr>
+					<td>
+						<a href="<te:url/>"><te:field  name="title"/></a>
+						<te:field  name="subtitle"/>
+						<te:field  name="substring(html(intro),150,...)"/>
+					</td>
+					<td>
+					<mm:relatednodes type="images" max="1">
+						<img src="<mm:image template="s(100x100)"/>" valign="top" align="right"/>
+					</mm:relatednodes>
+					</td>
+				</tr>
+			</table>
+		</mm:node>
+	</mm:compare>
 </mm:node>
-</div>
 </mm:cloud>
+</div>

@@ -1,20 +1,20 @@
 <%@include file="../../../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
 %>
-<div class="content">
+<div class="<%= component.getName() %>">
 <mm:cloud>
-	<mm:node number="<%= findParentParam(navigation,"items").getID() %>">
+	<mm:node number="<%= navigation.getID() %>">
 		<p>
-		<mm:field name="html(intro)"/>
+		<te:field name="html(intro)"/>
 		</p>
 		<p>
-		 <mm:field name="html(description)"/>
+		 <te:field name="html(description)"/>
 		</p>
 		<mm:related path="insrel,items">
 			<mm:node element="items">
 				<p>
-				<mm:field name="title"/><br>
-				<mm:field name="subtitle"/>
+				<te:field name="title"/><br>
+				<te:field name="subtitle"/>
 				</p>
 			</mm:node>
 		</mm:related>

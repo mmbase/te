@@ -1,6 +1,7 @@
 <%@include file="../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
 %>
+<div class="<%= component.getName() %>">
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
@@ -9,10 +10,7 @@
  <tr>
 		<mm:node element="news">
 		<td>
-			<mm:field name="number" jspvar="field">
-			<a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/artikelen/" + field%>/">
-			</mm:field>
-			<te:field  name="title"/></a>
+			<a hred="<te:url/>"<te:field  name="title"/></a>
 			<te:field  name="subtitle"/>
 			<te:field  name="substring(html_intro,150,..)"/>
 		</td><td>
@@ -26,4 +24,4 @@
 	</mm:related>
 </mm:node>
 </mm:cloud>
-
+</div>

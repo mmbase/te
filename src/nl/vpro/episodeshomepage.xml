@@ -7,6 +7,7 @@
   <container name="horizontal" layout="horizontal">
     <component name="home_maps"/>
     <container name="vertical">
+            <component name="home_superteaser"/>
             <component name="home_episodes_previous"/>
     	    <component name="home_episodes_next"/>
     </container>

@@ -1,6 +1,23 @@
 <%@page language="java" contentType="text/css" %>
 <%@include file="../../include.jsp"%>
 <mm:cloud jspvar="cloud">
+.home_maps {
+	width: 180px;
+	overfow: none;
+}
+
+th {
+	text-align: left;
+}
+div {
+	background-color: white;
+}
+
+.fixme {
+	color: red;
+	font-size: 6px;
+}
+<%--
 body{
 	background-color: white;
 }
@@ -25,6 +42,7 @@ td {
 	vertical-align: top;
 }
 
+--%>
 <%
 
 String[] nodeManagers =new String[]{"maps","programs", "news", "episodes", "items", "images" ,"magazines","binders","archives","audiofragments","videofragments","urls", "attachments","email","serviceinfo","people","public","groups" ,"mmevents","teasers"};

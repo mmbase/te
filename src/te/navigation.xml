@@ -2,7 +2,7 @@
 <!DOCTYPE navigation SYSTEM "navigation.dtd">
 <navigation name="sites" id="1" visible="false">
   <entrypoint class="nl.vpro.ProgrammasitesNavigationControl">
-    <navigationparam class="te.MMBaseNavigation" type="maps" field="title">
+    <navigationparam class="nl.vpro.ProgrammaSiteMMBaseNavigation" type="maps" field="title">
       <property name="type">episodeshomepage</property>
       <navigation id="episodes" name="Afleveringen">
         <property name="type">episodespage</property>
@@ -27,7 +27,7 @@
           <property name="type">newspage</property>
         </navigationparam>
       </navigation>
-      <navigation name="search" id="Zoeken">
+      <navigation name="Zoeken" id="search">
         <property name="type">searchpage</property>
       </navigation>
     </navigationparam>

@@ -24,10 +24,10 @@ import minixml.*;
  */
 public class MMBaseNavigation extends AbstractNavigation implements Configurable {
     private static Logger log = Logging.getLoggerInstance(MMBaseNavigation.class);
-    private String config = null;
-    private String type;
-    private String field;
-    private String guifield;
+    protected String config = null;
+	protected String type;
+	protected String field;
+	protected String guifield;
 
     public MMBaseNavigation() {
         super();
@@ -105,9 +105,9 @@ public class MMBaseNavigation extends AbstractNavigation implements Configurable
         }
 
         Navigation st = new NavigationParam("" + node.getNumber(), node.getStringValue(field), field, guifield, type);
-         if (guifield != null){
-         	st.setGUIName(node.getStringValue(guifield));
-         }
+        if (guifield != null) {
+            st.setGUIName(node.getStringValue(guifield));
+        }
         Navigation g = NavigationLoader.parseXML(config);
         Enumeration enum = g.getProperties().keys();
         while (enum.hasMoreElements()) {

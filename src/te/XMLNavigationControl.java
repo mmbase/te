@@ -86,6 +86,9 @@ public class XMLNavigationControl extends NavigationControl {
         return _paths;
     }
 
+    /**
+     * @param xmle the xml configuration
+     */
     private void initPaths(XMLElement xmle) {
         if (xmle.getTagName().equals("property")) {
             return;
@@ -120,9 +123,20 @@ public class XMLNavigationControl extends NavigationControl {
             }
             rules.append("/");
         }
+        //skip navigations with no property childs
+        boolean hasPropertyChild = false;
+        Enumeration enum = xmle.enumerateChildren();
+        while (enum.hasMoreElements()) {
+            XMLElement child = (XMLElement) enum.nextElement();
+            if (child.getTagName().equals("property")) {
+                hasPropertyChild = true;
+            }
+        }
+        if (hasPropertyChild) {
+            _paths.add(new Path(rules.toString()));
+            rules = null;
+        }
 
-        _paths.add(new Path(rules.toString()));
-        rules = null;
         for (int x = 0; x < xmle.countChildren(); x++) {
             XMLElement child = xmle.getChildAt(x);
             initPaths(child);
@@ -180,14 +194,18 @@ public class XMLNavigationControl extends NavigationControl {
             //log.debug(e);
             if (e instanceof NavigationParam) {
                 NavigationParam par = (NavigationParam) e;
-                hash.put(par.getType(), par);
-            } else if (e instanceof Navigation) {
+                if (hash.get(par.getType()) == null) {
+                    hash.put(par.getType(), par);
+                }
+            }
+
+            /* else if (e instanceof Navigation) {
                 Navigation nav = (Navigation) e;
                 //TODO getID of getName?
                 //hash.put(nav.getURLString(), nav);
                 //log.debug("add " + nav.getURLString());
                 hash.put(nav.getURLString(), nav);
-            }
+            } */
         } while ((e = e.getParentNavigation()) != null);
 
         log.debug("hash:" + hash);
@@ -213,13 +231,16 @@ public class XMLNavigationControl extends NavigationControl {
                             sb.append(param.getURLString());
                             sb.append("/");
                         } else if (o instanceof Node) {
-
                             Node node = (Node) o;
                             log.debug("adding node " + node.getStringValue(field));
                             sb.append(URLConverter.toURL(node.getStringValue(field)));
                             sb.append("/");
                         } else {
                             log.debug("I don't know what to do with objects of type " + o.getClass().getName() + " " + o);
+                            //p.remove(z);
+                            //z--;
+                            //done = true;
+
                         }
                     } else {
                         log.debug("failed to get type " + type);
@@ -246,12 +267,12 @@ public class XMLNavigationControl extends NavigationControl {
         }
         if (retval.size() > 1) {
             log.warn("remaining " + retval);
-        } else if (retval.size() == 1) {
-            return Engine.getFacade().getEngineURL() + retval.getPath(0).fullPath;
+        } else if (retval.size() != 1) {
+            log.error("there are multiple path" + retval);
+
         }
-
         //there are still multiple paths
+        return Engine.getFacade().getEngineURL() + retval.getPath(0).fullPath;
 
-        return "http://www.test.com";
     }
 }

@@ -5,6 +5,7 @@
   String ppage= "1";
   String restrict=""; // facade.getEngineURL() + mapsNavigation.getFullURLString() +  "/";
 %>
+<div class="<%= component.getName() %>">
 <mm:import externid="site">programmas</mm:import>
 <mm:import externid="words"/>
 
@@ -14,3 +15,4 @@
 <mm:notpresent referid="words">
 U kunt hier zoeken
 </mm:notpresent>
+</div>

@@ -20,12 +20,10 @@
 	path="programs,episodes,bcastrel,mmevents" 
 	fields="episodes.number,mmevents.number,mmevents.start" 
 	constraints="<%= "mmevents.start > "+ week_start+" and mmevents.start < "+ week_end %>" orderby="mmevents.start" max="10"> 
-<div style="height: 100px">
-	<span style="background-color:white" >
+<div class="<%= component.getName() %>">
 	<mm:node element="mmevents">
-			<mm:field name="weekday_start"/>
+			<te:field name="weekday_start"/>
 	</mm:node>
-	</span>
 	<mm:node element="episodes">
 
 		<te:url/>
@@ -33,10 +31,7 @@
 		<img src="<mm:image template="s(100x100)"/>" align="right"/>
 	</mm:relatednodes>
 
-	<mm:field name="number" write="false" jspvar="field">
-	<a href="<%= facade.getEngineURL() + navigation.getFullURLString() + "/afleveringen/" + field%>/">
-	</mm:field>
-	<te:field name="title"/></a>
+	<a href="<te:url/>"><te:field name="title"/></a>
 	<te:field name="subtitle"/>
 	<te:field name="html(intro)"/>
 </div>

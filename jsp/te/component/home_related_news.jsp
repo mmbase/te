@@ -4,7 +4,7 @@
 <mm:import externid="mapsid"><%= mapsNavigation.getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
-<div class="content">
+<div class="<%= component.getName() %>">
 	<mm:related path="magazines,news" fields="news.number" orderby="news.number"> 
 		<mm:node element="news">
 			<div class="news">
@@ -13,7 +13,7 @@
 			<te:field  name="subtitle"/>
 			<te:field  name="substring(html_intro,150,..)"/>
 			   <mm:relatednodes type="images">
-			   <img src="<mm:image template="s(200x200)+crop(50,50,200,20)"/>">
+			   <img src="<mm:image template="s(200x200)+part(0,85,200,115)"/>">
 			   </mm:relatednodes>
 			</div>
 			</mm:node>
