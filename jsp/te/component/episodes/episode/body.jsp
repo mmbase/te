@@ -41,12 +41,14 @@
 		<mm:related path="insrel,items">
 			<mm:node element="items">
 				<p>
-				<mm:field name="title"/>
+				<a href="<te:url/>">
+				<te:field name="title"/>
 				<te:field name="subtitle"/>
-				<a href="<te:url/>">[meer icoon]</a><br>
+				<img src="http://images.vpro.nl/img.db?pijl_zwart_wit_gif+dia+colorizehex(996600)+f(gif)" border="0"/><br>
 				   <mm:relatednodes type="images" max="1">
-				      <img src="<mm:image template="s(200x200)+part(0,85,200,115)"/>">
+				      <img src="<mm:image template="s(200x200)+part(0,85,200,115)"/>"/>
 				   </mm:relatednodes>
+				</a>
 				</p>
 			</mm:node>
 		</mm:related>

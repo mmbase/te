@@ -13,18 +13,17 @@
 	} catch (Exception e){};
 %>
 <table width="400">
-	<mm:related path="magazines,news,mmevents"  offset="<%= "" + offset %>" max="<%= "" + (max +1) %>">
+	<mm:related path="magazines,news,mmevents"  offset="<%= "" + offset %>" max="<%= "" + (max +1) %>" fields="mmevents.start"  orderby="mmevents.start" directions="DOWN" >
 	<mm:last inverse="true">
  <tr>
 		<td>
 		        <mm:node element="news">
 				<div class="news">
-				<mm:field name="number" jspvar="field">
-				<a href="<%= facade.getEngineURL() + mapsNavigation.getFullURLString() + "/artikelen/" + field%>/">
-				</mm:field>
-				<te:field  name="title"/></a>
+                                <a href="<te:url/>">
+				<te:field  name="title"/>
 				<te:field  name="subtitle"/>
 				<te:field  name="substring(html_intro,150,..)"/>
+				</a>
 				</div>
 			</mm:node>
 		</td><td>

@@ -24,8 +24,8 @@
 	<tr><td align="right">voorpagina</td> <td> 
 	<a href="change_frontpage.jsp?number=<mm:field name="number"/>">
 		<mm:field name="frontpage">
-			<mm:compare value="-1" inverse="true"><mm:node number="$_"><mm:field name="description"/></mm:node></mm:compare>	
-			<mm:compare value="-1">nog niet aangemaakt</mm:compare>	
+			<mm:isempty>nog niet aangemaakt</mm:isempty>	
+			<mm:isnotempty><mm:field name="frontpage"/></mm:isnotempty>
 		</mm:field></a></td> </tr>
 
 	<%-- maps --%>

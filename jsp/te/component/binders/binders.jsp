@@ -10,12 +10,13 @@
 	<% if ( (counter  +2) % 3 == 0) { out.write("<tr>"); } %>
 	<td>
 		<div class="binders">
-			<a href="<te:url/>"><te:field  name="title"/></a>
+			<a href="<te:url/>"><te:field  name="title"/>
 			<te:field  name="subtitle"/>
 			<te:field  name="intro"/>
 			<mm:relatednodes type="images" max="1">
 				 <img src="<mm:image template="s(140x140)+part(10,10,110,100)"/>" />
 			</mm:relatednodes>
+			</a>
 		</div>
 	</td>
 	<% if (counter % 3 == 0) { out.write("</tr>"); }%>

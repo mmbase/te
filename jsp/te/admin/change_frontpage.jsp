@@ -10,6 +10,12 @@
 %>
 <mm:import externid="number" required="true" jspvar="number"/>
 <mm:cloud uri="<%= cloudUri %>" name="mmbase" method="http" jspvar="cloud">
+<% Vector v = new Vector();
+  v.add("episodeshomepage");
+  v.add("magazinehomepage");
+  v.add("teasershomepage");
+  v.add("weekhomepage");
+%>
 <html>
 <head>
 <title><%= navigation.getName() %></title>
@@ -21,13 +27,12 @@
 <table>
 	<tr><td align="right">voorpagina</td><td>
 	 <select name="frontpage" onChange="form.submit()">
-   <mm:listnodes type="tetemplates" orderby="name" jspvar="t">
-	<% if (t.getNumber() == node.getIntValue("frontpage")){ %>
-      		<option value="<mm:field name="number"/>" selected="true" ><mm:field name="description"/></option>
-	<% } else { %>
-      		<option value="<mm:field name="number"/>"><mm:field name="description"/></option>
-	<% } %>
-   </mm:listnodes>
+	<option value="">--</option>
+         <% Iterator iter = v.iterator(); %>
+         <% while(iter.hasNext()) { %>
+                <% String name = (String)iter.next(); %>
+      		<option value="<%= name %>" <%= (name.equals(node.getStringValue("frontpage")))?"selected=\"true\"":""%>><%= name %></option>
+         <% } %>
 	</select>
 </td></tr>
 </table>

@@ -17,5 +17,19 @@
 				</div>
 			</mm:node>
 	</mm:related>
+	<mm:related path="kaft,posrel,teasers" fields="posrel.pos" constraints="posrel.pos <>0 " orderby="posrel.pos">
+		<div class="teasers">
+		<mm:node element="teasers">
+			<%@include file="parts/teaser_link.jsp"%>
+			<te:field name="title"/>
+			<%-- no subtitle in teasers ... <te:field name="subtitle"/> --%>
+			<te:field name="substring(html_body,100,..)"/>
+			<mm:relatednodes type="images">
+				 <img src="<mm:image template="s(80x80)+part(10,10,110,100)"/>" align="right"/>
+			</mm:relatednodes>
+			</a>
+		</mm:node>
+		</div>
+	</mm:related>
 </mm:node>
 </mm:cloud>

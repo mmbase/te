@@ -6,5 +6,8 @@
 	<mm:field name="style"/>
 </mm:node>
 </mm:cloud>
+img {
+	border-width: 0px;
+}
 <%@include file="jerry.css"%>
 </mm:cloud>

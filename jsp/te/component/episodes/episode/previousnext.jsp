@@ -14,7 +14,7 @@
 					<a href="<te:url/>">vorige aflevering</a>
 				</mm:node>
 			<% }  else { %>
-				geen vorige aflevering
+				&nbsp;
 			<% } %>
 			&nbsp;
 		</mm:field>
@@ -26,7 +26,7 @@
 					<a href="<te:url/>">volgende aflevering</a>
 				</mm:node>
 			<% }  else { %>
-				geen volgende aflevering
+				&nbsp;
 			<% } %>
 		</mm:field>
 	</td>

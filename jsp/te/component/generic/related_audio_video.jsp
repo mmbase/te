@@ -32,5 +32,9 @@
 			<a href="<mm:field name="gui()"/>"><mm:field name="title"/></a><br>
 			<mm:last><hr></mm:last>
 		</mm:relatednodes>
+		<mm:relatednodes type="email">
+			<mm:first><br>emails:<BR></mm:first>
+			<a href="mailto:<mm:field name="emailaddress"/>"><te:field name="description"/></a>
+		</mm:relatednodes>
 	</mm:node>
 </mm:cloud>

@@ -31,17 +31,44 @@
 			<mm:field name="channel"/>
 		</mm:node>
 	</mm:related>
+			<a href="<te:url/>">
 			<mm:relatednodes type="images" max="1">
 				 <img src="<mm:image template="s(200)+part(10,60,110,140)"/>" />
 			</mm:relatednodes>
-			<a href="<te:url/>"><te:field  name="title"/></a>
+			<te:field  name="title"/>
 			<te:field  name="subtitle"/>
                         <te:field  name="substring(html(intro),150,...)"/>
+			</a>
 
 		</div>
 	</td>
 	<% if (counter % width == 0) { out.write("</tr>"); }%>
 	<% counter ++ ;%>
+</mm:relatednodes>
+<%-- items --%>
+<mm:relatednodes type="items">
+<mm:context>
+	<mm:node id="item">
+	<% if ( (counter  +width -1) % width == 0) { out.write("<tr>"); } %>
+	<td>
+		<div class="items">
+                        <%-- the episode that belongs to the item --%>
+			<mm:relatednodes type="episodes"><mm:node id="itemepi"><mm:field name="number"/></mm:node></mm:relatednodes>
+
+			
+                        <%-- related images .. --%>
+         		<a href="<te:url referids="itemepi"/>">
+			<mm:relatednodes type="images" max="1"><img src="<mm:image template="s(200)+part(10,60,110,140)"/>" /></mm:relatednodes>
+			<te:field  name="title"/>
+			<te:field  name="intro"/>
+			</a>
+
+		</div>
+	</td>
+	<% if (counter % width == 0) { out.write("</tr>"); }%>
+	<% counter ++ ;%>
+	</mm:node>
+</mm:context>
 </mm:relatednodes>
 <%-- news --%>
 <mm:relatednodes type="news">

@@ -11,7 +11,7 @@
 <td>
 
 	<mm:relatednodes type="images" max="1">
-		<img src="<mm:image template="s(100x100)"/>" valign="top" align="right"/>
+		<img src="<mm:image template="s(100x100)"/>" valign="top" align="right" border="0"/>
 	</mm:relatednodes>
 </td>
 </tr>

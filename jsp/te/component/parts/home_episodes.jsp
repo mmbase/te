@@ -1,13 +1,17 @@
 				<tr>
 					<td>
+                                       <a href="<te:url/>">
 						<te:field  name="title"/>
 						<te:field  name="subtitle"/>
 						<te:field  name="substring(html(intro),150,...)"/>
+				               <img src="http://images.vpro.nl/img.db?pijl_zwart_wit_gif+dia+colorizehex(996600)+f(gif)" border="0"/>
+                                        </a>
 					</td>
 					<td>
-					<%-- mmevent .. needs more work (maybe a function for this?) --%>
-					<%-- the current episode is selected because it's the episode with the mmevents that is the closest to the current time --%>
-					<mm:related path="bcastrel,mmevents" fields="bcastrel.number,bcastrel.rerun" constraints="bcastrel.rerun != 0" >
+                                        <a href="<te:url/>">
+					<%-- mmevent .. needs more work (maybe a function for this?) 
+					   the current episode is selected because it's the episode with the mmevents that is the closest to the current time  --%>
+					<mm:related path="bcastrel,mmevents" fields="bcastrel.number,bcastrel.rerun" constraints="bcastrel.rerun != 0" > 
 						<mm:node element="mmevents">
 							<mm:field name="weekday_start"/>
 							<mm:field name="day_start"/>
@@ -34,25 +38,11 @@
 
 					</mm:related>
 					<mm:relatednodes type="images" max="1">
-							<img src="<mm:image template="s(100x100)"/>" />
+							<img src="<mm:image template="s(100x100)"/>" border="0"/>
 					</mm:relatednodes>
 
-					<% boolean hasAudio = false; %>
-					<% boolean hasVideo = false; %>
-					<mm:relatednodes type="mediafragments" jspvar="node">
-						<mm:first>Bevat</mm:first>
-					</mm:relatednodes>
-					<mm:relatednodes type="audiofragments" jspvar="node">
-						<mm:first><%  hasAudio = true ;%></mm:first>
-					</mm:relatednodes>
-					<mm:relatednodes type="videofragments" jspvar="node">
-						<mm:first><%  hasVideo = true ;%></mm:first>
-					</mm:relatednodes>
-                                        
-					<% if (hasAudio ) { %> audio <%}%>
-					<% if (hasAudio && hasVideo) { %> en <%}%>
-					<% if (hasVideo) { %> video <%}%>
-					<a href="<te:url/>">[Meer icoon]</a>
+			                <%@include file="has_audio_video.jsp" %>
+					</a>
 					
 					</td>
 				</tr>
