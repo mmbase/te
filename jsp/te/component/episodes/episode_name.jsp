@@ -3,6 +3,6 @@
 %>
 <mm:cloud>
 	<mm:node number="<%= episodes %>">
-		<mm:field name="title"/> <mm:field name="episodenr"/>
+		<div class="title"><mm:field name="title"/> Nr. <mm:field name="episodenr"/></div>
 	</mm:node>
 </mm:cloud>

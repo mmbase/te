@@ -1,4 +1,4 @@
 <%@include file="../../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
 %>
-terug naar de aflevering
+<a href="../../">terug naar de aflevering</a>

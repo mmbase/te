@@ -21,6 +21,7 @@ public class EpisodesNavigation extends AbstractNavigation {
     private static Logger log = Logging.getLoggerInstance(EpisodesNavigation.class);
     String name = "afleveringen";
     String id = "episodes";
+    Navigations realChildNav = new Navigations();
 
     public EpisodesNavigation() {
         super();
@@ -37,16 +38,12 @@ public class EpisodesNavigation extends AbstractNavigation {
     public Navigations getChildNavigations() {
         Navigations retval = new Navigations();
 
-        Navigation navigation = new ItemsNavigation(); //new StaticNavigation("items", "items");
-        navigation.setProperty("type", "itempage");
-        navigation.setNavigationControl(getNavigationControl());
-        navigation.setParentNavigation(this);
-        retval.add(navigation);
+        retval.addAll(realChildNav);
         return retval;
     }
 
     public Navigation resolveNavigation(String path, WhiteBoard wb) {
-        StringTokenizer st = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR, true);
+        StringTokenizer st = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR);
 
         //the current nav
         if (st.hasMoreTokens()) {
@@ -56,9 +53,7 @@ public class EpisodesNavigation extends AbstractNavigation {
             }
         }
         //the separator
-        if (st.hasMoreTokens()) {
-            st.nextToken();
-        } else {
+        if (! st.hasMoreTokens()) {
             //if there was not spearator .. this navigation is the current navigation
             return this;
         }
@@ -69,27 +64,26 @@ public class EpisodesNavigation extends AbstractNavigation {
             try {
                 Integer.parseInt(number);
                 log.debug("current episode = " + number);
+                //create a navigation item
+                if (realChildNav.getNavigationByName(number) == null) {
+                    StaticNavigation nav = new StaticNavigation(number, number);
+                    nav.setParentNavigation(this);
+                    nav.setProperty("type", "episodepage");
+
+                    Navigation navigation = new ItemsNavigation(); //new StaticNavigation("items", "items");
+                    navigation.setProperty("type", "itempage");
+                    navigation.setNavigationControl(getNavigationControl());
+                    navigation.setParentNavigation(nav);
+                    nav.addChild(navigation);
+
+                    realChildNav.add(nav);
+
+                }
+                //nav.setNavigationControl(getNavigationControl());
                 wb.getHttpServletRequest().setAttribute("episodes", number);
             } catch (NumberFormatException e) {
-                //hmm this was not an episode number
-                StringBuffer newPath = new StringBuffer();
-                newPath.append(number);
-                while (st.hasMoreTokens()) {
-                    newPath.append(st.nextToken());
-                }
-                return super.resolveNavigation(newPath.toString(), wb);
             }
         }
-        //delimiter
-        if (st.hasMoreTokens()) {
-            st.nextToken();
-        }
-        StringBuffer newPath = new StringBuffer();
-        newPath.append(getURLString());
-        newPath.append("/");
-        while (st.hasMoreTokens()) {
-            newPath.append(st.nextToken());
-        }
-        return super.resolveNavigation(newPath.toString(), wb);
+        return super.resolveNavigation(path, wb);
     }
 }

@@ -2,6 +2,7 @@
   Component component = (Component)request.getAttribute("component");
 %>
 <mm:cloud>
+<div>
 	<mm:node number="<%= episodes %>">
 		<mm:relatednodes type="audiofragments">
 			
@@ -21,4 +22,5 @@
 			binders <mm:field name="number"/> <BR>
 		</mm:relatednodes>
 	</mm:node>
+</div>
 </mm:cloud>

@@ -3,10 +3,10 @@
 		<img src="<mm:image template="s(100x100)"/>" align="right"/>
 	</mm:relatednodes>
 
-	<mm:field name="title"/>
-	<mm:field name="subtitle"/>
-	<mm:field name="html(intro)"/>
-	<mm:field name="number" write="false" jspvar="field">
+	<te:field name="title"/>
+	<te:field name="subtitle"/>
+	<te:field name="html(intro)"/>
+	<te:field name="number" write="false" jspvar="field">
 	<a href="<%= facade.getEngineURL() + navigation.getFullURLString() + "/afleveringen/" + field%>/">&gt;</a>
-	</mm:field>
+	</te:field>
 </div>

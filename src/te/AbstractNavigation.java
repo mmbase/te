@@ -120,7 +120,7 @@ public abstract class AbstractNavigation implements Navigation {
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
-	                           
+
     public Navigation resolveNavigation(String path, WhiteBoard wb) {
         log.debug(getFullURLString() + " resolving " + path);
         //if the current navigation is not visible call the child navigations and try to resolve
@@ -153,12 +153,9 @@ public abstract class AbstractNavigation implements Navigation {
                             newPath.append(newTokenizer.nextToken());
                         }
                         Navigations navs = getChildNavigations();
-                        log.debug(getFullURLString() +  " Has "+ navs.size() +"childs");
                         for (int x = 0; x < navs.size(); x++) {
-                        	Navigation theChild = navs.getNavigation(x);
-							
+                            Navigation theChild = navs.getNavigation(x);
                             Navigation resolved = theChild.resolveNavigation(newPath.toString(), wb);
-							log.debug(getFullURLString() +  " child " + x + " " + theChild.getName() + " retval " + resolved);
                             if (resolved != null) {
                                 return resolved;
                             }

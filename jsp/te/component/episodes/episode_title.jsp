@@ -3,7 +3,7 @@
 %>
 <mm:cloud>
 	<mm:node number="<%= episodes %>">
-		<h2><mm:field name="title"/></h2>
-		<b><mm:field name="subtitle"/></b>
+		<te:field name="title"/>
+		<te:field name="subtitle"/>
 	</mm:node>
 </mm:cloud>

@@ -14,12 +14,23 @@
 		bcNav = bcNav.getParentNavigation();
 	} ;
 	bc.insert(0,bcNav.getName());
+	String background = null;
 %><html>
+<%-- find if there is a background image --%>
+<mm:cloud>
+	<mm:list nodes="<%= maps %>" path="maps,images,categories" fields="images.number,categories.name" constraints="categories.name ='background'"  jspvar="vnode">
+	 <% background = vnode.getStringValue("images.number") ;%>
+        </mm:list>
+</mm:cloud>
 <head>
 <title><%= bc %></title>
-<link rel="stylesheet" href="css/style.css" type="text/css">
+<link rel="stylesheet" href="css/style.jsp" type="text/css">
 </head>
-<body >
+<% if (background == null) { %>
+ <body background="/img.db?<%= background  %>">
+<% } else { %>
+<body>
+<% } %>
 	<%= sw.toString() %>
 </body>
 </html>

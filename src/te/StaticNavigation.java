@@ -33,6 +33,10 @@ public class StaticNavigation extends AbstractNavigation {
         return nav;
     }
 
+	public void addChilds(Navigations navs){
+		childs.addAll(navs);
+	}
+	
     public String getID() {
         return id;
     }
