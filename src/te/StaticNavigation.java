@@ -9,7 +9,6 @@ See http://www.MMBase.org/license
 */
 package te;
 
-import java.util.*;
 /**
  * @author keesj
  * @version $Id$

@@ -35,31 +35,61 @@ public class EpisodesNavigation extends AbstractNavigation {
     }
 
     public Navigations getChildNavigations() {
-        return new Navigations();
+        Navigations retval = new Navigations();
+
+        Navigation navigation = new ItemsNavigation(); //new StaticNavigation("items", "items");
+        navigation.setProperty("type", "itempage");
+        navigation.setNavigationControl(getNavigationControl());
+        navigation.setParentNavigation(this);
+        retval.add(navigation);
+        return retval;
     }
 
     public Navigation resolveNavigation(String path, WhiteBoard wb) {
-        StringTokenizer st = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR);
+        StringTokenizer st = new StringTokenizer(path, NavigationControl.PATH_SEPARATOR, true);
 
+        //the current nav
         if (st.hasMoreTokens()) {
             String name = st.nextToken();
             if (!name.equals(getURLString())) {
                 return null;
             }
         }
+        //the separator
         if (st.hasMoreTokens()) {
+            st.nextToken();
+        } else {
+            //if there was not spearator .. this navigation is the current navigation
+            return this;
+        }
 
+        //the episode number
+        if (st.hasMoreTokens()) {
             String number = st.nextToken();
             try {
                 Integer.parseInt(number);
                 log.debug("current episode = " + number);
                 wb.getHttpServletRequest().setAttribute("episodes", number);
             } catch (NumberFormatException e) {
+                //hmm this was not an episode number
+                StringBuffer newPath = new StringBuffer();
+                newPath.append(number);
+                while (st.hasMoreTokens()) {
+                    newPath.append(st.nextToken());
+                }
+                return super.resolveNavigation(newPath.toString(), wb);
             }
-
         }
-        return this;
-        //return super.resolveNavigation(path, wb);
+        //delimiter
+        if (st.hasMoreTokens()) {
+            st.nextToken();
+        }
+        StringBuffer newPath = new StringBuffer();
+        newPath.append(getURLString());
+        newPath.append("/");
+        while (st.hasMoreTokens()) {
+            newPath.append(st.nextToken());
+        }
+        return super.resolveNavigation(newPath.toString(), wb);
     }
-
 }

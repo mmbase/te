@@ -50,7 +50,7 @@ public class ComponentRegistry {
 		//TODO:clone the list
 		return components;
 	}
-	//TODO:add the other get* functions
+	
 	
     public Component getComponent(String name) {
         try {
