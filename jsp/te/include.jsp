@@ -1,10 +1,9 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" session="false"%><%@
 taglib uri="http://www.mmbase.org/mmbase-taglib-1.0" prefix="mm" %><%@
 taglib uri="http://www.mmbase.org/te-taglib-1.0" prefix="te" %><%@
-page import="te.*"%><%@
-page import="te.util.*"%><%@
-page import="te.jsp.*"%><%@
-page import="nl.vpro.*"%><%@
+page import="org.mmbase.applications.te.*"%><%@
+page import="org.mmbase.applications.te.util.*"%><%@
+page import="org.mmbase.applications.te.jsp.*"%><%@
 page import="java.util.*"%><%@
 page import="org.mmbase.bridge.*"%><%@
 page import="org.mmbase.util.*"%><%@

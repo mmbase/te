@@ -1,7 +1,4 @@
 <%@include file="include.jsp"%>
-<%@page import="te.edit.*"%>
-<%@page import="te.util.*"%>
-<%@page import="minixml.*"%>
 <%
   Template template = (Template)request.getAttribute("template");
   response.addHeader("Cache-Control","no-cache");
