@@ -256,8 +256,7 @@ public class ComponentRegistry {
                             log.error(Logging.stackTrace(e3));
                         }
                     } catch (SecurityException e2) {
-                        // TODO Auto-generated catch block
-                        e2.printStackTrace();
+						log.error(Logging.stackTrace(e2));
                         continue;
                     } catch (NoSuchMethodException e2) {
                         log.error("class " + className + " does not contain a constructor with parameter String,LayoutManager");
