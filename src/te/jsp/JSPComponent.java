@@ -62,7 +62,7 @@ public class JSPComponent extends AbstractContainer implements Component {
      * @see te.Template#renderRelative(java.lang.String, te.WhiteBoard, java.io.PrintWriter)
      */
     public void renderRelative(String path, WhiteBoard wb) throws ServletException, IOException {
-        if (path.endsWith(".jsp") || path.endsWith(".jpg") || path.endsWith(".css") || path.endsWith(".png")) {
+        if (path.endsWith(".jsp") || path.endsWith(".jpg") || path.endsWith(".css") || path.endsWith(".png") || path.endsWith(".js")) {
             mapRenderRelativeToRender = false;
         } else {
             mapRenderRelativeToRender = true;

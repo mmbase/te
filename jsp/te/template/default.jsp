@@ -21,10 +21,11 @@
 	<mm:list nodes="<%= mapsNavigation.getID() %>" path="maps,images,categories" fields="images.number,categories.name" constraints="categories.name ='background'"  jspvar="vnode">
 	 <% background = vnode.getStringValue("images.number") ;%>
         </mm:list>
-</mm:cloud>
 <head>
 <title><%= bc %></title>
-<link rel="stylesheet" href="css/style.jsp" type="text/css"></link>
+<mm:node number="<%= mapsNavigation.getID() %>">
+<link rel="stylesheet" href="<te:url/>css/style.jsp" type="text/css"></link>
+</mm:node>
 </head>
 <% if (background == null) { %>
  <body background="/img.db?<%= background  %>">
@@ -34,5 +35,6 @@
 <div class="<%= template.getName() %>">
 	<%= sw.toString() %>
 </div>
+</mm:cloud>
 </body>
 </html>

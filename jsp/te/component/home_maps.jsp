@@ -5,6 +5,7 @@
 <mm:cloud>
 <mm:node referid="mapsid">
 <div class="<%= component.getName() %>">
+	<div class="maps">
 	<%--not used because title is in logo --%>
 	<%-- <te:field  name="subtitle"/> --%>
 	<te:field  name="subtitle"/>
@@ -31,6 +32,7 @@
 		<mm:first><br>emails:<BR></mm:first>
 		<a href="mailto:<mm:field name="emailaddress"/>"><te:field name="description"/></a>
 	</mm:relatednodes>
+	</div>
 </div>
 </mm:node>
 </mm:cloud>

@@ -6,6 +6,7 @@ page import="te.jsp.*"%><%@
 page import="nl.vpro.*"%><%@
 page import="java.util.*"%><%@
 page import="org.mmbase.bridge.*"%><%@
+page import="org.mmbase.util.*"%><%@
 page import="java.io.*"%><% 
   WhiteBoard wb = (WhiteBoard)request.getAttribute("wb") ;
   Facade facade = wb.getFacade();

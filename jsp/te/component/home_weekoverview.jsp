@@ -23,12 +23,11 @@
 	fields="episodes.number,mmevents.number,mmevents.start" 
 	constraints="<%= "mmevents.start > "+ week_start+" and mmevents.start < "+ week_end %>" orderby="mmevents.start" max="10"> 
 <tr><td>
+	<div class="episodes">
 	<mm:node element="mmevents">
-			<te:field name="weekday_start"/>
+			<div class="weekday"><mm:field name="weekday_start"/></div>
 	</mm:node>
 	<mm:node element="episodes">
-
-
 	<a href="<te:url/>"><te:field name="title"/></a>
 	<te:field name="subtitle"/>
 	<te:field name="html(intro)"/>
@@ -37,6 +36,7 @@
 	<mm:relatednodes type="images" max="1">
 		<img src="<mm:image template="s(140x140)+part(10,10,110,100)"/>" align="right"/>
 	</mm:relatednodes>
+	</div>
 
 	</mm:node>
 </td></tr>

@@ -4,5 +4,5 @@
   <component name="page_head"/>
   <component name="logo"/>
   <component name="navigation"/>
-  <component name="binders"/>
+  <component name="binderslist"/>
 </template>

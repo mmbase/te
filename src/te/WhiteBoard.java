@@ -10,7 +10,7 @@ See http://www.MMBase.org/license
 package te;
 
 import javax.servlet.http.*;
-
+import java.util.*;
 /**
  * shared shored living object to share data over different templates 
  * @author Kees Jongenburger
@@ -20,6 +20,7 @@ public class WhiteBoard {
     private HttpServletResponse httpServletResponse;
     private Navigation navigation;
     private Facade facade;
+    private Properties props = new Properties();
 
     public WhiteBoard(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         this.httpServletRequest = httpServletRequest;
@@ -52,4 +53,12 @@ public class WhiteBoard {
     public Navigation getRootNavigation() {
         return getFacade().getNavigationControl().getNavigation();
     }
+    
+    public void setProperty(String key , String value){
+    	props.setProperty(key,value);
+    }
+	public String  getProperty(String key){
+		return props.getProperty(key);
+	}
+
 }

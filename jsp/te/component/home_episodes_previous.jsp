@@ -13,10 +13,12 @@
 	<%-- so compare the prevepisode with 0 , if they are not equal display the episode --%>
 	<mm:compare referid="prevepisodenumber" value="0" inverse="true">
 		<mm:node referid="prevepisodenumber">
+			<div class="episodes">
 			<table width="100%">
 				<tr><th colspan="2">Vorige aflevering</th><th></th></tr>
 				<%@include file="parts/home_episodes.jsp"%>
 			</table>
+			</div>
 		</mm:node>
 	</mm:compare>
 </mm:node>

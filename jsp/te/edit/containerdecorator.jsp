@@ -6,7 +6,6 @@
 	 Navigation nav = wb.getCurrentNavigation();
 %>
 <% if (container.getLayoutManager().getName().equals("horizontal")) { %>
-<div class="container">
 <table>
 	<tr><th class="header" colspan="<%= components.size() %>"><%= container.getName() %> -  <%= container.getLayoutManager().getName() %></th></tr>
         <tr>
@@ -29,9 +28,7 @@
 <% } %>
 	</tr>
 </table>
-</div>
 <% } else if (container.getLayoutManager().getName().equals("vertical")){ %>
-<div class="container">
 <table>
 	<tr><th colspan="3" class="header" colspan="<%= components.size() %>"><%= container.getName() %> -  <%= container.getLayoutManager().getName() %></th></tr>
 <% for (int x = 0 ; x < components.size(); x++) {%>
@@ -47,7 +44,6 @@
 	</tr>
 <% } %>
 </table>
-</div>
 <% } else { %>
 <%
 	 LayoutManager layout = container.getLayoutManager();

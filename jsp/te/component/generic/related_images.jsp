@@ -4,13 +4,11 @@
 <mm:cloud>
 <div class="<%= component.getName() %>">
 	<mm:node number="<%= navigation.getID() %>">
-		<mm:related path="insrel,images">
-			<mm:node element="images">
+		<mm:relatednodes type="images">
 				<img src="<mm:image template="s(100x100)"/>"><br>
 				<te:field name="description"/>
 			<br>
-			</mm:node>
-		</mm:related>
+		</mm:relatednodes>
 	</mm:node>
 </div>
 </mm:cloud>

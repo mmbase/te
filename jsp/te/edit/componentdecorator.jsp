@@ -29,9 +29,9 @@
 	parent = parent.getParentComponent();
   }
 %>
-<div class="content">
 <table>
-	<tr><td>
+	<tr><th> <%= component.getName() %>
+<%--
 		<table> <tr> 
 		<td>
 	<form>
@@ -52,7 +52,8 @@
 
              </td></tr>
 		</table>
-	</td></tr>
+--%>
+	</th></tr>
         <tr>
 		<td>
         <% 
@@ -64,4 +65,3 @@
                </td>
 	</tr>
 </table>
-</div>

@@ -9,6 +9,7 @@ See http://www.MMBase.org/license
 */
 package te.edit;
 import te.*;
+import te.jsp.*;
 import te.util.*;
 import java.util.*;
 import org.mmbase.util.logging.*;
@@ -30,6 +31,7 @@ public class TemplateEditor {
             Template wrappedTemplate = (Template) store.stringToComponent(store.componentToString(navigation.getTemplate()));
             wrapComponent(wrappedTemplate);
             hash.put(navigation,wrappedTemplate);
+            wrappedTemplate.addComponent(new JSPComponent("/te/edit/stylecompoment.jsp"));
         }
     }
 

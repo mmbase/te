@@ -48,7 +48,7 @@
   <component class="te.jsp.JSPComponent" path="/te/component/binders/binder/binder.jsp" name="binder" description="The information aboud a dossier"/>
   <component class="te.jsp.JSPComponent" path="/te/component/binders/binder/related.jsp" name="binder_related" description="related information to a dossier"/>
   <!-- binders page -->
-  <component class="te.jsp.JSPComponent" path="/te/component/binders/binders.jsp" name="binders" description="The list of dossiers"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/binders/binders.jsp" name="binderslist" description="The list of dossiers"/>
   <!-- search -->
   <component class="te.jsp.JSPComponent" path="/te/component/search.jsp" name="search" description="The programs of this week"/>
   <!-- afleveringen  -->

@@ -4,7 +4,7 @@
 <mm:import externid="mapsid"><%= ((NavigationParam)findParentParam(navigation,"maps")).getID() %></mm:import>
 <mm:cloud>
 <mm:node referid="mapsid">
-<div class="content">
+<div class="<%= component.getName() %>">
 <%-- list related episodes to a maps (program) order them by episode number
  skip episodes that are in the future (maybe we first need to make a query for only the next episode)
 --%>
@@ -30,6 +30,7 @@
 	constraints="<%= constraints  %>" orderby="episodes.episodenr" directions="DOWN" offset="<%= "" + offset %>" max="<%= "" + (max +1) %>">
 	<mm:last inverse="true">
 		<mm:node element="episodes">
+		<div class="episodes">
 <table width="100%">
 <tr>
 <td>
@@ -45,6 +46,7 @@
 </td>
 </tr>
 </table>
+		</div>
 		</mm:node>
 	</mm:last>
 	<mm:last>

@@ -13,6 +13,8 @@ import javax.servlet.jsp.*;
 
 import org.mmbase.bridge.*;
 import org.mmbase.bridge.jsp.taglib.*;
+
+import te.*;
 //import javax.servlet.jsp.PageContext;
 //import te.*;
 /**
@@ -38,14 +40,21 @@ public class TeFieldTag extends FieldTag {
                     sb.append(nodeManagerfield.getName());
                     break;
                 } else {
-					//sb.append("[");
-					//sb.append(nodeManagerfield.getName() + "/" + fieldName);
-					//sb.append("]");
+                    //sb.append("[");
+                    //sb.append(nodeManagerfield.getName() + "/" + fieldName);
+                    //sb.append("]");
                 }
             }
-            
+
         }
-        sb.append("\">");
+        sb.append("\" ");
+        if (pageContext.getRequest().getAttribute("wb") != null) {
+            WhiteBoard wb = (WhiteBoard) pageContext.getRequest().getAttribute("wb");
+            if (wb.getProperty("edit") != null) {
+                sb.append(" onMouseOver=\"select(this);\" onMouseOut=\"unselect();\" ");
+            }
+        }
+        sb.append(">");
         sb.append(content);
         sb.append("</div>");
         helper.setValue(sb.toString());

@@ -73,13 +73,17 @@ public class XMLStorage {
         Component retval = null;
         if (xmle.getTagName().equals("template")) {
             Template t = reg.getTemplate(xmle.getProperty("name"));
+            if (t == null) {
+                t = reg.getTemplate("default");
+                t.setName(xmle.getProperty("name"));
+            }
             if (xmle.getProperty("layout") != null) {
                 String layout = xmle.getProperty("layout");
                 t.setLayoutManager(reg.getLayoutManager(layout));
             }
             retval = t;
         } else if (xmle.getTagName().equals("container")) {
-           Container c = reg.getContainer(xmle.getProperty("name"));
+            Container c = reg.getContainer(xmle.getProperty("name"));
             if (xmle.getProperty("layout") != null) {
                 String layout = xmle.getProperty("layout");
                 c.setLayoutManager(reg.getLayoutManager(layout));
@@ -91,17 +95,17 @@ public class XMLStorage {
             log.error("unknown subtab " + xmle.getTagName());
             return null;
         }
-        for (int x =0 ; x < xmle.countChildren(); x++){
-        	XMLElement child = xmle.getChildAt(x);
-        	if (child.getTagName().equals("property")){
-        		retval.setProperty(child.getProperty("name"),child.getContents());
-        	} else if (retval instanceof Container) {
-        		Container cont = (Container)retval;
-        		Component comp = XMLToComponent(child);
-        		if (comp != null){
-        			cont.addComponent(comp); 
-        		}
-        	}
+        for (int x = 0; x < xmle.countChildren(); x++) {
+            XMLElement child = xmle.getChildAt(x);
+            if (child.getTagName().equals("property")) {
+                retval.setProperty(child.getProperty("name"), child.getContents());
+            } else if (retval instanceof Container) {
+                Container cont = (Container) retval;
+                Component comp = XMLToComponent(child);
+                if (comp != null) {
+                    cont.addComponent(comp);
+                }
+            }
         }
         return retval;
     }

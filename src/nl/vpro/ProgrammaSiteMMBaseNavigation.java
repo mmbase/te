@@ -117,7 +117,7 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
         Node templateNode = templateCloud.getNode(siteNode.getIntValue("frontpage"));
         st.setProperty("type", templateNode.getStringValue("name"));
         log.debug("creating a new Navigation for " + path.current() + " result style ={"+templateNode.getStringValue("name") +"} \n" + st.toString());
-        
+        st.setProperty("programmasites","" +siteNode.getNumber());
         getParentNavigation().addChild(st);
         return st.resolveNavigation(path);
     }

@@ -18,5 +18,4 @@
 <% } %>
 </mm:cloud>
 
-<div class="fixme">some komt er niet klikbare navigatie zoals "Items"</div>
 </div>
