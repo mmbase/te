@@ -17,7 +17,6 @@ import javax.servlet.http.*;
 import org.mmbase.module.core.MMBaseContext;
 import org.mmbase.util.logging.*;
 
-import te.test.TestFacadeImpl;
 
 /**
  * Engine is a Filter servlet that acts as a front servlet the main purpose of the filter is 
@@ -58,7 +57,7 @@ public class Engine implements Filter {
             filterConfig.getServletContext();
             log = Logging.getLoggerInstance(Engine.class.getName() + "[" + filterCreationCounter + "]");
             log.info("init of engine with name " + this.filterConfig.getFilterName());
-            facade = new TestFacadeImpl();
+            facade = new FacadeImpl();
         } catch (Throwable t) {
             log.fatal(t.getMessage() + " " + Logging.stackTrace(t));
         }
@@ -126,7 +125,7 @@ public class Engine implements Filter {
                     if (!path.equals(navpath)) {
                         String remainingPath = path.substring(navpath.length() + NavigationControl.PATH_SEPARATOR.length());
                         //call with the writer being null since the renderRelative may forwar and not include it's data
-                        t.renderRelative(remainingPath, wb, null);
+                        t.renderRelative(remainingPath, wb);
                     } else {
                         t.render(wb, resp.getWriter());
                     }

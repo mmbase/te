@@ -13,13 +13,17 @@ import java.io.PrintWriter;
 import java.util.Properties;
 
 /**
+ * template class implementing the get/set properties of Component 
  * @author Kees Jongenburger
  */
 public abstract class AbstractComponent implements Component {
     Properties properties = new Properties();
+    Component parent = null;
+    String name;
+    String desc;
 
     public abstract void render(WhiteBoard wb, PrintWriter writer) throws Exception;
-    public abstract void renderRelative(String path, WhiteBoard wb, PrintWriter writer) throws Exception;
+    public abstract void renderRelative(String path, WhiteBoard wb) throws Exception;
 
     public String getProperty(String key) {
         return properties.getProperty(key);
@@ -31,6 +35,28 @@ public abstract class AbstractComponent implements Component {
     public Properties getProperties() {
         return properties;
     }
-    public abstract void setParentComponent(Component component);
-	public abstract Component getParentComponent();
+    
+    public void setParentComponent(Component component){
+    	this.parent = component;
+    }
+    
+	public Component getParentComponent(){
+		return parent;
+	}
+	
+	public void setName(String name ){
+		this.name = name;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public void setDescription(String desc){
+		this.desc = desc;
+	}
+	
+	public String getDescription(){
+		return desc;
+	}
 }

@@ -24,7 +24,6 @@ import te.util.*;
 public class JSPComponent extends AbstractComponent implements Component {
     private static Logger log = Logging.getLoggerInstance(JSPComponent.class);
     String path = null;
-    Component parent;
     
     /**
      * create a new jsp template for a certain path
@@ -50,7 +49,7 @@ public class JSPComponent extends AbstractComponent implements Component {
     /* (non-Javadoc)
      * @see te.Template#renderRelative(java.lang.String, te.WhiteBoard, java.io.PrintWriter)
      */
-    public void renderRelative(String path, WhiteBoard wb, PrintWriter writer) throws ServletException, IOException {
+    public void renderRelative(String path, WhiteBoard wb) throws ServletException, IOException {
         int index = this.path.lastIndexOf(NavigationControl.PATH_SEPARATOR);
         if (index != -1) {
             String realPath = this.path.substring(0, index);
@@ -65,12 +64,4 @@ public class JSPComponent extends AbstractComponent implements Component {
         }
 
     }
-
-    public void setParentComponent(Component component) {
-        this.parent = component;
-    }
-
-	public Component getParentComponent(){
-				return parent;
-	}
 }

@@ -10,24 +10,31 @@ See http://www.MMBase.org/license
 package te.edit;
 
 import te.*;
-
+import te.jsp.*;
 /**
  * @author Kees Jongenburger
  */
 public class EditNavigationControl extends NavigationControl {
-	Navigation navigation;
-    
-    public EditNavigationControl(){
-		navigation = new Navigation(null,"sadf","edit");
-		navigation.setNavigationControl(this);
+    Navigation navigation;
+
+    public EditNavigationControl() {
+        navigation = new Navigation("edit", "edit");
+        navigation.setNavigationControl(this);
+        Navigation configure = new Navigation("configure", "configure");
+        configure.setProperty("template","/te/edit/configure.jsp");
+        navigation.addChild(configure);
+
     }
 
     public Navigation getNavigation() {
-    	return navigation;
+        return navigation;
     }
 
     public Template getTemplate(Navigation navigation) {
-    	return new EditTemplate(); 
-    	//return new JSPTemplate("/te/template/notimplemented.jsp",null);
+    	if (navigation.getProperty("template") != null){
+			return new JSPTemplate(navigation.getProperty("template"),null);
+    	}
+        return new EditTemplate();
+        //return new JSPTemplate("/te/template/notimplemented.jsp",null);
     }
 }

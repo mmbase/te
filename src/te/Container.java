@@ -16,7 +16,13 @@ package te;
  */
 public interface Container extends Component {
 	public Components getComponents();
+	/**
+	 * add a component to the container
+	 * this method sould call setParentComponent of the caller
+	 * @param component the component to add
+	 */
 	public void addComponent(Component component);
 	public void addComponent(Component component,String hint);
 	public LayoutManager getLayoutManager();
+	public void setLayoutManager(LayoutManager layoutManager);
 }

@@ -33,13 +33,13 @@ public abstract class NavigationLoader {
     }
 
     private static Navigation createNavigation(Navigation parent, XMLElement xmle) {
-        Navigation nav = new Navigation(parent, xmle.getProperty("id"), xmle.getProperty("name"));
+        Navigation nav = new Navigation( xmle.getProperty("id"), xmle.getProperty("name"));
         for (int x = 0; x < xmle.countChildren(); x++) {
             XMLElement child = xmle.getChildAt(x);
             if (child.getTagName().equals("navigation")) {
                 nav.addChild(createNavigation(nav, xmle.getChildAt(x)));
             } else if (child.getTagName().equals("property")) {
-                nav.addProperty(child.getProperty("name"), child.getContents());
+                nav.setProperty(child.getProperty("name"), child.getContents());
             } else if (child.getTagName().equals("entrypoint")) {
                 String className = child.getProperty("class");
                 Class entryClass;

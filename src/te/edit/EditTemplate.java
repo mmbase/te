@@ -18,40 +18,22 @@ import te.jsp.JSPComponent;
 /**
  * @author Kees Jongenburger
  */
-public class EditTemplate extends AbstractComponent implements Template {
+public class EditTemplate extends AbstractContainer implements Template {
     private static Logger log = Logging.getLoggerInstance(EditTemplate.class);
-    Components components = new Components();
-
-    public Components getComponents() {
-        return components;
-    }
-
-    public void addComponent(Component component) {
-        components.add(component);
-    }
-
-    public void addComponent(Component component, String hint) {
-        //components.addC
-
-    }
-    public LayoutManager getLayoutManager() {
-        // TODO Auto-generated method stub
-        return null;
-    }
 
     public void render(WhiteBoard wb, PrintWriter writer) throws Exception {
         // TODO Auto-generated method stub
 
     }
 
-    public void renderRelative(String path, WhiteBoard wb, PrintWriter writer) throws Exception {
+    public void renderRelative(String path, WhiteBoard wb) throws Exception {
         log.debug("incomming path " + path);
 
         //remove the name of the "edit" navigation
         NavigationControl mainNavControl = wb.getFacade().getNavigationControl();
-        
+
         Navigation editNav = wb.getCurrentNavigation();
-        
+
         Navigation parentOfEditNav = editNav.getParentNavigation();
         //from the parent create a url and add the relative path
         String generatedURL = mainNavControl.getURLString(parentOfEditNav) + "/" + path;
@@ -66,29 +48,22 @@ public class EditTemplate extends AbstractComponent implements Template {
 
             log.debug("editNavPath " + editNavPath);
             log.debug("nav to edit " + mainNavControl.getURLString(navigationToEdit));
-            
+
             //the original template
             Template t = navigationToEdit.getTemplate();
             Navigation cacheNav = wb.getCurrentNavigation();
             t.addComponent(new JSPComponent("/te/component/pagestructure.jsp"));
             wb.setCurrentNavigation(navigationToEdit);
-            if (writer == null) {
-                t.render(wb, wb.getHttpServletResponse().getWriter());
-            }
+            t.render(wb, wb.getHttpServletResponse().getWriter());
             wb.setCurrentNavigation(cacheNav);
         } else {
-        	
-        	//TODO: fix this .. it's all to compilcated
-        	log.debug("//TODO: fix this .. it's all to compilcated");
-			Template t = navigationToEdit.getTemplate();
-			String url1 = mainNavControl.getURLString(navigationToEdit);
-			
-        	t.renderRelative(path,wb,null);        	
+
+            //TODO: fix this .. it's all to compilcated
+            log.debug("//TODO: fix this .. it's all to compilcated");
+            Template t = navigationToEdit.getTemplate();
+            String url1 = mainNavControl.getURLString(navigationToEdit);
+
+            t.renderRelative(path, wb);
         }
     }
-
-    public void setParentComponent(Component component) {}
-	public Component getParentComponent(){
-					return null;
-		}
 }

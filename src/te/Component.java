@@ -18,8 +18,8 @@ import java.util.*;
  * @author Kees Jongenburger
  */
 public interface Component {
-	/**
-	 * 
+	
+	/** 
 	 * @param wb the whiteboard
 	 * @param writer the writer the render function might use. in some cases the writer can be null
 	 * because the caller wants the render method to generate a requesdipatch(in that case the 
@@ -27,11 +27,15 @@ public interface Component {
 	 * @throws Exception
 	 */
     public void render(WhiteBoard wb, PrintWriter writer) throws Exception;
-    public void renderRelative(String path, WhiteBoard wb, PrintWriter writer) throws Exception;
+    public void renderRelative(String path, WhiteBoard wb) throws Exception;
     
 	public String getProperty(String key);
 	public void setProperty(String key,String value);
 	public Properties getProperties(); 
 	public void setParentComponent(Component component);
 	public Component getParentComponent();
+	public void setName(String name);
+	public String getName();
+	public void setDescription(String  desc);
+	public String getDescription();
 }

@@ -22,8 +22,8 @@ public class Navigation {
     Properties properties;
 
     NavigationControl navigationControl;
-    public Navigation(Navigation parent, String id, String name) {
-        this.parent = parent;
+    
+    public Navigation(String id, String name) {
         this.id = id;
         this.name = name;
         childs = new Navigations();
@@ -44,7 +44,7 @@ public class Navigation {
         this.parent = navigation;
     }
 
-    public void addProperty(String key, String value) {
+    public void setProperty(String key, String value) {
         properties.setProperty(key, value);
     }
     /** 

@@ -15,13 +15,15 @@ import te.jsp.*;
 import te.jsp.JSPTemplate;
 import te.util.NavigationLoader;
 
+import org.mmbase.util.logging.*;
+
 /**
  * @author Kees Jongenburger
  */
 public class XMLNavigationControl extends NavigationControl {
-
+    private static Logger log = Logging.getLoggerInstance(XMLNavigationControl.class);
     Navigation navigation;
-    
+
     public XMLNavigationControl() {
         BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("navigation.xml")));
         StringWriter sw = new StringWriter();
@@ -45,11 +47,14 @@ public class XMLNavigationControl extends NavigationControl {
         NavigationControl control = navigation.getNavigationControl();
         if (control == this) {
             //			return new JSPTemplate("/site/index.jsp?id=" + navigation.getID());
-            
-            LayoutManager layout = new JSPLayoutManager("/te/layout/default.jsp");
-            
-            Template t = new JSPTemplate("/te/template/default.jsp", layout);
 
+            LayoutManager layout = new JSPLayoutManager("/te/layout/default.jsp");
+            Template t = new JSPTemplate("/te/template/default.jsp", layout);
+			Component c = new JSPComponent("/te/component/mags_intro.jsp");
+			c.setProperty("number", navigation.getProperty("number"));
+			t.addComponent(c);
+						
+			/**
             Component c = new JSPComponent("/te/component/navigation.jsp");
             c.setProperty("style", "breadcrum");
             t.addComponent(c, "breadcrum");
@@ -57,6 +62,7 @@ public class XMLNavigationControl extends NavigationControl {
             Component c2 = new JSPComponent("/te/component/navigation.jsp");
             c2.setProperty("style", "sitenavigation");
             t.addComponent(c2, "sitenavigation");
+            **/
             return t;
         } else {
             return control.getTemplate(navigation);

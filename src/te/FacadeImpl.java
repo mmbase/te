@@ -7,17 +7,15 @@ The license (Mozilla version 1.0) can be read at the MMBase site.
 See http://www.MMBase.org/license
 
 */
-package te.test;
-
-import te.*;
+package te;
 
 /**
  * @author Kees Jongenburger
  */
-public class TestFacadeImpl extends Facade {
+public class FacadeImpl extends Facade {
 	NavigationControl navigationComponent;
 
-	public TestFacadeImpl(){
+	public FacadeImpl(){
 		navigationComponent = new XMLNavigationControl();
 	}
 

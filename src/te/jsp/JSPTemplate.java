@@ -14,10 +14,12 @@ import java.io.*;
 import javax.servlet.ServletException;
 
 import te.*;
+
 /**
  * @author Kees Jongenburger
  */
 public class JSPTemplate extends JSPContainer implements Template {
+	
     public JSPTemplate(String path, LayoutManager layout) {
         super(path, layout);
     }
