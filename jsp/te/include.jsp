@@ -16,5 +16,6 @@ page import="java.io.*"%><%
 		throw new Exception("can not find the maps navigation");
 	}
   }
-  String episodes= "14055753";
+  String maps= (String)request.getAttribute("maps");
+  String episodes= (String)request.getAttribute("episodes");
 %>
