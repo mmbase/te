@@ -11,7 +11,7 @@
      </container>
      <container name="vertical">
          <component name="related_audio_video"/>
-  	     <component name="breadcrum"/>
+  	     <component name="related_other"/>
      </container>
     
   </container>

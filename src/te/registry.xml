@@ -21,7 +21,8 @@
   <component class="te.jsp.JSPComponent" path="/te/component/generic/related_images.jsp" name="related_images" description="Display images related to the current nav via posrel"/>
   <component class="te.jsp.JSPComponent" path="/te/component/generic/related_images_posrel.jsp" name="related_images_posrel" description="Display images related to the current nav via posrel"/>
   <component class="te.jsp.JSPComponent" path="/te/component/generic/related_audio_video.jsp" name="related_audio_video" description="Display the related audio and video's related to the current nav"/>
-  
+  <component class="te.jsp.JSPComponent" path="/te/component/generic/related_other.jsp" name="related_other" description="Display the related person , publications and groups to the current nav"/>
+    
   <component class="te.jsp.JSPComponent" path="/te/component/page_head.jsp" name="page_head" description="The top of the VPRO page with meta navigation"/>
   <component class="te.jsp.JSPComponent" path="/te/component/logo.jsp" name="logo" description="Display the logo of the program"/>
   <component class="te.jsp.JSPComponent" path="/te/component/home_maps.jsp" name="home_maps" description="Display information about a map (the root object of a programma site"/>
@@ -53,6 +54,7 @@
   <component class="te.jsp.JSPComponent" path="/te/component/search.jsp" name="search" description="The programs of this week"/>
   <!-- afleveringen  -->
   <component class="te.jsp.JSPComponent" path="/te/component/episodes/episodes.jsp" name="episode_list" description="list of episodes of a program"/>
+  <component class="te.jsp.JSPComponent" path="/te/component/episodes/episodes_archive_info.jsp" name="episodes_archive_info" description="information about the archive linked to the maps object"/>
   <!-- magazines  -->
   <component class="te.jsp.JSPComponent" path="/te/component/magazines/magazines.jsp" name="magazine_list" description="list of episodes of a program"/>
   <!-- news  -->

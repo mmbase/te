@@ -27,7 +27,8 @@ public abstract class AbstractNavigation implements Navigation {
     Navigations childNavigation = new Navigations();
     Navigations paramNavigations = new Navigations();
     String guiName = null;
-    public AbstractNavigation() {}
+    public AbstractNavigation() {
+    }
 
     public boolean isRootNavigation() {
         return parent == null;
@@ -218,13 +219,13 @@ public abstract class AbstractNavigation implements Navigation {
         for (int x = 0; x < deep; x++) {
             sb.append(" ");
         }
-        sb.append(getName() + " " + getClass().getName() );
-		for (int x =0 ; x < paramNavigations.size() ; x++){
-			sb.append( " " + paramNavigations.getNavigation(x).getName());
-		}
-		sb.append("\n");
-        for (int x =0 ; x < childNavigation.size() ; x++){
-        	childNavigation.getNavigation(x).toString(sb, deep +1); 
+        sb.append(getName() + " " + getClass().getName());
+        for (int x = 0; x < paramNavigations.size(); x++) {
+            sb.append(" " + paramNavigations.getNavigation(x).getName());
+        }
+        sb.append("\n");
+        for (int x = 0; x < childNavigation.size(); x++) {
+            childNavigation.getNavigation(x).toString(sb, deep + 1);
         }
     }
     public String toString() {
@@ -232,8 +233,15 @@ public abstract class AbstractNavigation implements Navigation {
         toString(sb, 0);
         return sb.toString();
     }
-    
-    public Navigations getParamChilds(){
-    	return paramNavigations;
+
+    public Navigations getParamChilds() {
+        return paramNavigations;
+    }
+
+    public Navigation removeChild(Navigation nav) {
+        if (childNavigation.contains(nav)) {
+            childNavigation.remove(nav);
+        }
+        return nav;
     }
 }

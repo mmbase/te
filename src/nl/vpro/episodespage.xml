@@ -4,5 +4,8 @@
   <component name="page_head"/>
   <component name="logo"/>
   <component name="navigation"/>
-  <component name="episode_list"/>
+  <container name="horizontal">
+      <component name="episodes_archive_info"/>
+      <component name="episode_list"/>
+    </container>
 </template>
