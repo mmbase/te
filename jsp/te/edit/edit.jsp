@@ -100,6 +100,37 @@ bg:<INPUT TYPE="text" NAME="bgcolor" SIZE="6" VALUE=""> <A HREF="#" onClick="cp2
 <input type="submit" name="toepassen"/>
 </form>
 <% } %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <mm:cloud uri="rmi://127.0.0.1:1111/templates">
 <mm:node number="<%= mapsNavigation.getProperty("tesites") %>">
 <form method="post" action="edit_commit.jsp" target="_top">
