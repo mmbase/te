@@ -9,13 +9,12 @@ See http://www.MMBase.org/license
 */
 package te;
 
-import java.io.IOException;
+import java.io.*;
 
 import javax.servlet.*;
-import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-import org.mmbase.servlet.BridgeServlet;
+import org.mmbase.module.core.*;
 import org.mmbase.util.logging.*;
 
 /**
@@ -23,7 +22,7 @@ import org.mmbase.util.logging.*;
  * to choose the right template .
   * @author Kees Jongenburger
  */
-public class Engine extends BridgeServlet implements Filter {
+public class Engine implements Filter {
 
     private static String engineName = "programma";
     //every time a new EngineFacade is created a the counter is increased 
@@ -43,29 +42,25 @@ public class Engine extends BridgeServlet implements Filter {
 
     //we have only one facade
     private static Facade facade;
-    /**
-     *
-     */
-    public void init() throws ServletException {
-        super.init();
-        try {
-
-            creationCounter++;
-
-            log = Logging.getLoggerInstance(Engine.class.getName() + "[" + creationCounter + "]");
-            log.info("init of engine with name " + getServletConfig().getServletName());
-            if (facade == null) {
-                facade = new FacadeImpl();
-            }
-        } catch (Throwable t) {
-            log.fatal(t.getMessage() + " " + Logging.stackTrace(t));
+    
+	public Engine(){
+		System.err.println("LOG4J SUCKS");
+		
+	}
+    public void init(FilterConfig filterConfig) throws ServletException {
+    	
+        //this.filterConfig = filterConfig;
+        creationCounter++;
+        MMBaseContext.init(filterConfig.getServletContext());
+        MMBaseContext.initHtmlRoot();
+        filterConfig.getServletContext();
+        log = Logging.getLoggerInstance(Engine.class.getName() + "[" + creationCounter + "]");
+        log.info("init of engine with name " + filterConfig.getFilterName());
+        if (facade == null) {
+            facade = new FacadeImpl();
         }
     }
 
-	 public void init(FilterConfig filterConfig) throws ServletException {
-	 	init();
-	 }
-	 
     public static Facade getFacade() {
         return facade;
     }
@@ -80,7 +75,6 @@ public class Engine extends BridgeServlet implements Filter {
         try {
 
             requestCounter++;
-
 
             resp.setContentType("text/html;charset=" + Facade.encoding);
             //resp.setContentType("text/html");
@@ -135,7 +129,6 @@ public class Engine extends BridgeServlet implements Filter {
                 String navpath = navigationComponent.getURLString(nav);
                 log.debug("request[" + requestCounter + "] found " + navpath);
 
-
                 try {
                     Template t = navigationComponent.getTemplate(nav);
                     log.debug("using template: " + t.getName() + " " + t.getDescription());
@@ -154,7 +147,9 @@ public class Engine extends BridgeServlet implements Filter {
                 }
             } else {
                 try {
-                    req.getRequestDispatcher("/" + path).forward(req, resp);
+                    req.getRequestDispatcher("/" + engineName + ".old/" + path).forward(req, resp);
+                    //filterChain.doFilter(servletRequest, servletResponse);
+
                 } catch (IOException e) {
                     log.warn(Logging.stackTrace(e));
                 } catch (Exception e) {
@@ -172,10 +167,10 @@ public class Engine extends BridgeServlet implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest)request;
-		HttpServletResponse resp = (HttpServletResponse) response;
-	 	doGet(req,resp);
-        
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
+        doGet(req, resp);
+
     }
 
 }
