@@ -135,8 +135,8 @@ public class Engine extends BridgeServlet {
                     Template t = navigationComponent.getTemplate(nav);
                     log.debug("using template: " + t.getName() + " " + t.getDescription());
                     if (!path.equals(navpath)) {
-                    	log.debug("navpath " + navpath);
-						log.debug("path " + path);
+                        log.debug("navpath " + navpath);
+                        log.debug("path " + path);
                         String remainingPath = path.substring(navpath.length() + NavigationControl.PATH_SEPARATOR.length());
                         //call with the writer being null since the renderRelative may forward and not include it's data
                         t.renderRelative(remainingPath, wb);
@@ -162,4 +162,9 @@ public class Engine extends BridgeServlet {
             log.fatal(t.getMessage() + " " + Logging.stackTrace(t));
         }
     }
+
+    public void doPost(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
+        doGet(arg0, arg1);
+    }
+
 }

@@ -9,16 +9,16 @@ See http://www.MMBase.org/license
 */
 package nl.vpro;
 
+import java.util.*;
+
+import minixml.*;
+
 import org.mmbase.bridge.*;
+import org.mmbase.util.logging.*;
 
 import te.*;
 import te.jsp.*;
 import te.util.*;
-
-import org.mmbase.util.logging.*;
-import java.util.*;
-
-import minixml.*;
 /**
  * @author Kees Jongenburger
  */
@@ -43,8 +43,10 @@ public class ProgrammasitesNavigationControl extends NavigationControl implement
             return t;
         }
         String templateName = navigation.getProperty("type");
-        //TODO : move code to storage          
+
         Template t = getTemplate(templateName);
+        //since the template is used in a differen faction then the template compoment
+        //we set the name and description of the template again
         t.setName(templateName);
         return t;
     }
@@ -57,7 +59,6 @@ public class ProgrammasitesNavigationControl extends NavigationControl implement
             String content = list.getNode(0).getStringValue("content");
             XMLStorage store = new XMLStorage();
             Component c = store.stringToComponent(content);
-            //TODO : better clonning support (name)            
             return (Template) c;
         } else {
             log.error("can not find template with name {" + name + "} navigation");
@@ -96,6 +97,6 @@ public class ProgrammasitesNavigationControl extends NavigationControl implement
      * @see te.NavigationControl#resoveURL(te.Navigation, java.util.List)
      */
     public String resoveURL(Navigation currentNavigation, List params) {
-        return getNavigation().getParentNavigation().getNavigationControl().resoveURL(currentNavigation,params);
+        return getNavigation().getParentNavigation().getNavigationControl().resoveURL(currentNavigation, params);
     }
 }

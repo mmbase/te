@@ -60,7 +60,7 @@ public class TestNavigationControl extends NavigationControl implements Configur
      * @see te.NavigationControl#resoveURL(te.Navigation, java.util.List)
      */
     public String resoveURL(Navigation currentNavigation, List params) {
-        // TODO Auto-generated method stub
+        
         return null;
     }
 

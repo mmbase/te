@@ -89,6 +89,7 @@ public class MMBaseNavigation extends AbstractNavigation implements Configurable
             }
         } else {
             //TODO need beter code for performance (for example a "best" reverse mapping for url)
+            //maybe at least do a query where unserscores are replaced by question marks
             NodeList nl = nm.getList(null, null, null);
             for (int x = 0; x < nl.size(); x++) {
                 Node nodeFromList = nl.getNode(x);

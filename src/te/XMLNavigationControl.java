@@ -30,11 +30,9 @@ public class XMLNavigationControl extends NavigationControl {
         try {
             xmle.parseFromReader(new InputStreamReader(this.getClass().getResourceAsStream("navigation.xml")));
         } catch (XMLParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.error(Logging.stackTrace(e));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.error(Logging.stackTrace(e));
         }
         navigation = NavigationLoader.parseXML(xmle.toString());
 
@@ -198,14 +196,6 @@ public class XMLNavigationControl extends NavigationControl {
                     hash.put(par.getType(), par);
                 }
             }
-
-            /* else if (e instanceof Navigation) {
-                Navigation nav = (Navigation) e;
-                //TODO getID of getName?
-                //hash.put(nav.getURLString(), nav);
-                //log.debug("add " + nav.getURLString());
-                hash.put(nav.getURLString(), nav);
-            } */
         } while ((e = e.getParentNavigation()) != null);
 
         log.debug("hash:" + hash);

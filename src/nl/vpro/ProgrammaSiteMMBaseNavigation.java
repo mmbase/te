@@ -22,6 +22,8 @@ import te.util.*;
  */
 public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
     private static Logger log = Logging.getLoggerInstance(MMBaseNavigation.class);
+    private Cloud _cloud;
+
     public ProgrammaSiteMMBaseNavigation() {
         super();
         type = "maps";
@@ -29,23 +31,46 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
     }
 
     public Navigation resolveNavigation(Path path) {
+
         log.debug("resolve " + path.current());
         String current = path.current();
-        Cloud cloud = getCloud();
 
+        //get the list of sites managed for this entry (programmasites) and create a query 
+        //for the maps object
+        Hashtable siteMapsHash = new Hashtable();
+        StringBuffer sb = new StringBuffer();
+        Cloud templateCloud = getTemplateCloud();
+        NodeList sites = templateCloud.getNodeManager("programmasites").getList("state <> 0", null, null);
+        for (int x = 0; x < sites.size(); x++) {
+        	Node theNode = sites.getNode(x);
+            sb.append("number = " + theNode.getIntValue("maps"));
+            siteMapsHash.put(theNode.getStringValue("maps"), sites.getNode(0));
+            if (x + 1 < sites.size()) {
+                sb.append(" OR ");
+            }
+        }
+
+        String constraints = sb.toString();
+        if (sites.size() == 0) {
+        	log.debug("not programmasites nodes found");
+            return null;
+        }
+
+        Cloud cloud = getCloud();
         NodeManager nm = getCloud().getNodeManager("maps");
-        NodeList nl = nm.getList("number = 14194448 or number = 14195688 or number =  14055733 or number = 3517269", null, null);
+        NodeList nl = nm.getList(constraints, null, null);
         Node node = null;
-        
-        String navName= null;
+
+        String navName = null;
         for (int x = 0; x < nl.size(); x++) {
             Node nodeFromList = nl.getNode(x);
             String nodeField = nodeFromList.getStringValue("title");
+            log.debug("try to map "+ nodeField +"/" + current);
             String oldPath = nodeFromList.getStringValue("path");
             if (current.equals(URLConverter.toURL(nodeField))) {
                 log.debug("found node based on field" + field);
                 navName = nodeField;
-                node = nodeFromList;                
+                node = nodeFromList;
                 break;
             } else {
                 StringTokenizer st = new StringTokenizer(oldPath, "/");
@@ -55,7 +80,7 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
                 }
                 if (lastPath != null) {
                     if (current.equals(lastPath)) {
-						log.debug("found node based on path field in navigation" + field);
+                        log.debug("found node based on path field in navigation" + field);
                         node = nodeFromList;
                         navName = current;
                         break;
@@ -90,6 +115,11 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
 
         log.debug("creating a new Navigation for " + path.current() + " result \n" + st.toString());
 
+		//find back the programmasite via the hash and select the right frontpage template
+		Node siteNode =(Node) siteMapsHash.get("" + node.getNumber());
+		Node templateNode = templateCloud.getNode(siteNode.getIntValue("frontpage"));
+		st.setProperty("type",templateNode.getStringValue("name"));
+
         getParentNavigation().addChild(st);
         return st.resolveNavigation(path);
     }
@@ -99,4 +129,14 @@ public class ProgrammaSiteMMBaseNavigation extends MMBaseNavigation {
         //return ContextProvider.getCloudContext("rmi://127.0.0.1:1111/remotecontext").getCloud("mmbase");
     }
 
+    private Cloud getTemplateCloud() {
+        if (_cloud == null || !_cloud.getUser().isValid()) {
+            CloudContext cloudContext = ContextProvider.getCloudContext("rmi://localhost:1111/templates");
+            HashMap user = new HashMap();
+            user.put("username", "admin");
+            user.put("password", "admin2k");
+            _cloud = cloudContext.getCloud("mmbase", "name/password", user);
+        }
+        return _cloud;
+    }
 }

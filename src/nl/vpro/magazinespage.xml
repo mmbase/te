@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE template SYSTEM "template.dtd">
-<template name="default" layout="default" description="pagina om een list van newsitems die aan een magazine zijn gekoppeld">
+<template name="default" layout="default" description="pagina om een list van newsitems die aan een magazine zijn gekoppeld te tonen">
   <component name="page_head"/>
   <component name="logo"/>
   <component name="navigation"/>
