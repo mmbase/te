@@ -18,4 +18,5 @@ page import="java.io.*"%><%
   }
   String maps= (String)request.getAttribute("maps");
   String episodes= (String)request.getAttribute("episodes");
+  String items= (String)request.getAttribute("items");
 %>

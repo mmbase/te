@@ -1,4 +1,4 @@
-<%@include file="../include.jsp"%><% 
+<%@include file="../../include.jsp"%><% 
   Component component = (Component)request.getAttribute("component");
 %>
-EPISODE TITLE
+terug naar de aflevering
