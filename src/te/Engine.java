@@ -159,7 +159,6 @@ public class Engine extends BridgeServlet {
                         String url = getFacade().getNavigationControl().resoveURL(nav, list);
                         if (url != null) {
                             resp.sendRedirect(url);
-                            
                         } else {
                         	resp.sendRedirect(facade.getEngineURL() +nav.getFullURLString() + "/");
                         }

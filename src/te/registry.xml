@@ -13,6 +13,7 @@
   <container class="te.jsp.JSPContainer" path="/te/container/default.jsp" name="horizontal" description="a container with a horizontal layout" layout="horizontal"/>
   <container class="te.jsp.JSPContainer" path="/te/container/default.jsp" name="vertical" description="a container with a vertical layout" layout="vertical"/>
   <!-- tempates -->
+  <template class="nl.vpro.ProgrammaSiteTemplate" path="/te/template/default.jsp" name="programmasites" description="template the can hande old style .shtml files" layout="default"/>
   <template class="te.jsp.JSPTemplate" path="/te/template/default.jsp" name="default" description="default tempate using the default layout" layout="default"/>
   <template class="te.jsp.JSPTemplate" path="/te/template/nocache.jsp" name="nocache" description="template with headers so it wil not get cached" layout="default"/>
   <!-- generic components -->

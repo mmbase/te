@@ -10,6 +10,7 @@ See http://www.MMBase.org/license
 package te;
 
 import java.io.*;
+import java.lang.reflect.*;
 
 import minixml.XMLElement;
 
@@ -46,38 +47,39 @@ public class ComponentRegistry {
         return componentRegistry;
     }
 
-	public Components getComponents(){
-		Components c = new Components();
-		c.addAll(components);
-		return c;
-	}
-	
-	
+    public Components getComponents() {
+        Components c = new Components();
+        c.addAll(components);
+        return c;
+    }
+
     public Component getComponent(String name) {
         try {
-             Component g =  components.getComponentByName(name);
-             if (g != null ) return (Component)g.clone();
+            Component g = components.getComponentByName(name);
+            if (g != null)
+                return (Component) g.clone();
         } catch (CloneNotSupportedException e) {
             log.error("component " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
-        log.warn("component {"+ name +"} is not registerd");
+        log.warn("component {" + name + "} is not registerd");
         return null;
     }
 
-	public Containers getContainers(){
-		Containers c =  new Containers();
-		c.addAll(containers);
-		return c;
-	}
-	
+    public Containers getContainers() {
+        Containers c = new Containers();
+        c.addAll(containers);
+        return c;
+    }
+
     public Container getContainer(String name) {
         try {
-            Container c =  containers.getContainerByName(name);
-            if (c != null ) return (Container)c.clone();
+            Container c = containers.getContainerByName(name);
+            if (c != null)
+                return (Container) c.clone();
         } catch (CloneNotSupportedException e) {
             log.error("container " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
-		log.warn("container {"+ name +"} is not registerd");
+        log.warn("container {" + name + "} is not registerd");
         return null;
     }
 
@@ -85,31 +87,32 @@ public class ComponentRegistry {
      * @return
      */
     public LayoutManagers getLayoutManagers() {
-    	LayoutManagers l = new LayoutManagers();
-    	l.addAll(layoutManagers);
+        LayoutManagers l = new LayoutManagers();
+        l.addAll(layoutManagers);
         return l;
     }
-    
-    public LayoutManager getLayoutManager(String name){
-    	return layoutManagers.getLayoutManagerByName(name);
+
+    public LayoutManager getLayoutManager(String name) {
+        return layoutManagers.getLayoutManagerByName(name);
     }
 
-	public Templates getTemplates(){
-		Templates t = new Templates();
-		t.addAll(templates);
-		return t;
-	}
+    public Templates getTemplates() {
+        Templates t = new Templates();
+        t.addAll(templates);
+        return t;
+    }
     /**
      * @return
      */
     public Template getTemplate(String name) {
         try {
-            Template  t =  templates.getTemplateByName(name);
-            if (t != null ) return (Template)t.clone();
+            Template t = templates.getTemplateByName(name);
+            if (t != null)
+                return (Template) t.clone();
         } catch (CloneNotSupportedException e) {
             log.error("template " + name + " (class) does not allow cloning:" + Logging.stackTrace(e));
         }
-		log.warn("template {"+ name +"} is not registerd");
+        log.warn("template {" + name + "} is not registerd");
         return null;
 
     }
@@ -139,8 +142,8 @@ public class ComponentRegistry {
                 //<layoutManager class="te.jsp.JSPLayoutManager" name="default" description="default list layout">
                 //	<property name="jspPage">/te/layout/default.jsp</property>
                 //</layoutManager>
-                if (child.getProperty("class") != null && ! child.getProperty("class").equals("te.jsp.JSPLayoutManager")) {
-                    log.error("layoutManager class not of type  te.jsp.JSPLayoutManager {" + child.getProperty("class")+ "}");
+                if (child.getProperty("class") != null && !child.getProperty("class").equals("te.jsp.JSPLayoutManager")) {
+                    log.error("layoutManager class not of type  te.jsp.JSPLayoutManager {" + child.getProperty("class") + "}");
                 }
                 String name = child.getProperty("name");
                 String description = child.getProperty("description");
@@ -203,32 +206,70 @@ public class ComponentRegistry {
                 String path = child.getProperty("path");
                 String description = child.getProperty("description");
                 String layout = child.getProperty("layout");
-                if (!className.equals("te.jsp.JSPTemplate")) {
-                    log.error("currently impossible to load templates that are not te.jsp.JSPTemplate :" + child);
-                    continue;
-                }
-                if (className == null || name == null || path == null || description == null || layout == null) {
-                    log.error("template can not be loaded because some parameters are missing(className,name,path,description,layout)(" + className + "," + name + "," + path + "," + description + "," + layout + ")");
+                try {
+                    Class clazz = Class.forName(className);
+                    Class[] interfaces = clazz.getInterfaces();
+                    boolean isTemplate = false;
+                    for (int g = 0; g < interfaces.length; g++) {
+                        Class inter = interfaces[g];
+                        inter.getName().equals("te.Template");
+                        isTemplate = true;
+                    }
+                    if (!isTemplate) {
+                        log.error(className + " does not implement te.Template so it's not a template");
+                        continue;
+                    }
+
+                    try {
+                        Constructor constructor = clazz.getConstructor(new Class[] { String.class, LayoutManager.class });
+
+                        if (className == null || name == null || path == null || description == null || layout == null) {
+                            log.error("template can not be loaded because some parameters are missing(className,name,path,description,layout)(" + className + "," + name + "," + path + "," + description + "," + layout + ")");
+                            continue;
+                        }
+
+                        Template t = templates.getTemplateByName(name);
+                        if (t != null) {
+                            log.debug("updating template");
+                            templates.remove(t);
+                        }
+
+                        LayoutManager lom = layoutManagers.getLayoutManagerByName(layout);
+                        if (lom == null) {
+                            log.error("while loading the layout manager for a template the layout manager(" + layout + ") was not registered :" + child);
+                            continue;
+                        }
+
+                        log.debug("adding template with name " + name);
+                        try {
+                            t = (Template) constructor.newInstance(new Object[] { path, lom });
+                            t.setName(name);
+                            t.setDescription(description);
+                            templates.add(t);
+                        } catch (IllegalArgumentException e3) {
+                            log.error(Logging.stackTrace(e3));
+                        } catch (InstantiationException e3) {
+                            log.error(Logging.stackTrace(e3));
+                        } catch (IllegalAccessException e3) {
+                            log.error(Logging.stackTrace(e3));
+                        } catch (InvocationTargetException e3) {
+                            log.error(Logging.stackTrace(e3));
+                        }
+                    } catch (SecurityException e2) {
+                        // TODO Auto-generated catch block
+                        e2.printStackTrace();
+                        continue;
+                    } catch (NoSuchMethodException e2) {
+                        log.error("class " + className + " does not contain a constructor with parameter String,LayoutManager");
+                        e2.printStackTrace();
+                        continue;
+                    }
+
+                } catch (ClassNotFoundException e1) {
+                    log.error("can not find class {" + className + "} for configuration element " + child);
                     continue;
                 }
 
-                Template t = templates.getTemplateByName(name);
-                if (t != null) {
-                    log.debug("updating template");
-                    templates.remove(t);
-                }
-
-                LayoutManager lom = layoutManagers.getLayoutManagerByName(layout);
-                if (lom == null) {
-                    log.error("while loading the layout manager for a template the layout manager(" + layout + ") was not registered :" + child);
-                    continue;
-                }
-
-                log.debug("adding template with name " + name);
-                t = new JSPTemplate(path, lom);
-                t.setName(name);
-                t.setDescription(description);
-                templates.add(t);
             } else if (child.getTagName().equals("component")) {
                 String className = child.getProperty("class");
                 String name = child.getProperty("name");
