@@ -17,7 +17,7 @@
 <mm:node referid="number" jspvar="node">
 <div class="programmasites">
 <table>
-	<tr><td align="right">naam van de website</td><td><te:field name="name"/></td></tr>
+	<tr><td align="right">naam van de website</td><td><a href="change_name.jsp?number=<mm:field name="number"/>"><te:field name="name"/></a></td></tr>
 	<tr><td align="right">beschrijving</td> <td><te:field name="description"/></td> </tr>
 	<%-- front page --%>
 	<tr><td align="right">voorpagina</td> <td> 

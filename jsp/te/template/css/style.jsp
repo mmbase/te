@@ -5,6 +5,9 @@
 	width: 180px;
 	overfow: none;
 }
+.related_images_posrel {
+	boder: 20px dashed;
+}
 
 th {
 	text-align: left;
@@ -15,6 +18,11 @@ div {
 
 .fixme {
 	color: red;
+	font-size: 6px;
+	visibility: hidden;
+}
+
+.breadcrum {
 	font-size: 6px;
 }
 <%--
@@ -63,7 +71,7 @@ for (int x =0 ; x < nodeManagers.length ; x ++){
 %>
 .<%= nm.getName() %> .<%= field.getName() %> {
 	<% if (field.getName().indexOf("title") != -1) { %>
-		font-size: 20px;
+		//font-size: 20px;
 	<%  }%>
 }
 <%} }} %>

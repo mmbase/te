@@ -21,7 +21,7 @@
 <table>
 	<tr><td align="right">voorpagina</td><td>
 	 <select name="frontpage" onChange="form.submit()">
-   <mm:listnodes type="templates" jspvar="t">
+   <mm:listnodes type="templates" orderby="name" jspvar="t">
 	<% if (t.getNumber() == node.getIntValue("frontpage")){ %>
       		<option value="<mm:field name="number"/>" selected="true" ><mm:field name="description"/></option>
 	<% } else { %>

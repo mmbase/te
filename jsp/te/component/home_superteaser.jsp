@@ -5,7 +5,7 @@
 <mm:cloud>
 <div class="<%= component.getName() %>">
 <mm:node referid="mapsid">
-	<mm:related path="posrel,teasers" fields="posrel.pos" constraints="posrel.pos !=0 ">
+	<mm:related path="posrel,teasers" fields="posrel.pos" constraints="posrel.pos =0 ">
 		<mm:node element="teasers">
 			<h1>SUPER TEASER</h1>
 			<te:field name="title"/>

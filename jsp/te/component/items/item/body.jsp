@@ -4,20 +4,9 @@
 <div class="<%= component.getName() %>">
 <mm:cloud>
 	<mm:node number="<%= navigation.getID() %>">
-		<p>
+		<te:field name="title"/>
 		<te:field name="html(intro)"/>
-		</p>
-		<p>
-		 <te:field name="html(description)"/>
-		</p>
-		<mm:related path="insrel,items">
-			<mm:node element="items">
-				<p>
-				<te:field name="title"/><br>
-				<te:field name="subtitle"/>
-				</p>
-			</mm:node>
-		</mm:related>
+		<te:field name="html(description)"/>
 	</mm:node>
 </mm:cloud>
 </div>

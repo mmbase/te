@@ -15,13 +15,15 @@
 <title><%= navigation.getName() %></title>
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <mm:node referid="number" jspvar="node">
-	<mm:setfield name="state">1</mm:setfield>
-de site is geactiveerd en te zien op
-<mm:cloud><%-- VPRO cloud --%>
-<mm:node number="<%= node.getStringValue("maps") %>">
-<a href="<te:url/>"><te:url/></a>
-</mm:node>
-</mm:cloud>
+<div class="programmasites">
+<form action="change_name_commit.jsp" method="POST">
+	<input type="hidden" name="number" value="<mm:field name="number"/>">
+<table>
+	<tr><td align="right">Naam van de website</td><td><input type="text" name="name" value="<%= htmlAttributeEscape.encode(node.getStringValue("name"))%>"/>
+</td></tr>
+</table>
+</form>
+</div>
 </mm:node>
 </head>
 <body>

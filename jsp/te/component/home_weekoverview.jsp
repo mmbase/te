@@ -16,28 +16,32 @@
 
 %>
 <mm:node referid="mapsid">
+<div class="<%= component.getName() %>">
+<table>
 <mm:related 
 	path="programs,episodes,bcastrel,mmevents" 
 	fields="episodes.number,mmevents.number,mmevents.start" 
 	constraints="<%= "mmevents.start > "+ week_start+" and mmevents.start < "+ week_end %>" orderby="mmevents.start" max="10"> 
-<div class="<%= component.getName() %>">
+<tr><td>
 	<mm:node element="mmevents">
 			<te:field name="weekday_start"/>
 	</mm:node>
 	<mm:node element="episodes">
 
-		<te:url/>
-	<mm:relatednodes type="images" max="1">
-		<img src="<mm:image template="s(100x100)"/>" align="right"/>
-	</mm:relatednodes>
 
 	<a href="<te:url/>"><te:field name="title"/></a>
 	<te:field name="subtitle"/>
 	<te:field name="html(intro)"/>
-</div>
-<br>
-	</mm:node>
-</mm:related>
 
+</td><td>
+	<mm:relatednodes type="images" max="1">
+		<img src="<mm:image template="s(140x140)+part(10,10,110,100)"/>" align="right"/>
+	</mm:relatednodes>
+
+	</mm:node>
+</td></tr>
+</mm:related>
+</table>
 </mm:node>
+</div>
 </mm:cloud>
