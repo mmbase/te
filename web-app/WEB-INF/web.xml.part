@@ -3,10 +3,10 @@
   <servlet>
     <servlet-name>TemplateEngine</servlet-name>
     <display-name>TemplateEngine</display-name>
-    <servlet-class>te.Engine</servlet-class>
+    <servlet-class>org.mmbase.applications.te.Engine</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>servscan</servlet-name>
+    <servlet-name>TemplateEngine</servlet-name>
     <url-pattern>/engine/*</url-pattern>
   </servlet-mapping>
 	-->
@@ -17,7 +17,7 @@
     <filter-name>TemplateEngine</filter-name>
     <display-name>TemplateEngine</display-name>
     <description>TemplateEngine</description>
-    <filter-class>te.Engine</filter-class>
+    <filter-class>org.mmbase.appplications.te.Engine</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>TemplateEngine</filter-name>
